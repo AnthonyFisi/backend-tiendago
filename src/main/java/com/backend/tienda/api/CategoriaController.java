@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Categoria;
+import com.backend.tienda.entity.GsonCategoria;
 import com.backend.tienda.service.CategoriaService;
 
 @RestController
@@ -22,11 +23,14 @@ public class CategoriaController {
 	@Autowired
 	CategoriaService service;
 	
+	
+	
 	@RequestMapping(value = "/lista", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity< List<Categoria>> obtenerLista(){
 		List<Categoria> alu= service.listaCategoria();
 		return new ResponseEntity<List<Categoria>>(alu, HttpStatus.OK);
 	}
+	
 	
 
 	@RequestMapping(value="/guardarCategoria", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
