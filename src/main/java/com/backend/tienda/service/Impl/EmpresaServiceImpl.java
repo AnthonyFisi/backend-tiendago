@@ -20,4 +20,19 @@ public class EmpresaServiceImpl  implements EmpresaService{
 		return empresaDAO.listaEmpresaFindByIdSubCategoria(idSubCategoria);
 	}
 
+	@Override
+	public List<Empresa> listaEmpresaFindByIdCategoriaAndUbicacion(int idCategoria, String Ubicacion) {
+		return empresaDAO.listaEmpresaFindByIdCategoriaAndUbicacion(idCategoria, Ubicacion);
+	}
+
+	@Override
+	public List<Empresa> listaEmpresaSortByBusquedaRating(int idCategoria) {
+		return empresaDAO.listaEmpresaSortByBusquedaRating(idCategoria);
+	}
+
+	@Override
+	public List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion(int idSubCategoria, String Ubicacion) {
+		return empresaDAO.listaEmpresaFindByIdSubCategoriaAndUbicacion(idSubCategoria, Ubicacion);
+	}
+
 }

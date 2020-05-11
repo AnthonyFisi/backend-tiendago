@@ -32,6 +32,16 @@ public class Empresa implements Serializable{
 	private String nombredueno_empresa;
 	
 	private int numerolocales;
+	
+	private int idcuentaempresa;
+
+	public int getIdcuentaempresa() {
+		return idcuentaempresa;
+	}
+
+	public void setIdcuentaempresa(int idcuentaempresa) {
+		this.idcuentaempresa = idcuentaempresa;
+	}
 
 	public int getIdempresa() {
 		return idempresa;

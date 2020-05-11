@@ -24,6 +24,7 @@ public class EmpresaRowMapper implements RowMapper<Empresa> {
 		empresa.setUrlfoto_empresa(rs.getString("urlfoto_empresa"));
 		empresa.setNombredueno_empresa(rs.getString("nombredueno_empresa"));
 		empresa.setNumerolocales(rs.getInt("numerolocales"));
+		empresa.setIdcuentaempresa(rs.getInt("idcuentaempresa"));
 		return empresa;
 	}
 
