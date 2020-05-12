@@ -2,9 +2,20 @@ package com.backend.tienda.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tipocuenta")
 public class TipoCuenta implements Serializable  {
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idtipocuenta", updatable = false, nullable = false)
 	private int idtipocuenta;
 	
 	private String nombrecuenta;

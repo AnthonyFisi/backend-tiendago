@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tiend.modelo.TipoCuentaGson;
 import com.backend.tienda.entity.TipoCuenta;
+import com.backend.tienda.gson.TipoCuentaGson;
 import com.backend.tienda.service.TipoCuentaService;
 
 @RestController

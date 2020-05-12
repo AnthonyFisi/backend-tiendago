@@ -5,8 +5,6 @@ import java.util.List;
 import com.backend.tienda.entity.TipoCuenta;
 
 public interface TipoCuentaService {
-	
-	List<TipoCuenta> listaTipoCuenta();
 
-
+	public List<TipoCuenta> listaTipoCuenta() ;
 }

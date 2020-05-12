@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tiend.modelo.PublicidadGson;
 import com.backend.tienda.entity.Publicidad;
+import com.backend.tienda.gson.PublicidadGson;
 import com.backend.tienda.service.PublicidadService;
 
 @RestController

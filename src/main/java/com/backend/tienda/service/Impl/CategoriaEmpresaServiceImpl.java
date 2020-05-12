@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.backend.tienda.dao.CategoriaEmpresaDAO;
 import com.backend.tienda.entity.CategoriaEmpresa;
 import com.backend.tienda.repository.CategoriaEmpresaRepository;
 import com.backend.tienda.service.CategoriaEmpresaService;

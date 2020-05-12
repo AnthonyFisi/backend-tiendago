@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tiend.modelo.CategoriaEmpresaGson;
-import com.backend.tiend.modelo.SubCategoriaEmpresaGson;
 import com.backend.tienda.entity.SubCategoriaEmpresa;
+import com.backend.tienda.gson.CategoriaEmpresaGson;
+import com.backend.tienda.gson.SubCategoriaEmpresaGson;
 import com.backend.tienda.service.SubCategoriaEmpresaService;
 
 /*
