@@ -1,23 +1,22 @@
 package com.backend.tienda.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class CategoriaEmpresa implements Serializable {
+@Table(name="categoriaempresa")
+public class CategoriaEmpresa  {
 
-
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idcategoriaempresa", updatable = false, nullable = false)
-	private int idCategoriaEmpresa ;
+	private int idcategoriaempresa ;
 	
 	private String nombre_categoria;
 	
@@ -27,12 +26,14 @@ public class CategoriaEmpresa implements Serializable {
 	
 	private String url_imagen_categoria;
 
-	public int getIdCategoriaEmpresa() {
-		return idCategoriaEmpresa;
+	
+
+	public int getIdcategoriaempresa() {
+		return idcategoriaempresa;
 	}
 
-	public void setIdCategoriaEmpresa(int idCategoriaEmpresa) {
-		this.idCategoriaEmpresa = idCategoriaEmpresa;
+	public void setIdcategoriaempresa(int idcategoriaempresa) {
+		this.idcategoriaempresa = idcategoriaempresa;
 	}
 
 	public String getNombre_categoria() {
@@ -72,7 +73,7 @@ public class CategoriaEmpresa implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descripcion_categoria == null) ? 0 : descripcion_categoria.hashCode());
-		result = prime * result + idCategoriaEmpresa;
+		result = prime * result + idcategoriaempresa;
 		result = prime * result + ((nombre_categoria == null) ? 0 : nombre_categoria.hashCode());
 		result = prime * result + Float.floatToIntBits(porcentajebusqueda);
 		result = prime * result + ((url_imagen_categoria == null) ? 0 : url_imagen_categoria.hashCode());
@@ -93,7 +94,7 @@ public class CategoriaEmpresa implements Serializable {
 				return false;
 		} else if (!descripcion_categoria.equals(other.descripcion_categoria))
 			return false;
-		if (idCategoriaEmpresa != other.idCategoriaEmpresa)
+		if (idcategoriaempresa != other.idcategoriaempresa)
 			return false;
 		if (nombre_categoria == null) {
 			if (other.nombre_categoria != null)
@@ -112,11 +113,11 @@ public class CategoriaEmpresa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CategoriaEmpresa [idCategoriaEmpresa=" + idCategoriaEmpresa + ", nombre_categoria=" + nombre_categoria
+		return "CategoriaEmpresa [idcategoriaempresa=" + idcategoriaempresa + ", nombre_categoria=" + nombre_categoria
 				+ ", descripcion_categoria=" + descripcion_categoria + ", porcentajebusqueda=" + porcentajebusqueda
 				+ ", url_imagen_categoria=" + url_imagen_categoria + "]";
 	}
-	
+
 	
 	
 	

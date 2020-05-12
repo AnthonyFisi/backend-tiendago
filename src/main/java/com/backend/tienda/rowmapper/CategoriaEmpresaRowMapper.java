@@ -12,7 +12,7 @@ public class CategoriaEmpresaRowMapper implements RowMapper<CategoriaEmpresa> {
 	@Override
 	public CategoriaEmpresa mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CategoriaEmpresa categoriaEmpresa= new CategoriaEmpresa();
-		categoriaEmpresa.setIdCategoriaEmpresa(rs.getInt("idCategoriaEmpresa"));
+		//categoriaEmpresa.setIdCategoriaEmpresa(rs.getInt("idCategoriaEmpresa"));
 		categoriaEmpresa.setNombre_categoria(rs.getString("nombre_categoria"));
 		categoriaEmpresa.setDescripcion_categoria(rs.getString("descripcion_categoria"));
 		categoriaEmpresa.setPorcentajebusqueda(rs.getFloat("porcentajebusqueda"));

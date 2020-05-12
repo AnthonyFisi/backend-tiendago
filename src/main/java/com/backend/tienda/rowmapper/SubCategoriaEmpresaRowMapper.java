@@ -12,8 +12,8 @@ public class SubCategoriaEmpresaRowMapper implements RowMapper<SubCategoriaEmpre
 	@Override
 	public SubCategoriaEmpresa mapRow(ResultSet rs, int rowNum) throws SQLException {
 		SubCategoriaEmpresa subCategoriaEmpresa =new SubCategoriaEmpresa();
-		subCategoriaEmpresa.setIdSubCategoriaEmpresa(rs.getInt("idsubcategoriaempresa"));
-		subCategoriaEmpresa.setIdCategoriaEmpresa(rs.getInt("idcategoriaempresa"));
+
+		//subCategoriaEmpresa.setIdCategoriaEmpresa(rs.getInt("idcategoriaempresa"));
 		subCategoriaEmpresa.setNombre_subcategoria(rs.getString("nombre_subcategoria"));
 		subCategoriaEmpresa.setDescripcion_subcategoria(rs.getString("descripcion_subcategoria"));
 		subCategoriaEmpresa.setPorcentajebusqueda(rs.getFloat("porcentajebusqueda"));

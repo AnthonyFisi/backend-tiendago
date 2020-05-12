@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.backend.tienda.dao.SubCategoriaEmpresaDAO;
 import com.backend.tienda.entity.SubCategoriaEmpresa;
+import com.backend.tienda.repository.SubCategoriaEmpresaRepository;
 import com.backend.tienda.service.SubCategoriaEmpresaService;
 
 @Service
 public class SubCategoriaEmpresaServiceImpl implements SubCategoriaEmpresaService{
 	
 	@Autowired
-	SubCategoriaEmpresaDAO subCategoriaEmpresaDAO;
+	SubCategoriaEmpresaRepository subCategoriaEmpresaRepository;
 	
 	@Override
 	public List<SubCategoriaEmpresa> listaSubCategoriaEmpresaByIdCategoria(int idCategoriaEmpresa) {
-		return subCategoriaEmpresaDAO.listaSubCategoriaEmpresaByIdCategoria(idCategoriaEmpresa);
+		return subCategoriaEmpresaRepository.findByidcategoriaempresa(idCategoriaEmpresa);
 	}
 
 }

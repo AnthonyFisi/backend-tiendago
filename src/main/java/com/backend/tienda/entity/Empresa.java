@@ -1,14 +1,21 @@
 package com.backend.tienda.entity;
 
-import java.io.Serializable;
 
-public class Empresa implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+@Entity
+@Table(name="empresa")
+
+public class Empresa{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idempresa", updatable = false, nullable = false)
 	private int idempresa;
 	
 	private int idsubcategoriaempresa;
@@ -34,14 +41,8 @@ public class Empresa implements Serializable{
 	private int numerolocales;
 	
 	private int idcuentaempresa;
-
-	public int getIdcuentaempresa() {
-		return idcuentaempresa;
-	}
-
-	public void setIdcuentaempresa(int idcuentaempresa) {
-		this.idcuentaempresa = idcuentaempresa;
-	}
+	
+	private double porcentaje_popularidad;
 
 	public int getIdempresa() {
 		return idempresa;
@@ -139,97 +140,21 @@ public class Empresa implements Serializable{
 		this.numerolocales = numerolocales;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (boletas ? 1231 : 1237);
-		result = prime * result + ((celular_empresa == null) ? 0 : celular_empresa.hashCode());
-		result = prime * result + ((descripcion_empresa == null) ? 0 : descripcion_empresa.hashCode());
-		result = prime * result + idempresa;
-		result = prime * result + idsubcategoriaempresa;
-		result = prime * result + ((nombre_empresa == null) ? 0 : nombre_empresa.hashCode());
-		result = prime * result + ((nombredueno_empresa == null) ? 0 : nombredueno_empresa.hashCode());
-		result = prime * result + numerolocales;
-		result = prime * result + ((ruc_empresa == null) ? 0 : ruc_empresa.hashCode());
-		result = prime * result + ((telefono_empresa == null) ? 0 : telefono_empresa.hashCode());
-		result = prime * result + ((ubicacion_empresa == null) ? 0 : ubicacion_empresa.hashCode());
-		result = prime * result + ((urlfoto_empresa == null) ? 0 : urlfoto_empresa.hashCode());
-		return result;
+	public int getIdcuentaempresa() {
+		return idcuentaempresa;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (boletas != other.boletas)
-			return false;
-		if (celular_empresa == null) {
-			if (other.celular_empresa != null)
-				return false;
-		} else if (!celular_empresa.equals(other.celular_empresa))
-			return false;
-		if (descripcion_empresa == null) {
-			if (other.descripcion_empresa != null)
-				return false;
-		} else if (!descripcion_empresa.equals(other.descripcion_empresa))
-			return false;
-		if (idempresa != other.idempresa)
-			return false;
-		if (idsubcategoriaempresa != other.idsubcategoriaempresa)
-			return false;
-		if (nombre_empresa == null) {
-			if (other.nombre_empresa != null)
-				return false;
-		} else if (!nombre_empresa.equals(other.nombre_empresa))
-			return false;
-		if (nombredueno_empresa == null) {
-			if (other.nombredueno_empresa != null)
-				return false;
-		} else if (!nombredueno_empresa.equals(other.nombredueno_empresa))
-			return false;
-		if (numerolocales != other.numerolocales)
-			return false;
-		if (ruc_empresa == null) {
-			if (other.ruc_empresa != null)
-				return false;
-		} else if (!ruc_empresa.equals(other.ruc_empresa))
-			return false;
-		if (telefono_empresa == null) {
-			if (other.telefono_empresa != null)
-				return false;
-		} else if (!telefono_empresa.equals(other.telefono_empresa))
-			return false;
-		if (ubicacion_empresa == null) {
-			if (other.ubicacion_empresa != null)
-				return false;
-		} else if (!ubicacion_empresa.equals(other.ubicacion_empresa))
-			return false;
-		if (urlfoto_empresa == null) {
-			if (other.urlfoto_empresa != null)
-				return false;
-		} else if (!urlfoto_empresa.equals(other.urlfoto_empresa))
-			return false;
-		return true;
+	public void setIdcuentaempresa(int idcuentaempresa) {
+		this.idcuentaempresa = idcuentaempresa;
 	}
 
-	@Override
-	public String toString() {
-		return "Empresa [idempresa=" + idempresa + ", idsubcategoriaempresa=" + idsubcategoriaempresa
-				+ ", nombre_empresa=" + nombre_empresa + ", ubicacion_empresa=" + ubicacion_empresa + ", ruc_empresa="
-				+ ruc_empresa + ", telefono_empresa=" + telefono_empresa + ", celular_empresa=" + celular_empresa
-				+ ", boletas=" + boletas + ", descripcion_empresa=" + descripcion_empresa + ", urlfoto_empresa="
-				+ urlfoto_empresa + ", nombredueno_empresa=" + nombredueno_empresa + ", numerolocales=" + numerolocales
-				+ "]";
+	public double getPorcentaje_popularidad() {
+		return porcentaje_popularidad;
 	}
-	
-	
-	
+
+	public void setPorcentaje_popularidad(double porcentaje_popularidad) {
+		this.porcentaje_popularidad = porcentaje_popularidad;
+	}
 	
 
 }

@@ -3,10 +3,14 @@ package com.backend.tienda.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="subcategoriaempresa")
 public class SubCategoriaEmpresa implements Serializable {
 	
 	
@@ -18,9 +22,9 @@ public class SubCategoriaEmpresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idsubcategoriaempresa", updatable = false, nullable = false)
-	private int idSubCategoriaEmpresa ;
+	private int idsubcategoriaempresa ;
 	
-	private int idCategoriaEmpresa ;
+	private int idcategoriaempresa ;
 	
 	private String nombre_subcategoria;
 	
@@ -30,20 +34,24 @@ public class SubCategoriaEmpresa implements Serializable {
 	
 	private String url_imagen_subcategoria;
 
-	public int getIdSubCategoriaEmpresa() {
-		return idSubCategoriaEmpresa;
+	
+
+	public int getIdsubcategoriaempresa() {
+		return idsubcategoriaempresa;
 	}
 
-	public void setIdSubCategoriaEmpresa(int idSubCategoriaEmpresa) {
-		this.idSubCategoriaEmpresa = idSubCategoriaEmpresa;
+	public void setIdsubcategoriaempresa(int idsubcategoriaempresa) {
+		this.idsubcategoriaempresa = idsubcategoriaempresa;
 	}
 
-	public int getIdCategoriaEmpresa() {
-		return idCategoriaEmpresa;
+	
+
+	public int getIdcategoriaempresa() {
+		return idcategoriaempresa;
 	}
 
-	public void setIdCategoriaEmpresa(int idCategoriaEmpresa) {
-		this.idCategoriaEmpresa = idCategoriaEmpresa;
+	public void setIdcategoriaempresa(int idcategoriaempresa) {
+		this.idcategoriaempresa = idcategoriaempresa;
 	}
 
 	public String getNombre_subcategoria() {
@@ -83,8 +91,8 @@ public class SubCategoriaEmpresa implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descripcion_subcategoria == null) ? 0 : descripcion_subcategoria.hashCode());
-		result = prime * result + idCategoriaEmpresa;
-		result = prime * result + idSubCategoriaEmpresa;
+		result = prime * result + idcategoriaempresa;
+		result = prime * result + idsubcategoriaempresa;
 		result = prime * result + ((nombre_subcategoria == null) ? 0 : nombre_subcategoria.hashCode());
 		result = prime * result + Float.floatToIntBits(porcentajebusqueda);
 		result = prime * result + ((url_imagen_subcategoria == null) ? 0 : url_imagen_subcategoria.hashCode());
@@ -105,9 +113,9 @@ public class SubCategoriaEmpresa implements Serializable {
 				return false;
 		} else if (!descripcion_subcategoria.equals(other.descripcion_subcategoria))
 			return false;
-		if (idCategoriaEmpresa != other.idCategoriaEmpresa)
+		if (idcategoriaempresa != other.idcategoriaempresa)
 			return false;
-		if (idSubCategoriaEmpresa != other.idSubCategoriaEmpresa)
+		if (idsubcategoriaempresa != other.idsubcategoriaempresa)
 			return false;
 		if (nombre_subcategoria == null) {
 			if (other.nombre_subcategoria != null)
@@ -126,12 +134,12 @@ public class SubCategoriaEmpresa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SubCategoriaEmpresa [idSubCategoriaEmpresa=" + idSubCategoriaEmpresa + ", idCategoriaEmpresa="
-				+ idCategoriaEmpresa + ", nombre_subcategoria=" + nombre_subcategoria + ", descripcion_subcategoria="
+		return "SubCategoriaEmpresa [idsubcategoriaempresa=" + idsubcategoriaempresa + ", idcategoriaEmpresa="
+				+ idcategoriaempresa + ", nombre_subcategoria=" + nombre_subcategoria + ", descripcion_subcategoria="
 				+ descripcion_subcategoria + ", porcentajebusqueda=" + porcentajebusqueda + ", url_imagen_subcategoria="
 				+ url_imagen_subcategoria + "]";
 	}
-	
+
 	
 	
 

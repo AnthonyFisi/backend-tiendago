@@ -28,11 +28,16 @@ public class EmpresaController {
 	
 	public final static String FIND_EMPRESA_BY_IDCATEGORIA_SORT="/ListaSortfindBy/{idCategoria}";
 	
-	public final static String FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION="/ListafindBy/{idSubCategoria}/{Ubicacion}";
+	public final static String FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION="/ListafindByLocationSubCategoria/{idSubCategoria}/{Ubicacion}";
 	
+	public final static String FIND_LISTA="/lista";
+	
+	public final static String FIND_LISTA_ENTERPRISE="/listaEnterprise/{idCategoria}";
+
 	
 	@Autowired
 	EmpresaService empresaService;
+	
 	
 	
 	@RequestMapping(value=FIND_EMPRESA_IDSUBCATEGORIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

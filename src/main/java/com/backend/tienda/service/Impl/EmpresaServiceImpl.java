@@ -7,32 +7,33 @@ import org.springframework.stereotype.Service;
 
 import com.backend.tienda.dao.EmpresaDAO;
 import com.backend.tienda.entity.Empresa;
+import com.backend.tienda.repository.EmpresaRepository;
 import com.backend.tienda.service.EmpresaService;
 
 @Service
 public class EmpresaServiceImpl  implements EmpresaService{
 	
 	@Autowired
-	EmpresaDAO empresaDAO;
+	EmpresaRepository empresaRepository;
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria) {
-		return empresaDAO.listaEmpresaFindByIdSubCategoria(idSubCategoria);
+		return empresaRepository.listaEmpresaFindByIdSubCategoria(idSubCategoria);
 	}
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdCategoriaAndUbicacion(int idCategoria, String Ubicacion) {
-		return empresaDAO.listaEmpresaFindByIdCategoriaAndUbicacion(idCategoria, Ubicacion);
+		return empresaRepository.listaEmpresaFindByIdCategoriaAndUbicacion(idCategoria, Ubicacion);
 	}
 
 	@Override
 	public List<Empresa> listaEmpresaSortByBusquedaRating(int idCategoria) {
-		return empresaDAO.listaEmpresaSortByBusquedaRating(idCategoria);
+		return empresaRepository.listaEmpresaSortByBusquedaRating(idCategoria);
 	}
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion(int idSubCategoria, String Ubicacion) {
-		return empresaDAO.listaEmpresaFindByIdSubCategoriaAndUbicacion(idSubCategoria, Ubicacion);
+		return empresaRepository.listaEmpresaFindByIdSubCategoriaAndUbicacion(idSubCategoria, Ubicacion);
 	}
 
 }

@@ -7,17 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.backend.tienda.dao.CategoriaEmpresaDAO;
 import com.backend.tienda.entity.CategoriaEmpresa;
+import com.backend.tienda.repository.CategoriaEmpresaRepository;
 import com.backend.tienda.service.CategoriaEmpresaService;
 
 @Service
 public class CategoriaEmpresaServiceImpl implements CategoriaEmpresaService {
 	
 	@Autowired
-	CategoriaEmpresaDAO categoriaEmpresaDAO;
+	CategoriaEmpresaRepository categoriaEmpresaRepository;
 	
 	@Override
 	public List<CategoriaEmpresa> listaCategoriaEmpresa() {
-		return categoriaEmpresaDAO.listaCategoriaEmpresa();
+		return categoriaEmpresaRepository.findAll();
 	}
 
 }
