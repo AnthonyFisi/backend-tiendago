@@ -16,7 +16,7 @@ import com.backend.tienda.gson.ProductoGson;
 import com.backend.tienda.service.ProductoService;
 
 @RestController
-@RequestMapping()
+@RequestMapping(ProductoController.PRODUCTO_CONTROLLER)
 public class ProductoController {
 	
 	public final static String PRODUCTO_CONTROLLER="/productoController";

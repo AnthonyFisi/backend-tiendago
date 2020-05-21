@@ -131,7 +131,6 @@ public class EmpresaController {
 		
 		Empresa rpta=null;
 		
-		
 		try {
 			rpta=empresaService.InsertEmpresa(empresa);
 			

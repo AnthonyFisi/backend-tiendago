@@ -30,22 +30,16 @@ public class Empresa{
 	
 	private String celular_empresa;
 	
-	
 	private String descripcion_empresa;
 	
 	private String urlfoto_empresa;
 	
 	private String nombredueno_empresa;
 	
-	
 	private int idcuentaempresa;
 	
 	private double porcentaje_popularidad;
-	
-	
-	/* NUEVO */
-	
-	
+
 	private boolean cuenta_delivery;
 	
 	private float costo_delivery;
@@ -53,8 +47,6 @@ public class Empresa{
 	private String detalle_delivery;
 	
 	private String horario_atencion;
-	
-	
 	
 	private int iddistrito;
 	
