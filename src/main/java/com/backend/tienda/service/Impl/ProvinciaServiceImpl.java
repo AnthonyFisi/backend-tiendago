@@ -16,8 +16,8 @@ public class ProvinciaServiceImpl implements ProvinciaService{
 	ProvinciaRepository provinciaRepository;
 
 	@Override
-	public List<Provincia> listaProvincia() {
-		return provinciaRepository.findAll();
+	public List<Provincia> listaProvincia(int iddepartamento) {
+		return provinciaRepository.findByiddepartamento(iddepartamento);
 	}
 
 }

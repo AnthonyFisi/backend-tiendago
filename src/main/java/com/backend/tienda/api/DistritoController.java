@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,14 +21,14 @@ public class DistritoController {
 	
     public final static String DISTRITO_CONTROLLER="/DistritoController";
 	
-	public final static String LISTA_DISTRITO="/lista";
+	public final static String LISTA_DISTRITO="/lista/{idprovincia}";
 	
 	@Autowired
 	DistritoService distritoService;
 	
 	
 	@RequestMapping(value=LISTA_DISTRITO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<DistritoGson> listaDistrito(){
+	public ResponseEntity<DistritoGson> listaDistrito(@PathVariable("idprovincia") int idprovincia){
 		
 		List<Distrito> listaDistrito=null;
 		
@@ -35,7 +36,7 @@ public class DistritoController {
 		
 		try {
 			
-			listaDistrito=distritoService.listaDistrito();
+			listaDistrito=distritoService.listaDistrito(idprovincia);
 			distritoGson=new DistritoGson();
 			distritoGson.setListaDistrito(listaDistrito);
 			

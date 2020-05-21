@@ -6,6 +6,6 @@ import com.backend.tienda.entity.Provincia;
 
 public interface ProvinciaService { 
 	
-	List<Provincia> listaProvincia();
+	List<Provincia> listaProvincia(int iddepartamento);
 
 }

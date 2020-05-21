@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,14 +21,14 @@ public class ProvinciaController {
 	
 	public static final String PROVINCIA_CONTROLLER="/ProvinciaController";
 	
-	public static final String LISTA_PROVINCIA="/lista";
+	public static final String LISTA_PROVINCIA="/lista/{iddepartamento}";
 	
 	@Autowired
 	ProvinciaService provinciaService;
 	
 	
 	@RequestMapping(value=LISTA_PROVINCIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProvinciaGson> listaProvincia(){
+	public ResponseEntity<ProvinciaGson> listaProvincia(@PathVariable("iddepartamento")int iddepartamento){
 		
 		List<Provincia> listaProvincia=null;
 		
@@ -35,7 +36,7 @@ public class ProvinciaController {
 		
 		try {
 			
-			listaProvincia=provinciaService.listaProvincia();
+			listaProvincia=provinciaService.listaProvincia(iddepartamento);
 			provinciaGson=new ProvinciaGson();
 			provinciaGson.setListaProvincia(listaProvincia);
 			

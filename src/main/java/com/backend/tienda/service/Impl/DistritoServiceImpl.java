@@ -16,8 +16,8 @@ public class DistritoServiceImpl  implements DistritoService{
 	DistritoRepository distritoRepository;
 
 	@Override
-	public List<Distrito> listaDistrito() {
-		return distritoRepository.findAll();
+	public List<Distrito> listaDistrito(int idprovincia) {
+		return distritoRepository.findByidprovincia(idprovincia);
 	}
 
 }

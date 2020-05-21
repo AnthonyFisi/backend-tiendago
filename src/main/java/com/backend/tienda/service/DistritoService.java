@@ -6,6 +6,6 @@ import com.backend.tienda.entity.Distrito;
 
 public interface DistritoService {
 	
-	List<Distrito> listaDistrito();
+	List<Distrito> listaDistrito(int idprovincia);
 
 }
