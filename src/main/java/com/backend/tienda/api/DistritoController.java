@@ -16,7 +16,7 @@ import com.backend.tienda.gson.DistritoGson;
 import com.backend.tienda.service.DistritoService;
 
 @RestController
-@RequestMapping(name=DistritoController.DISTRITO_CONTROLLER)
+@RequestMapping(DistritoController.DISTRITO_CONTROLLER)
 public class DistritoController {
 	
     public final static String DISTRITO_CONTROLLER="/DistritoController";
@@ -30,15 +30,15 @@ public class DistritoController {
 	@RequestMapping(value=LISTA_DISTRITO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DistritoGson> listaDistrito(@PathVariable("idprovincia") int idprovincia){
 		
-		List<Distrito> listaDistrito=null;
+		List<Distrito> lista=null;
 		
 		DistritoGson distritoGson=null;
 		
 		try {
 			
-			listaDistrito=distritoService.listaDistrito(idprovincia);
+			lista=distritoService.listaDistrito(idprovincia);
 			distritoGson=new DistritoGson();
-			distritoGson.setListaDistrito(listaDistrito);
+			distritoGson.setListaDistrito(lista);
 			
 		}catch(Exception e) {
 			return new ResponseEntity<DistritoGson>(distritoGson,HttpStatus.INTERNAL_SERVER_ERROR);

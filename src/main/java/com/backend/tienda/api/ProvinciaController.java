@@ -16,7 +16,7 @@ import com.backend.tienda.gson.ProvinciaGson;
 import com.backend.tienda.service.ProvinciaService;
 
 @RestController
-@RequestMapping(name=ProvinciaController.PROVINCIA_CONTROLLER)
+@RequestMapping(ProvinciaController.PROVINCIA_CONTROLLER)
 public class ProvinciaController {
 	
 	public static final String PROVINCIA_CONTROLLER="/ProvinciaController";
@@ -28,17 +28,18 @@ public class ProvinciaController {
 	
 	
 	@RequestMapping(value=LISTA_PROVINCIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProvinciaGson> listaProvincia(@PathVariable("iddepartamento")int iddepartamento){
+	public ResponseEntity<ProvinciaGson> listaProvincia(@PathVariable("iddepartamento") int iddepartamento){
 		
-		List<Provincia> listaProvincia=null;
+		
+		List<Provincia> lista=null;
 		
 		ProvinciaGson provinciaGson=null;
 		
 		try {
 			
-			listaProvincia=provinciaService.listaProvincia(iddepartamento);
+			lista=provinciaService.listaProvincia(iddepartamento);
 			provinciaGson=new ProvinciaGson();
-			provinciaGson.setListaProvincia(listaProvincia);
+			provinciaGson.setListaProvincia(lista);
 			
 		}catch(Exception e) {
 			return new ResponseEntity<ProvinciaGson>(provinciaGson,HttpStatus.INTERNAL_SERVER_ERROR);
