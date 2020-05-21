@@ -13,4 +13,6 @@ public interface EmpresaService {
 	List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion( int idSubCategoria,String Ubicacion);
 	
 	List<Empresa> listaEmpresaFindByIdSubCategoria( int idSubCategoria);
+	
+	Empresa InsertEmpresa(Empresa empresa);
 }

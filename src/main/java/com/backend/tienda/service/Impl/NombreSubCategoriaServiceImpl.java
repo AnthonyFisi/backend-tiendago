@@ -23,4 +23,12 @@ public class NombreSubCategoriaServiceImpl implements NombreSubCategoriaService 
 		return nombreSubCategoriaRepository.findAll();
 	}
 
+
+	@Override
+	public NombreSubcategoria insertarNombreSubCategoria(NombreSubcategoria nombreSubCategoria) {
+		return nombreSubCategoriaRepository.save(nombreSubCategoria);
+	}
+
+
+
 }

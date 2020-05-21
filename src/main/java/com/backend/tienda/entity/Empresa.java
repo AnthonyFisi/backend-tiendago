@@ -22,7 +22,7 @@ public class Empresa{
 	
 	private String nombre_empresa;
 	
-	private String ubicacion_empresa;
+	private String direccion_empresa;
 	
 	private String ruc_empresa;
 	
@@ -30,7 +30,6 @@ public class Empresa{
 	
 	private String celular_empresa;
 	
-	private boolean boletas;
 	
 	private String descripcion_empresa;
 	
@@ -38,14 +37,93 @@ public class Empresa{
 	
 	private String nombredueno_empresa;
 	
-	private int numerolocales;
 	
 	private int idcuentaempresa;
 	
 	private double porcentaje_popularidad;
+	
+	
+	/* NUEVO */
+	
+	
+	private boolean cuenta_delivery;
+	
+	private float costo_delivery;
+	
+	private String detalle_delivery;
+	
+	private String horario_atencion;
+	
+	
+	
+	private int iddistrito;
+	
+	private String tiempo_aproximado_entrega;
+	
+	
+	
+	
+
+	public String getDireccion_empresa() {
+		return direccion_empresa;
+	}
+
+	public void setDireccion_empresa(String direccion_empresa) {
+		this.direccion_empresa = direccion_empresa;
+	}
+
+	public boolean isCuenta_delivery() {
+		return cuenta_delivery;
+	}
+
+	public void setCuenta_delivery(boolean cuenta_delivery) {
+		this.cuenta_delivery = cuenta_delivery;
+	}
+
+	public int getIddistrito() {
+		return iddistrito;
+	}
+
+	public void setIddistrito(int iddistrito) {
+		this.iddistrito = iddistrito;
+	}
 
 	public int getIdempresa() {
 		return idempresa;
+	}
+
+	public String getTiempo_aproximado_entrega() {
+		return tiempo_aproximado_entrega;
+	}
+
+	public void setTiempo_aproximado_entrega(String tiempo_aproximado_entrega) {
+		this.tiempo_aproximado_entrega = tiempo_aproximado_entrega;
+	}
+
+
+
+	public float getCosto_delivery() {
+		return costo_delivery;
+	}
+
+	public void setCosto_delivery(float costo_delivery) {
+		this.costo_delivery = costo_delivery;
+	}
+
+	public String getDetalle_delivery() {
+		return detalle_delivery;
+	}
+
+	public void setDetalle_delivery(String detalle_delivery) {
+		this.detalle_delivery = detalle_delivery;
+	}
+
+	public String getHorario_atencion() {
+		return horario_atencion;
+	}
+
+	public void setHorario_atencion(String horario_atencion) {
+		this.horario_atencion = horario_atencion;
 	}
 
 	public void setIdempresa(int idempresa) {
@@ -66,14 +144,6 @@ public class Empresa{
 
 	public void setNombre_empresa(String nombre_empresa) {
 		this.nombre_empresa = nombre_empresa;
-	}
-
-	public String getUbicacion_empresa() {
-		return ubicacion_empresa;
-	}
-
-	public void setUbicacion_empresa(String ubicacion_empresa) {
-		this.ubicacion_empresa = ubicacion_empresa;
 	}
 
 	public String getRuc_empresa() {
@@ -100,13 +170,7 @@ public class Empresa{
 		this.celular_empresa = celular_empresa;
 	}
 
-	public boolean isBoletas() {
-		return boletas;
-	}
 
-	public void setBoletas(boolean boletas) {
-		this.boletas = boletas;
-	}
 
 	public String getDescripcion_empresa() {
 		return descripcion_empresa;
@@ -132,14 +196,7 @@ public class Empresa{
 		this.nombredueno_empresa = nombredueno_empresa;
 	}
 
-	public int getNumerolocales() {
-		return numerolocales;
-	}
-
-	public void setNumerolocales(int numerolocales) {
-		this.numerolocales = numerolocales;
-	}
-
+	
 	public int getIdcuentaempresa() {
 		return idcuentaempresa;
 	}
@@ -155,6 +212,8 @@ public class Empresa{
 	public void setPorcentaje_popularidad(double porcentaje_popularidad) {
 		this.porcentaje_popularidad = porcentaje_popularidad;
 	}
+
+
 	
 
 }

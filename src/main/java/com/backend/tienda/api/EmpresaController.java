@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,8 @@ public class EmpresaController {
 	public final static String FIND_LISTA="/lista";
 	
 	public final static String FIND_LISTA_ENTERPRISE="/listaEnterprise/{idCategoria}";
+	
+	public final static String REGISTRAR_EMPRESA="/registrar";
 
 	
 	@Autowired
@@ -122,6 +125,25 @@ public class EmpresaController {
 		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
 
 	}
+	
+	@RequestMapping(value=REGISTRAR_EMPRESA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> regitrarEmpresa(@RequestBody Empresa empresa){
+		
+		Empresa rpta=null;
+		
+		
+		try {
+			rpta=empresaService.InsertEmpresa(empresa);
+			
+		}catch(Exception e) 
+		{
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
 	
 	
 

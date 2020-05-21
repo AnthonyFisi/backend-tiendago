@@ -22,7 +22,7 @@ public class EmpresaServiceImpl  implements EmpresaService{
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdCategoriaAndUbicacion(int idCategoria, String Ubicacion) {
-		return empresaRepository.listaEmpresaFindByIdCategoriaAndUbicacion(idCategoria, Ubicacion);
+		return empresaRepository.listaEmpresaFindByIdCategoriaAnddireccion(idCategoria, Ubicacion);
 	}
 
 	@Override
@@ -32,7 +32,13 @@ public class EmpresaServiceImpl  implements EmpresaService{
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion(int idSubCategoria, String Ubicacion) {
-		return empresaRepository.listaEmpresaFindByIdSubCategoriaAndUbicacion(idSubCategoria, Ubicacion);
+
+		return empresaRepository.listaEmpresaFindByIdSubCategoriaAnddireccion(idSubCategoria, Ubicacion);
+	}
+
+	@Override
+	public Empresa InsertEmpresa(Empresa empresa) {
+		return  empresaRepository.save(empresa);
 	}
 
 }
