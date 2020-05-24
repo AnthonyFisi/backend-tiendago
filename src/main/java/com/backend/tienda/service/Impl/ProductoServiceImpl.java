@@ -26,4 +26,12 @@ public class ProductoServiceImpl  implements ProductoService{
 		return productoRepository.save(producto);
 	}
 
+	@Override
+	public List<Producto> listaIdcategoriaproductoAndIdempresa(int idcategoriaproducto, int idempresa) {
+		
+		return productoRepository.listafindByidcategoriaproductoAndidempresa(idcategoriaproducto, idempresa);
+	
+	}
+
+	
 }

@@ -9,5 +9,6 @@ public interface ProductoService {
 	List<Producto> listaProducto();
 	
 	Producto insertarProducto(Producto producto);
-
+	
+	List<Producto> listaIdcategoriaproductoAndIdempresa(int idcategoriaproducto,int idempresa);
 }
