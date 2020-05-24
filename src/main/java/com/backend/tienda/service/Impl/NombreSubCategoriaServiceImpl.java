@@ -19,7 +19,6 @@ public class NombreSubCategoriaServiceImpl implements NombreSubCategoriaService 
 	
 	@Override
 	public List<NombreSubcategoria> listaNombreSubCategoria() {
-		// TODO Auto-generated method stub
 		return nombreSubCategoriaRepository.findAll();
 	}
 
@@ -27,6 +26,12 @@ public class NombreSubCategoriaServiceImpl implements NombreSubCategoriaService 
 	@Override
 	public NombreSubcategoria insertarNombreSubCategoria(NombreSubcategoria nombreSubCategoria) {
 		return nombreSubCategoriaRepository.save(nombreSubCategoria);
+	}
+
+
+	@Override
+	public List<NombreSubcategoria> listaNombreSubCategoriaByidEmpresa(int idempresa) {
+		return nombreSubCategoriaRepository.findByidempresa(idempresa);
 	}
 
 

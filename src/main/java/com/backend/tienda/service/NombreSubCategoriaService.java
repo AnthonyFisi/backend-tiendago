@@ -10,5 +10,7 @@ public interface NombreSubCategoriaService {
 	
 	NombreSubcategoria insertarNombreSubCategoria(NombreSubcategoria nombreSubCategoria);
 
+	List<NombreSubcategoria> listaNombreSubCategoriaByidEmpresa(int idempresa);
+
 
 }

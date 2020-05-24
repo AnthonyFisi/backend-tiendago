@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,8 @@ public class NombreSubCategoriaController {
 	public static final String  NOMBRE_SUBCATEGORIA_CONTROLLER="/NombreSubCategoria";
 	
 	public static final String  MOSTRAR_NOMBRES="/mostrarNombres";
+	
+	public static final String  LISTA_BY_IDEMPRESA="/listaIdEmpresa/{idempresa}";
 	
 	public static final String INSERTAR_NOMBRE_SUBCATEGORIA="/insertar";
 	
@@ -53,7 +56,29 @@ public class NombreSubCategoriaController {
 		
 	}
 	
-	
+	@RequestMapping(value=LISTA_BY_IDEMPRESA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<NombreSubCategoriaGson> listaNombresSubCategoriaByIdEmpresa(@PathVariable("idempresa")int idempresa){
+		
+		NombreSubCategoriaGson nombreSubCategoriaGson=null;
+		List<NombreSubcategoria> lista=null;
+		
+		
+		try {
+			lista= nombreSubCategoriaService.listaNombreSubCategoriaByidEmpresa(idempresa);
+			
+			nombreSubCategoriaGson=new NombreSubCategoriaGson();
+			
+			nombreSubCategoriaGson.setListaNombreSubCategoria(lista);
+			
+		}catch(Exception e) {
+			
+			return new ResponseEntity<NombreSubCategoriaGson>(nombreSubCategoriaGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<NombreSubCategoriaGson>(nombreSubCategoriaGson,HttpStatus.OK);
+
+		
+	}
 	
 
 	@RequestMapping(value=INSERTAR_NOMBRE_SUBCATEGORIA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
