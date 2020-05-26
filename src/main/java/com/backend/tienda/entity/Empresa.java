@@ -52,9 +52,19 @@ public class Empresa{
 	
 	private String tiempo_aproximado_entrega;
 	
+	private String icono_empresa;
 	
 	
 	
+	
+
+	public String getIcono_empresa() {
+		return icono_empresa;
+	}
+
+	public void setIcono_empresa(String icono_empresa) {
+		this.icono_empresa = icono_empresa;
+	}
 
 	public String getDireccion_empresa() {
 		return direccion_empresa;

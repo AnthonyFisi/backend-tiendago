@@ -38,6 +38,10 @@ public class Producto {
 	
 	private float producto_descuento;
 
+	
+	
+	
+	
 	public int getIdproducto() {
 		return idproducto;
 	}
