@@ -1,6 +1,7 @@
 package com.backend.tienda.api;
 
 
+
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.MainPedido;
 import com.backend.tienda.entity.Pedido;
-import com.backend.tienda.entity.Producto;
 import com.backend.tienda.entity.RegistroPedido;
 import com.backend.tienda.entity.RegistroPedidoPK;
 import com.backend.tienda.service.PedidoService;
@@ -43,6 +43,8 @@ public class PedidoController {
 	@RequestMapping(value=REGISTRAR_PEDIDO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RegistroPedido> agregarPedido(@RequestBody MainPedido mainPedido){
 		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
 		Pedido respuesta = null;
 		RegistroPedido registroPedido1=null;
 
@@ -54,7 +56,7 @@ public class PedidoController {
 			pk.setIdproducto(mainPedido.getidproducto());
 
 			registroPedido1=registroPedidoService.registrar
-					(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),mainPedido.getFecha_registro(),mainPedido.getIdempresa()));
+					(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa()));
 
 			try {
 						
@@ -76,7 +78,7 @@ public class PedidoController {
 			
 			Pedido rpta1=null;
 			
-			Pedido pedido=new Pedido(0,mainPedido.getPrecio(),mainPedido.getCantidad(),mainPedido.getFecha_registro(),false,mainPedido.getIdusuario());
+			Pedido pedido=new Pedido(0,mainPedido.getPrecio(),mainPedido.getCantidad(),time,false,mainPedido.getIdusuario());
 				
 			try {	
 				
@@ -87,7 +89,7 @@ public class PedidoController {
 				pk.setIdproducto(mainPedido.getidproducto());
 					
 				registroPedido=registroPedidoService.registrar
-						(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),mainPedido.getFecha_registro(),mainPedido.getIdempresa()));
+						(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa()));
 				
 				
 			}catch(Exception j) {
