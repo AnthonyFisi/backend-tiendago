@@ -89,6 +89,12 @@ public class RegistroPedidoController {
 					
 					int i=registroPedidoService.eliminarProductoRegistro(pk);
 					
+
+					int cantidad_total=respuesta.getPedido_cantidadtotal()-mainPedido.getCantidad();
+					float precio_total=respuesta.getPedido_montototal()-mainPedido.getPrecio();
+					
+					pedidoService.updatePedido2(cantidad_total, precio_total, respuesta.getIdpedido());
+					
 					if(i==0) {
 						System.out.println("Eliminado");
 					}
