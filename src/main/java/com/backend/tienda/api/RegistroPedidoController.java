@@ -2,6 +2,8 @@ package com.backend.tienda.api;
 
 
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -97,6 +99,14 @@ public class RegistroPedidoController {
 					
 					if(i==0) {
 						System.out.println("Eliminado");
+						respuestaFinal= new RegistroPedido();
+						RegistroPedidoPK pk1=new RegistroPedidoPK();
+						pk1.setIdpedido(0);
+						pk1.setIdproducto(0);
+						respuestaFinal.setId(pk1);
+						Timestamp time=new Timestamp(System.currentTimeMillis());
+
+						respuestaFinal.setRegistro_fecha(time);
 					}
 				
 				}else {
