@@ -18,4 +18,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer>{
 			+ "producto_detalle,producto_descuento FROM producto WHERE idcategoriaproducto = ?1 AND idempresa = ?2",nativeQuery=true)
 	List<Producto>  listafindByidcategoriaproductoAndidempresa(int idcategoriaproducto,int idempresa);
 	
+	
+	List<Producto>  findByidempresa(int idempresa);
+
 }

@@ -27,6 +27,9 @@ public class ProductoController {
 	public final static String INSERTAR_PRODUCTO="/insertar";
 	
 	public final static String LISTA_PRODUCTOS_FIND_IDCATEGORIA_IDEMPRESA="/listaCategoria/{idcategoriaproducto}/{idempresa}";
+	
+	public final static String LISTA_PRODUCTOS_FIND_IDEMPRESA="/listaCategoria/{idempresa}";
+
 
 	
 	
@@ -101,5 +104,26 @@ public class ProductoController {
 
 	}
 	
+	@RequestMapping(value=LISTA_PRODUCTOS_FIND_IDEMPRESA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ProductoGson> listaEmpresa(
+			@PathVariable("idempresa") int idempresa){
+		
+		List<Producto> rpta=null;
+		ProductoGson productoGson=null;
+		
+		
+		try {
+			rpta=productoService.findByidempresa(idempresa);
+			productoGson= new ProductoGson();
+			productoGson.setListaProducto(rpta);
+			
+		}catch(Exception e) 
+		{
+			return new ResponseEntity<ProductoGson>(productoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<ProductoGson>(productoGson,HttpStatus.OK);
 
+	}
+	
 }

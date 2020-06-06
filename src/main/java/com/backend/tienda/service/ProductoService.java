@@ -11,4 +11,8 @@ public interface ProductoService {
 	Producto insertarProducto(Producto producto);
 	
 	List<Producto> listaIdcategoriaproductoAndIdempresa(int idcategoriaproducto,int idempresa);
+	
+	
+	List<Producto>  findByidempresa(int idempresa);
+
 }

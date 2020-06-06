@@ -33,5 +33,11 @@ public class ProductoServiceImpl  implements ProductoService{
 	
 	}
 
+	@Override
+	public List<Producto> findByidempresa(int idempresa) {
+		return productoRepository.findByidempresa(idempresa);
+	}
+
+
 	
 }
