@@ -46,7 +46,6 @@ public class Empresa{
 	
 	private String detalle_delivery;
 	
-	private String horario_atencion;
 	
 	private int iddistrito;
 	
@@ -54,6 +53,15 @@ public class Empresa{
 	
 	private String icono_empresa;
 	
+	private int horario_inicio;
+	
+	private int horario_fin;
+	
+	private boolean tarjeta;
+	
+	private String detalle_tarjeta;
+	
+	private float estrella_empresa;
 	
 	
 	
@@ -120,13 +128,7 @@ public class Empresa{
 		this.detalle_delivery = detalle_delivery;
 	}
 
-	public String getHorario_atencion() {
-		return horario_atencion;
-	}
-
-	public void setHorario_atencion(String horario_atencion) {
-		this.horario_atencion = horario_atencion;
-	}
+	
 
 	public void setIdempresa(int idempresa) {
 		this.idempresa = idempresa;
@@ -215,7 +217,49 @@ public class Empresa{
 		this.porcentaje_popularidad = porcentaje_popularidad;
 	}
 
+	public int getHorario_inicio() {
+		return horario_inicio;
+	}
 
+	public void setHorario_inicio(int horario_inicio) {
+		this.horario_inicio = horario_inicio;
+	}
+
+	public int getHorario_fin() {
+		return horario_fin;
+	}
+
+	public void setHorario_fin(int horario_fin) {
+		this.horario_fin = horario_fin;
+	}
+
+	public boolean isTarjeta() {
+		return tarjeta;
+	}
+
+	public void setTarjeta(boolean tarjeta) {
+		this.tarjeta = tarjeta;
+	}
+
+	public String getDetalle_tarjeta() {
+		return detalle_tarjeta;
+	}
+
+	public void setDetalle_tarjeta(String detalle_tarjeta) {
+		this.detalle_tarjeta = detalle_tarjeta;
+	}
+
+	public float getEstrella_empresa() {
+		return estrella_empresa;
+	}
+
+	public void setEstrella_empresa(float estrella_empresa) {
+		this.estrella_empresa = estrella_empresa;
+	}
+
+
+	
+	
 	
 
 }
