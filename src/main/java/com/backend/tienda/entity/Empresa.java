@@ -64,6 +64,16 @@ public class Empresa{
 	private float estrella_empresa;
 	
 	
+	private String productospopulares;
+	
+	private String categoria1;
+	
+	private String categoria2;
+	
+	private String categoria3;
+
+	private String categoria4;
+
 	
 
 	public String getIcono_empresa() {
@@ -255,6 +265,46 @@ public class Empresa{
 
 	public void setEstrella_empresa(float estrella_empresa) {
 		this.estrella_empresa = estrella_empresa;
+	}
+
+	public String getProductospopulares() {
+		return productospopulares;
+	}
+
+	public void setPropductospopulares(String propductospopulares) {
+		this.productospopulares = propductospopulares;
+	}
+
+	public String getCategoria1() {
+		return categoria1;
+	}
+
+	public void setCategoria1(String categoria1) {
+		this.categoria1 = categoria1;
+	}
+
+	public String getCategoria2() {
+		return categoria2;
+	}
+
+	public void setCategoria2(String categoria2) {
+		this.categoria2 = categoria2;
+	}
+
+	public String getCategoria3() {
+		return categoria3;
+	}
+
+	public void setCategoria3(String categoria3) {
+		this.categoria3 = categoria3;
+	}
+
+	public String getCategoria4() {
+		return categoria4;
+	}
+
+	public void setCategoria4(String categoria4) {
+		this.categoria4 = categoria4;
 	}
 
 

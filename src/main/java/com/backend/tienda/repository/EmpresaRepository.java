@@ -18,6 +18,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 			"				 ,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" +
 			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
+			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
 			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
 			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
@@ -30,6 +31,8 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 			"				 ,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" + 
 			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
+			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
+
 			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
 			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
@@ -41,6 +44,8 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 				"				,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" + 
 				"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 				"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
+				"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
+
 				"				FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 				"				 WHERE e.idsubcategoriaempresa = ?1 AND c.cuentaactiva = true  AND" + 
 				"				 plainto_tsquery( ?2  ) @@ to_tsvector(coalesce(direccion_empresa,'')) ",nativeQuery=true)
@@ -52,6 +57,8 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 				+ ",e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad"
 				+"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"
 				+"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "
+				+"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"
+
 				+ " FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa "
 				+ " WHERE e.idsubcategoriaempresa = ?1  AND c.cuentaactiva = true  ",nativeQuery=true)
 	List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria);

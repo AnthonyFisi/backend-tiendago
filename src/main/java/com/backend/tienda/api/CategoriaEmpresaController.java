@@ -14,6 +14,9 @@ import com.backend.tienda.entity.CategoriaEmpresa;
 import com.backend.tienda.gson.CategoriaEmpresaGson;
 import com.backend.tienda.service.CategoriaEmpresaService;
 
+import com.mashape.unirest.http.HttpResponse;
+
+
 /*
  * @PreAuthorize("authenticated")
  * */
