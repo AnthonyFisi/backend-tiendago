@@ -17,6 +17,7 @@ public class MainPedido implements Serializable{
 	
 	private int cantidad;
 	
+	private String comentario;
 
 	public int getidproducto() {
 		return idproducto;
@@ -56,6 +57,14 @@ public class MainPedido implements Serializable{
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 

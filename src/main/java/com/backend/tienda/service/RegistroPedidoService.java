@@ -9,7 +9,7 @@ public interface RegistroPedidoService {
 	
 	RegistroPedido findByid_pedidoAndid_producto(int idpedido,int idproducto);
 	
-	RegistroPedido updateRegistroPedidoCantidadAndPrecio(int registro_cantidad,float registro_costo,RegistroPedidoPK pk);
+	RegistroPedido updateRegistroPedidoCantidadAndPrecio(int registro_cantidad,float registro_costo,String comentario,RegistroPedidoPK pk);
 	
 	RegistroPedido findByid(RegistroPedidoPK pk);
 	

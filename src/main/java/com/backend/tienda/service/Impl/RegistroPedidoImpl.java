@@ -1,5 +1,8 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +31,19 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 	}
 
 	@Override
-	public RegistroPedido updateRegistroPedidoCantidadAndPrecio(int registro_cantidad, float registro_costo,RegistroPedidoPK pk) {
+	public RegistroPedido updateRegistroPedidoCantidadAndPrecio(int registro_cantidad, float registro_costo,String comentario,RegistroPedidoPK pk) {
 		
+		int total=0;
 		RegistroPedido registroPedido=registroPedidoRepository.findById(pk).get();
+		total=registroPedido.getRegistropedido_cantidadtotal()+registro_cantidad;
 		
 		
+		if(comentario.length()>0) {
+			registroPedido.setComentario(registroPedido.getComentario()+" | Comentario "+String.valueOf(total)+" : "+comentario);
+
+		}
 		
-		registroPedido.setRegistropedido_cantidadtotal(registroPedido.getRegistropedido_cantidadtotal()+registro_cantidad);
+		registroPedido.setRegistropedido_cantidadtotal(total);
 		registroPedido.setRegistropedido_preciototal(registroPedido.getRegistropedido_preciototal()+registro_costo);
 		
 		//registroPedidoRepository.updateRegistroPedidoCantidadAndPrecio(registro_cantidad, registro_costo, idpedido,idproducto);
@@ -51,9 +60,20 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 	public RegistroPedido updateDisminuirCantidadAndPrecio(int registro_cantidad, float registro_costo,
 			RegistroPedidoPK pk) {
 
+		String updateComentario="";
 		RegistroPedido registroPedido=registroPedidoRepository.findById(pk).get();
 		
+		String[] parts = registroPedido.getComentario().split("\\|"); 
+		List<String> lista=Arrays.asList(parts);
+		lista.remove(registroPedido.getRegistropedido_cantidadtotal()-1);
 		
+		for(String cadena:lista) {
+			updateComentario=updateComentario+cadena;
+		}
+		registroPedido.setComentario(updateComentario);
+		
+		
+
 		
 		registroPedido.setRegistropedido_cantidadtotal(registroPedido.getRegistropedido_cantidadtotal()-registro_cantidad);
 		registroPedido.setRegistropedido_preciototal(registroPedido.getRegistropedido_preciototal()-registro_costo);

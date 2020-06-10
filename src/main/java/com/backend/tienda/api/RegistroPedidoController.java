@@ -51,7 +51,7 @@ public class RegistroPedidoController {
 			RegistroPedidoPK pk=new RegistroPedidoPK();
 			pk.setIdpedido(respuesta.getIdpedido());
 			pk.setIdproducto(mainPedido.getidproducto());
-			 respuestaFinal=registroPedidoService.updateRegistroPedidoCantidadAndPrecio(mainPedido.getCantidad(), mainPedido.getPrecio(),pk);
+			 respuestaFinal=registroPedidoService.updateRegistroPedidoCantidadAndPrecio(mainPedido.getCantidad(), mainPedido.getPrecio(),mainPedido.getComentario(),pk);
 
 				
 			int cantidad_total=respuesta.getPedido_cantidadtotal()+mainPedido.getCantidad();

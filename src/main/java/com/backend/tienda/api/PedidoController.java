@@ -56,7 +56,7 @@ public class PedidoController {
 			pk.setIdproducto(mainPedido.getidproducto());
 
 			registroPedido1=registroPedidoService.registrar
-					(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa()));
+					(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa(),"Comentario 1 :"+mainPedido.getComentario()));
 
 			try {
 						
@@ -89,7 +89,7 @@ public class PedidoController {
 				pk.setIdproducto(mainPedido.getidproducto());
 					
 				registroPedido=registroPedidoService.registrar
-						(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa()));
+						(new RegistroPedido(pk,mainPedido.getCantidad(),mainPedido.getPrecio(),time,mainPedido.getIdempresa(),"Comentario 1 :"+mainPedido.getComentario()));
 				
 				
 			}catch(Exception j) {

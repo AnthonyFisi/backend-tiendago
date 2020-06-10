@@ -30,17 +30,20 @@ public class RegistroPedido {
 	
 	private int idempresa;
 	
+	private String comentario;
+	
 	public RegistroPedido() {}
 	
 
 	public RegistroPedido(RegistroPedidoPK id, int registropedido_cantidadtotal, float registropedido_preciototal,
-			Timestamp registro_fecha, int idempresa) {
+			Timestamp registro_fecha, int idempresa,String comentario) {
 		super();
 		this.id = id;
 		this.registropedido_cantidadtotal = registropedido_cantidadtotal;
 		this.registropedido_preciototal = registropedido_preciototal;
 		this.registro_fecha = registro_fecha;
 		this.idempresa = idempresa;
+		this.comentario=comentario;
 	}
 
 	public RegistroPedidoPK getId() {
@@ -82,6 +85,18 @@ public class RegistroPedido {
 	public void setIdempresa(int idempresa) {
 		this.idempresa = idempresa;
 	}
+
+
+	public String getComentario() {
+		return comentario;
+	}
+
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+	
+	
 	
 	
 	
