@@ -37,11 +37,10 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 		RegistroPedido registroPedido=registroPedidoRepository.findById(pk).get();
 		total=registroPedido.getRegistropedido_cantidadtotal()+registro_cantidad;
 		
+	
 		
-		if(comentario.length()>0) {
-			registroPedido.setComentario(registroPedido.getComentario()+" | Comentario "+String.valueOf(total)+" : "+comentario);
+		registroPedido.setComentario(registroPedido.getComentario()+" | Comentario "+String.valueOf(total)+" : "+comentario);
 
-		}
 		
 		registroPedido.setRegistropedido_cantidadtotal(total);
 		registroPedido.setRegistropedido_preciototal(registroPedido.getRegistropedido_preciototal()+registro_costo);
@@ -62,7 +61,7 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 
 		String updateComentario="";
 		RegistroPedido registroPedido=registroPedidoRepository.findById(pk).get();
-		
+		/*
 		String[] parts = registroPedido.getComentario().split("\\|"); 
 		List<String> lista=Arrays.asList(parts);
 		lista.remove(registroPedido.getRegistropedido_cantidadtotal()-1);
@@ -72,7 +71,7 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 		}
 		registroPedido.setComentario(updateComentario);
 		
-		
+		*/
 
 		
 		registroPedido.setRegistropedido_cantidadtotal(registroPedido.getRegistropedido_cantidadtotal()-registro_cantidad);
@@ -103,7 +102,22 @@ public class RegistroPedidoImpl  implements RegistroPedidoService{
 		}
 		
 	}
-	
+
+	@Override
+	public RegistroPedido eliminarCarrito(int idpedido) {
+		RegistroPedido registroPedido=null;
+		
+		try {
+			registroPedidoRepository.eliminarCarrito(idpedido);
+			registroPedido=new RegistroPedido();
+		}catch(Exception e) {
+			return registroPedido;
+		}
+		
+		return registroPedido;
+	}
+
+
 	
 
 }

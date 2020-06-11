@@ -24,5 +24,8 @@ public interface RegistroPedidoRepository extends JpaRepository<RegistroPedido,R
 	@Query(value="UPDATE registropedido SET  registropedido_cantidadtotal = ?1 , registropedido_preciototal = ?2 WHERE idpedido = ?3  AND idproducto = ?4" ,nativeQuery=true)
 	void updateRegistroPedidoCantidadAndPrecio(int registro_cantidad,float registro_costo,int idpedido,int idproducto);
 	
+	@Query(value="DELETE FROM registropedido WHERE idpedido = ?1 ",nativeQuery=true)
+	void eliminarCarrito(int idpedido);
+	
 	
 }

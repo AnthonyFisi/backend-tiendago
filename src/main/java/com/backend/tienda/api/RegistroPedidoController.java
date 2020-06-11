@@ -30,6 +30,9 @@ public class RegistroPedidoController {
 	public static final String AÑADIR_PEDIDO_CONTROLLER="/agregarProducto";
 	
 	public static final String DISMINUIR_PEDIDO_CONTROLLER="/disminuirProducto";
+	
+	
+	public static final String ELIMINAR_CARRITO="/eliminarCarrito/{idUsuario}";
 
 	@Autowired
 	RegistroPedidoService registroPedidoService;
@@ -76,6 +79,9 @@ public class RegistroPedidoController {
 		
 		Pedido respuesta = null;
 		RegistroPedido respuestaFinal=null;
+		
+		
+		
 		try {
 			
 			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario());
@@ -122,6 +128,28 @@ public class RegistroPedidoController {
 			}
 			
 			
+		}catch(Exception e) {
+			return new ResponseEntity<RegistroPedido>(respuestaFinal,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+		
+		return new ResponseEntity<RegistroPedido>(respuestaFinal,HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value=ELIMINAR_CARRITO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RegistroPedido> eliminarCarrito(@PathVariable("idUsuario")int idUsuario){
+	
+		Pedido respuesta = null;
+		RegistroPedido respuestaFinal=null;
+	
+		try {
+			
+			respuesta=pedidoService.findByIdUsuario(idUsuario);
+			
+			respuestaFinal=registroPedidoService.eliminarCarrito(respuesta.getIdpedido());
+			
+			pedidoService.eliminarPedido(respuesta.getIdpedido());
 			
 			
 			
@@ -131,8 +159,9 @@ public class RegistroPedidoController {
 		}
 		
 		return new ResponseEntity<RegistroPedido>(respuestaFinal,HttpStatus.OK);
+
 	}
-	
+
 	
 
 }

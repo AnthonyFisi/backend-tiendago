@@ -41,4 +41,15 @@ public class PedidoServiceImpl implements PedidoService {
 		
 	}
 
+	@Override
+	public void eliminarPedido(int idPedido) {
+		try {
+			pedidoRepository.deleteById(idPedido);
+			
+		}catch(Exception e) {
+			
+		}
+		
+	}
+
 }

@@ -16,5 +16,8 @@ public interface RegistroPedidoService {
 	RegistroPedido updateDisminuirCantidadAndPrecio(int registro_cantidad,float registro_costo,RegistroPedidoPK pk);
 	
 	int eliminarProductoRegistro(RegistroPedidoPK pk);
+	
+	RegistroPedido eliminarCarrito(int idpedido);
+	
 
 }
