@@ -31,9 +31,9 @@ public class Ubicacion {
 	
 	private String maps_detalle;
 	
-	private float maps_coordenada_x;
+	private String maps_coordenada_x;
 	
-	private float maps_coordenada_y;
+	private String maps_coordenada_y;
 
 	public int getIdubicacion() {
 		return idubicacion;
@@ -94,14 +94,6 @@ public class Ubicacion {
 	}
 
 
-	public float getMaps_coordenada_x() {
-		return maps_coordenada_x;
-	}
-
-	public void setMaps_coordenada_x(float maps_coordenada_x) {
-		this.maps_coordenada_x = maps_coordenada_x;
-	}
-
 	public String getMaps_detalle() {
 		return maps_detalle;
 	}
@@ -110,11 +102,19 @@ public class Ubicacion {
 		this.maps_detalle = maps_detalle;
 	}
 
-	public float getMaps_coordenada_y() {
+	public String getMaps_coordenada_x() {
+		return maps_coordenada_x;
+	}
+
+	public void setMaps_coordenada_x(String maps_coordenada_x) {
+		this.maps_coordenada_x = maps_coordenada_x;
+	}
+
+	public String getMaps_coordenada_y() {
 		return maps_coordenada_y;
 	}
 
-	public void setMaps_coordenada_y(float maps_coordenada_y) {
+	public void setMaps_coordenada_y(String maps_coordenada_y) {
 		this.maps_coordenada_y = maps_coordenada_y;
 	}
 
