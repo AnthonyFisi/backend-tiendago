@@ -38,6 +38,22 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	private int idpedido;
 	
 	private int idusuario;
+	
+	
+	    private boolean pedido_estado;
+
+	
+	    private String nombre_empresa;
+
+	   
+	    private float costo_delivery;
+
+	  
+	    private String urlfoto_empresa;
+
+	    
+	    private String icono_empresa;
+
 
 	
 	public int getRegistropedido_cantidadtotal() {
@@ -137,6 +153,48 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	public void setRegistropedido_preciototal(float registropedido_preciototal) {
 		this.registropedido_preciototal = registropedido_preciototal;
 	}
+
+	public boolean isPedido_estado() {
+		return pedido_estado;
+	}
+
+	public void setPedido_estado(boolean pedido_estado) {
+		this.pedido_estado = pedido_estado;
+	}
+
+	public String getNombre_empresa() {
+		return nombre_empresa;
+	}
+
+	public void setNombre_empresa(String nombre_empresa) {
+		this.nombre_empresa = nombre_empresa;
+	}
+
+	public float getCosto_delivery() {
+		return costo_delivery;
+	}
+
+	public void setCosto_delivery(float costo_delivery) {
+		this.costo_delivery = costo_delivery;
+	}
+
+	public String getUrlfoto_empresa() {
+		return urlfoto_empresa;
+	}
+
+	public void setUrlfoto_empresa(String urlfoto_empresa) {
+		this.urlfoto_empresa = urlfoto_empresa;
+	}
+
+	public String getIcono_empresa() {
+		return icono_empresa;
+	}
+
+	public void setIcono_empresa(String icono_empresa) {
+		this.icono_empresa = icono_empresa;
+	}
+	
+	
 	
 	
 	

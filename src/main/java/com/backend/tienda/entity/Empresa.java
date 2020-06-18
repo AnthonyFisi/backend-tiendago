@@ -73,6 +73,15 @@ public class Empresa{
 	private String categoria3;
 
 	private String categoria4;
+	
+	
+	
+	
+	private String maps_coordenada_x;
+	
+	private String maps_coordenada_y;
+	
+	private String detalle_ubicacion;
 
 	
 
@@ -305,6 +314,30 @@ public class Empresa{
 
 	public void setCategoria4(String categoria4) {
 		this.categoria4 = categoria4;
+	}
+
+	public String getMaps_coordenada_x() {
+		return maps_coordenada_x;
+	}
+
+	public void setMaps_coordenada_x(String maps_coordenada_x) {
+		this.maps_coordenada_x = maps_coordenada_x;
+	}
+
+	public String getMaps_coordenada_y() {
+		return maps_coordenada_y;
+	}
+
+	public void setMaps_coordenada_y(String maps_coordenada_y) {
+		this.maps_coordenada_y = maps_coordenada_y;
+	}
+
+	public String getDetalle_ubicacion() {
+		return detalle_ubicacion;
+	}
+
+	public void setDetalle_ubicacion(String detalle_ubicacion) {
+		this.detalle_ubicacion = detalle_ubicacion;
 	}
 
 
