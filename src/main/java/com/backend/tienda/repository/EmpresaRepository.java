@@ -19,7 +19,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
 			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-			"                ,e.maps_coordenda_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
+			"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
 			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
 			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
@@ -33,7 +33,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
 			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-			"                ,e.maps_coordenda_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
+			"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
 			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
 			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
@@ -46,7 +46,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 				"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
 				"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
 				"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-				"                ,e.maps_coordenda_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
+				"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion"+
 
 				"				FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
 				"				 WHERE e.idsubcategoriaempresa = ?1 AND c.cuentaactiva = true  AND" + 
@@ -60,7 +60,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 				+"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"
 				+"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "
 				+"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"
-				+"                ,e.maps_coordenda_x , e.maps_coordenada_y ,e.detalle_ubicacion"
+				+"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion"
 				+ " FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa "
 				+ " WHERE e.idsubcategoriaempresa = ?1  AND c.cuentaactiva = true  ",nativeQuery=true)
 	List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria);
