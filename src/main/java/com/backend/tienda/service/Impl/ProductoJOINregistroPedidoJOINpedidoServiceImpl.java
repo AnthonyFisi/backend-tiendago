@@ -63,6 +63,14 @@ public class ProductoJOINregistroPedidoJOINpedidoServiceImpl implements Producto
 		
 		return list;
 	}
+
+
+
+
+	@Override
+	public List<ProductoJOINregistroPedidoJOINpedido> listaCarritoByIdUsuario(int idusuario) {
+		return  productoJOINregistroPedidoJOINpedidoRepository.findByidusuario(idusuario);
+	}
 	
 	
 	

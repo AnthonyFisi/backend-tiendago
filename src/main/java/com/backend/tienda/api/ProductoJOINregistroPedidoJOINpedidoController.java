@@ -26,6 +26,9 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	public final static String LISTA_BY_PEDIDO="/listaByEmpresa/{idusuario}/{idempresa}";
 
 	public final static String LISTA_TOTAL="/listaTotal/{idusuario}";
+	
+	public final static String LISTA_TOTAL_BY_USUARIO="/listaTotalByUsuario/{idusuario}";
+
 
 	
 	@Autowired
@@ -64,6 +67,27 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 		try {
 			
 			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoTotal(idusuario);
+			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
+			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
+		}catch(Exception e) {
+			return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
+		
+		return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.OK);
+	
+	}
+	
+	
+	@RequestMapping(value=LISTA_TOTAL_BY_USUARIO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> listaTotalByUsuario(@PathVariable("idusuario")int idusuario){
+		
+		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
+		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
+		
+		try {
+			
+			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoByIdUsuario(idusuario);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
 		}catch(Exception e) {

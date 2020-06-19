@@ -17,6 +17,9 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	
 	 List<ProductoJOINregistroPedidoJOINpedido> findByidpedido(int idpedido);
 	 
+	 List<ProductoJOINregistroPedidoJOINpedido> findByidusuario(int idusuario);
+
+	 
 	 @Query(value=
 	 		"SELECT DISTINCT ON (idempresa) idempresa," + 
 	 		"	idproducto," + 

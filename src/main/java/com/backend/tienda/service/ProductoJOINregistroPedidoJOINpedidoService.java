@@ -10,6 +10,9 @@ public interface ProductoJOINregistroPedidoJOINpedidoService {
 	 List<ProductoJOINregistroPedidoJOINpedido> listaTotalByEmpresa(int idusuario,int idEmpresa);
 	 
 	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritoTotal(int idusuario);
+	 
+	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritoByIdUsuario(int idusuario);
+
 
 
 }
