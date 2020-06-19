@@ -49,7 +49,7 @@ public class PedidoController {
 		RegistroPedido registroPedido1=null;
 
 		try {
-			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario());
+			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario(),mainPedido.getIdempresa());
 
 			RegistroPedidoPK pk=new RegistroPedidoPK();
 			pk.setIdpedido(respuesta.getIdpedido());
@@ -78,7 +78,7 @@ public class PedidoController {
 			
 			Pedido rpta1=null;
 			
-			Pedido pedido=new Pedido(0,mainPedido.getPrecio(),mainPedido.getCantidad(),time,false,mainPedido.getIdusuario());
+			Pedido pedido=new Pedido(0,mainPedido.getPrecio(),mainPedido.getCantidad(),time,false,mainPedido.getIdusuario(),mainPedido.getIdempresa());
 				
 			try {	
 				

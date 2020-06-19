@@ -18,6 +18,7 @@ public class MainPedido implements Serializable{
 	private int cantidad;
 	
 	private String comentario;
+	
 
 	public int getidproducto() {
 		return idproducto;

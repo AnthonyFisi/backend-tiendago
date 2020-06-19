@@ -30,17 +30,20 @@ public class Pedido {
 	
 	private int idusuario;
 	
+	private int idempresa;
+	
 	
 	public Pedido() {}
 
 	public Pedido(int idpedido, float pedido_montototal, int pedido_cantidadtotal, Timestamp pedido_fecha_registro,
-			boolean pedido_estado, int idusuario) {
+			boolean pedido_estado, int idusuario,int idempresa) {
 		this.idpedido = idpedido;
 		this.pedido_montototal = pedido_montototal;
 		this.pedido_cantidadtotal = pedido_cantidadtotal;
 		this.pedido_fecha_registro = pedido_fecha_registro;
 		this.pedido_estado = pedido_estado;
 		this.idusuario = idusuario;
+		this.idempresa=idempresa;
 	}
 
 	public int getIdpedido() {
@@ -91,7 +94,16 @@ public class Pedido {
 		this.idusuario = idusuario;
 	}
 
+	public int getIdempresa() {
+		return idempresa;
+	}
 
+	public void setIdempresa(int idempresa) {
+		this.idempresa = idempresa;
+	}
+
+	
+	
 	
 	
 	

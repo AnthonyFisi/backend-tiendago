@@ -30,13 +30,31 @@ public class ProductoJOINregistroPedidoJOINpedidoServiceImpl implements Producto
 	
 
 	@Override
-	public List<ProductoJOINregistroPedidoJOINpedido> listaTotal(int idusuario) {
+	public List<ProductoJOINregistroPedidoJOINpedido> listaTotalByEmpresa(int idusuario,int idEmpresa) {
 		
 		Pedido respuesta = null;
 		List<ProductoJOINregistroPedidoJOINpedido> list=null;
 		try {
-			respuesta=pedidoRepository.findByIdUsuario(idusuario);
+			respuesta=pedidoRepository.findByIdUsuario(idusuario,idEmpresa);
 	        list=productoJOINregistroPedidoJOINpedidoRepository.findByidpedido(respuesta.getIdpedido());
+
+		}catch(Exception e) {
+			list=new ArrayList<ProductoJOINregistroPedidoJOINpedido>();
+			return list;
+		}
+		
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<ProductoJOINregistroPedidoJOINpedido> listaCarritoTotal(int idusuario) {
+		
+		List<ProductoJOINregistroPedidoJOINpedido> list=null;
+		try {
+	        list=productoJOINregistroPedidoJOINpedidoRepository.listaCarritos(idusuario);
 
 		}catch(Exception e) {
 			list=new ArrayList<ProductoJOINregistroPedidoJOINpedido>();

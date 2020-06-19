@@ -6,7 +6,7 @@ public interface PedidoService {
 	
 	Pedido registrarPedido(Pedido pedido);
 	
-	Pedido findByIdUsuario(int idUsuario);
+	Pedido findByIdUsuario(int idUsuario,int idEmpresa);
 	
 	void updatePedido(int cantidad_total,float precio_total,int idpedido);
 	

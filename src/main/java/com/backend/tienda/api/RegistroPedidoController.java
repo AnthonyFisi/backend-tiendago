@@ -48,7 +48,7 @@ public class RegistroPedidoController {
 		RegistroPedido respuestaFinal=null;
 		try {
 			
-			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario());
+			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario(),mainPedido.getIdempresa());
 			
 			
 			RegistroPedidoPK pk=new RegistroPedidoPK();
@@ -84,7 +84,7 @@ public class RegistroPedidoController {
 		
 		try {
 			
-			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario());
+			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario(),mainPedido.getIdempresa());
 			
 			
 			RegistroPedidoPK pk=new RegistroPedidoPK();
@@ -138,14 +138,14 @@ public class RegistroPedidoController {
 	
 	
 	@RequestMapping(value=ELIMINAR_CARRITO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RegistroPedido> eliminarCarrito(@PathVariable("idUsuario")int idUsuario){
+	public ResponseEntity<RegistroPedido> eliminarCarrito(@RequestBody MainPedido mainPedido){
 	
 		Pedido respuesta = null;
 		RegistroPedido respuestaFinal=null;
 	
 		try {
 			
-			respuesta=pedidoService.findByIdUsuario(idUsuario);
+			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario(),mainPedido.getIdempresa());
 			
 			respuestaFinal=registroPedidoService.eliminarCarrito(respuesta.getIdpedido());
 			

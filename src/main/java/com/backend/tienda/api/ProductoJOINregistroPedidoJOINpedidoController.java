@@ -23,21 +23,24 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	
 	public final static String PRODUCTO_REGISTROPEDIDO_PEDIDO_CONTROLLER="/ProductoJOINregistroPedidoJOINpedidoController";
 	
-	public final static String LISTA_BY_PEDIDO="/lista/{idusuario}";
+	public final static String LISTA_BY_PEDIDO="/listaByEmpresa/{idusuario}/{idempresa}";
+
+	public final static String LISTA_TOTAL="/listaTotal/{idusuario}";
+
 	
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 	
 	
 	@RequestMapping(value=LISTA_BY_PEDIDO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> lista(@PathVariable("idusuario")int idusuario){
+	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> lista(@PathVariable("idusuario")int idusuario,@PathVariable("idempresa")int idempresa){
 		
 		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
 		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
 		
 		try {
 			
-			lista=productoJOINregistroPedidoJOINpedidoService.listaTotal(idusuario);
+			lista=productoJOINregistroPedidoJOINpedidoService.listaTotalByEmpresa(idusuario, idempresa);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
 		}catch(Exception e) {
@@ -51,5 +54,25 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	}
 
 
+	
+	@RequestMapping(value=LISTA_TOTAL,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> lista(@PathVariable("idusuario")int idusuario){
+		
+		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
+		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
+		
+		try {
+			
+			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoTotal(idusuario);
+			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
+			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
+		}catch(Exception e) {
+			return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
+		
+		return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.OK);
+	
+	}
 
 }

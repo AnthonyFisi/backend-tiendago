@@ -11,8 +11,8 @@ import com.backend.tienda.entity.Pedido;
 public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 	
 	@Query(value="SELECT idpedido ,pedido_montototal,pedido_cantidadtotal,pedido_fecha_registro,pedido_estado,idusuario FROM pedido WHERE"
-			+ " idusuario = ?1 AND  pedido_estado = false ",nativeQuery=true)
-	Pedido  findByIdUsuario(int idUsuario);
+			+ " idusuario = ?1 AND idempresa= ?2 pedido_estado = false ",nativeQuery=true)
+	Pedido  findByIdUsuario(int idUsuario,int idEmpresa);
 	
 	@Modifying
 	@Query(value="UPDATE pedido SET pedido_cantidadtotal = ?1 , pedido_montototal = ?2 WHERE idpedido = ?3 ",nativeQuery=true)

@@ -7,6 +7,9 @@ import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 public interface ProductoJOINregistroPedidoJOINpedidoService {
 	
 
-	 List<ProductoJOINregistroPedidoJOINpedido> listaTotal(int idusuario);
+	 List<ProductoJOINregistroPedidoJOINpedido> listaTotalByEmpresa(int idusuario,int idEmpresa);
+	 
+	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritoTotal(int idusuario);
+
 
 }

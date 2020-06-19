@@ -20,8 +20,8 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
-	public Pedido findByIdUsuario(int idUsuario) {
-		return pedidoRepository.findByIdUsuario(idUsuario);
+	public Pedido findByIdUsuario(int idUsuario,int idEmpresa) {
+		return pedidoRepository.findByIdUsuario(idUsuario,idEmpresa);
 	}
 
 	@Override
