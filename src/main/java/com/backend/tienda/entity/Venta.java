@@ -39,6 +39,8 @@ public class Venta {
 	private int idestado_venta;
 	
 	private int idestado_pago;
+	
+	private int idtipo_envio;
 
 	public int getIdventa() {
 		return idventa;
@@ -136,6 +138,14 @@ public class Venta {
 
 	public void setIdestado_pago(int idestado_pago) {
 		this.idestado_pago = idestado_pago;
+	}
+
+	public int getIdtipo_envio() {
+		return idtipo_envio;
+	}
+
+	public void setIdtipo_envio(int idtipo_envio) {
+		this.idtipo_envio = idtipo_envio;
 	}
 	
 	

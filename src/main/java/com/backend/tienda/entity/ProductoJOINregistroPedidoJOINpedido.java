@@ -42,6 +42,10 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	
 	    private boolean pedido_estado;
 
+	    private float pedido_montototal;
+
+	    private int pedido_cantidadtotal;
+
 	
 	    private String nombre_empresa;
 
@@ -192,6 +196,22 @@ public class ProductoJOINregistroPedidoJOINpedido {
 
 	public void setIcono_empresa(String icono_empresa) {
 		this.icono_empresa = icono_empresa;
+	}
+
+	public float getPedido_montototal() {
+		return pedido_montototal;
+	}
+
+	public void setPedido_montototal(float pedido_montototal) {
+		this.pedido_montototal = pedido_montototal;
+	}
+
+	public int getPedido_cantidadtotal() {
+		return pedido_cantidadtotal;
+	}
+
+	public void setPedido_cantidadtotal(int pedido_cantidadtotal) {
+		this.pedido_cantidadtotal = pedido_cantidadtotal;
 	}
 	
 	
