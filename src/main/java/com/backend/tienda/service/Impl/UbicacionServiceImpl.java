@@ -29,11 +29,16 @@ public class UbicacionServiceImpl implements UbicacionService{
 	}
 
 	@Override
-	public Ubicacion saveUbicacion(Ubicacion ubicacion) {
+	public Ubicacion saveUbicacion(Ubicacion ubicacion,int idOldUbicacion) {
 		
 		Ubicacion respuesta=null;
+		Ubicacion firstAnswer=null;
 		
 		try {
+			
+			firstAnswer=ubicacionRepository.findById(idOldUbicacion).get();
+			firstAnswer.setUbicacion_estado(false);
+			ubicacionRepository.save(firstAnswer);
 			
 			respuesta=ubicacionRepository.save(ubicacion);
 			

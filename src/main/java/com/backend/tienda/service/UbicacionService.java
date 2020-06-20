@@ -10,7 +10,7 @@ public interface UbicacionService {
 
 	Ubicacion findByidubicacion(int idubicacion);
 
-	Ubicacion saveUbicacion(Ubicacion ubicacion);
+	Ubicacion saveUbicacion(Ubicacion ubicacion,int idOldUbicacion);
 	
 	Ubicacion findByidusuario1(int idusuario);
 	

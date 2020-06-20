@@ -28,7 +28,7 @@ public class UbicacionController {
 	
 	public final static String OBJETO_BY_IDUBICACION="/ObjetoByUbicacion/{idubicacion}";
 	
-	public final static String REGISTRAR="/registrar";
+	public final static String REGISTRAR="/registrar/{idOldUbicacion}";
 	
 	public final static String ACTUALIZAR_ESTADO="/updateEstadoUbicacion/{idOldUbicacion}/{idNewUbicacion}";
 	
@@ -61,12 +61,12 @@ public class UbicacionController {
 	
 
 	@RequestMapping(value=REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ubicacion>  registrarUbicacion(@RequestBody Ubicacion ubicacion){
+	public ResponseEntity<Ubicacion>  registrarUbicacion(@RequestBody Ubicacion ubicacion,@PathVariable("idOldUbicacion") int idOldUbicacion){
 		
 		Ubicacion ubicacio=null;
 		
 		try {
-			ubicacio=ubicacionService.saveUbicacion(ubicacion);
+			ubicacio=ubicacionService.saveUbicacion(ubicacion,idOldUbicacion);
 			
 		}catch(Exception e) {
 			return new  ResponseEntity<Ubicacion>(ubicacio,HttpStatus.INTERNAL_SERVER_ERROR);
