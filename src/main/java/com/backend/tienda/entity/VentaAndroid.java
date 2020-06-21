@@ -33,8 +33,7 @@ public class VentaAndroid {
 	
 	private int idUsuario;
 
-	
-	
+	private boolean repsuesta_registro_venta;	
 	
 
 	public int getIdEmpresa() {
@@ -149,6 +148,17 @@ public class VentaAndroid {
 		this.idUsuario = idUsuario;
 	}
 	
+	
+	
+	
+	public boolean isRepsuesta_registro_venta() {
+		return repsuesta_registro_venta;
+	}
+
+	public void setRepsuesta_registro_venta(boolean repsuesta_registro_venta) {
+		this.repsuesta_registro_venta = repsuesta_registro_venta;
+	}
+
 	public static Venta createVenta(VentaAndroid ventaAndroid,int idPedido) {
 		
 		Venta venta= new Venta
@@ -172,6 +182,7 @@ public class VentaAndroid {
 		
 		return venta;
 	}
+
 	
 	
 	
