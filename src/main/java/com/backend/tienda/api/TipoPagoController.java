@@ -22,6 +22,9 @@ public class TipoPagoController {
 	
 	public final static String LISTA="/lista";
 	
+	public final static String LISTA_ENABLE="/listaEnable";
+
+	
 	@Autowired
 	TipoPagoService tipoPagoService;
 	
@@ -34,6 +37,26 @@ public class TipoPagoController {
 		try {
 			
 			listaTipoPago=tipoPagoService.listaTipoPago();
+			tipoPagoGson=new TipoPagoGson();
+			tipoPagoGson.setListaTipoPago(listaTipoPago);
+			
+		}catch(Exception e) {
+			return new  ResponseEntity<TipoPagoGson> (tipoPagoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<TipoPagoGson> (tipoPagoGson,HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value=LISTA_ENABLE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TipoPagoGson>  listaTipoPagoEnable(){
+		
+		List<TipoPago> listaTipoPago=null;
+		TipoPagoGson tipoPagoGson=null;
+		
+		try {
+			
+			listaTipoPago=tipoPagoService.listaTipoPagoEnable();
 			tipoPagoGson=new TipoPagoGson();
 			tipoPagoGson.setListaTipoPago(listaTipoPago);
 			

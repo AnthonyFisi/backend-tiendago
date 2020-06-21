@@ -7,5 +7,7 @@ import com.backend.tienda.entity.TipoPago;
 public interface TipoPagoService {
 	
 	List<TipoPago> listaTipoPago();
+	
+	List<TipoPago> listaTipoPagoEnable();
 
 }

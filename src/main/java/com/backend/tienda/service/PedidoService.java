@@ -13,5 +13,7 @@ public interface PedidoService {
 	void updatePedido2(int cantidad_total,float precio_total,int idpedido);
 	
 	void eliminarPedido(int idPedido);
+	
+	Pedido updatePedidoEstado(boolean estado,int idPedido);
 
 }

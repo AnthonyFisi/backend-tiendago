@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Pedido;
 import com.backend.tienda.entity.Venta;
+import com.backend.tienda.entity.VentaAndroid;
+import com.backend.tienda.service.PedidoService;
 import com.backend.tienda.service.VentaService;
 
 @RestController
@@ -27,13 +30,30 @@ public class VentaController {
 	@Autowired
 	VentaService ventaService;
 	
+	@Autowired
+	PedidoService pedidoService;
+	
+	
 	@RequestMapping(value=REGISTRAR_VENTA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Venta>  registrarVenta(@RequestBody Venta venta){
+	public ResponseEntity<Venta>  registrarVenta(@RequestBody VentaAndroid ventaAndroid){
 		
 		Venta respuesta=null;
+		
+		Pedido respuestaPedido =new Pedido();
+		
+		boolean answerPedido= false;
+
+		
+		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
+		
+		
 		try {
 			
-			respuesta=ventaService.registrarVenta(venta);
+			respuesta=ventaService.registrarVenta(VentaAndroid.createVenta(ventaAndroid, respuestaPedido.getIdpedido()));
+			
+			answerPedido=true;
+		
+			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
 			
 		}catch(Exception e) {
 			return new  ResponseEntity<Venta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);

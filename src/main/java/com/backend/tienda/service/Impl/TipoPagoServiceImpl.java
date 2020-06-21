@@ -19,6 +19,11 @@ public class TipoPagoServiceImpl implements TipoPagoService{
 	public List<TipoPago> listaTipoPago() {
 		return tipoPagoRepository.findAll();
 	}
+
+	@Override
+	public List<TipoPago> listaTipoPagoEnable() {
+		return tipoPagoRepository.listaEnableTipoPago(true);
+	}
 	
 	
 

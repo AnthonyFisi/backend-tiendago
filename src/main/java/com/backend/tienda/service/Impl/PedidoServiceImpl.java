@@ -52,4 +52,28 @@ public class PedidoServiceImpl implements PedidoService {
 		
 	}
 
+	@Override
+	public Pedido updatePedidoEstado(boolean estado,int idPedido) {
+	
+		Pedido pedido=null;
+		Pedido pedidoAnswer=null;
+		
+		try {
+			
+			pedido=pedidoRepository.findById(idPedido).get();
+			pedido.setPedido_estado(estado);
+			pedidoAnswer=pedidoRepository.save(pedido);
+			
+			
+		}catch(Exception e) {
+			return pedidoAnswer;
+		}
+		
+		return pedidoAnswer;
+	}
+	
+	
+	
+	
+
 }

@@ -17,6 +17,28 @@ public class TipoPago {
 	private int idtipopago;
 	
 	private String tipopago_nombre;
+	
+	private boolean tipopago_estado;
+	
+	private String tipopago_url;
+	
+	
+
+	public boolean isTipopago_estado() {
+		return tipopago_estado;
+	}
+
+	public void setTipopago_estado(boolean tipopago_estado) {
+		this.tipopago_estado = tipopago_estado;
+	}
+
+	public String getTipopago_url() {
+		return tipopago_url;
+	}
+
+	public void setTipopago_url(String tipopago_url) {
+		this.tipopago_url = tipopago_url;
+	}
 
 	public int getIdtipopago() {
 		return idtipopago;

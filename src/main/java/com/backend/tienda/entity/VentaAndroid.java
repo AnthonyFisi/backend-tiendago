@@ -2,21 +2,10 @@ package com.backend.tienda.entity;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class VentaAndroid {
 
-@Entity
-@Table(name="venta")
-public class Venta {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idventa", updatable = false, nullable = false)
-	private int idventa;
+	private int idEmpresa;
 	
 	private int idtipopago;
 	
@@ -42,40 +31,19 @@ public class Venta {
 	
 	private int idtipo_envio;
 	
-	private String comentario_entrega;
-	
-
-
-	public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
-			Timestamp venta_fechaentrega, float venta_costodelivery, float venta_costototal, String comentario,
-			int idestado_venta, int idestado_pago, int idtipo_envio,String comentario_entrega) {
-		this.idventa = idventa;
-		this.idtipopago = idtipopago;
-		this.idhorario = idhorario;
-		this.idubicacion = idubicacion;
-		this.idpedido = idpedido;
-		this.venta_fecha = venta_fecha;
-		this.venta_fechaentrega = venta_fechaentrega;
-		this.venta_costodelivery = venta_costodelivery;
-		this.venta_costototal = venta_costototal;
-		this.comentario = comentario;
-		this.idestado_venta = idestado_venta;
-		this.idestado_pago = idestado_pago;
-		this.idtipo_envio = idtipo_envio;
-		this.comentario_entrega=comentario_entrega;
-	}
+	private int idUsuario;
 
 	
-	public Venta() {}
-	public int getIdventa() {
-		return idventa;
-	}
-
-	public void setIdventa(int idventa) {
-		this.idventa = idventa;
-	}
-
 	
+	
+
+	public int getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
 
 	public int getIdtipopago() {
 		return idtipopago;
@@ -173,24 +141,40 @@ public class Venta {
 		this.idtipo_envio = idtipo_envio;
 	}
 
-
-	public String getComentario_entrega() {
-		return comentario_entrega;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
-
-	public void setComentario_entrega(String comentario_entrega) {
-		this.comentario_entrega = comentario_entrega;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	public static Venta createVenta(VentaAndroid ventaAndroid,int idPedido) {
+		
+		Venta venta= new Venta
+				(
+					0,
+					ventaAndroid.getIdtipopago(),
+					ventaAndroid.getIdhorario(),
+					ventaAndroid.getIdubicacion(),
+					idPedido,
+					ventaAndroid.getVenta_fecha(),
+					ventaAndroid.getVenta_fechaentrega(),
+					ventaAndroid.getVenta_costodelivery(),
+					ventaAndroid.getVenta_costototal(),
+					ventaAndroid.getComentario(),
+					ventaAndroid.getIdestado_venta(),
+					ventaAndroid.getIdestado_pago(),
+					ventaAndroid.getIdtipo_envio(),
+					""
+				
+				);
+		
+		return venta;
 	}
 	
 	
 	
 	
 	
-	
-	
-
 }
-
-
-
