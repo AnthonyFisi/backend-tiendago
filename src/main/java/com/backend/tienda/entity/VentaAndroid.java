@@ -1,5 +1,7 @@
 package com.backend.tienda.entity;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.sql.Timestamp;
 
 public class VentaAndroid {
@@ -15,9 +17,9 @@ public class VentaAndroid {
 	
 	private int idpedido;
 	
-	private Timestamp venta_fecha;
+	private Date venta_fecha;
 	
-	private Timestamp venta_fechaentrega;
+	private Date venta_fechaentrega;
 	
 	private float venta_costodelivery;
 	
@@ -76,16 +78,23 @@ public class VentaAndroid {
 		this.idpedido = idpedido;
 	}
 
-	public Timestamp getVenta_fecha() {
+	
+	
+	
+	public Date getVenta_fecha() {
 		return venta_fecha;
 	}
 
-	public void setVenta_fecha(Timestamp venta_fecha) {
+	public void setVenta_fecha(Date venta_fecha) {
 		this.venta_fecha = venta_fecha;
 	}
 
-	public Timestamp getVenta_fechaentrega() {
+	public Date getVenta_fechaentrega() {
 		return venta_fechaentrega;
+	}
+
+	public void setVenta_fechaentrega(Date venta_fechaentrega) {
+		this.venta_fechaentrega = venta_fechaentrega;
 	}
 
 	public void setVenta_fechaentrega(Timestamp venta_fechaentrega) {
@@ -161,6 +170,10 @@ public class VentaAndroid {
 
 	public static Venta createVenta(VentaAndroid ventaAndroid,int idPedido) {
 		
+		Timestamp ventaFecha=new Timestamp(ventaAndroid.getVenta_fecha().getTime());
+		Timestamp ventaFecha_entrega=new Timestamp(ventaAndroid.getVenta_fechaentrega().getTime());
+
+		
 		Venta venta= new Venta
 				(
 					0,
@@ -168,8 +181,8 @@ public class VentaAndroid {
 					ventaAndroid.getIdhorario(),
 					ventaAndroid.getIdubicacion(),
 					idPedido,
-					ventaAndroid.getVenta_fecha(),
-					ventaAndroid.getVenta_fechaentrega(),
+					ventaFecha,
+					ventaFecha_entrega,
 					ventaAndroid.getVenta_costodelivery(),
 					ventaAndroid.getVenta_costototal(),
 					ventaAndroid.getComentario(),
