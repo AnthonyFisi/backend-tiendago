@@ -35,9 +35,11 @@ public class VentaController {
 	
 	
 	@RequestMapping(value=REGISTRAR_VENTA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Venta>  registrarVenta(@RequestBody VentaAndroid ventaAndroid){
+	public ResponseEntity<VentaAndroid>  registrarVenta(@RequestBody VentaAndroid ventaAndroid){
 		
 		Venta respuesta=null;
+		
+		VentaAndroid ventaAndroidAnswer=null;
 		
 		Pedido respuestaPedido =new Pedido();
 		
@@ -45,7 +47,6 @@ public class VentaController {
 
 		
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
-		
 		
 		try {
 			
@@ -55,11 +56,16 @@ public class VentaController {
 		
 			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
 			
+			ventaAndroidAnswer = new VentaAndroid();
+			ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+			
+			
+			
 		}catch(Exception e) {
-			return new  ResponseEntity<Venta>(respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		return new  ResponseEntity<Venta>(respuesta,HttpStatus.OK);
+		return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
 	}
 	
 	

@@ -17,9 +17,9 @@ public class VentaAndroid {
 	
 	private int idpedido;
 	
-	private Date venta_fecha;
+	private String venta_fecha;
 	
-	private Date venta_fechaentrega;
+	private String venta_fechaentrega;
 	
 	private float venta_costodelivery;
 	
@@ -80,24 +80,21 @@ public class VentaAndroid {
 
 	
 	
-	
-	public Date getVenta_fecha() {
+
+
+	public String getVenta_fecha() {
 		return venta_fecha;
 	}
 
-	public void setVenta_fecha(Date venta_fecha) {
+	public void setVenta_fecha(String venta_fecha) {
 		this.venta_fecha = venta_fecha;
 	}
 
-	public Date getVenta_fechaentrega() {
+	public String getVenta_fechaentrega() {
 		return venta_fechaentrega;
 	}
 
-	public void setVenta_fechaentrega(Date venta_fechaentrega) {
-		this.venta_fechaentrega = venta_fechaentrega;
-	}
-
-	public void setVenta_fechaentrega(Timestamp venta_fechaentrega) {
+	public void setVenta_fechaentrega(String venta_fechaentrega) {
 		this.venta_fechaentrega = venta_fechaentrega;
 	}
 
@@ -170,8 +167,10 @@ public class VentaAndroid {
 
 	public static Venta createVenta(VentaAndroid ventaAndroid,int idPedido) {
 		
-		Timestamp ventaFecha=new Timestamp(ventaAndroid.getVenta_fecha().getTime());
-		Timestamp ventaFecha_entrega=new Timestamp(ventaAndroid.getVenta_fechaentrega().getTime());
+		String newDate=ventaAndroid.getVenta_fechaentrega()+" 00:00:00.000";
+		
+		Timestamp ventaFecha=new Timestamp(System.currentTimeMillis());
+		Timestamp ventaFecha_entrega=Timestamp.valueOf(newDate);
 
 		
 		Venta venta= new Venta
