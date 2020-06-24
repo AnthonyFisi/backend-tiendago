@@ -74,7 +74,7 @@ public class VentaController {
 
 			Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
 			Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
-			pk.setIdestado_venta(respuesta.getIdventa());
+			pk.setIdventa(respuesta.getIdventa());
 			pk.setIdestado_venta(1);
 			
 			ordenEstado.setId(pk);

@@ -43,7 +43,7 @@ public class Restaurante_PedidoController {
 		
 		try {
 			
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa, fecha_entrega);
+			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa);
 			restauranteGson= new Restaurante_PedidoGson();
 			restauranteGson.setListaRestaurante_Pedido(listaRestaurante);
 			

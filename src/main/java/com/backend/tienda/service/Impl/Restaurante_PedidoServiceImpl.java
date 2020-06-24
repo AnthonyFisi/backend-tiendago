@@ -17,8 +17,8 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 	Restaurante_PedidoRepository restaurante_PedidoRepository;
 	
 	@Override
-	public List<Restaurante_Pedido> listaRestaurantePedidosNuevos(int idEmpresa, Timestamp fecha_entrega) {
-		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntrega(idEmpresa, fecha_entrega);
+	public List<Restaurante_Pedido> listaRestaurantePedidosNuevos(int idEmpresa) {
+		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntrega(idEmpresa);
 	}
 
 }
