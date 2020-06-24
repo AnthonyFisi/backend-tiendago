@@ -26,7 +26,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					nombre_tipo_envio"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta <> 4  AND orden_disponible=true" + 
-			"					AND idempresa= ?1  AND  ",nativeQuery=true)
+			"					AND idempresa= ?1 ",nativeQuery=true)
 	List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntrega(int idEmpresa);
 
 }

@@ -34,23 +34,22 @@ public class Restaurante_PedidoController {
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
 		
-		Timestamp fecha_entrega=new Timestamp(System.currentTimeMillis());
-		System.out.println(fecha_entrega+ " ------------");
+		
 
 		Restaurante_PedidoGson restauranteGson= null;
 		
 		List<Restaurante_Pedido> listaRestaurante=null;
 		
-		try {
+		//try {
 			
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa);
 			restauranteGson= new Restaurante_PedidoGson();
 			restauranteGson.setListaRestaurante_Pedido(listaRestaurante);
 			
-		}catch(Exception e) {
+		/*}catch(Exception e) {
 			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
 			
-		}
+		}*/
 		
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
