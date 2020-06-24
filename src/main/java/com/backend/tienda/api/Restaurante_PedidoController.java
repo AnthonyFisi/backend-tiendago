@@ -40,18 +40,18 @@ public class Restaurante_PedidoController {
 		
 		List<Restaurante_Pedido> listaRestaurante=null;
 		
-		//try {
+		try {
 			
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa);
 			restauranteGson= new Restaurante_PedidoGson();
 			restauranteGson.setListaRestaurante_Pedido(listaRestaurante);
 			
-		/*}catch(Exception e) {
+		}catch(Exception e) {
 			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
 			
-		}*/
+		}
 		
-		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 	
 
