@@ -1,5 +1,6 @@
 package com.backend.tienda.api;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Orden_estado_restaurante;
+import com.backend.tienda.entity.Orden_estado_restaurantePK;
 import com.backend.tienda.entity.Pedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
+import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.PedidoService;
 import com.backend.tienda.service.VentaService;
 
@@ -32,6 +36,9 @@ public class VentaController {
 	
 	@Autowired
 	PedidoService pedidoService;
+	
+	@Autowired
+	Orden_estado_restauranteService ordenService;
 	
 	
 	@RequestMapping(value=REGISTRAR_VENTA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,14 +59,31 @@ public class VentaController {
 			
 			respuesta=ventaService.registrarVenta(VentaAndroid.createVenta(ventaAndroid, respuestaPedido.getIdpedido()));
 			
+			/*
+			 * 
+			 * FALTA CALCULAR LOS DATOS DE KILOMETROS ,TIEMPO RECORRIDO ,COSTO DPRO KM
+			 * ETC
+			 * */
 			answerPedido=true;
 		
 			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
 			
 			ventaAndroidAnswer = new VentaAndroid();
 			ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+			Timestamp time=new Timestamp(System.currentTimeMillis());
+
+			Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
+			Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
+			pk.setIdestado_venta(respuesta.getIdventa());
+			pk.setIdestado_venta(1);
 			
+			ordenEstado.setId(pk);
+			ordenEstado.setDetalle("");
+			ordenEstado.setFecha(time);
 			
+			ordenService.registrarEstado(ordenEstado);
+			
+			/*EN EL FUTURO PODEMOS AGREGAR UN PUSHER PARA MANDAR A NOTIFICAR A LA APP DE RESTAURANTE */
 			
 		}catch(Exception e) {
 			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
