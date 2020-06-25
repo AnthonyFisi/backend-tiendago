@@ -26,4 +26,9 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 		return restaurante_PedidoRepository.findRecentOrden(idEmpresa, idPedido, idVenta);
 	}
 
+	@Override
+	public List<Restaurante_Pedido> listaRestaurantePedidosNuevosDistinct(int idEmpresa) {
+		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(idEmpresa);
+	}
+
 }
