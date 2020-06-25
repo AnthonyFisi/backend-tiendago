@@ -95,7 +95,7 @@ public class VentaController {
 			
 			ordenService.registrarEstado(ordenEstado);
 			
-			Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(ventaAndroid.getIdEmpresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 			
 
 			pusher.setCluster("us2");
