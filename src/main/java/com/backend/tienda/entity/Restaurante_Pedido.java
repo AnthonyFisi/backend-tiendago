@@ -68,6 +68,18 @@ public class Restaurante_Pedido {
 	
 	private String nombre_tipo_envio;
 
+	private String tiempo_espera;
+	
+	
+	
+	public String getTiempo_espera() {
+		return tiempo_espera;
+	}
+
+	public void setTiempo_espera(String tiempo_espera) {
+		this.tiempo_espera = tiempo_espera;
+	}
+
 	public int getIdpedido() {
 		return idpedido;
 	}

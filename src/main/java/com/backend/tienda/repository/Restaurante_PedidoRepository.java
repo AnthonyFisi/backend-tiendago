@@ -23,7 +23,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipopago,tipopago_nombre," + 
 			"					idestado_venta,tipo_estado," + 
 			"					idtipo_envio," + 
-			"					nombre_tipo_envio"+
+			"					nombre_tipo_envio, tiempo_espera"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta <> 4  AND orden_disponible=true" + 
 			"					AND idempresa= ?1 ",nativeQuery=true)
@@ -39,7 +39,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipopago,tipopago_nombre," + 
 			"					idestado_venta,tipo_estado," + 
 			"					idtipo_envio," + 
-			"					nombre_tipo_envio"+
+			"					nombre_tipo_envio , tiempo_espera "+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta <> 4  AND orden_disponible=true" + 
 			"					AND idempresa= ?1 ",nativeQuery=true)
@@ -54,8 +54,8 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					orden_disponible,idrepartidor," + 
 			"					idtipopago,tipopago_nombre," + 
 			"					idestado_venta,tipo_estado," + 
-			"					idtipo_envio," + 
-			"					nombre_tipo_envio"+
+			"					idtipo_envio , " + 
+			"					nombre_tipo_envio, tiempo_espera,"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta <> 4  AND orden_disponible=true" + 
 			"					AND idempresa= ?1 AND idpedido = ?2 AND idventa = ?3  ",nativeQuery=true)
