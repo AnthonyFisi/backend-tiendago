@@ -100,7 +100,7 @@ public class VentaController {
 
 			pusher.setCluster("us2");
 			
-			pusher.trigger("my-channel", "my-event", ordenReciente);
+			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 			
 
 			
