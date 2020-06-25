@@ -188,10 +188,14 @@ public class VentaAndroid {
 					ventaAndroid.getIdestado_venta(),
 					ventaAndroid.getIdestado_pago(),
 					ventaAndroid.getIdtipo_envio(),
-					""
+					"",
+					0,
+					0,
+					true,
+					"20 minutos",
+					1
 				
 				);
-		
 		return venta;
 	}
 

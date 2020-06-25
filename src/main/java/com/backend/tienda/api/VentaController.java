@@ -67,7 +67,7 @@ public class VentaController {
 		
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 		
-		try {
+	//	try {
 			
 			respuesta=ventaService.registrarVenta(VentaAndroid.createVenta(ventaAndroid, respuestaPedido.getIdpedido()));
 			
@@ -108,9 +108,11 @@ public class VentaController {
 			
 			/*EN EL FUTURO PODEMOS AGREGAR UN PUSHER PARA MANDAR A NOTIFICAR A LA APP DE RESTAURANTE */
 			
-		}catch(Exception e) {
+		/*}catch(Exception e) {
+			System.out.println(e.getMessage());
+
 			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}*/
 		
 		return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
 	}

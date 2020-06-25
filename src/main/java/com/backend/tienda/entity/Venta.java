@@ -44,11 +44,25 @@ public class Venta {
 	
 	private String comentario_entrega;
 	
+	private float distancia_delivery;
+	
+	private float costo_delivery;
+	
+	private boolean orden_disponible;
+	
+	private String tiempo_espera;
+	
+	private int  idrepartidor;
+	
 
 
+	
 	public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
 			Timestamp venta_fechaentrega, float venta_costodelivery, float venta_costototal, String comentario,
-			int idestado_venta, int idestado_pago, int idtipo_envio,String comentario_entrega) {
+			int idestado_venta, int idestado_pago, int idtipo_envio, String comentario_entrega,
+			float distancia_delivery, float costo_delivery, boolean orden_disponible, String tiempo_espera,
+			int idrepartidor) {
+		super();
 		this.idventa = idventa;
 		this.idtipopago = idtipopago;
 		this.idhorario = idhorario;
@@ -62,10 +76,43 @@ public class Venta {
 		this.idestado_venta = idestado_venta;
 		this.idestado_pago = idestado_pago;
 		this.idtipo_envio = idtipo_envio;
-		this.comentario_entrega=comentario_entrega;
+		this.comentario_entrega = comentario_entrega;
+		this.distancia_delivery = distancia_delivery;
+		this.costo_delivery = costo_delivery;
+		this.orden_disponible = orden_disponible;
+		this.tiempo_espera = tiempo_espera;
+		this.idrepartidor = idrepartidor;
 	}
-
-	
+	public float getDistancia_delivery() {
+		return distancia_delivery;
+	}
+	public void setDistancia_delivery(float distancia_delivery) {
+		this.distancia_delivery = distancia_delivery;
+	}
+	public float getCosto_delivery() {
+		return costo_delivery;
+	}
+	public void setCosto_delivery(float costo_delivery) {
+		this.costo_delivery = costo_delivery;
+	}
+	public boolean isOrden_disponible() {
+		return orden_disponible;
+	}
+	public void setOrden_disponible(boolean orden_disponible) {
+		this.orden_disponible = orden_disponible;
+	}
+	public String getTiempo_espera() {
+		return tiempo_espera;
+	}
+	public void setTiempo_espera(String tiempo_espera) {
+		this.tiempo_espera = tiempo_espera;
+	}
+	public int getIdrepartidor() {
+		return idrepartidor;
+	}
+	public void setIdrepartidor(int idrepartidor) {
+		this.idrepartidor = idrepartidor;
+	}
 	public Venta() {}
 	public int getIdventa() {
 		return idventa;
