@@ -9,4 +9,6 @@ public interface Restaurante_PedidoService {
 
 	
 	List<Restaurante_Pedido> listaRestaurantePedidosNuevos(int idEmpresa);
+	
+	Restaurante_Pedido recientePedido(int idEmpresa,int idPedido,int idVenta);
 }

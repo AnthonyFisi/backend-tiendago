@@ -1,6 +1,7 @@
 package com.backend.tienda.api;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.Orden_estado_restaurantePK;
 import com.backend.tienda.entity.Pedido;
+import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.PedidoService;
+import com.backend.tienda.service.Restaurante_PedidoService;
 import com.backend.tienda.service.VentaService;
+import com.pusher.rest.Pusher;
 
 @RestController
 @RequestMapping(VentaController.VENTA_CONTROLLER)
@@ -39,6 +43,14 @@ public class VentaController {
 	
 	@Autowired
 	Orden_estado_restauranteService ordenService;
+	
+	@Autowired
+	Restaurante_PedidoService restaurante_PedidoService;
+	
+	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
+
+	
+
 	
 	
 	@RequestMapping(value=REGISTRAR_VENTA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -82,6 +94,17 @@ public class VentaController {
 			ordenEstado.setFecha(time);
 			
 			ordenService.registrarEstado(ordenEstado);
+			
+			Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(ventaAndroid.getIdEmpresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			
+
+			pusher.setCluster("us2");
+			
+			pusher.trigger("my-channel", "my-event", ordenReciente);
+			
+
+			
+			
 			
 			/*EN EL FUTURO PODEMOS AGREGAR UN PUSHER PARA MANDAR A NOTIFICAR A LA APP DE RESTAURANTE */
 			

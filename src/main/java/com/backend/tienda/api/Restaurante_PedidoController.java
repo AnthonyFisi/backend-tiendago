@@ -26,6 +26,9 @@ public class Restaurante_PedidoController {
 	
 	public static final String LISTA_BY_IDEMPRESA_FECHAVENTA="/listaPedidos/{idEmpresa}";
 	
+	public static final String PEDIDO_RECIENTE="/reciente/{idEmpresa}/{idPedido}/{idVenta}";
+
+	
 	
 	@Autowired
 	Restaurante_PedidoService restaurante_PedidoService;
@@ -54,6 +57,32 @@ public class Restaurante_PedidoController {
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value=PEDIDO_RECIENTE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Restaurante_Pedido>  pedidosRecientes(
+			@PathVariable("idEmpresa") int idEmpresa,@PathVariable("idPedido") int idPedido,@PathVariable("idVenta") int idVenta){
+		
+		
 
+		Restaurante_Pedido restauranteGson= null;
+		
+		
+		try {
+			
+			
+			restauranteGson=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
+			
+		}catch(Exception e) {
+			
+			System.out.println(e.getMessage());
+			
+			return new ResponseEntity<Restaurante_Pedido>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+		
+		return new ResponseEntity<Restaurante_Pedido>( restauranteGson,HttpStatus.OK);
+	}
+	
+	
 
 }
