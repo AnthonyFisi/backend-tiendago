@@ -129,6 +129,8 @@ public class Restaurante_PedidoController {
 				res.setTiempo_espera(pedido.getTiempo_espera());
 
 				res.setListaProductos(listaProductos);
+				
+				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
 
 				listaTotal.add(res);
@@ -151,6 +153,89 @@ public class Restaurante_PedidoController {
 	@RequestMapping(value=PEDIDO_RECIENTE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoModified>  pedidosRecientes(
 			@PathVariable("idEmpresa") int idEmpresa,@PathVariable("idPedido") int idPedido,@PathVariable("idVenta") int idVenta){
+
+
+		Restaurante_Pedido pedido= null;
+
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+
+		Restaurante_PedidoModified res =null;
+
+
+		try {
+
+
+			pedido=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
+			
+			System.out.println("paso por pedido" + pedido.getIdempresa());
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+			System.out.println("paso porlista productos" + pedido.getIdempresa());
+
+
+		
+
+			 res = new Restaurante_PedidoModified();
+			res.setIdpedido(pedido.getIdpedido());
+			res.setIdempresa(pedido.getIdempresa());
+			res.setIdventa(pedido.getIdventa());
+			res.setIdubicacion(pedido.getIdubicacion());
+			res.setVenta_fecha(pedido.getVenta_fecha());
+			res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+			res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+			
+			
+			
+			res.setVenta_costototal(pedido.getVenta_costototal());
+			res.setComentario_global(pedido.getComentario_global());
+			res.setIdestado_pago(pedido.getIdestado_pago());
+			res.setNombre_estado(pedido.getNombre_estado());
+			
+			res.setComentario_pedido(pedido.getComentario_pedido());
+			
+			res.setIdusuario(pedido.getIdusuario());
+			res.setUsuario_nombre(pedido.getUsuario_nombre());
+			res.setUsuario_celular(pedido.getUsuario_celular());
+			res.setOrden_disponible(pedido.isOrden_disponible());
+			res.setIdrepartidor(pedido.getIdrepartidor());
+			res.setIdtipopago(pedido.getIdtipopago());
+			
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+	
+			
+			res.setIdestado_venta(pedido.getIdestado_venta());
+			res.setTipo_estado(pedido.getTipo_estado());
+			res.setIdtipopago(pedido.getIdtipopago());
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+			
+			
+			res.setTiempo_espera(pedido.getTiempo_espera());
+
+			res.setListaProductos(listaProductos);
+
+
+			
+			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
+
+			
+			
+
+
+		}catch(Exception e) {
+
+			System.out.println(e.getMessage());
+
+			return new ResponseEntity<Restaurante_PedidoModified> ( res,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<Restaurante_PedidoModified>( res,HttpStatus.OK);
+	}
+	
+	
+	
+	
+	public Restaurante_PedidoModified  recientes(int idEmpresa,int idPedido, int idVenta){
 
 
 
@@ -211,6 +296,7 @@ public class Restaurante_PedidoController {
 
 
 			
+			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
 			
 			
@@ -218,13 +304,10 @@ public class Restaurante_PedidoController {
 
 		}catch(Exception e) {
 
-			System.out.println(e.getMessage());
-
-			return new ResponseEntity<Restaurante_PedidoModified> ( res,HttpStatus.INTERNAL_SERVER_ERROR);
-
+		return res;
 		}
 
-		return new ResponseEntity<Restaurante_PedidoModified>( res,HttpStatus.OK);
+		return res;
 	}
 
 

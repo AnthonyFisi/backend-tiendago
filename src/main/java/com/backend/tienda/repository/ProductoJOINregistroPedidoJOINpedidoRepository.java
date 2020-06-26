@@ -34,7 +34,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"	nombre_empresa," + 
 	 		"	costo_delivery," + 
 	 		"	urlfoto_empresa," + 
-	 		"	icono_empresa" + 
+	 		"	icono_empresa , comentario" + 
 	 		"   FROM  carrito WHERE idpedido = ?1  AND pedido_estado = false ",nativeQuery=true)
 	 List<ProductoJOINregistroPedidoJOINpedido> GfindByidpedido(int idpedido);
 	 
@@ -58,7 +58,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"	nombre_empresa," + 
 	 		"	costo_delivery," + 
 	 		"	urlfoto_empresa," + 
-	 		"	icono_empresa" + 
+	 		"	icono_empresa ,comentario" + 
 	 		"   FROM  carrito WHERE idusuario = ?1  AND pedido_estado = false ",nativeQuery=true)
 	 List<ProductoJOINregistroPedidoJOINpedido> GfindByidusuario(int idusuario);
 
@@ -82,7 +82,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"	nombre_empresa," + 
 	 		"	costo_delivery," + 
 	 		"	urlfoto_empresa," + 
-	 		"	icono_empresa" +  
+	 		"	icono_empresa  ,comentario" +  
 	 		"   FROM  carrito WHERE idusuario = ?1    AND pedido_estado = false  ",nativeQuery=true)
 	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritos(int idusuario);
 
@@ -106,7 +106,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 		 		"	nombre_empresa," + 
 		 		"	costo_delivery," + 
 		 		"	urlfoto_empresa," + 
-		 		"	icono_empresa" +  
+		 		"	icono_empresa ,comentario" +  
 		 		"   FROM  carrito WHERE idpedido = ?1   ",nativeQuery=true)
 		 List<ProductoJOINregistroPedidoJOINpedido> ventaFindByidPedido(int idpedido);
 

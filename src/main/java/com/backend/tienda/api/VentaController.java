@@ -17,6 +17,7 @@ import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.Orden_estado_restaurantePK;
 import com.backend.tienda.entity.Pedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
+import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
 import com.backend.tienda.service.Orden_estado_restauranteService;
@@ -46,6 +47,9 @@ public class VentaController {
 	
 	@Autowired
 	Restaurante_PedidoService restaurante_PedidoService;
+	
+	@Autowired
+	Restaurante_PedidoController pedidoController;
 	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
@@ -95,8 +99,8 @@ public class VentaController {
 			
 			ordenService.registrarEstado(ordenEstado);
 			
-			Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
-			
+			//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
 			pusher.setCluster("us2");
 			
