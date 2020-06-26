@@ -38,13 +38,6 @@ public class Restaurante_Pedido {
 	
 	private String nombre_estado;
 
-	private String producto_nombre;
-	
-	private float producto_precio;
-	
-	private String producto_uriimagen;
-	
-	private String comentario_pedido;
 	
 	private int idusuario;
 	
@@ -70,8 +63,20 @@ public class Restaurante_Pedido {
 
 	private String tiempo_espera;
 	
+	private int pedido_cantidadtotal;
+	
+	private String comentario_pedido;
 	
 	
+	
+	public int getPedido_cantidadtotal() {
+		return pedido_cantidadtotal;
+	}
+
+	public void setPedido_cantidadtotal(int pedido_cantidadtotal) {
+		this.pedido_cantidadtotal = pedido_cantidadtotal;
+	}
+
 	public String getTiempo_espera() {
 		return tiempo_espera;
 	}
@@ -168,29 +173,7 @@ public class Restaurante_Pedido {
 		this.nombre_estado = nombre_estado;
 	}
 
-	public String getProducto_nombre() {
-		return producto_nombre;
-	}
 
-	public void setProducto_nombre(String producto_nombre) {
-		this.producto_nombre = producto_nombre;
-	}
-
-	public float getProducto_precio() {
-		return producto_precio;
-	}
-
-	public void setProducto_precio(float producto_precio) {
-		this.producto_precio = producto_precio;
-	}
-
-	public String getProducto_uriimagen() {
-		return producto_uriimagen;
-	}
-
-	public void setProducto_uriimagen(String producto_uriimagen) {
-		this.producto_uriimagen = producto_uriimagen;
-	}
 
 	public String getComentario_pedido() {
 		return comentario_pedido;

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.gson.Restaurante_PedidoGson;
 import com.backend.tienda.gson.Tipo_EnvioGson;
+import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.Restaurante_PedidoService;
 
 @RestController
@@ -38,6 +40,8 @@ public class Restaurante_PedidoController {
 	@Autowired
 	Restaurante_PedidoService restaurante_PedidoService;
 
+	@Autowired
+	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
@@ -71,40 +75,60 @@ public class Restaurante_PedidoController {
 
 		List<Restaurante_Pedido> listaRestaurante=null;
 
-		List<Restaurante_Pedido> listaProductos=null;
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
 
 		try {
 
-			listaProductos=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa);
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevosDistinct(idEmpresa);
+			
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+
 
 			listaTotal= new ArrayList<>();
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
-
+				
+		
 				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
 				res.setIdpedido(pedido.getIdpedido());
 				res.setIdempresa(pedido.getIdempresa());
 				res.setIdventa(pedido.getIdventa());
 				res.setIdubicacion(pedido.getIdubicacion());
 				res.setVenta_fecha(pedido.getVenta_fecha());
+				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+				
+				
+				
 				res.setVenta_costototal(pedido.getVenta_costototal());
+				res.setComentario_global(pedido.getComentario_global());
+				res.setIdestado_pago(pedido.getIdestado_pago());
+				res.setNombre_estado(pedido.getNombre_estado());
+				
+				res.setComentario_pedido(pedido.getComentario_pedido());
+				
 				res.setIdusuario(pedido.getIdusuario());
 				res.setUsuario_nombre(pedido.getUsuario_nombre());
+				res.setUsuario_celular(pedido.getUsuario_celular());
+				res.setOrden_disponible(pedido.isOrden_disponible());
+				res.setIdrepartidor(pedido.getIdrepartidor());
+				res.setIdtipopago(pedido.getIdtipopago());
+				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+		
+				
 				res.setIdestado_venta(pedido.getIdestado_venta());
+				res.setTipo_estado(pedido.getTipo_estado());
+				res.setIdtipopago(pedido.getIdtipopago());
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+				
+				
 				res.setTiempo_espera(pedido.getTiempo_espera());
 
-				List<Restaurante_Pedido> lista= new ArrayList<>();
-
-				for(Restaurante_Pedido productos:listaProductos) {
-					if(productos.getIdventa()==pedido.getIdventa()) {
-						lista.add(productos);
-					}
-				}
-				res.setListaProductos(lista);
+				res.setListaProductos(listaProductos);
 
 
 				listaTotal.add(res);
@@ -130,43 +154,63 @@ public class Restaurante_PedidoController {
 
 
 
-		Restaurante_Pedido restauranteGson= null;
+		Restaurante_Pedido pedido= null;
 
-		List<Restaurante_Pedido> listaProductos=null;
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		Restaurante_PedidoModified res =null;
 
 
 		try {
 
-			listaProductos=restaurante_PedidoService.listaRestaurantePedidosNuevos(idEmpresa);
 
-			restauranteGson=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
+			pedido=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 
 		
 
-				res= new Restaurante_PedidoModified();
-				res.setIdpedido(restauranteGson.getIdpedido());
-				res.setIdempresa(restauranteGson.getIdempresa());
-				res.setIdventa(restauranteGson.getIdventa());
-				res.setIdubicacion(restauranteGson.getIdubicacion());
-				res.setVenta_fecha(restauranteGson.getVenta_fecha());
-				res.setVenta_costototal(restauranteGson.getVenta_costototal());
-				res.setIdusuario(restauranteGson.getIdusuario());
-				res.setUsuario_nombre(restauranteGson.getUsuario_nombre());
-				res.setIdestado_venta(restauranteGson.getIdestado_venta());
-				res.setTiempo_espera(restauranteGson.getTiempo_espera());
+			 res = new Restaurante_PedidoModified();
+			res.setIdpedido(pedido.getIdpedido());
+			res.setIdempresa(pedido.getIdempresa());
+			res.setIdventa(pedido.getIdventa());
+			res.setIdubicacion(pedido.getIdubicacion());
+			res.setVenta_fecha(pedido.getVenta_fecha());
+			res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+			res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+			
+			
+			
+			res.setVenta_costototal(pedido.getVenta_costototal());
+			res.setComentario_global(pedido.getComentario_global());
+			res.setIdestado_pago(pedido.getIdestado_pago());
+			res.setNombre_estado(pedido.getNombre_estado());
+			
+			res.setComentario_pedido(pedido.getComentario_pedido());
+			
+			res.setIdusuario(pedido.getIdusuario());
+			res.setUsuario_nombre(pedido.getUsuario_nombre());
+			res.setUsuario_celular(pedido.getUsuario_celular());
+			res.setOrden_disponible(pedido.isOrden_disponible());
+			res.setIdrepartidor(pedido.getIdrepartidor());
+			res.setIdtipopago(pedido.getIdtipopago());
+			
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+	
+			
+			res.setIdestado_venta(pedido.getIdestado_venta());
+			res.setTipo_estado(pedido.getTipo_estado());
+			res.setIdtipopago(pedido.getIdtipopago());
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+			
+			
+			res.setTiempo_espera(pedido.getTiempo_espera());
 
-				List<Restaurante_Pedido> lista= new ArrayList<>();
+			res.setListaProductos(listaProductos);
 
-				for(Restaurante_Pedido productos:listaProductos) {
-					if(productos.getIdventa()==restauranteGson.getIdventa()) {
-						lista.add(productos);
-					}
-				}
-				res.setListaProductos(lista);
 
+			
 
 			
 			

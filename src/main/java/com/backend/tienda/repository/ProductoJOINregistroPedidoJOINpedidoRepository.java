@@ -15,9 +15,52 @@ import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 @Repository
 public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepository<ProductoJOINregistroPedidoJOINpedido,Integer>{
 	
-	 List<ProductoJOINregistroPedidoJOINpedido> findByidpedido(int idpedido);
+	@Query(value=
+	 		"SELECT  idempresa," + 
+	 		"	idproducto," + 
+	 		"	producto_nombre," + 
+	 		"	producto_precio," + 
+	 		"	producto_uriimagen," + 
+	 		"	producto_calificacion," + 
+	 		"	producto_descuento," + 
+	 		"	producto_precio_descuento," + 
+	 		"	registropedido_cantidadtotal," + 
+	 		"   registropedido_preciototal," + 
+	 		"	idpedido," + 
+	 		"	idusuario," + 
+	 		"	pedido_estado," + 
+	 		"	pedido_montototal," + 
+	 		"	pedido_cantidadtotal," + 
+	 		"	nombre_empresa," + 
+	 		"	costo_delivery," + 
+	 		"	urlfoto_empresa," + 
+	 		"	icono_empresa" + 
+	 		"   FROM  carrito WHERE idpedido = ?1  AND pedido_estado = false ",nativeQuery=true)
+	 List<ProductoJOINregistroPedidoJOINpedido> GfindByidpedido(int idpedido);
 	 
-	 List<ProductoJOINregistroPedidoJOINpedido> findByidusuario(int idusuario);
+	
+	@Query(value=
+	 		"SELECT idempresa," + 
+	 		"	idproducto," + 
+	 		"	producto_nombre," + 
+	 		"	producto_precio," + 
+	 		"	producto_uriimagen," + 
+	 		"	producto_calificacion," + 
+	 		"	producto_descuento," + 
+	 		"	producto_precio_descuento," + 
+	 		"	registropedido_cantidadtotal," + 
+	 		"   registropedido_preciototal," + 
+	 		"	idpedido," + 
+	 		"	idusuario," + 
+	 		"	pedido_estado," + 
+	 		"	pedido_montototal," + 
+	 		"	pedido_cantidadtotal," + 
+	 		"	nombre_empresa," + 
+	 		"	costo_delivery," + 
+	 		"	urlfoto_empresa," + 
+	 		"	icono_empresa" + 
+	 		"   FROM  carrito WHERE idusuario = ?1  AND pedido_estado = false ",nativeQuery=true)
+	 List<ProductoJOINregistroPedidoJOINpedido> GfindByidusuario(int idusuario);
 
 	 
 	 @Query(value=
@@ -39,9 +82,33 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"	nombre_empresa," + 
 	 		"	costo_delivery," + 
 	 		"	urlfoto_empresa," + 
-	 		"	icono_empresa" + 
-	 		"   FROM  carrito WHERE idusuario = ?1",nativeQuery=true)
+	 		"	icono_empresa" +  
+	 		"   FROM  carrito WHERE idusuario = ?1    AND pedido_estado = false  ",nativeQuery=true)
 	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritos(int idusuario);
+
+	 
+	 @Query(value=
+		 		"SELECT  idempresa," + 
+		 		"	idproducto," + 
+		 		"	producto_nombre," + 
+		 		"	producto_precio," + 
+		 		"	producto_uriimagen," + 
+		 		"	producto_calificacion," + 
+		 		"	producto_descuento," + 
+		 		"	producto_precio_descuento," + 
+		 		"	registropedido_cantidadtotal," + 
+		 		"   registropedido_preciototal," + 
+		 		"	idpedido," + 
+		 		"	idusuario," + 
+		 		"	pedido_estado," + 
+		 		"	pedido_montototal," + 
+		 		"	pedido_cantidadtotal," + 
+		 		"	nombre_empresa," + 
+		 		"	costo_delivery," + 
+		 		"	urlfoto_empresa," + 
+		 		"	icono_empresa" +  
+		 		"   FROM  carrito WHERE idpedido = ?1   ",nativeQuery=true)
+		 List<ProductoJOINregistroPedidoJOINpedido> ventaFindByidPedido(int idpedido);
 
 	 
 

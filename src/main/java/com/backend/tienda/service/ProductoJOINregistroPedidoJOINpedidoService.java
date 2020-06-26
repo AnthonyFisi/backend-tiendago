@@ -12,6 +12,8 @@ public interface ProductoJOINregistroPedidoJOINpedidoService {
 	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritoTotal(int idusuario);
 	 
 	 List<ProductoJOINregistroPedidoJOINpedido> listaCarritoByIdUsuario(int idusuario);
+	 
+	 List<ProductoJOINregistroPedidoJOINpedido> listaProductoVenta(int idPedido);
 
 
 

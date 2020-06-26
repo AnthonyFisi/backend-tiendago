@@ -36,7 +36,7 @@ public class ProductoJOINregistroPedidoJOINpedidoServiceImpl implements Producto
 		List<ProductoJOINregistroPedidoJOINpedido> list=null;
 		try {
 			respuesta=pedidoRepository.findByIdUsuario(idusuario,idEmpresa);
-	        list=productoJOINregistroPedidoJOINpedidoRepository.findByidpedido(respuesta.getIdpedido());
+	        list=productoJOINregistroPedidoJOINpedidoRepository.GfindByidpedido(respuesta.getIdpedido());
 
 		}catch(Exception e) {
 			list=new ArrayList<ProductoJOINregistroPedidoJOINpedido>();
@@ -69,7 +69,26 @@ public class ProductoJOINregistroPedidoJOINpedidoServiceImpl implements Producto
 
 	@Override
 	public List<ProductoJOINregistroPedidoJOINpedido> listaCarritoByIdUsuario(int idusuario) {
-		return  productoJOINregistroPedidoJOINpedidoRepository.findByidusuario(idusuario);
+		return  productoJOINregistroPedidoJOINpedidoRepository.GfindByidusuario(idusuario);
+	}
+
+
+
+
+	@Override
+	public List<ProductoJOINregistroPedidoJOINpedido> listaProductoVenta(int idPedido) {
+		 List<ProductoJOINregistroPedidoJOINpedido> list=null;
+			try {
+				
+		        list= productoJOINregistroPedidoJOINpedidoRepository.ventaFindByidPedido(idPedido);
+				 
+
+			}catch(Exception e) {
+				list=new ArrayList<ProductoJOINregistroPedidoJOINpedido>();
+				return list;
+			}
+			
+			return list;
 	}
 	
 	
