@@ -55,6 +55,7 @@ public class Restaurante_PedidoModified {
 
 	private String tiempo_espera;
 	
+	private int pedido_cantidadtotal;
 
 	
 	private String nombre_repartidor;
@@ -63,7 +64,19 @@ public class Restaurante_PedidoModified {
 	
 	private String codigo_repartidor;
 	
+	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
 	
+	
+	public int getPedido_cantidadtotal() {
+		return pedido_cantidadtotal;
+	}
+
+	public void setPedido_cantidadtotal(int pedido_cantidadtotal) {
+		this.pedido_cantidadtotal = pedido_cantidadtotal;
+	}
+
+	
+
 	
 	public String getNombre_repartidor() {
 		return nombre_repartidor;
@@ -89,7 +102,6 @@ public class Restaurante_PedidoModified {
 		this.codigo_repartidor = codigo_repartidor;
 	}
 
-	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
 
 	public int getIdpedido() {
 		return idpedido;

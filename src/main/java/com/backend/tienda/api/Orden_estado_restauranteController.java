@@ -76,7 +76,7 @@ public class Orden_estado_restauranteController {
 			
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta(),tiempo_espera);
 			
-			if(venta==null) {
+			if(venta!=null) {
 				
 				ordenResult=ordenService.registrarEstado(orden);
 				

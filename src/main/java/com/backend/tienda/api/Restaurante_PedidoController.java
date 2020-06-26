@@ -135,6 +135,7 @@ public class Restaurante_PedidoController {
 
 				res.setListaProductos(listaProductos);
 				
+				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
 				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
@@ -209,7 +210,8 @@ public class Restaurante_PedidoController {
 				res.setIdtipopago(pedido.getIdtipopago());
 				
 				res.setTipopago_nombre(pedido.getTipopago_nombre());
-		
+				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+
 				
 				res.setIdestado_venta(pedido.getIdestado_venta());
 				res.setTipo_estado(pedido.getTipo_estado());
@@ -297,7 +299,8 @@ public class Restaurante_PedidoController {
 				
 				res.setTipopago_nombre(pedido.getTipopago_nombre());
 		
-				
+				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+
 				res.setIdestado_venta(pedido.getIdestado_venta());
 				res.setTipo_estado(pedido.getTipo_estado());
 				res.setIdtipopago(pedido.getIdtipopago());
@@ -385,7 +388,8 @@ public class Restaurante_PedidoController {
 				
 				res.setTipopago_nombre(pedido.getTipopago_nombre());
 		
-				
+				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+
 				res.setIdestado_venta(pedido.getIdestado_venta());
 				res.setTipo_estado(pedido.getTipo_estado());
 				res.setIdtipopago(pedido.getIdtipopago());
@@ -479,7 +483,8 @@ public class Restaurante_PedidoController {
 			res.setIdtipopago(pedido.getIdtipopago());
 			res.setTipopago_nombre(pedido.getTipopago_nombre());
 			
-			
+			res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+
 			res.setTiempo_espera(pedido.getTiempo_espera());
 
 			res.setListaProductos(listaProductos);
@@ -561,7 +566,8 @@ public class Restaurante_PedidoController {
 			res.setIdtipopago(pedido.getIdtipopago());
 			res.setTipopago_nombre(pedido.getTipopago_nombre());
 			
-			
+			res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+
 			res.setTiempo_espera(pedido.getTiempo_espera());
 
 			res.setListaProductos(listaProductos);
