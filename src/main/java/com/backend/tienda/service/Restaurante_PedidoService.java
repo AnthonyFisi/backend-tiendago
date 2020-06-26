@@ -13,4 +13,11 @@ public interface Restaurante_PedidoService {
 	List<Restaurante_Pedido> listaRestaurantePedidosNuevosDistinct(int idEmpresa);
 	
 	Restaurante_Pedido recientePedido(int idEmpresa,int idPedido,int idVenta);
+	
+	List<Restaurante_Pedido> listaRestaurantePedidosProceso(int idEmpresa);
+	
+	List<Restaurante_Pedido> listaRestaurantePedidosReady(int idEmpresa);
+	
+	List<Restaurante_Pedido> listaRestaurantePedidosHistorial(int idEmpresa);
+	
 }

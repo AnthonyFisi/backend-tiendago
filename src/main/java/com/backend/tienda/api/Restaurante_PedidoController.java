@@ -32,6 +32,11 @@ public class Restaurante_PedidoController {
 
 	public static final String LISTA_BY_IDEMPRESA_DISTINCT="/listaPedidosDistinct/{idEmpresa}";
 
+	public static final String LISTA_BY_IDEMPRESA_PROCES="/listaPedidosProces/{idEmpresa}";
+
+	public static final String LISTA_BY_IDEMPRESA_READY="/listaPedidosReady/{idEmpresa}";
+
+	public static final String LISTA_BY_IDEMPRESA_HISTORIAL="/listaPedidosHistorial/{idEmpresa}";
 
 	public static final String PEDIDO_RECIENTE="/reciente/{idEmpresa}/{idPedido}/{idVenta}";
 
@@ -131,7 +136,9 @@ public class Restaurante_PedidoController {
 				res.setListaProductos(listaProductos);
 				
 				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-
+				res.setNombre_repartidor(pedido.getNombre_repartidor());
+				res.setImagen_repartidor(pedido.getImagen_repartidor());
+				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
 
 				listaTotal.add(res);
 			}
@@ -149,7 +156,271 @@ public class Restaurante_PedidoController {
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
+	
+	@RequestMapping(value=LISTA_BY_IDEMPRESA_READY,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosReady(@PathVariable("idEmpresa") int idEmpresa){
 
+
+
+		Restaurante_PedidoGson restauranteGson= null;
+
+		List<Restaurante_Pedido> listaRestaurante=null;
+
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+
+		List<Restaurante_PedidoModified> listaTotal=null;
+
+		try {
+
+
+			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
+			
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+
+
+			listaTotal= new ArrayList<>();
+
+			for(Restaurante_Pedido pedido:listaRestaurante) {
+				
+		
+				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
+				res.setIdpedido(pedido.getIdpedido());
+				res.setIdempresa(pedido.getIdempresa());
+				res.setIdventa(pedido.getIdventa());
+				res.setIdubicacion(pedido.getIdubicacion());
+				res.setVenta_fecha(pedido.getVenta_fecha());
+				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+				
+				
+				
+				res.setVenta_costototal(pedido.getVenta_costototal());
+				res.setComentario_global(pedido.getComentario_global());
+				res.setIdestado_pago(pedido.getIdestado_pago());
+				res.setNombre_estado(pedido.getNombre_estado());
+				
+				res.setComentario_pedido(pedido.getComentario_pedido());
+				
+				res.setIdusuario(pedido.getIdusuario());
+				res.setUsuario_nombre(pedido.getUsuario_nombre());
+				res.setUsuario_celular(pedido.getUsuario_celular());
+				res.setOrden_disponible(pedido.isOrden_disponible());
+				res.setIdrepartidor(pedido.getIdrepartidor());
+				res.setIdtipopago(pedido.getIdtipopago());
+				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+		
+				
+				res.setIdestado_venta(pedido.getIdestado_venta());
+				res.setTipo_estado(pedido.getTipo_estado());
+				res.setIdtipopago(pedido.getIdtipopago());
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+				
+				
+				res.setTiempo_espera(pedido.getTiempo_espera());
+
+				res.setListaProductos(listaProductos);
+				
+				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
+				res.setNombre_repartidor(pedido.getNombre_repartidor());
+				res.setImagen_repartidor(pedido.getImagen_repartidor());
+				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+
+				listaTotal.add(res);
+			}
+
+
+
+			restauranteGson= new Restaurante_PedidoGson();
+			restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+		}catch(Exception e) {
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
+	}
+
+	
+	
+	@RequestMapping(value=LISTA_BY_IDEMPRESA_PROCES,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosProces(@PathVariable("idEmpresa") int idEmpresa){
+
+
+
+		Restaurante_PedidoGson restauranteGson= null;
+
+		List<Restaurante_Pedido> listaRestaurante=null;
+
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+
+		List<Restaurante_PedidoModified> listaTotal=null;
+
+		try {
+
+
+			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);
+			
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+
+
+			listaTotal= new ArrayList<>();
+
+			for(Restaurante_Pedido pedido:listaRestaurante) {
+				
+		
+				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
+				res.setIdpedido(pedido.getIdpedido());
+				res.setIdempresa(pedido.getIdempresa());
+				res.setIdventa(pedido.getIdventa());
+				res.setIdubicacion(pedido.getIdubicacion());
+				res.setVenta_fecha(pedido.getVenta_fecha());
+				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+				
+				
+				
+				res.setVenta_costototal(pedido.getVenta_costototal());
+				res.setComentario_global(pedido.getComentario_global());
+				res.setIdestado_pago(pedido.getIdestado_pago());
+				res.setNombre_estado(pedido.getNombre_estado());
+				
+				res.setComentario_pedido(pedido.getComentario_pedido());
+				
+				res.setIdusuario(pedido.getIdusuario());
+				res.setUsuario_nombre(pedido.getUsuario_nombre());
+				res.setUsuario_celular(pedido.getUsuario_celular());
+				res.setOrden_disponible(pedido.isOrden_disponible());
+				res.setIdrepartidor(pedido.getIdrepartidor());
+				res.setIdtipopago(pedido.getIdtipopago());
+				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+		
+				
+				res.setIdestado_venta(pedido.getIdestado_venta());
+				res.setTipo_estado(pedido.getTipo_estado());
+				res.setIdtipopago(pedido.getIdtipopago());
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+				
+				
+				res.setTiempo_espera(pedido.getTiempo_espera());
+
+				res.setListaProductos(listaProductos);
+				
+				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
+				res.setNombre_repartidor(pedido.getNombre_repartidor());
+				res.setImagen_repartidor(pedido.getImagen_repartidor());
+				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+
+				listaTotal.add(res);
+			}
+
+
+
+			restauranteGson= new Restaurante_PedidoGson();
+			restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+		}catch(Exception e) {
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
+	}
+
+	
+	
+	
+	@RequestMapping(value=LISTA_BY_IDEMPRESA_HISTORIAL,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosHistorial(@PathVariable("idEmpresa") int idEmpresa){
+
+
+
+		Restaurante_PedidoGson restauranteGson= null;
+
+		List<Restaurante_Pedido> listaRestaurante=null;
+
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+
+		List<Restaurante_PedidoModified> listaTotal=null;
+
+		try {
+
+
+			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosHistorial(idEmpresa);
+			
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+
+
+			listaTotal= new ArrayList<>();
+
+			for(Restaurante_Pedido pedido:listaRestaurante) {
+				
+		
+				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
+				res.setIdpedido(pedido.getIdpedido());
+				res.setIdempresa(pedido.getIdempresa());
+				res.setIdventa(pedido.getIdventa());
+				res.setIdubicacion(pedido.getIdubicacion());
+				res.setVenta_fecha(pedido.getVenta_fecha());
+				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
+				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+				
+				
+				
+				res.setVenta_costototal(pedido.getVenta_costototal());
+				res.setComentario_global(pedido.getComentario_global());
+				res.setIdestado_pago(pedido.getIdestado_pago());
+				res.setNombre_estado(pedido.getNombre_estado());
+				
+				res.setComentario_pedido(pedido.getComentario_pedido());
+				
+				res.setIdusuario(pedido.getIdusuario());
+				res.setUsuario_nombre(pedido.getUsuario_nombre());
+				res.setUsuario_celular(pedido.getUsuario_celular());
+				res.setOrden_disponible(pedido.isOrden_disponible());
+				res.setIdrepartidor(pedido.getIdrepartidor());
+				res.setIdtipopago(pedido.getIdtipopago());
+				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+		
+				
+				res.setIdestado_venta(pedido.getIdestado_venta());
+				res.setTipo_estado(pedido.getTipo_estado());
+				res.setIdtipopago(pedido.getIdtipopago());
+				res.setTipopago_nombre(pedido.getTipopago_nombre());
+				
+				
+				res.setTiempo_espera(pedido.getTiempo_espera());
+
+				res.setListaProductos(listaProductos);
+				
+				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
+				res.setNombre_repartidor(pedido.getNombre_repartidor());
+				res.setImagen_repartidor(pedido.getImagen_repartidor());
+				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+
+				listaTotal.add(res);
+			}
+
+
+
+			restauranteGson= new Restaurante_PedidoGson();
+			restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+		}catch(Exception e) {
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
+	}
+
+	
+	
+	
+	
 	@RequestMapping(value=PEDIDO_RECIENTE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoModified>  pedidosRecientes(
 			@PathVariable("idEmpresa") int idEmpresa,@PathVariable("idPedido") int idPedido,@PathVariable("idVenta") int idVenta){
@@ -214,7 +485,9 @@ public class Restaurante_PedidoController {
 			res.setListaProductos(listaProductos);
 
 
-			
+			res.setNombre_repartidor(pedido.getNombre_repartidor());
+			res.setImagen_repartidor(pedido.getImagen_repartidor());
+			res.setCodigo_repartidor(pedido.getCodigo_repartidor());
 			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
 			
@@ -231,9 +504,8 @@ public class Restaurante_PedidoController {
 
 		return new ResponseEntity<Restaurante_PedidoModified>( res,HttpStatus.OK);
 	}
-	
-	
-	
+
+
 	
 	public Restaurante_PedidoModified  recientes(int idEmpresa,int idPedido, int idVenta){
 
@@ -294,7 +566,9 @@ public class Restaurante_PedidoController {
 
 			res.setListaProductos(listaProductos);
 
-
+			res.setNombre_repartidor(pedido.getNombre_repartidor());
+			res.setImagen_repartidor(pedido.getImagen_repartidor());
+			res.setCodigo_repartidor(pedido.getCodigo_repartidor());
 			
 			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
@@ -310,6 +584,8 @@ public class Restaurante_PedidoController {
 		return res;
 	}
 
+	
+	
 
 
 }

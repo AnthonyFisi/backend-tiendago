@@ -32,4 +32,24 @@ public class VentaServiceImpl implements VentaService{
 		return ventaRepository.findAll();
 	}
 
+	@Override
+	public Venta updateVentaEstado(int idVenta,int idEstado_Venta,String tiempo_espera) {
+		
+	Venta venta=null;
+	
+		try 
+		{
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setIdestado_venta(idEstado_Venta);
+			venta.setTiempo_espera(tiempo_espera);
+			venta=ventaRepository.save(venta);
+		
+		}catch(Exception e)
+		{
+			return venta;
+		}
+		
+		return venta;
+	}
+
 }

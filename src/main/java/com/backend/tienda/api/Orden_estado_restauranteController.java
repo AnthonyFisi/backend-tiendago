@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.Orden_estado_restaurantePK;
+import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.service.Orden_estado_restauranteService;
+import com.backend.tienda.service.VentaService;
 
 @RestController
 @RequestMapping(Orden_estado_restauranteController.ORDEN_ESTADO_RESTAURANTE_CONTROLLER)
@@ -24,13 +26,16 @@ public class Orden_estado_restauranteController {
 
 	public static final String ORDEN_ESTADO_RESTAURANTE_CONTROLLER="/Orden_Estado_RestauranteController";
 	
-	public static final String ORDEN_REGISTRAR="/registrarOrden";
+	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}";
 	
 	public static final String LISTA_ESTADO_BY_VENTA="/listaOrden/{idVenta}";
 	
 	
 	@Autowired
 	Orden_estado_restauranteService ordenService;
+	
+	@Autowired
+	VentaService ventaService;
 	
 	@RequestMapping(value=LISTA_ESTADO_BY_VENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_restauranteGson> listaOrdenByVenta(@PathVariable ("idVenta") int idVenta){
@@ -57,23 +62,32 @@ public class Orden_estado_restauranteController {
 	
 
 	@RequestMapping(value=ORDEN_REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Orden_estado_restaurante> registrar(/*@RequestBody Orden_estado_restaurante orden*/){
+	public ResponseEntity<Orden_estado_restaurante> registrar(@RequestBody Orden_estado_restaurante orden,
+			@PathVariable ("tiempo_espera") String tiempo_espera){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		Venta venta=null;
+		Orden_estado_restaurante ordenResult=null;
+		orden.setFecha(time);
+	
+		try 
+		{
+			
+			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta(),tiempo_espera);
+			
+			if(venta==null) {
+				
+				ordenResult=ordenService.registrarEstado(orden);
+				
+			}
+			
+		}catch(Exception e) {
+			return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
-		Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
-		pk.setIdventa(16);
-		pk.setIdestado_venta(1);
-		
-		ordenEstado.setId(pk);
-		ordenEstado.setDetalle("nothing");
-		ordenEstado.setFecha(time);
-		
-		//ordenService.registrarEstado(ordenEstado);
+		}
 		
 		
-		Orden_estado_restaurante ordenResult=ordenService.registrarEstado(ordenEstado);
 		
 		return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.OK);
 		

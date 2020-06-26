@@ -8,6 +8,7 @@ public interface Orden_estado_restauranteService {
 	
 	Orden_estado_restaurante registrarEstado(Orden_estado_restaurante ordenEstado);
 	
+
 	List<Orden_estado_restaurante> listaEstadosOrden(int idVenta);
 
 }

@@ -55,6 +55,40 @@ public class Restaurante_PedidoModified {
 
 	private String tiempo_espera;
 	
+
+	
+	private String nombre_repartidor;
+	
+	private String imagen_repartidor;
+	
+	private String codigo_repartidor;
+	
+	
+	
+	public String getNombre_repartidor() {
+		return nombre_repartidor;
+	}
+
+	public void setNombre_repartidor(String nombre_repartidor) {
+		this.nombre_repartidor = nombre_repartidor;
+	}
+
+	public String getImagen_repartidor() {
+		return imagen_repartidor;
+	}
+
+	public void setImagen_repartidor(String imagen_repartidor) {
+		this.imagen_repartidor = imagen_repartidor;
+	}
+
+	public String getCodigo_repartidor() {
+		return codigo_repartidor;
+	}
+
+	public void setCodigo_repartidor(String codigo_repartidor) {
+		this.codigo_repartidor = codigo_repartidor;
+	}
+
 	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
 
 	public int getIdpedido() {
