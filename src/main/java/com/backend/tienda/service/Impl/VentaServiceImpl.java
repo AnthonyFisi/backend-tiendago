@@ -52,4 +52,22 @@ public class VentaServiceImpl implements VentaService{
 		return venta;
 	}
 
+	@Override
+	public Venta updateVentaEstado(int idVenta, int idEstado_Venta) {
+		Venta venta=null;
+		
+		try 
+		{
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setIdestado_venta(idEstado_Venta);
+			venta=ventaRepository.save(venta);
+		
+		}catch(Exception e)
+		{
+			return venta;
+		}
+		
+		return venta;
+		}
+
 }

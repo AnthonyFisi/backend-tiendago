@@ -19,6 +19,7 @@ import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.VentaService;
+import com.pusher.rest.Pusher;
 
 @RestController
 @RequestMapping(Orden_estado_restauranteController.ORDEN_ESTADO_RESTAURANTE_CONTROLLER)
@@ -26,7 +27,13 @@ public class Orden_estado_restauranteController {
 
 	public static final String ORDEN_ESTADO_RESTAURANTE_CONTROLLER="/Orden_Estado_RestauranteController";
 	
-	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}";
+	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}/{idUsuario}";
+	
+	public static final String ORDEN_UPDATE_PROCES="/updateOrdenProces/{idUsuario}";
+
+	
+	public static final String ORDEN_UPDATE_READY="/updateOrdenReady/{idUsuario}";
+
 	
 	public static final String LISTA_ESTADO_BY_VENTA="/listaOrden/{idVenta}";
 	
@@ -36,6 +43,8 @@ public class Orden_estado_restauranteController {
 	
 	@Autowired
 	VentaService ventaService;
+	
+	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 	
 	@RequestMapping(value=LISTA_ESTADO_BY_VENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_restauranteGson> listaOrdenByVenta(@PathVariable ("idVenta") int idVenta){
@@ -61,11 +70,17 @@ public class Orden_estado_restauranteController {
 	}
 	
 
+
+
+	
+
 	@RequestMapping(value=ORDEN_REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Orden_estado_restaurante> registrar(@RequestBody Orden_estado_restaurante orden,
-			@PathVariable ("tiempo_espera") String tiempo_espera){
+	public ResponseEntity<Orden_estado_restaurante> updateOrdenProces(@RequestBody Orden_estado_restaurante orden,@PathVariable ("tiempo_espera") String tiempo_espera,@PathVariable ("idUsuario") int idUsuario){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		
+		List<Orden_estado_restaurante> listaOrden =null;
 		
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
@@ -80,6 +95,60 @@ public class Orden_estado_restauranteController {
 				
 				ordenResult=ordenService.registrarEstado(orden);
 				
+				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+						
+				pusher.setCluster("us2");
+				
+				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", listaOrden);
+				
+			}
+			
+		}catch(Exception e) {
+			return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		
+		
+		
+		
+		
+		
+		return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	@RequestMapping(value=ORDEN_UPDATE_PROCES,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Orden_estado_restaurante> registrar(@RequestBody Orden_estado_restaurante orden,
+			@PathVariable ("idUsuario") int idUsuario){
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		List<Orden_estado_restaurante> listaOrden =null;
+		Venta venta=null;
+		Orden_estado_restaurante ordenResult=null;
+		orden.setFecha(time);
+	
+		try 
+		{
+			
+			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
+			
+			if(venta!=null) {
+				
+				ordenResult=ordenService.registrarEstado(orden);
+				
+				
+				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+				
+				pusher.setCluster("us2");
+				
+				pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
+				
+				
+				
+				
 			}
 			
 		}catch(Exception e) {
@@ -92,7 +161,49 @@ public class Orden_estado_restauranteController {
 		return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.OK);
 		
 	}
+	
+	
+	@RequestMapping(value=ORDEN_UPDATE_READY,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Orden_estado_restaurante> updateOrdenReady(@RequestBody Orden_estado_restaurante orden,
+			@PathVariable ("idUsuario") int idUsuario){
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		List<Orden_estado_restaurante> listaOrden =null;
+		Venta venta=null;
+		Orden_estado_restaurante ordenResult=null;
+		orden.setFecha(time);
+	
+		try 
+		{
+			
+			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
+			
+			if(venta!=null) {
+				
+				ordenResult=ordenService.registrarEstado(orden);
+				
+				
+				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+				
+				pusher.setCluster("us2");
+				
+				pusher.trigger("canal-orden-ready-"+idUsuario, "my-event", listaOrden);
+				
+				
+				
+				
+			}
+			
+		}catch(Exception e) {
+			return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
+		}
+		
+		
+		
+		return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.OK);
+		
+	}
 }
 
 

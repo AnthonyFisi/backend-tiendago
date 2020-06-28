@@ -11,5 +11,8 @@ public interface VentaService {
 	List<Venta> listaVentaTotal();
 	
 	Venta updateVentaEstado(int idVenta,int idEstado_Venta,String tiempo_espera);
+	
+	Venta updateVentaEstado(int idVenta,int idEstado_Venta);
+
 
 }

@@ -27,8 +27,21 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 
 	@Override
 	public List<Orden_estado_restaurante> listaEstadosOrden(int idVenta) {
-		return ordenRepository.listFindByidVenta(idVenta);
+		
+		
+	List<Orden_estado_restaurante> lista=null;
+		
+		try {
+			
+			lista=ordenRepository.listFindByidVenta(idVenta);
+		}catch(Exception e) {
+			
+			lista=new ArrayList<>();
+		}
+		
+		return lista; 
 	}
+	
 
 	@Override
 	public Orden_estado_restaurante OrdenDate(int idVenta, int idEstado_Venta) {
