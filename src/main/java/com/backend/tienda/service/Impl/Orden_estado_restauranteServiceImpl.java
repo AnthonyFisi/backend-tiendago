@@ -1,5 +1,6 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 	
 	@Override
 	public Orden_estado_restaurante registrarEstado(Orden_estado_restaurante ordenEstado) {
+		
+		
+		
 		return ordenRepository.save(ordenEstado);
 	}
 
@@ -44,6 +48,22 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 		
 		
 		return orden;
+	}
+
+	@Override
+	public List<Orden_estado_restaurante> listaEstados(List<Orden_estado_restaurantePK> pk) {
+
+		List<Orden_estado_restaurante> lista=null;
+		
+		try {
+			
+			lista=ordenRepository.findAllById(pk);
+		}catch(Exception e) {
+			
+			lista=new ArrayList<>();
+		}
+		
+		return lista; 
 	}
 
 }

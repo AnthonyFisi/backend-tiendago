@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_restaurante;
+import com.backend.tienda.entity.Orden_estado_restaurantePK;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
@@ -258,8 +259,8 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
-		
-		Orden_estado_restaurante orden=null;
+				
+		List<Orden_estado_restaurante> listaEstados=null;
 
 		try {
 
@@ -268,12 +269,30 @@ public class Restaurante_PedidoController {
 			
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
+		
 			
-			orden=ordenService.OrdenDate(listaRestaurante.get(0).getIdventa(), listaRestaurante.get(0).getIdestado_venta());
+			List<Orden_estado_restaurantePK> pklist=new ArrayList<>();
+			
+			for(Restaurante_Pedido pedido:listaRestaurante) {
+				
+				Orden_estado_restaurantePK pk=new Orden_estado_restaurantePK();
+				pk.setIdventa(pedido.getIdventa());
+				pk.setIdestado_venta(pedido.getIdestado_venta());
+				pklist.add(pk);
+				
+			}
+			
+			
+			listaEstados=ordenService.listaEstados(pklist);
 			
 			
 
+
 			listaTotal= new ArrayList<>();
+			
+			int position=0;
+			
+			
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
@@ -321,8 +340,7 @@ public class Restaurante_PedidoController {
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
 				
-				String fecha = orden.getFecha().toString();
-				res.setCodigo_repartidor(fecha);
+				res.setCodigo_repartidor(listaEstados.get(position).getFecha().toString());
 
 				listaTotal.add(res);
 			}
