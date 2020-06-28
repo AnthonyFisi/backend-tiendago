@@ -343,6 +343,8 @@ public class Restaurante_PedidoController {
 				res.setCodigo_repartidor(listaEstados.get(position).getFecha().toString());
 
 				listaTotal.add(res);
+				
+				position++;
 			}
 
 
