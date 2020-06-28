@@ -10,5 +10,8 @@ public interface Orden_estado_restauranteService {
 	
 
 	List<Orden_estado_restaurante> listaEstadosOrden(int idVenta);
+	
+	Orden_estado_restaurante OrdenDate(int idVenta,int idEstado_Venta);
+
 
 }

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.gson.Restaurante_PedidoGson;
 import com.backend.tienda.gson.Tipo_EnvioGson;
+import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.Restaurante_PedidoService;
 
@@ -47,6 +49,9 @@ public class Restaurante_PedidoController {
 
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
+	
+	@Autowired
+	Orden_estado_restauranteService ordenService;
 
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
@@ -83,6 +88,8 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
+		
+		
 
 		try {
 
@@ -91,13 +98,15 @@ public class Restaurante_PedidoController {
 			
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
-
+			
+			
 			listaTotal= new ArrayList<>();
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
 		
 				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
+				
 				res.setIdpedido(pedido.getIdpedido());
 				res.setIdempresa(pedido.getIdempresa());
 				res.setIdventa(pedido.getIdventa());
@@ -105,42 +114,33 @@ public class Restaurante_PedidoController {
 				res.setVenta_fecha(pedido.getVenta_fecha());
 				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
 				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
-				
-				
-				
 				res.setVenta_costototal(pedido.getVenta_costototal());
 				res.setComentario_global(pedido.getComentario_global());
 				res.setIdestado_pago(pedido.getIdestado_pago());
-				res.setNombre_estado(pedido.getNombre_estado());
-				
-				res.setComentario_pedido(pedido.getComentario_pedido());
-				
+				res.setNombre_estado(pedido.getNombre_estado());				
+				res.setComentario_pedido(pedido.getComentario_pedido());				
 				res.setIdusuario(pedido.getIdusuario());
 				res.setUsuario_nombre(pedido.getUsuario_nombre());
 				res.setUsuario_celular(pedido.getUsuario_celular());
 				res.setOrden_disponible(pedido.isOrden_disponible());
 				res.setIdrepartidor(pedido.getIdrepartidor());
-				res.setIdtipopago(pedido.getIdtipopago());
-				
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-		
-				
+				res.setIdtipopago(pedido.getIdtipopago());				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());			
 				res.setIdestado_venta(pedido.getIdestado_venta());
 				res.setTipo_estado(pedido.getTipo_estado());
 				res.setIdtipopago(pedido.getIdtipopago());
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-				
-				
+				res.setTipopago_nombre(pedido.getTipopago_nombre());			
 				res.setTiempo_espera(pedido.getTiempo_espera());
-
-				res.setListaProductos(listaProductos);
-				
+				res.setListaProductos(listaProductos);				
 				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
 				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
+				
 				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
 
+				
+				
 				listaTotal.add(res);
 			}
 
@@ -258,6 +258,8 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
+		
+		Orden_estado_restaurante orden=null;
 
 		try {
 
@@ -266,6 +268,10 @@ public class Restaurante_PedidoController {
 			
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
+			
+			orden=ordenService.OrdenDate(listaRestaurante.get(0).getIdventa(), listaRestaurante.get(0).getIdestado_venta());
+			
+			
 
 			listaTotal= new ArrayList<>();
 
@@ -314,7 +320,9 @@ public class Restaurante_PedidoController {
 				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
-				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+				
+				String fecha = orden.getFecha().toString();
+				res.setCodigo_repartidor(fecha);
 
 				listaTotal.add(res);
 			}
