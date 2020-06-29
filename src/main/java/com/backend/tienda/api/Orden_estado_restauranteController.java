@@ -173,14 +173,16 @@ public class Orden_estado_restauranteController {
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
 	
-		try 
-		{
+		//try 
+		//{
 			
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
 			
 			if(venta!=null) {
 				
 				ordenResult=ordenService.registrarEstado(orden);
+				
+				System.out.println("idventa" + orden.getId().getIdventa());
 				
 				
 				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
@@ -194,16 +196,19 @@ public class Orden_estado_restauranteController {
 				
 			}
 			
-		}catch(Exception e) {
+		/*}catch(Exception e) {
 			return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}
-		
-		
+		}*/
 		
 		return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.OK);
 		
 	}
+	
+	
+	
+	
+	
 }
 
 

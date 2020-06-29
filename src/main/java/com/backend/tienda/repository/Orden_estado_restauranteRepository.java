@@ -12,7 +12,7 @@ import com.backend.tienda.entity.Orden_estado_restaurantePK;
 @Repository
 public interface Orden_estado_restauranteRepository extends JpaRepository<Orden_estado_restaurante,Orden_estado_restaurantePK>{
 	
-	@Query(value="SELECT idventa,idestado_venta ,detalle ,fecha FROM orden_estado_venta WHERE idventa = ?1 ",nativeQuery=true)
+	@Query(value="SELECT idventa,idestado_venta ,detalle ,fecha FROM orden_estado_restaurante WHERE idventa = ?1 ",nativeQuery=true)
 	List<Orden_estado_restaurante> listFindByidVenta(int idVenta);
 	
 
