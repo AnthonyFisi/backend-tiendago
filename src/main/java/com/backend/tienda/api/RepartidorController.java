@@ -18,10 +18,10 @@ import com.backend.tienda.service.RepartidorService;
 
 
 @RestController
-@RequestMapping
+@RequestMapping(RepartidorController.REPARTIDOR_CONTROLLER)
 public class RepartidorController {
 	
-	public static final String REPARTIDOR_CONTROLLE="/repartidorController";
+	public static final String REPARTIDOR_CONTROLLER="/repartidorController";
 	
 	public static final String FIND_BY_IDREPARTIDOR="/findByRepartidor/{idRepartidor}";
 
