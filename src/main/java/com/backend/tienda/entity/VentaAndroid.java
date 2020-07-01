@@ -193,8 +193,8 @@ public class VentaAndroid {
 					0,
 					true,
 					"20 minutos",
-					1
-				
+					1,
+					false
 				);
 		return venta;
 	}

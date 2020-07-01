@@ -13,6 +13,12 @@ public interface VentaService {
 	Venta updateVentaEstado(int idVenta,int idEstado_Venta,String tiempo_espera);
 	
 	Venta updateVentaEstado(int idVenta,int idEstado_Venta);
+	
+	Venta updateVentaTiempoEspera(int idVenta,int tiempo);
+	
+	Venta updateVentaPrecioTotal(int idVenta,float costoTotal);
+	
+	Venta updateVentaCancelarPedido(int idVenta);
 
 
 }

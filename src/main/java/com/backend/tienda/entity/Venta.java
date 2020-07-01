@@ -54,6 +54,8 @@ public class Venta {
 	
 	private int  idrepartidor;
 	
+	private boolean cancelar;
+	
 
 
 	
@@ -61,7 +63,7 @@ public class Venta {
 			Timestamp venta_fechaentrega, float venta_costodelivery, float venta_costototal, String comentario,
 			int idestado_venta, int idestado_pago, int idtipo_envio, String comentario_entrega,
 			float distancia_delivery, float costo_delivery, boolean orden_disponible, String tiempo_espera,
-			int idrepartidor) {
+			int idrepartidor,boolean cancelar) {
 		super();
 		this.idventa = idventa;
 		this.idtipopago = idtipopago;
@@ -82,6 +84,7 @@ public class Venta {
 		this.orden_disponible = orden_disponible;
 		this.tiempo_espera = tiempo_espera;
 		this.idrepartidor = idrepartidor;
+		this.cancelar=cancelar;
 	}
 	public float getDistancia_delivery() {
 		return distancia_delivery;
@@ -228,6 +231,12 @@ public class Venta {
 
 	public void setComentario_entrega(String comentario_entrega) {
 		this.comentario_entrega = comentario_entrega;
+	}
+	public boolean isCancelar() {
+		return cancelar;
+	}
+	public void setCancelar(boolean cancelar) {
+		this.cancelar = cancelar;
 	}
 	
 	

@@ -266,8 +266,10 @@ public class Restaurante_PedidoController {
 
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);
+			System.out.println("PASO 1 ");
 			
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+			System.out.println("PASO 1 ");
 
 		
 			
@@ -284,8 +286,12 @@ public class Restaurante_PedidoController {
 			
 			
 			listaEstados=ordenService.listaEstados(pklist);
-			
-			
+			System.out.println("PASO 2 ");
+
+			listaEstados.stream().forEach(p->{
+				System.out.println(p.getFecha().toString());
+
+			});
 
 
 			listaTotal= new ArrayList<>();
@@ -353,6 +359,10 @@ public class Restaurante_PedidoController {
 			restauranteGson.setListaRestaurante_Pedido(listaTotal);
 
 		}catch(Exception e) {
+			
+			System.out.println(e.getMessage());
+			System.out.println("HERE");
+
 			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}

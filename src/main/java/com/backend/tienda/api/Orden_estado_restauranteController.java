@@ -134,13 +134,17 @@ public class Orden_estado_restauranteController {
 		{
 			
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
-			
+			System.out.println("PASO1");
+
 			if(venta!=null) {
 				
 				ordenResult=ordenService.registrarEstado(orden);
 				
-				
+				System.out.println("PASO2");
+
 				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+				System.out.println("PASO3");
+
 				
 				pusher.setCluster("us2");
 				

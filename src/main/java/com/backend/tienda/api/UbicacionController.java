@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Ubicacion;
+import com.backend.tienda.entity.Venta;
+import com.backend.tienda.entity.VentaAndroid;
 import com.backend.tienda.gson.UbicacionGson;
 import com.backend.tienda.service.UbicacionService;
 
@@ -161,7 +163,6 @@ public class UbicacionController {
 		
 		return new  ResponseEntity<UbicacionGson>(ubicacionGson,HttpStatus.OK);
 	}
-
 
 
 	

@@ -70,4 +70,53 @@ public class VentaServiceImpl implements VentaService{
 		return venta;
 		}
 
+	@Override
+	public Venta updateVentaTiempoEspera(int idVenta, int tiempo) {
+		Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setTiempo_espera(String.valueOf(tiempo));
+			venta=ventaRepository.save(venta);
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+
+	}
+
+	@Override
+	public Venta updateVentaPrecioTotal(int idVenta, float costoTotal) {
+	Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setVenta_costototal(costoTotal);
+			venta=ventaRepository.save(venta);
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+	}
+
+	@Override
+	public Venta updateVentaCancelarPedido(int idVenta) {
+Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setCancelar(true);
+			venta=ventaRepository.save(venta);
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+	}
+
 }

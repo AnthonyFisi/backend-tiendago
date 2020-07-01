@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +36,14 @@ public class VentaController {
 	public final static String REGISTRAR_VENTA="/registrar";
 	
 	public final static String LISTA_VENTA="/lista";
+	
+	public final static String UPDATE_VENTA="/updateTiempo/{idVenta}/{tiempo}";
+	
+	public final static String UPDATE_COSTO_TOTAL="/updateCosto/{idVenta}/{costoTotal}";
+	
+	public final static String CANCELAR_PEDIDO="/cancelar/{idVenta}";
+
+
 	
 	@Autowired
 	VentaService ventaService;
@@ -71,7 +80,7 @@ public class VentaController {
 		
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 		
-	//	try {
+		try {
 			
 			respuesta=ventaService.registrarVenta(VentaAndroid.createVenta(ventaAndroid, respuestaPedido.getIdpedido()));
 			
@@ -112,11 +121,11 @@ public class VentaController {
 			
 			/*EN EL FUTURO PODEMOS AGREGAR UN PUSHER PARA MANDAR A NOTIFICAR A LA APP DE RESTAURANTE */
 			
-		/*}catch(Exception e) {
+		}catch(Exception e) {
 			System.out.println(e.getMessage());
 
 			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
-		}*/
+		}
 		
 		return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
 	}
@@ -135,5 +144,79 @@ public class VentaController {
 		}
 		
 		return new  ResponseEntity<List<Venta>>(respuesta,HttpStatus.OK);
+	}
+	
+	
+
+	@RequestMapping(value=UPDATE_VENTA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VentaAndroid>  updateTiempo(@PathVariable("idVenta")int idVenta,@PathVariable("tiempo")int tiempo){
+		
+		VentaAndroid  respuesta=null;
+		Venta venta=null;
+		
+		
+		try {
+		
+			venta=ventaService.updateVentaTiempoEspera(idVenta, tiempo);
+			
+			
+			respuesta= new VentaAndroid();
+			
+			respuesta.setRepsuesta_registro_venta(true);
+			
+		}catch(Exception e) {
+			return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value=UPDATE_COSTO_TOTAL,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VentaAndroid>  updateCostoTotal(@PathVariable("idVenta")int idVenta,@PathVariable("costoTotal")float costoTotal){
+		
+		VentaAndroid  respuesta=null;
+		Venta venta=null;
+		
+		
+		try {
+		
+			venta=ventaService.updateVentaPrecioTotal(idVenta, costoTotal);
+			
+			
+			respuesta= new VentaAndroid();
+			
+			respuesta.setRepsuesta_registro_venta(true);
+			
+		}catch(Exception e) {
+			return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.OK);
+	}
+	
+	
+	
+	@RequestMapping(value=CANCELAR_PEDIDO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VentaAndroid>  cancelarPedido(@PathVariable("idVenta")int idVenta){
+		
+		VentaAndroid  respuesta=null;
+		Venta venta=null;
+		
+		
+		try {
+		
+			venta=ventaService.updateVentaCancelarPedido(idVenta);
+			
+			
+			respuesta= new VentaAndroid();
+			
+			respuesta.setRepsuesta_registro_venta(true);
+			
+		}catch(Exception e) {
+			return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.OK);
 	}
 }
