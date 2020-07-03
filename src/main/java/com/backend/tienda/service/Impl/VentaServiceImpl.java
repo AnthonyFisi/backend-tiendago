@@ -119,4 +119,19 @@ Venta venta=null;
 		return venta;
 	}
 
+	@Override
+	public Venta getVenta(int idVenta) {
+			Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idVenta).get();
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+		
+	}
+
 }

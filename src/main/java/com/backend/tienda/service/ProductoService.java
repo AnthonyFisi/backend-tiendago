@@ -14,5 +14,7 @@ public interface ProductoService {
 	
 	
 	List<Producto>  findByidempresa(int idempresa);
+	
+	Producto updateDisponibilidadProducto(int idproducto,int idempresa,boolean disponibilidad);
 
 }

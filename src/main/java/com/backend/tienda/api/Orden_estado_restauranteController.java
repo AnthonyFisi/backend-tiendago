@@ -1,6 +1,10 @@
 package com.backend.tienda.api;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.Orden_estado_restaurantePK;
+import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.service.Orden_estado_restauranteService;
@@ -129,30 +134,51 @@ public class Orden_estado_restauranteController {
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
+		boolean update=false;
+		
+		
+		
+		Venta ventaTotal=ventaService.getVenta(orden.getId().getIdventa());
+		
+		
+		int tiempo=tiempoRestante(ventaTotal.getTiempo_espera());
+		
+		
+		if(tiempo>= Integer.valueOf(ventaTotal.getTiempo_espera())) {
+			
+			update=true;
+		}
+		
 	
 		try 
 		{
 			
-			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
-			System.out.println("PASO1");
+			if(update) {
+				
+				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
+				System.out.println("PASO1");
 
-			if(venta!=null) {
-				
-				ordenResult=ordenService.registrarEstado(orden);
-				
-				System.out.println("PASO2");
+				if(venta!=null) {
+					
+					ordenResult=ordenService.registrarEstado(orden);
+					
+					System.out.println("PASO2");
 
-				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
-				System.out.println("PASO3");
+					listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+					System.out.println("PASO3");
 
+					
+					pusher.setCluster("us2");
+					
+					pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
+					
+					
+					
+					
 				
-				pusher.setCluster("us2");
-				
-				pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
-				
-				
-				
-				
+			}
+			
+		
 			}
 			
 		}catch(Exception e) {
@@ -209,6 +235,50 @@ public class Orden_estado_restauranteController {
 		
 	}
 	
+	
+	
+    private int tiempoRestante(String restante){
+
+
+        Timestamp ts = Timestamp.valueOf(restante);
+
+        String pattern = "HH:mm:ss";
+        DateFormat dateFormat = new SimpleDateFormat(pattern);
+        String time1=dateFormat.format(ts);
+
+
+
+
+
+        DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+        Date date = new Date();
+        String time2 = dateFormat2.format(date);
+
+
+
+        System.out.println("dateformated  " +time1+" |  fecha1 "+time2);
+
+
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date date1 = null;
+        Date date2 =null;
+        try {
+            date1 = format.parse(time1);
+            date2=format.parse(time2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long difference = date2.getTime() - date1.getTime();
+
+        int tiempo=(int)(difference/1000);
+
+        return tiempo;
+
+
+    }
+
 	
 	
 	

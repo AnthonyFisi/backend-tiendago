@@ -38,6 +38,27 @@ public class ProductoServiceImpl  implements ProductoService{
 		return productoRepository.findByidempresa(idempresa);
 	}
 
+	@Override
+	public Producto updateDisponibilidadProducto(int idproducto,int idempresa,boolean disponibilidad) {
+		Producto producto=null;
+		
+		try {
+			
+			producto=productoRepository.findByIdproductoAndIdempresa(idproducto, idempresa);
+			
+			producto.setDisponible(disponibilidad);
+			
+			productoRepository.save(producto);
+			
+		}catch(Exception e) {
+			
+			return producto;
+			
+		}
+		
+		return producto;
+	}
+
 
 	
 }

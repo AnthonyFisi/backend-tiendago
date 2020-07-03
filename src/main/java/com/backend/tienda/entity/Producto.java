@@ -37,11 +37,23 @@ public class Producto {
 	private String producto_detalle;
 	
 	private float producto_descuento;
+	
+	private float producto_precio_descuento;
+	
+	private boolean disponible;
 
 	
 	
 	
 	
+	public float getProducto_precio_descuento() {
+		return producto_precio_descuento;
+	}
+
+	public void setProducto_precio_descuento(float producto_precio_descuento) {
+		this.producto_precio_descuento = producto_precio_descuento;
+	}
+
 	public int getIdproducto() {
 		return idproducto;
 	}
@@ -130,80 +142,14 @@ public class Producto {
 		this.producto_descuento = producto_descuento;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idcategoriaproducto;
-		result = prime * result + idempresa;
-		result = prime * result + idproducto;
-		result = prime * result + Float.floatToIntBits(producto_calificacion);
-		result = prime * result + Float.floatToIntBits(producto_descuento);
-		result = prime * result + ((producto_detalle == null) ? 0 : producto_detalle.hashCode());
-		result = prime * result + ((producto_fechacreacion == null) ? 0 : producto_fechacreacion.hashCode());
-		result = prime * result + ((producto_nombre == null) ? 0 : producto_nombre.hashCode());
-		result = prime * result + Float.floatToIntBits(producto_precio);
-		result = prime * result + producto_stock;
-		result = prime * result + ((producto_uriimagen == null) ? 0 : producto_uriimagen.hashCode());
-		return result;
+	public boolean isDisponible() {
+		return disponible;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		if (idcategoriaproducto != other.idcategoriaproducto)
-			return false;
-		if (idempresa != other.idempresa)
-			return false;
-		if (idproducto != other.idproducto)
-			return false;
-		if (Float.floatToIntBits(producto_calificacion) != Float.floatToIntBits(other.producto_calificacion))
-			return false;
-		if (Float.floatToIntBits(producto_descuento) != Float.floatToIntBits(other.producto_descuento))
-			return false;
-		if (producto_detalle == null) {
-			if (other.producto_detalle != null)
-				return false;
-		} else if (!producto_detalle.equals(other.producto_detalle))
-			return false;
-		if (producto_fechacreacion == null) {
-			if (other.producto_fechacreacion != null)
-				return false;
-		} else if (!producto_fechacreacion.equals(other.producto_fechacreacion))
-			return false;
-		if (producto_nombre == null) {
-			if (other.producto_nombre != null)
-				return false;
-		} else if (!producto_nombre.equals(other.producto_nombre))
-			return false;
-		if (Float.floatToIntBits(producto_precio) != Float.floatToIntBits(other.producto_precio))
-			return false;
-		if (producto_stock != other.producto_stock)
-			return false;
-		if (producto_uriimagen == null) {
-			if (other.producto_uriimagen != null)
-				return false;
-		} else if (!producto_uriimagen.equals(other.producto_uriimagen))
-			return false;
-		return true;
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
 	}
 
-	@Override
-	public String toString() {
-		return "Producto [idproducto=" + idproducto + ", idcategoriaproducto=" + idcategoriaproducto + ", idempresa="
-				+ idempresa + ", producto_nombre=" + producto_nombre + ", producto_precio=" + producto_precio
-				+ ", producto_stock=" + producto_stock + ", producto_fechacreacion=" + producto_fechacreacion
-				+ ", producto_uriimagen=" + producto_uriimagen + ", producto_calificacion=" + producto_calificacion
-				+ ", producto_detalle=" + producto_detalle + ", producto_descuento=" + producto_descuento + "]";
-	}
-
-	
 	
 	
 }

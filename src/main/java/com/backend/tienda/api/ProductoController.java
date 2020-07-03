@@ -29,6 +29,9 @@ public class ProductoController {
 	public final static String LISTA_PRODUCTOS_FIND_IDCATEGORIA_IDEMPRESA="/listaCategoria/{idcategoriaproducto}/{idempresa}";
 	
 	public final static String LISTA_PRODUCTOS_FIND_IDEMPRESA="/listaCategoria/{idempresa}";
+	
+	public final static String UPDATE_DISPONIBILIDAD="/updateDisponibilidad/{idproducto}/{idempresa}/{disponibilidad}";
+
 
 
 	
@@ -123,6 +126,26 @@ public class ProductoController {
 		}
 		
 		return new ResponseEntity<ProductoGson>(productoGson,HttpStatus.OK);
+
+	}
+	
+	
+	@RequestMapping(value=UPDATE_DISPONIBILIDAD,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Producto> updateDisponibilidadProducto(@PathVariable("idproducto") int idproducto,
+			@PathVariable("idempresa") int idempresa,@PathVariable("disponibilidad") boolean disponibilidad){
+		
+		Producto producto=null;
+		
+		
+		try {
+			producto=productoService.updateDisponibilidadProducto(idproducto,idempresa, disponibilidad);
+			
+		}catch(Exception e) 
+		{
+			return new ResponseEntity<Producto>(producto,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Producto>(producto,HttpStatus.OK);
 
 	}
 	

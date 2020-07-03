@@ -16,6 +16,8 @@ public interface Orden_estado_restauranteService {
 	
 	
 	List<Orden_estado_restaurante> listaEstados(List<Orden_estado_restaurantePK> pk);
+	
+	
 
 
 }
