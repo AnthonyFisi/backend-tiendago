@@ -73,10 +73,12 @@ public class VentaServiceImpl implements VentaService{
 	@Override
 	public Venta updateVentaTiempoEspera(int idVenta, int tiempo) {
 		Venta venta=null;
+		int time=0;
 		
 		try {
 			venta=ventaRepository.findById(idVenta).get();
-			venta.setTiempo_espera(String.valueOf(tiempo));
+			time=Integer.valueOf(venta.getTiempo_espera())+ tiempo;
+			venta.setTiempo_espera(String.valueOf(time));
 			venta=ventaRepository.save(venta);
 		}catch(Exception e) {
 			return venta;
@@ -90,10 +92,12 @@ public class VentaServiceImpl implements VentaService{
 	@Override
 	public Venta updateVentaPrecioTotal(int idVenta, float costoTotal) {
 	Venta venta=null;
+	float costo=0;
 		
 		try {
 			venta=ventaRepository.findById(idVenta).get();
-			venta.setVenta_costototal(costoTotal);
+			costo=venta.getVenta_costototal()+costoTotal;
+			venta.setVenta_costototal(costo);
 			venta=ventaRepository.save(venta);
 		}catch(Exception e) {
 			return venta;

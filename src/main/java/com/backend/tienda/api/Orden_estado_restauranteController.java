@@ -134,11 +134,11 @@ public class Orden_estado_restauranteController {
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
-		boolean update=false;
+		//boolean update=false;
 		
 		
 		
-		Venta ventaTotal=ventaService.getVenta(orden.getId().getIdventa());
+		/*Venta ventaTotal=ventaService.getVenta(orden.getId().getIdventa());
 		
 		
 		int tiempo=tiempoRestante(ventaTotal.getTiempo_espera());
@@ -147,13 +147,13 @@ public class Orden_estado_restauranteController {
 		if(tiempo>= Integer.valueOf(ventaTotal.getTiempo_espera())) {
 			
 			update=true;
-		}
+		}*/
 		
 	
 		try 
 		{
 			
-			if(update) {
+			//if(update) {
 				
 				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
 				System.out.println("PASO1");
@@ -176,7 +176,7 @@ public class Orden_estado_restauranteController {
 					
 					
 				
-			}
+			
 			
 		
 			}
