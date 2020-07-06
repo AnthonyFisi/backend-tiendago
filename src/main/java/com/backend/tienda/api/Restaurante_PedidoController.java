@@ -143,6 +143,9 @@ public class Restaurante_PedidoController {
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
 				
 				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+				
+				res.setCancelar(pedido.isCancelar());
+				res.setTelefono(pedido.getTelefono());
 
 				
 				
@@ -232,6 +235,9 @@ public class Restaurante_PedidoController {
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
 				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+
+				res.setCancelar(pedido.isCancelar());
+				res.setTelefono(pedido.getTelefono());
 
 				listaTotal.add(res);
 			}
@@ -356,6 +362,10 @@ public class Restaurante_PedidoController {
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
 				
 				res.setCodigo_repartidor(listaEstados.get(position).getFecha().toString());
+				
+
+				res.setCancelar(pedido.isCancelar());
+				res.setTelefono(pedido.getTelefono());
 
 				listaTotal.add(res);
 				
@@ -451,6 +461,10 @@ public class Restaurante_PedidoController {
 				res.setNombre_repartidor(pedido.getNombre_repartidor());
 				res.setImagen_repartidor(pedido.getImagen_repartidor());
 				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
+				
+
+				res.setCancelar(pedido.isCancelar());
+				res.setTelefono(pedido.getTelefono());
 
 				listaTotal.add(res);
 			}
@@ -542,6 +556,8 @@ public class Restaurante_PedidoController {
 			res.setCodigo_repartidor(pedido.getCodigo_repartidor());
 			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
+			res.setCancelar(pedido.isCancelar());
+			res.setTelefono(pedido.getTelefono());
 			
 			
 
@@ -625,7 +641,9 @@ public class Restaurante_PedidoController {
 			
 			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
 
-			
+
+			res.setCancelar(pedido.isCancelar());
+			res.setTelefono(pedido.getTelefono());
 			
 
 

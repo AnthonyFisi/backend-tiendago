@@ -43,11 +43,11 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipo_envio," + 
 			"					nombre_tipo_envio , tiempo_espera,pedido_cantidadtotal "+
 			"					,nombre_repartidor,imagen_repartidor,codigo_repartidor"+
-
+			"					,telefono,cancelar"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 1  AND orden_disponible=true" + 
-			"					AND idempresa= ?1 ",nativeQuery=true)
-	List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(int idEmpresa);
+			"					AND idempresa= ?1  AND  venta_fechaentrega BETWEEN ?2 AND ?3  ",nativeQuery=true)
+	List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(int idEmpresa,Timestamp fecha1,Timestamp fecha2);
 	
 	@Query(value="SELECT    idventa,	" + 
 			"					idpedido,idempresa," + 
@@ -61,7 +61,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipo_envio , " + 
 			"					nombre_tipo_envio, tiempo_espera,pedido_cantidadtotal"+
 			"					,nombre_repartidor,imagen_repartidor,codigo_repartidor"+
-
+			"					,telefono,cancelar"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 1  AND orden_disponible=true" + 
 			"					AND idempresa= ?1 AND idpedido = ?2 AND idventa = ?3  ",nativeQuery=true)
@@ -83,6 +83,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipo_envio , " + 
 			"					nombre_tipo_envio, tiempo_espera,pedido_cantidadtotal"+
 			"					,nombre_repartidor,imagen_repartidor,codigo_repartidor"+
+			"					,telefono,cancelar"+
 
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 2  AND orden_disponible=true" + 
@@ -103,6 +104,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipo_envio , " + 
 			"					nombre_tipo_envio, tiempo_espera,pedido_cantidadtotal"+
 			"					,nombre_repartidor,imagen_repartidor,codigo_repartidor"+
+			"					,telefono,cancelar"+
 
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 3  AND orden_disponible=true" + 
@@ -123,7 +125,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idtipo_envio , " + 
 			"					nombre_tipo_envio, tiempo_espera,pedido_cantidadtotal"+
 			"					,nombre_repartidor,imagen_repartidor,codigo_repartidor"+
-
+			"					,telefono,cancelar"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 4  AND orden_disponible=true" + 
 			"					AND idempresa= ?1  ",nativeQuery=true)

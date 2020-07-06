@@ -75,7 +75,29 @@ public class Restaurante_Pedido {
 	
 	private String codigo_repartidor;
 	
+	private boolean cancelar;
 	
+	private String telefono;
+	
+	
+	
+	
+
+	public boolean isCancelar() {
+		return cancelar;
+	}
+
+	public void setCancelar(boolean cancelar) {
+		this.cancelar = cancelar;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
 	public String getNombre_repartidor() {
 		return nombre_repartidor;

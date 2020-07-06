@@ -64,9 +64,35 @@ public class Restaurante_PedidoModified {
 	
 	private String codigo_repartidor;
 	
+private boolean cancelar;
+	
+	private String telefono;
+	
+	
+	
 	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
 	
 	
+	
+	
+	
+	
+	public boolean isCancelar() {
+		return cancelar;
+	}
+
+	public void setCancelar(boolean cancelar) {
+		this.cancelar = cancelar;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public int getPedido_cantidadtotal() {
 		return pedido_cantidadtotal;
 	}

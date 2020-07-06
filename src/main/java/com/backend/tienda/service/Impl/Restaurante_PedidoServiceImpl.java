@@ -1,6 +1,8 @@
 package com.backend.tienda.service.Impl;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,32 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosNuevosDistinct(int idEmpresa) {
-		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(idEmpresa);
+		
+		String fecha1=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	).toString();
+		    	
+		Timestamp date1=Timestamp.valueOf(fecha1+" 00:00:00.000");
+
+		String fecha2=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	).plusDays(1).toString();
+		
+		Timestamp date2=Timestamp.valueOf(fecha2+" 00:00:00.000");
+
+		
+		
+		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(idEmpresa,date1,date2);
 	}
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosProceso(int idEmpresa) {
+		
+		
 		return restaurante_PedidoRepository.findProcesOrden(idEmpresa);
 	}
 
