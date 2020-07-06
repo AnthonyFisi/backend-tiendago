@@ -41,7 +41,7 @@ public class VentaController {
 	
 	public final static String UPDATE_COSTO_TOTAL="/updateCosto/{idVenta}/{costoTotal}";
 	
-	public final static String CANCELAR_PEDIDO="/cancelar/{idVenta}/{comentario_cancelar}";
+	public final static String CANCELAR_PEDIDO="/cancelar";
 
 
 	
@@ -201,12 +201,12 @@ public class VentaController {
 	public ResponseEntity<VentaAndroid>  cancelarPedido(@RequestBody Venta venta){
 		 
 		VentaAndroid  respuesta=null;
-		Venta venta=null;
+		Venta venta2=null;
 		
 		
 		try {
 		
-			venta=ventaService.updateVentaCancelarPedido(venta.getIdestado_venta(),venta.getComentario());
+			venta2=ventaService.updateVentaCancelarPedido(venta.getIdestado_venta(),venta.getComentario());
 			
 			
 			respuesta= new VentaAndroid();
