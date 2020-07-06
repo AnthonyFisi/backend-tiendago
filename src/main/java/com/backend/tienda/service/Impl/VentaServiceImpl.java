@@ -108,12 +108,13 @@ public class VentaServiceImpl implements VentaService{
 	}
 
 	@Override
-	public Venta updateVentaCancelarPedido(int idVenta) {
+	public Venta updateVentaCancelarPedido(int idVenta,String comentario_cancelar) {
 Venta venta=null;
 		
 		try {
 			venta=ventaRepository.findById(idVenta).get();
 			venta.setCancelar(true);
+			venta.setComentario_cancelar(comentario_cancelar);
 			venta=ventaRepository.save(venta);
 		}catch(Exception e) {
 			return venta;

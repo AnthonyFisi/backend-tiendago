@@ -86,7 +86,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 2  AND orden_disponible=true" + 
-			"					AND idempresa= ?1  ",nativeQuery=true)
+			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
 	List<Restaurante_Pedido> findProcesOrden(int idEmpresa);
 	
 	
@@ -106,7 +106,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 3  AND orden_disponible=true" + 
-			"					AND idempresa= ?1   ",nativeQuery=true)
+			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
 	List<Restaurante_Pedido> findReadyOrden(int idEmpresa);
 	
 	
@@ -126,7 +126,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestado_venta = 4  AND orden_disponible=true" + 
-			"					AND idempresa= ?1   ",nativeQuery=true)
+			"					AND idempresa= ?1  ",nativeQuery=true)
 	List<Restaurante_Pedido> findHistorialOrden(int idEmpresa);
 	
 

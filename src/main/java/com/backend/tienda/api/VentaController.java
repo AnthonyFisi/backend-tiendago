@@ -41,7 +41,7 @@ public class VentaController {
 	
 	public final static String UPDATE_COSTO_TOTAL="/updateCosto/{idVenta}/{costoTotal}";
 	
-	public final static String CANCELAR_PEDIDO="/cancelar/{idVenta}";
+	public final static String CANCELAR_PEDIDO="/cancelar/{idVenta}/{comentario_cancelar}";
 
 
 	
@@ -198,15 +198,15 @@ public class VentaController {
 	
 	
 	@RequestMapping(value=CANCELAR_PEDIDO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<VentaAndroid>  cancelarPedido(@PathVariable("idVenta")int idVenta){
-		
+	public ResponseEntity<VentaAndroid>  cancelarPedido(@PathVariable("idVenta")int idVenta,@PathVariable("comentario_cancelar")String comentario_cancelar){
+		 
 		VentaAndroid  respuesta=null;
 		Venta venta=null;
 		
 		
 		try {
 		
-			venta=ventaService.updateVentaCancelarPedido(idVenta);
+			venta=ventaService.updateVentaCancelarPedido(idVenta,comentario_cancelar);
 			
 			
 			respuesta= new VentaAndroid();

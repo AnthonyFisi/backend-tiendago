@@ -18,7 +18,7 @@ public interface VentaService {
 	
 	Venta updateVentaPrecioTotal(int idVenta,float costoTotal);
 	
-	Venta updateVentaCancelarPedido(int idVenta);
+	Venta updateVentaCancelarPedido(int idVenta,String comentario);
 	
 	Venta getVenta(int idVenta);
 

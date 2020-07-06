@@ -31,16 +31,15 @@ public class ProductoController {
 	public final static String LISTA_PRODUCTOS_FIND_IDEMPRESA="/listaCategoria/{idempresa}";
 	
 	public final static String UPDATE_DISPONIBILIDAD="/updateDisponibilidad/{idproducto}/{idempresa}/{disponibilidad}";
-
-
-
 	
+	public final static String LIST_PRODUCTOS_EMPRESA="/listaProductosEmpresa/{idEmpresa}";
+
+
 	
 	@Autowired
 	ProductoService productoService;
 	
 	
-
 	@RequestMapping(value=INSERTAR_PRODUCTO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Producto> regitrarCuentaEmpresa(@RequestBody Producto producto){
 		
@@ -81,6 +80,8 @@ public class ProductoController {
 		return new ResponseEntity<ProductoGson>(productoGson,HttpStatus.OK);
 
 	}
+	
+	
 	
 	
 	
@@ -148,5 +149,26 @@ public class ProductoController {
 		return new ResponseEntity<Producto>(producto,HttpStatus.OK);
 
 	}
+	
+	/*@RequestMapping(value=LIST_PRODUCTOS_EMPRESA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ProductoApiGson> listaProductosByIdEmpresa(@PathVariable("idEmpresa") int idEmpresa){
+		
+		List<Producto> rpta=null;
+		ProductoApiGson productoGson=null;
+		
+		
+		try {
+			rpta=productoService.listaProducto();
+			productoGson= new ProductoGson();
+			productoGson.setListaProducto(rpta);
+			
+		}catch(Exception e) 
+		{
+			return new ResponseEntity<ProductoApiGson>(productoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<ProductoApiGson> (productoGson,HttpStatus.OK);
+
+	}*/
 	
 }
