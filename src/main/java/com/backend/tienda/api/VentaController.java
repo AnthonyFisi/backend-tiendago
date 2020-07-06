@@ -198,7 +198,7 @@ public class VentaController {
 	
 	
 	@RequestMapping(value=CANCELAR_PEDIDO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<VentaAndroid>  cancelarPedido(@PathVariable("idVenta")int idVenta,@PathVariable("comentario_cancelar")String comentario_cancelar){
+	public ResponseEntity<VentaAndroid>  cancelarPedido(@RequestBody Venta venta){
 		 
 		VentaAndroid  respuesta=null;
 		Venta venta=null;
@@ -206,7 +206,7 @@ public class VentaController {
 		
 		try {
 		
-			venta=ventaService.updateVentaCancelarPedido(idVenta,comentario_cancelar);
+			venta=ventaService.updateVentaCancelarPedido(venta.getIdestado_venta(),venta.getComentario());
 			
 			
 			respuesta= new VentaAndroid();
