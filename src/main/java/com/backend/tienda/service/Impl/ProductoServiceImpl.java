@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.tienda.entity.Producto;
+import com.backend.tienda.entity.ProductoApp;
 import com.backend.tienda.repository.ProductoRepository;
 import com.backend.tienda.service.ProductoService;
 
@@ -58,6 +59,8 @@ public class ProductoServiceImpl  implements ProductoService{
 		
 		return producto;
 	}
+
+	
 
 
 	

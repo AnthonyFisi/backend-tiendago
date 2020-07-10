@@ -83,7 +83,19 @@ public class Empresa{
 	
 	private String detalle_ubicacion;
 
+	private boolean disponible;
 	
+	
+	
+	
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
 
 	public String getIcono_empresa() {
 		return icono_empresa;

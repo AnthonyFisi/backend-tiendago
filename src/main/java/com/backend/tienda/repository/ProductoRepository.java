@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.backend.tienda.entity.Producto;
+import com.backend.tienda.entity.ProductoApp;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Integer>{
@@ -20,6 +21,10 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer>{
 	
 	
 	List<Producto>  findByidempresa(int idempresa);
+	
+
+	
+	
 	
 	Producto findByIdproductoAndIdempresa(int idproducto,int idempresa);
 	

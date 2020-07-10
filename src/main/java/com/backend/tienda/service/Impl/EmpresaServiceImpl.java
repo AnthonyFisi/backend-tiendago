@@ -41,4 +41,11 @@ public class EmpresaServiceImpl  implements EmpresaService{
 		return  empresaRepository.save(empresa);
 	}
 
+	@Override
+	public Empresa findByIdEmpresaTotal(int idEmpresa) {
+		return empresaRepository.findById(idEmpresa).get();
+	}
+
+	
+
 }

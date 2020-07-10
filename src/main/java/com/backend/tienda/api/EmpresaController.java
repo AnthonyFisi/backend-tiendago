@@ -39,6 +39,9 @@ public class EmpresaController {
 	public final static String REGISTRAR_EMPRESA="/registrar";
 
 	
+	public final static String FIND_BY_EMPRESA="/findByEmpresa/{idEmpresa}";
+
+	
 	@Autowired
 	EmpresaService empresaService;
 	
@@ -137,6 +140,24 @@ public class EmpresaController {
 			
 		}catch(Exception e) 
 		{
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value=FIND_BY_EMPRESA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> findByIdEmpresa(@PathVariable("idEmpresa") int idEmpresa){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.findByIdEmpresaTotal(idEmpresa);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
 			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		

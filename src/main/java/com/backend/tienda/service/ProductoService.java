@@ -3,6 +3,7 @@ package com.backend.tienda.service;
 import java.util.List;
 
 import com.backend.tienda.entity.Producto;
+import com.backend.tienda.entity.ProductoApp;
 
 public interface ProductoService {
 	
@@ -16,5 +17,6 @@ public interface ProductoService {
 	List<Producto>  findByidempresa(int idempresa);
 	
 	Producto updateDisponibilidadProducto(int idproducto,int idempresa,boolean disponibilidad);
+	
 
 }

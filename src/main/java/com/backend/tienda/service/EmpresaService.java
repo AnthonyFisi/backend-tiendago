@@ -15,4 +15,6 @@ public interface EmpresaService {
 	List<Empresa> listaEmpresaFindByIdSubCategoria( int idSubCategoria);
 	
 	Empresa InsertEmpresa(Empresa empresa);
+	
+	Empresa  findByIdEmpresaTotal(int idEmpresa);
 }
