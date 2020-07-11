@@ -17,4 +17,6 @@ public interface EmpresaService {
 	Empresa InsertEmpresa(Empresa empresa);
 	
 	Empresa  findByIdEmpresaTotal(int idEmpresa);
+	
+	Empresa updateDisponibilidad(int idEmpresa,boolean disponible);
 }

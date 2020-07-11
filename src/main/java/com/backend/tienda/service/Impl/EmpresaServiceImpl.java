@@ -46,6 +46,21 @@ public class EmpresaServiceImpl  implements EmpresaService{
 		return empresaRepository.findById(idEmpresa).get();
 	}
 
+	@Override
+	public Empresa updateDisponibilidad(int idEmpresa, boolean disponible) {
+		Empresa empresa=null;
+		
+		try {
+			empresa=empresaRepository.findById(idEmpresa).get();
+			empresa.setDisponible(disponible);
+			empresa=empresaRepository.save(empresa);
+			
+		}catch(Exception e) {
+			return empresa;
+		}
+		return empresa;
+	}
+
 	
 
 }

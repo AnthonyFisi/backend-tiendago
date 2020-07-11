@@ -40,6 +40,8 @@ public class EmpresaController {
 
 	
 	public final static String FIND_BY_EMPRESA="/findByEmpresa/{idEmpresa}";
+	
+	public final static String UPDATE_DISPONIBILIDAD_EMPRESA="/updateDisponibilidad/{idEmpresa}/{disponibilidad}";
 
 	
 	@Autowired
@@ -165,6 +167,24 @@ public class EmpresaController {
 
 	}
 	
+	
+	@RequestMapping(value=UPDATE_DISPONIBILIDAD_EMPRESA,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateDisponibilidadEmpresa(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("disponibilidad") boolean disponibilidad){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateDisponibilidad(idEmpresa, disponibilidad);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
 	
 	
 
