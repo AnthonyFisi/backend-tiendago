@@ -170,13 +170,13 @@ public class ProductoController {
 				app.setIdcategoriaproducto(producto.getIdcategoriaproducto());
 				app.setIdempresa(producto.getIdempresa());
 				app.setProducto_nombre(producto.getProducto_nombre());
-				app.setProducto_precio(producto.getProducto_precio());
+				/*app.setProducto_precio(producto.getProducto_precio());
 				app.setProducto_stock(producto.getProducto_stock());
 				app.setProducto_uriimagen(producto.getProducto_uriimagen());
 				app.setProducto_calificacion(producto.getProducto_calificacion());
 				app.setProducto_detalle(producto.getProducto_detalle());
 				app.setProducto_descuento(producto.getProducto_descuento());
-				app.setProducto_precio_descuento(producto.getProducto_precio_descuento());
+				app.setProducto_precio_descuento(producto.getProducto_precio_descuento());*/
 				app.setDisponible(producto.isDisponible());
 				
 				lista.add(app);
