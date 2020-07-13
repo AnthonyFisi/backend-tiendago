@@ -135,7 +135,7 @@ public class ProductoController {
 	
 	
 	@RequestMapping(value=UPDATE_DISPONIBILIDAD,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Producto> updateDisponibilidadProducto(@PathVariable("idproducto") int idproducto,
+	public ResponseEntity<Producto>  updateDisponibilidadProducto(@PathVariable("idproducto") int idproducto,
 			@PathVariable("idempresa") int idempresa,@PathVariable("disponibilidad") boolean disponibilidad){
 		
 		Producto producto=null;
@@ -154,46 +154,33 @@ public class ProductoController {
 	}
 	
 	@RequestMapping(value=LIST_PRODUCTOS_EMPRESA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProductoAppGson> listaProductosByIdEmpresa(@PathVariable("idEmpresa") int idEmpresa){
+	public ResponseEntity<ProductoGson> listaProductosByIdEmpresa(@PathVariable("idEmpresa") int idEmpresa){
 		
 		List<Producto> rpta=null;
 		List<ProductoApp> lista=new ArrayList<>();
-		ProductoAppGson productoGson=null;
+		ProductoGson productoGson=null;
 
 		
 		try {
 			rpta=productoService.findByidempresa(idEmpresa);
 			
 			for(Producto producto:rpta) {
+				producto.setProducto_fechacreacion(null);
 				
-				ProductoApp app=new ProductoApp();
-				app.setIdcategoriaproducto(producto.getIdcategoriaproducto());
-				app.setIdempresa(producto.getIdempresa());
-				app.setProducto_nombre(producto.getProducto_nombre());
-				/*app.setProducto_precio(producto.getProducto_precio());
-				app.setProducto_stock(producto.getProducto_stock());
-				app.setProducto_uriimagen(producto.getProducto_uriimagen());
-				app.setProducto_calificacion(producto.getProducto_calificacion());
-				app.setProducto_detalle(producto.getProducto_detalle());
-				app.setProducto_descuento(producto.getProducto_descuento());
-				app.setProducto_precio_descuento(producto.getProducto_precio_descuento());*/
-				app.setDisponible(producto.isDisponible());
-				
-				lista.add(app);
 			}
 			
-			productoGson= new ProductoAppGson();
-			productoGson.setListaProductos(lista);
+			productoGson= new ProductoGson();
+			productoGson.setListaProducto(rpta);
 			
 		}catch(Exception e) 
 		{
 			System.out.println(e.getMessage());
 			System.out.println(e.getCause());
 
-			return new ResponseEntity<ProductoAppGson>(productoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ProductoGson>(productoGson,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		return new ResponseEntity<ProductoAppGson> (productoGson,HttpStatus.OK);
+		return new ResponseEntity<ProductoGson> (productoGson,HttpStatus.OK);
 
 	}
 	
