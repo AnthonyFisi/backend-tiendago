@@ -11,7 +11,7 @@ import com.backend.tienda.service.EmpresaService;
 
 @Service
 public class EmpresaServiceImpl  implements EmpresaService{
-	
+
 	@Autowired
 	EmpresaRepository empresaRepository;
 
@@ -49,18 +49,94 @@ public class EmpresaServiceImpl  implements EmpresaService{
 	@Override
 	public Empresa updateDisponibilidad(int idEmpresa, boolean disponible) {
 		Empresa empresa=null;
-		
+
 		try {
 			empresa=empresaRepository.findById(idEmpresa).get();
 			empresa.setDisponible(disponible);
 			empresa=empresaRepository.save(empresa);
-			
+
 		}catch(Exception e) {
 			return empresa;
 		}
 		return empresa;
 	}
 
-	
+	@Override
+	public Empresa updateTelefono(int idEmpresa, String numeroTelefono) {
+		Empresa empresa=null;
+
+		try {
+			empresa=empresaRepository.findById(idEmpresa).get();
+			empresa.setTelefono_empresa(numeroTelefono);
+			empresa=empresaRepository.save(empresa);
+
+		}catch(Exception e) {
+			return empresa;
+		}
+		return empresa;
+	}
+
+	@Override
+	public Empresa updateCelular(int idEmpresa, String numeroCelular) {
+		Empresa empresa=null;
+
+		try {
+			empresa=empresaRepository.findById(idEmpresa).get();
+			empresa.setCelular_empresa(numeroCelular);
+			empresa=empresaRepository.save(empresa);
+
+		}catch(Exception e) {
+			return empresa;
+		}
+		return empresa;
+	}
+
+	@Override
+	public Empresa updateHorarioAtencion(int idEmpresa, int inicio, int fin) {
+		Empresa empresa=null;
+
+		try {
+			empresa=empresaRepository.findById(idEmpresa).get();
+			empresa.setHorario_inicio(inicio);
+			empresa.setHorario_fin(fin);
+			empresa=empresaRepository.save(empresa);
+
+		}catch(Exception e) {
+			return empresa;
+		}
+		return empresa;
+	}
+
+	@Override
+	public Empresa updateTiempoEntrega(int idEmpresa, String tiempoAproximado) {
+		Empresa empresa=null;
+
+		try {
+			empresa=empresaRepository.findById(idEmpresa).get();
+			empresa.setTiempo_aproximado_entrega(tiempoAproximado);
+			empresa=empresaRepository.save(empresa);
+
+		}catch(Exception e) {
+			return empresa;
+		}
+		return empresa;
+	}
+
+	@Override
+	public Empresa updateDescripcion(Empresa empresa) {
+		Empresa empresaResult=null;
+
+		try {
+			empresaResult=empresaRepository.findById(empresa.getIdempresa()).get();
+			empresaResult.setDescripcion_empresa(empresa.getDescripcion_empresa());
+			empresaResult=empresaRepository.save(empresa);
+
+		}catch(Exception e) {
+			return empresaResult;
+		}
+		return empresaResult;
+	}
+
+
 
 }

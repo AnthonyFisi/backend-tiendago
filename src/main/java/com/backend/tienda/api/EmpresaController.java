@@ -42,6 +42,19 @@ public class EmpresaController {
 	public final static String FIND_BY_EMPRESA="/findByEmpresa/{idEmpresa}";
 	
 	public final static String UPDATE_DISPONIBILIDAD_EMPRESA="/updateDisponibilidad/{idEmpresa}/{disponibilidad}";
+	
+	
+	public final static String UPDATE_NUMERO_TELEFONO="/updateTelefono/{idEmpresa}/{numTelefono}";
+	
+	public final static String UPDATE_NUMERO_CELULAR="/updateCelular/{idEmpresa}/{numCelular}";
+
+	public final static String UPDATE_HORARIO_INICIO_FIN="/updateHorario/{idEmpresa}/{horarioInicio}/{horarioFin}";
+
+	public final static String UPDATE_TIEMPO_APROXIMADO="/updateTiempo/{idEmpresa}/{tiempo}";
+	
+	public final static String UPDATE_DESCRIPCION="/updateDescripcion";
+
+
 
 	
 	@Autowired
@@ -186,6 +199,99 @@ public class EmpresaController {
 
 	}
 	
+
+	@RequestMapping(value=UPDATE_NUMERO_TELEFONO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateTelefonoEmpresa(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("numTelefono")String numTelefono){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateTelefono(idEmpresa, numTelefono);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value=UPDATE_NUMERO_CELULAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateCelularEmpresa(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("numCelular")String numCelular){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateCelular(idEmpresa, numCelular);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value=UPDATE_HORARIO_INICIO_FIN, method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateHorarioEmpresa(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("horarioInicio")int horarioInicio,@PathVariable("horarioFin")int horarioFin){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateHorarioAtencion(idEmpresa, horarioInicio, horarioFin);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
+	
+	@RequestMapping(value=UPDATE_TIEMPO_APROXIMADO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateTiempoEmpresa(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("tiempo")String tiempo){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateTiempoEntrega(idEmpresa, tiempo);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
+	
+	
+
+	@RequestMapping(value=UPDATE_DESCRIPCION,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Empresa> updateDescripcionEmpresa(@RequestBody Empresa empresa){
+		
+		Empresa rpta=null;
+		
+		try {
+			rpta=empresaService.updateDescripcion(empresa);
+			
+		}catch(Exception e) 
+		{
+			System.out.println(e.getMessage());
+			return new ResponseEntity<Empresa>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
+
+	}
 	
 
 }
