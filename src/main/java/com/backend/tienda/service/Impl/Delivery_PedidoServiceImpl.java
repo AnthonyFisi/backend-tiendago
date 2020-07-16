@@ -20,10 +20,15 @@ public class Delivery_PedidoServiceImpl implements Delivery_PedidoService{
 		
 		Delivery_Pedido delivery=null;
 		
+		//delivery=delivery_PedidoRepository.findByidrepartidor(idRepartidor);
+
+		
 		try {
 			delivery=delivery_PedidoRepository.findByidrepartidor(idRepartidor);
 			
 		}catch(Exception e ) {
+			System.out.println(e.getMessage());
+			
 			return delivery;
 		}
 	
