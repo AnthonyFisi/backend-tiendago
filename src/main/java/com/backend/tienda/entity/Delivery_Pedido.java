@@ -47,6 +47,8 @@ public class Delivery_Pedido {
 	
 	private float costo_delivery;
 	
+	private int idestado_delivery;
+	
 	private boolean orden_disponible;
 	
 	private int idrepartidor;
@@ -142,6 +144,16 @@ public class Delivery_Pedido {
 
 	public void setVenta_costodelivery(float venta_costodelivery) {
 		this.venta_costodelivery = venta_costodelivery;
+	}
+
+	
+	
+	public int getIdestado_delivery() {
+		return idestado_delivery;
+	}
+
+	public void setIdestado_delivery(int idestado_delivery) {
+		this.idestado_delivery = idestado_delivery;
 	}
 
 	public float getVenta_costototal() {
