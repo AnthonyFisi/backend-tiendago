@@ -32,7 +32,6 @@ public class Delivery_Pedido {
 	
 	private int idpedido;
 	
-	
 	private float venta_costodelivery;
 	
     private String distancia_delivery;

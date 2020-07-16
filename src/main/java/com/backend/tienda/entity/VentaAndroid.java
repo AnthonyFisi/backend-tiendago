@@ -196,7 +196,7 @@ public class VentaAndroid {
 					1,
 					false,
 					"",
-					0
+					6
 				);
 		return venta;
 	}

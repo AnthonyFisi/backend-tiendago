@@ -19,6 +19,7 @@ import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.service.Orden_estado_deliveryService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
+import com.backend.tienda.service.VentaService;
 import com.pusher.rest.Pusher;
 
 @RestController
@@ -36,6 +37,10 @@ public class Orden_estado_deliveryController {
 	@Autowired
 	Orden_estado_deliveryService orden_estado_deliveryService;
 	
+	@Autowired
+	VentaService ventaService;
+	
+	
 	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
@@ -44,8 +49,9 @@ public class Orden_estado_deliveryController {
 	public ResponseEntity<Orden_estado_delivery> updateOrdenProces(@RequestBody Orden_estado_delivery orden,@PathVariable ("idUsuario") int idUsuario){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
-		
-		
+
+		Venta venta=null;
+
 		List<Orden_estado_delivery> listaOrden =null;
 		
 		Orden_estado_delivery ordenResult=null;
@@ -54,19 +60,23 @@ public class Orden_estado_deliveryController {
 	
 		try 
 		{
+		
+				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),orden.getId().getIdestado_delivery());
+ 
+				if(venta!=null) {
 					
-				ordenResult=orden_estado_deliveryService.saveState(orden);
+					ordenResult=orden_estado_deliveryService.saveState(orden);
+					
+					listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
+					
+				pusher.setCluster("us2");
+					
+				pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", listaOrden);
+					
 				
-				listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
+				}
 				
-				for(Orden_estado_delivery o:listaOrden) {
-					System.out.println(o.getId().getIdestado_delivery() + " / "+o.getId().getIdventa());
-				}	
-			pusher.setCluster("us2");
 				
-			pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", listaOrden);
-				
-			
 			
 		}catch(Exception e) {
 			return new ResponseEntity<Orden_estado_delivery>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);

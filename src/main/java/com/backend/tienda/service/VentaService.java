@@ -21,6 +21,8 @@ public interface VentaService {
 	Venta updateVentaCancelarPedido(int idVenta,String comentario);
 	
 	Venta getVenta(int idVenta);
+	
+	Venta updateDeliveryEstado(int idVenta,int idEstado_delivery);
 
 
 }
