@@ -109,6 +109,9 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 		 		"	icono_empresa ,comentario" +  
 		 		"   FROM  carrito WHERE idpedido = ?1   ",nativeQuery=true)
 		 List<ProductoJOINregistroPedidoJOINpedido> ventaFindByidPedido(int idpedido);
+	 
+	 
+	 
 
 	 
 

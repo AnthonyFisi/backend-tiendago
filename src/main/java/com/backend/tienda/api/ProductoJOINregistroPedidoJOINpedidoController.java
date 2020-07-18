@@ -29,7 +29,7 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	
 	public final static String LISTA_TOTAL_BY_USUARIO="/listaTotalByUsuario/{idusuario}";
 
-	public final static String LISTA_TOTAL_BY_USUARIO_2="/proof/{idusuario}";
+	public final static String LISTA_TOTAL_BY_USUARIO_2="/listaProductosAfterSell/{idPedido}";
 
 
 	
@@ -102,14 +102,14 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	}
 	
 	@RequestMapping(value=LISTA_TOTAL_BY_USUARIO_2,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> listaTotalByUsuarioProof(@PathVariable("idusuario")int idusuario){
+	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> listaTotalByUsuarioProof(@PathVariable("idPedido")int idPedido){
 		
 		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
 		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
 		
 		try {
 			
-			lista=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(idusuario);
+			lista=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(idPedido);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
 		}catch(Exception e) {

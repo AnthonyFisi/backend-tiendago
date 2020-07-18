@@ -155,4 +155,20 @@ Venta venta=null;
 		return venta;
 	}
 
+	@Override
+	public Venta updateDisponibilidad(int idVenta) {
+Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idVenta).get();
+			venta.setOrden_disponible(false);
+			venta=ventaRepository.save(venta);
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+	}
+
 }

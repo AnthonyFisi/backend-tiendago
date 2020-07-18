@@ -60,14 +60,23 @@ public class Orden_estado_deliveryController {
 	
 		try 
 		{
+				
 		
 				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),orden.getId().getIdestado_delivery());
  
 				if(venta!=null) {
 					
+					if(orden.getId().getIdestado_delivery() == 5) {
+						
+						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
+						
+					}
+						
+					
 					ordenResult=orden_estado_deliveryService.saveState(orden);
 					
 					listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
+					
 					
 				pusher.setCluster("us2");
 					
