@@ -19,6 +19,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"SELECT  idempresa," + 
 	 		"	idproducto," + 
 	 		"	producto_nombre," + 
+	 		"   producto_detalle , "+
 	 		"	producto_precio," + 
 	 		"	producto_uriimagen," + 
 	 		"	producto_calificacion," + 
@@ -43,6 +44,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"SELECT idempresa," + 
 	 		"	idproducto," + 
 	 		"	producto_nombre," + 
+	 		"   producto_detalle , "+
 	 		"	producto_precio," + 
 	 		"	producto_uriimagen," + 
 	 		"	producto_calificacion," + 
@@ -67,6 +69,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 	 		"SELECT DISTINCT ON (idempresa) idempresa," + 
 	 		"	idproducto," + 
 	 		"	producto_nombre," + 
+	 		"   producto_detalle , "+
 	 		"	producto_precio," + 
 	 		"	producto_uriimagen," + 
 	 		"	producto_calificacion," + 
@@ -91,6 +94,7 @@ public interface ProductoJOINregistroPedidoJOINpedidoRepository extends JpaRepos
 		 		"SELECT  idempresa," + 
 		 		"	idproducto," + 
 		 		"	producto_nombre," + 
+		 		"   producto_detalle , "+
 		 		"	producto_precio," + 
 		 		"	producto_uriimagen," + 
 		 		"	producto_calificacion," + 

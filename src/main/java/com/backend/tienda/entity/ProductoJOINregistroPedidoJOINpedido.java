@@ -21,6 +21,8 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	
 	private String producto_nombre;
 	
+	private String producto_detalle;
+	
 	private float producto_precio;
 	
 	private String producto_uriimagen;
@@ -223,18 +225,17 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	public void setPedido_cantidadtotal(int pedido_cantidadtotal) {
 		this.pedido_cantidadtotal = pedido_cantidadtotal;
 	}
+
+	public String getProducto_detalle() {
+		return producto_detalle;
+	}
+
+	public void setProducto_detalle(String producto_detalle) {
+		this.producto_detalle = producto_detalle;
+	}
 	
 	
 	
 	
-	
-	
-	
-	/*
-	 * p.idproducto,p.idempresa,p.producto_nombre,p.producto_precio,p.producto_uriimagen,p.producto_calificacion,p.producto_descuento,
-	 * p.producto_precio_descuento,
-	rp.registropedido_cantidadtotal,rp.registropedido_preciototal,
-	pe.idpedido
-	 * */
 
 }
