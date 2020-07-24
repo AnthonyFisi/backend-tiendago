@@ -20,7 +20,6 @@ public class Calificacion_Usuario {
 	
 	private int idventa;
 	
-	private int idtipo_usuario;
 	
 	private int idusuario;
 	
@@ -52,13 +51,7 @@ public class Calificacion_Usuario {
 		this.idventa = idventa;
 	}
 
-	public int getIdtipo_usuario() {
-		return idtipo_usuario;
-	}
-
-	public void setIdtipo_usuario(int idtipo_usuario) {
-		this.idtipo_usuario = idtipo_usuario;
-	}
+	
 
 	public int getIdusuario() {
 		return idusuario;

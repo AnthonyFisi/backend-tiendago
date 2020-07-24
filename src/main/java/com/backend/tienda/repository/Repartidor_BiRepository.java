@@ -7,7 +7,5 @@ import com.backend.tienda.entity.Repartidor_Bi;
 
 @Repository
 public interface Repartidor_BiRepository extends JpaRepository<Repartidor_Bi,Integer> {
-	
-	
 
 }

@@ -58,9 +58,9 @@ public class Delivery_Pedido {
 	
 	private int idusuario;
 	
-	private String usuario_nombre;
+	private String nombre;
 	
-	private String usuario_celular;
+	private String celular;
 	
 	private int idempresa;
 	
@@ -237,20 +237,22 @@ public class Delivery_Pedido {
 		this.idusuario = idusuario;
 	}
 
-	public String getUsuario_nombre() {
-		return usuario_nombre;
+	
+
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setUsuario_nombre(String usuario_nombre) {
-		this.usuario_nombre = usuario_nombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getUsuario_celular() {
-		return usuario_celular;
+	public String getCelular() {
+		return celular;
 	}
 
-	public void setUsuario_celular(String usuario_celular) {
-		this.usuario_celular = usuario_celular;
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	public int getIdempresa() {
