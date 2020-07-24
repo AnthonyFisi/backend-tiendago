@@ -19,11 +19,32 @@ public class RepartidorServiceImpl implements RepartidorService {
 		
 		try {
 			repartidor=repartidorRepository.findById(idRepartidor).get();
-			
+			return repartidor;
+
 		}catch(Exception e) {
 			return repartidor;
 		}
-		return repartidor;
+	}
+
+	@Override
+	public Repartidor updateDisponibilidad(int idRepartidor, boolean state) {
+
+        Repartidor repartidor =null;
+		
+		try {
+			
+			repartidor=repartidorRepository.findById(idRepartidor).get();
+			
+			repartidor.setDisponible(state);
+			
+			 return repartidorRepository.save(repartidor);
+			
+			
+		}catch(Exception e) {
+			
+			return repartidor;
+		}
+		
 	}
 	
 	

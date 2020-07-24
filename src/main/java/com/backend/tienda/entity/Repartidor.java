@@ -27,6 +27,9 @@ public class Repartidor {
 	private String detalles;
 	
 	private int idcuentarepartidor;
+	
+	private boolean disponible ;
+	
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -74,6 +77,14 @@ public class Repartidor {
 
 	public void setIdcuentarepartidor(int idcuentarepartidor) {
 		this.idcuentarepartidor = idcuentarepartidor;
+	}
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
 	}
 
 	

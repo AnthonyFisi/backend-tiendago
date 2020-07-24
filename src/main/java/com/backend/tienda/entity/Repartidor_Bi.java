@@ -44,6 +44,8 @@ public class Repartidor_Bi {
 	
 	private String imagen_vehiculo;
 
+	private String diponible;
+	
 	public int getIdusuario() {
 		return idusuario;
 	}
@@ -162,6 +164,14 @@ public class Repartidor_Bi {
 
 	public void setImagen_vehiculo(String imagen_vehiculo) {
 		this.imagen_vehiculo = imagen_vehiculo;
+	}
+
+	public String getDiponible() {
+		return diponible;
+	}
+
+	public void setDiponible(String diponible) {
+		this.diponible = diponible;
 	}
 	
 	
