@@ -44,7 +44,7 @@ public class Repartidor_Bi {
 	
 	private String imagen_vehiculo;
 
-	private String diponible;
+	private boolean diponible;
 	
 	public int getIdusuario() {
 		return idusuario;
@@ -166,13 +166,14 @@ public class Repartidor_Bi {
 		this.imagen_vehiculo = imagen_vehiculo;
 	}
 
-	public String getDiponible() {
+	public boolean isDiponible() {
 		return diponible;
 	}
 
-	public void setDiponible(String diponible) {
+	public void setDiponible(boolean diponible) {
 		this.diponible = diponible;
 	}
+
 	
 	
 	
