@@ -18,13 +18,15 @@ public class Repartidor {
 	@Column(name = "idrepartidor", updatable = false, nullable = false)
 	private int idrepartidor;
 	
-	private String nombre;
+	private String placa_vehiculo;
 	
-	private String url_imagen;
+	private String imagen_vehiculo;
 	
-	private String codigo;
+	private String tipo_brevete;
 	
-	private String telefono;
+	private String detalles;
+	
+	private int idcuentarepartidor;
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -34,39 +36,46 @@ public class Repartidor {
 		this.idrepartidor = idrepartidor;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getPlaca_vehiculo() {
+		return placa_vehiculo;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setPlaca_vehiculo(String placa_vehiculo) {
+		this.placa_vehiculo = placa_vehiculo;
 	}
 
-	public String getUrl_imagen() {
-		return url_imagen;
+	public String getImagen_vehiculo() {
+		return imagen_vehiculo;
 	}
 
-	public void setUrl_imagen(String url_imagen) {
-		this.url_imagen = url_imagen;
+	public void setImagen_vehiculo(String imagen_vehiculo) {
+		this.imagen_vehiculo = imagen_vehiculo;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getTipo_brevete() {
+		return tipo_brevete;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setTipo_brevete(String tipo_brevete) {
+		this.tipo_brevete = tipo_brevete;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public String getDetalles() {
+		return detalles;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
 	}
-	
-	
+
+	public int getIdcuentarepartidor() {
+		return idcuentarepartidor;
+	}
+
+	public void setIdcuentarepartidor(int idcuentarepartidor) {
+		this.idcuentarepartidor = idcuentarepartidor;
+	}
+
 	
 	
 
