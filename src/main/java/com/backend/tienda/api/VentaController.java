@@ -25,6 +25,9 @@ import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.PedidoService;
 import com.backend.tienda.service.Restaurante_PedidoService;
 import com.backend.tienda.service.VentaService;
+import com.backend.tienda.util.CalculatePriceDelivery;
+import com.backend.tienda.util.CalculatePriceRestaurante;
+import com.backend.tienda.util.CreateVenta;
 import com.pusher.rest.Pusher;
 
 @RestController
@@ -82,13 +85,9 @@ public class VentaController {
 		
 		try {
 			
-			respuesta=ventaService.registrarVenta(VentaAndroid.createVenta(ventaAndroid, respuestaPedido.getIdpedido()));
+			respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
 			
-			/*
-			 * 
-			 * FALTA CALCULAR LOS DATOS DE KILOMETROS ,TIEMPO RECORRIDO ,COSTO DPRO KM
-			 * ETC
-			 * */
+			
 			answerPedido=true;
 		
 			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
@@ -109,6 +108,7 @@ public class VentaController {
 			ordenService.registrarEstado(ordenEstado);
 			
 			//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			
 			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
 			pusher.setCluster("us2");
@@ -116,10 +116,6 @@ public class VentaController {
 			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 			
 
-			
-			
-			
-			/*EN EL FUTURO PODEMOS AGREGAR UN PUSHER PARA MANDAR A NOTIFICAR A LA APP DE RESTAURANTE */
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

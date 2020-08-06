@@ -28,7 +28,6 @@ public class Restaurante_PedidoModified {
 	private String nombre_estado;
 
 	
-	
 	private String comentario_pedido;
 	
 	private int idusuario;

@@ -11,8 +11,11 @@ import com.backend.tienda.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<Usuario, Long> {
+	
 	Optional<Usuario> findByNombre(String usuario_nombre);
 
+	Optional<Usuario> findByCorreo(String correo);
+	
 	Boolean existsByNombre(String usuario_nombre);
 
 	Boolean existsByCorreo(String usuario_correo);

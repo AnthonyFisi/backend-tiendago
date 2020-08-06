@@ -61,12 +61,12 @@ public class Venta {
 	private int idestado_delivery;
 
 	
-	public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
+	/*public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
 			Timestamp venta_fechaentrega, float venta_costodelivery, float venta_costototal, String comentario,
 			int idestado_venta, int idestado_pago, int idtipo_envio, String comentario_entrega,
 			float distancia_delivery, float costo_delivery, boolean orden_disponible, String tiempo_espera,
 			int idrepartidor,boolean cancelar,String comentario_cancelar,int idestado_delivery) {
-		super();
+		
 		this.idventa = idventa;
 		this.idtipopago = idtipopago;
 		this.idhorario = idhorario;
@@ -80,6 +80,7 @@ public class Venta {
 		this.idestado_venta = idestado_venta;
 		this.idestado_pago = idestado_pago;
 		this.idtipo_envio = idtipo_envio;
+		
 		this.comentario_entrega = comentario_entrega;
 		this.distancia_delivery = distancia_delivery;
 		this.costo_delivery = costo_delivery;
@@ -89,13 +90,13 @@ public class Venta {
 		this.cancelar=cancelar;
 		this.comentario_cancelar=comentario_cancelar;
 		this.idestado_delivery=idestado_delivery;
-	}
+	}*/
 	
+	public Venta() {}
 	
 	public String getComentario_cancelar() {
 		return comentario_cancelar;
 	}
-
 
 	public void setComentario_cancelar(String comentario_cancelar) {
 		this.comentario_cancelar = comentario_cancelar;
@@ -132,7 +133,6 @@ public class Venta {
 	public void setIdrepartidor(int idrepartidor) {
 		this.idrepartidor = idrepartidor;
 	}
-	public Venta() {}
 	public int getIdventa() {
 		return idventa;
 	}

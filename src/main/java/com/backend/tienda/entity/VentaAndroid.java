@@ -2,6 +2,10 @@ package com.backend.tienda.entity;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import com.backend.tienda.util.CalculatePriceDelivery;
+import com.backend.tienda.util.CalculatePriceRestaurante;
+
 import java.sql.Timestamp;
 
 public class VentaAndroid {
@@ -37,6 +41,7 @@ public class VentaAndroid {
 
 	private boolean repsuesta_registro_venta;	
 	
+
 
 	public int getIdEmpresa() {
 		return idEmpresa;
@@ -79,8 +84,6 @@ public class VentaAndroid {
 	}
 
 	
-	
-
 
 	public String getVenta_fecha() {
 		return venta_fecha;
@@ -155,8 +158,6 @@ public class VentaAndroid {
 	}
 	
 	
-	
-	
 	public boolean isRepsuesta_registro_venta() {
 		return repsuesta_registro_venta;
 	}
@@ -165,44 +166,8 @@ public class VentaAndroid {
 		this.repsuesta_registro_venta = repsuesta_registro_venta;
 	}
 
-	public static Venta createVenta(VentaAndroid ventaAndroid,int idPedido) {
-		
-		String newDate=ventaAndroid.getVenta_fechaentrega()+" 00:00:00.000";
-		
-		Timestamp ventaFecha=new Timestamp(System.currentTimeMillis());
-		Timestamp ventaFecha_entrega=Timestamp.valueOf(newDate);
-
-		
-		Venta venta= new Venta
-				(
-					0,
-					ventaAndroid.getIdtipopago(),
-					ventaAndroid.getIdhorario(),
-					ventaAndroid.getIdubicacion(),
-					idPedido,
-					ventaFecha,
-					ventaFecha_entrega,
-					ventaAndroid.getVenta_costodelivery(),
-					ventaAndroid.getVenta_costototal(),
-					ventaAndroid.getComentario(),
-					ventaAndroid.getIdestado_venta(),
-					ventaAndroid.getIdestado_pago(),
-					ventaAndroid.getIdtipo_envio(),
-					"",
-					0,
-					0,
-					true,
-					"20 minutos",
-					1,
-					false,
-					"",
-					6
-				);
-		return venta;
-	}
-
 	
-	
+
 	
 	
 	

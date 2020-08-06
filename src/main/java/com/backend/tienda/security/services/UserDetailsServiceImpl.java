@@ -14,14 +14,19 @@ import com.backend.tienda.repositorys.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+	
 	@Autowired
 	UserRepository userRepository;
 
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario user = userRepository.findByNombre(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+		
+		System.out.println("ENTRAMIS CON EL CORREO "+ correo);
+		
+		//Usuario user = userRepository.findByNombre(username)
+		Usuario user = userRepository.findByCorreo(correo)
+				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + correo));
 
 		return UserDetailsImpl.build(user);
 	}
