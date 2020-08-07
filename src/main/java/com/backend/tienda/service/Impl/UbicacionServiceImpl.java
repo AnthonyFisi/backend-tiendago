@@ -101,4 +101,10 @@ public class UbicacionServiceImpl implements UbicacionService{
 		return ubicacionRepository.findByIdusuario(idusuario);
 	}
 
+	@Override
+	public Ubicacion saveUbicacionFirstTime(Ubicacion ubicacion) {
+		
+		return ubicacionRepository.save(ubicacion);
+	}
+
 }

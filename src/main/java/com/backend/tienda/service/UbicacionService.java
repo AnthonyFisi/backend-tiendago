@@ -19,6 +19,8 @@ public interface UbicacionService {
 	boolean deleteUbicacion(int idubicacion);
 	
 	List<Ubicacion> findByIdUsuario(int idusuario);
+	
+	Ubicacion saveUbicacionFirstTime(Ubicacion ubicacion);
 
 
 }

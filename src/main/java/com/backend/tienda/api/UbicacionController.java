@@ -31,6 +31,8 @@ public class UbicacionController {
 	public final static String OBJETO_BY_IDUBICACION="/ObjetoByUbicacion/{idubicacion}";
 	
 	public final static String REGISTRAR="/registrar/{idOldUbicacion}";
+
+	public final static String REGISTRAR_FIRST_TIME="/registrarFirstTime";
 	
 	public final static String ACTUALIZAR_ESTADO="/updateEstadoUbicacion/{idOldUbicacion}/{idNewUbicacion}";
 	
@@ -62,6 +64,21 @@ public class UbicacionController {
 	
 	
 
+	@RequestMapping(value=REGISTRAR_FIRST_TIME,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Ubicacion>  registrarFirstTimeUbicacion(@RequestBody Ubicacion ubicacion){
+		
+		Ubicacion ubicacio=null;
+		
+		try {
+			ubicacio=ubicacionService.saveUbicacionFirstTime(ubicacion);
+			
+		}catch(Exception e) {
+			return new  ResponseEntity<Ubicacion>(ubicacio,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return new  ResponseEntity<Ubicacion>(ubicacio,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value=REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Ubicacion>  registrarUbicacion(@RequestBody Ubicacion ubicacion,@PathVariable("idOldUbicacion") int idOldUbicacion){
 		
