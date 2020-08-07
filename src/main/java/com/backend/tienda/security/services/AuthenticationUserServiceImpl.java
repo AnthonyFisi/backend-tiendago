@@ -1,5 +1,6 @@
 package com.backend.tienda.security.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.backend.tienda.entity.Ubicacion;
 import com.backend.tienda.payload.response.JwtResponse;
+import com.backend.tienda.repository.UbicacionRepository;
 import com.backend.tienda.security.jwt.JwtUtils;
 @Service
 public class AuthenticationUserServiceImpl implements AuthenticationUserService {
@@ -22,8 +25,14 @@ public class AuthenticationUserServiceImpl implements AuthenticationUserService 
 	@Autowired
 	JwtUtils jwtUtils;
 
+	@Autowired
+	UbicacionRepository ubicacionRepository;
+	
 	@Override
 	public JwtResponse jwtToken(String username,String password) {
+		
+		List<Ubicacion> lista=null;
+		int idubicacion=0;
 		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(username,password));
@@ -38,12 +47,28 @@ public class AuthenticationUserServiceImpl implements AuthenticationUserService 
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 		
+		try {
+			
+			lista=ubicacionRepository.findByIdusuario(userDetails.getId().intValue());
+
+		}catch(Exception e) {
+			
+			lista=new ArrayList<>();
+		}
+		
+		if(!lista.isEmpty()) {
+			idubicacion=lista.size();
+		}
 		
 		return new JwtResponse(jwt, 
 				 userDetails.getId(), 
 				 userDetails.getUsername(), 
 				 userDetails.getEmail(), 
-				 roles);
+				 roles,
+				 idubicacion
+				);
+		
+		
 
 		
 	}

@@ -96,4 +96,9 @@ public class UbicacionServiceImpl implements UbicacionService{
 		return respuesta;
 	}
 
+	@Override
+	public List<Ubicacion> findByIdUsuario(int idusuario) {
+		return ubicacionRepository.findByIdusuario(idusuario);
+	}
+
 }

@@ -10,6 +10,8 @@ public interface UbicacionRepository extends JpaRepository<Ubicacion,Integer>{
 	
 	List<Ubicacion> findByIdusuarioAndEliminado(int idusuario,boolean eliminado);
 	
+	List<Ubicacion> findByIdusuario(int idusuario);
+	
 	Ubicacion findByidubicacion(int idubicacion);
 	
 }

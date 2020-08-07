@@ -17,6 +17,8 @@ public interface UbicacionService {
 	boolean updateEstadoUbicacion(int idUbicacion,boolean estado);
 	
 	boolean deleteUbicacion(int idubicacion);
+	
+	List<Ubicacion> findByIdUsuario(int idusuario);
 
 
 }

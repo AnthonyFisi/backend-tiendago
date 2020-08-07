@@ -5,15 +5,12 @@ public class UsuarioInfo {
     
     private String nombre;
 
+    private String apellido;
     
     private String correo;
-
     
     private String celular;
-
-    
-    private String tipoAuth;
-    
+        
     private String foto;
 
     public String getNombre() {
@@ -40,13 +37,7 @@ public class UsuarioInfo {
         this.celular = celular;
     }
 
-    public String getTipoAuth() {
-        return tipoAuth;
-    }
-
-    public void setTipoAuth(String tipoAuth) {
-        this.tipoAuth = tipoAuth;
-    }
+  
 
 	public String getFoto() {
 		return foto;
@@ -54,6 +45,14 @@ public class UsuarioInfo {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
     
     

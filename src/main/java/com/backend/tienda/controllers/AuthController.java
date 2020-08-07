@@ -153,7 +153,7 @@ public class AuthController {
 	
 	
 	@PostMapping("/signupProvider")
-	public ResponseEntity<?> registerUserProvider(@Valid @RequestBody UsuarioInfo usuarioInfo) {
+	public ResponseEntity<?> registerUserProvider(@RequestBody UsuarioInfo usuarioInfo) {
 				
 		Usuario usuario=null;
 		
@@ -172,7 +172,7 @@ public class AuthController {
 		Usuario user = new Usuario(usuarioInfo.getNombre(), 
 							usuarioInfo.getCorreo().trim(),
 							 encoder.encode("provedor"),
-							 "",
+							 usuarioInfo.getApellido(),
 							 usuarioInfo.getCelular(),
 							 usuarioInfo.getFoto(),
 							 1);
