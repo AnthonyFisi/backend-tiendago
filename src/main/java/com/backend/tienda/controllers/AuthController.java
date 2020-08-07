@@ -1,6 +1,7 @@
 package com.backend.tienda.controllers;
 
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Cliente;
+import com.backend.tienda.entity.Cuenta_Usuario;
 import com.backend.tienda.entity.Roles;
 import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.entity.UsuarioInfo;
@@ -38,6 +41,8 @@ import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.security.jwt.JwtUtils;
 import com.backend.tienda.security.services.AuthenticationUserService;
 import com.backend.tienda.security.services.UserDetailsImpl;
+import com.backend.tienda.service.ClienteService;
+import com.backend.tienda.service.Cuenta_UsuarioService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 
@@ -62,6 +67,12 @@ public class AuthController {
 	
 	@Autowired
 	AuthenticationUserService authenticationUserService;
+	
+	@Autowired
+	ClienteService clienteService;
+	
+	@Autowired
+	Cuenta_UsuarioService cuenta_UsuarioService;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -144,6 +155,8 @@ public class AuthController {
 	@PostMapping("/signupProvider")
 	public ResponseEntity<?> registerUserProvider(@Valid @RequestBody UsuarioInfo usuarioInfo) {
 				
+		Usuario usuario=null;
+		
 		
 		String default_password="provedor";
 		
@@ -166,37 +179,39 @@ public class AuthController {
 		
 		
 
-		Set<String> strRoles =new HashSet<String>();
-		strRoles.add("cliente");
+		
 		
 		Set<Roles> roles = new HashSet<>();
-
 		
-		strRoles.forEach(role -> {
-			switch (role) {
-			case "cliente":
-				Roles cliRole = roleRepository.findByNombre(ERole.ROLE_CLIENTE)
-						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-				roles.add(cliRole);
-
-				break;
-			case "empresa":
-				Roles empRole = roleRepository.findByNombre(ERole.ROLE_EMPRESA_ASOCIADA)
-						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-				roles.add(empRole);
-
-				break;
-			case "motorizado":
-				Roles motoRole = roleRepository.findByNombre(ERole.ROLE_MOTORIZADO)
-						.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-				roles.add(motoRole);
-				break;
-					
-			}
-		});
-
+		Roles cliRole = roleRepository.findByNombre(ERole.ROLE_CLIENTE)
+				.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+		roles.add(cliRole);
+		
+	
 		user.setRoles(roles);
-		userRepository.save(user);
+		//CREANDO EN LA TABLA DE USUARIO
+		usuario=userRepository.save(user);
+		
+		//CREANDO EN LA TABLA DE CLIENTE
+		
+		Cliente createCliente=new Cliente();
+		createCliente.setIdcliente(0);
+		createCliente.setIdusuario(usuario.getIdusuario().intValue());
+		
+		clienteService.saveCliente(createCliente);
+		
+		
+		//CREANDO EN LA TABLA DE CUENTA_USUARIO
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+
+		Cuenta_Usuario createCuenta_Usuario= new Cuenta_Usuario();
+		createCuenta_Usuario.setIdcuentausuario(0);
+		createCuenta_Usuario.setActiva(true);
+		createCuenta_Usuario.setFecharegistro(time);
+		createCuenta_Usuario.setIdtipocuenta(1);
+		createCuenta_Usuario.setIdusuario(usuario.getIdusuario().intValue());
+		
+		cuenta_UsuarioService.saveCuenta_Usuario(createCuenta_Usuario);
 		
 		JwtResponse jwt=authenticationUserService.jwtToken(usuarioInfo.getCorreo(),default_password);
 		
