@@ -1,5 +1,6 @@
 package com.backend.tienda.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Empresa;
 import com.backend.tienda.gson.EmpresaGson;
 import com.backend.tienda.service.EmpresaService;
+import com.backend.tienda.util.HaversineDistanceDelivery;
 
 @RestController
 @RequestMapping(EmpresaController.EMPRESA_CONTROLLER)
@@ -83,17 +85,32 @@ public class EmpresaController {
 	}
 	
 	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_UBICACION,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacion(@PathVariable("idCategoria") int idCategoria,@PathVariable("Ubicacion")String Ubicacion){
+	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacion(@PathVariable("idCategoria") int idCategoria
+			,@PathVariable("Ubicacion")String Ubicacion){
+		
+		List<Empresa> listaEmpresaCerca=new ArrayList<>();
 		
 		EmpresaGson empresaGson =null;
+		
 		List<Empresa> lista=null;
 		
 		
 		try {
-			lista=empresaService.listaEmpresaFindByIdCategoriaAndUbicacion(idCategoria, Ubicacion);
+			
+			lista=empresaService.listaEmpresaIdCategoria(idCategoria);
+			listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion);
+			
+			
 			empresaGson=new EmpresaGson();
-			empresaGson.setListaEmpresa(lista);
-		}catch(Exception e) 
+			empresaGson.setListaEmpresa(listaEmpresaCerca);
+			
+			
+		
+		
+		}
+		
+		catch(Exception e) 
+		
 		{
 			return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.INTERNAL_SERVER_ERROR);
 		}

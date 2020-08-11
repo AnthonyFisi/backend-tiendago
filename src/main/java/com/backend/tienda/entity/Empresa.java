@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="empresa")
+@Table(name="empresa_bi")
 
 public class Empresa{
 
@@ -19,6 +19,8 @@ public class Empresa{
 	private int idempresa;
 	
 	private int idsubcategoriaempresa;
+	 
+	private String nombre_subcategoria; 
 	
 	private String nombre_empresa;
 	
@@ -38,7 +40,7 @@ public class Empresa{
 	
 	private int idcuentaempresa;
 	
-	private double porcentaje_popularidad;
+	private double popularidad;
 
 	private boolean cuenta_delivery;
 	
@@ -85,6 +87,15 @@ public class Empresa{
 
 	private boolean disponible;
 	
+	private int idusuario;
+	
+	private int idcategoriaempresa;
+	
+	private String nombre_categoria;
+	
+	private boolean marketplace;
+	
+	private boolean socio;
 	
 	
 	
@@ -240,13 +251,14 @@ public class Empresa{
 		this.idcuentaempresa = idcuentaempresa;
 	}
 
-	public double getPorcentaje_popularidad() {
-		return porcentaje_popularidad;
+	public double getPopularidad() {
+		return popularidad;
 	}
 
-	public void setPorcentaje_popularidad(double porcentaje_popularidad) {
-		this.porcentaje_popularidad = porcentaje_popularidad;
+	public void setPopularidad(double popularidad) {
+		this.popularidad = popularidad;
 	}
+	
 
 	public int getHorario_inicio() {
 		return horario_inicio;
@@ -350,6 +362,58 @@ public class Empresa{
 
 	public void setDetalle_ubicacion(String detalle_ubicacion) {
 		this.detalle_ubicacion = detalle_ubicacion;
+	}
+
+	public String getNombre_subcategoria() {
+		return nombre_subcategoria;
+	}
+
+	public void setNombre_subcategoria(String nombre_subcategoria) {
+		this.nombre_subcategoria = nombre_subcategoria;
+	}
+
+	public int getIdusuario() {
+		return idusuario;
+	}
+
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
+	}
+
+	public int getIdcategoriaempresa() {
+		return idcategoriaempresa;
+	}
+
+	public void setIdcategoriaempresa(int idcategoriaempresa) {
+		this.idcategoriaempresa = idcategoriaempresa;
+	}
+
+	public String getNombre_categoria() {
+		return nombre_categoria;
+	}
+
+	public void setNombre_categoria(String nombre_categoria) {
+		this.nombre_categoria = nombre_categoria;
+	}
+
+	public boolean isMarketplace() {
+		return marketplace;
+	}
+
+	public void setMarketplace(boolean marketplace) {
+		this.marketplace = marketplace;
+	}
+
+	public boolean isSocio() {
+		return socio;
+	}
+
+	public void setSocio(boolean socio) {
+		this.socio = socio;
+	}
+
+	public void setProductospopulares(String productospopulares) {
+		this.productospopulares = productospopulares;
 	}
 
 

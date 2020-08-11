@@ -3,6 +3,7 @@ package com.backend.tienda.service.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.backend.tienda.entity.Empresa;
@@ -17,23 +18,29 @@ public class EmpresaServiceImpl  implements EmpresaService{
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria) {
-		return empresaRepository.listaEmpresaFindByIdSubCategoria(idSubCategoria);
+	//	return empresaRepository.listaEmpresaFindByIdSubCategoria(idSubCategoria);
+		return null;
 	}
 
 	@Override
-	public List<Empresa> listaEmpresaFindByIdCategoriaAndUbicacion(int idCategoria, String Ubicacion) {
-		return empresaRepository.listaEmpresaFindByIdCategoriaAnddireccion(idCategoria, Ubicacion);
+	public List<Empresa> listaEmpresaIdCategoria( int idCategoria) {
+	
+		//CARGAMOS TODOS LOS DATOS DE LAS EMPRESAS 
+		return empresaRepository.findByIdcategoriaempresa(idCategoria);
+	
 	}
 
 	@Override
 	public List<Empresa> listaEmpresaSortByBusquedaRating(int idCategoria) {
-		return empresaRepository.listaEmpresaSortByBusquedaRating(idCategoria);
+		return empresaRepository.findByIdcategoriaempresaOrderByPopularidadAsc(idCategoria);
+
 	}
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion(int idSubCategoria, String Ubicacion) {
 
-		return empresaRepository.listaEmpresaFindByIdSubCategoriaAnddireccion(idSubCategoria, Ubicacion);
+		//return empresaRepository.listaEmpresaFindByIdSubCategoriaAnddireccion(idSubCategoria, Ubicacion);
+		return null;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.backend.tienda.entity.Empresa;
 import com.google.type.LatLng;
 
 
@@ -31,9 +32,10 @@ import com.google.type.LatLng;
  * arg 3 — longitude 1
  * arg 4 — longitude 2
  */
-public class HaversineDistance {
+public class HaversineDistanceDelivery {
 
-	
+	//DISTANCIA BASE PARA ENCONTRAR LUGARES CERCANOS
+	private static double distanciaCerca=3000;
 	
 	public static double calculateDistance(List<Double> point1,List<Double> point2) {
 
@@ -141,6 +143,41 @@ public class HaversineDistance {
             
             return listaTiempoDistancia;
         }
+		
+	}
+	
+	
+	
+	
+	
+	
+	public static List<Empresa> calculateDistance(List<Empresa> lista,String ubicacionCliente) {
+		
+		List<Empresa> listaCerca=new ArrayList<>();
+		
+		//VAMOS A CALCULAR LA DISTANCIA QUE EXISTE
+		for(int i=0;i<=lista.size();i++) {
+			
+				
+		List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(ubicacionCliente);
+		
+		String coordenada=lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y();
+		
+		
+		List<Double> point2=HaversineDistanceDelivery.convertStringToPoint(coordenada);
+		
+		double distancia=HaversineDistanceDelivery.calculateDistance(point1, point2);
+		
+
+		//EVALUAR SI EL LUGAR ESTA EN EL RADIO ADECUADO
+		
+		if(distanciaCerca>distancia) {
+			listaCerca.add(lista.get(i));
+		}
+		
+	}
+		
+		return listaCerca;
 		
 	}
 

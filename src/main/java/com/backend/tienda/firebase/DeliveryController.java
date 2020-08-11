@@ -18,7 +18,7 @@ import com.backend.tienda.gson.Delivery_PedidoGson;
 import com.backend.tienda.gson.Restaurante_PedidoGson;
 import com.backend.tienda.util.CalculatePriceDelivery;
 import com.backend.tienda.util.GoogleMapsApi;
-import com.backend.tienda.util.HaversineDistance;
+import com.backend.tienda.util.HaversineDistanceDelivery;
 import com.pusher.rest.Pusher;
 
 @RequestMapping(DeliveryController.DIRECCION)
@@ -70,18 +70,18 @@ public class DeliveryController {
 				
 				//REALIZAR LA TRANSFORMACION DE STRING A DOUBLE LAS COORDENADAS
 				
-				List<Double> point1=HaversineDistance.convertStringToPoint(data.getLocation());
+				List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(data.getLocation());
 				
 				String coordenada=pedido.getDelivery_information().getEmpresa_coordenada_x()+","+pedido.getDelivery_information().getEmpresa_coordenada_y();
 				
-				List<Double> point2=HaversineDistance.convertStringToPoint(coordenada);
+				List<Double> point2=HaversineDistanceDelivery.convertStringToPoint(coordenada);
 				
-				double distancia=HaversineDistance.calculateDistance(point1, point2);
+				double distancia=HaversineDistanceDelivery.calculateDistance(point1, point2);
 				
 				
 				//CALCULAR EN LA FUNCION EVALUADORA PARA GENERAR EL MEJOR RECOMENDADO
 				
-				double puntuacion=HaversineDistance.funcionEvaluadora(data.getFrecuencia(),data.getPedido(),data.getCalificacion(),data.getHora(),distancia);
+				double puntuacion=HaversineDistanceDelivery.funcionEvaluadora(data.getFrecuencia(),data.getPedido(),data.getCalificacion(),data.getHora(),distancia);
 				
 
 				//EVALUAR QUE PUNTUACION ES LA MAS RECOMENDABLE
@@ -96,11 +96,11 @@ public class DeliveryController {
 			}
 			
 			//CALCULAR LAS NUEVAS COORDENADS GPS
-			List<Double> point1=HaversineDistance.convertStringToPoint(lista.get(positionElegida).getLocation());
+			List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(lista.get(positionElegida).getLocation());
 			
 			String coordenada=pedido.getDelivery_information().getEmpresa_coordenada_x()+","+pedido.getDelivery_information().getEmpresa_coordenada_y();
 			
-			List<Double> point2=HaversineDistance.convertStringToPoint(coordenada);
+			List<Double> point2=HaversineDistanceDelivery.convertStringToPoint(coordenada);
 
 			
 				
@@ -113,7 +113,7 @@ public class DeliveryController {
 				// OBTENER EL TIEMPO Y LA DISTANCIA DE DE GOOGLEMAPS API
 				
 				
-				HashMap<String,String> distancia_tiempo=HaversineDistance.calculateDistanceAndTime(data);
+				HashMap<String,String> distancia_tiempo=HaversineDistanceDelivery.calculateDistanceAndTime(data);
 				
 				
 				Double distancia_1=CalculatePriceDelivery.transformDistancia(pedido.getDelivery_information().getDistancia_delivery());
