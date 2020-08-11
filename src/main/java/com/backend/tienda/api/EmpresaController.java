@@ -93,27 +93,16 @@ public class EmpresaController {
 		EmpresaGson empresaGson =null;
 		
 		List<Empresa> lista=null;
-		
-		
-		try {
 			
 			lista=empresaService.listaEmpresaIdCategoria(idCategoria);
+		
 			listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion);
 			
-			
+		
 			empresaGson=new EmpresaGson();
+			
 			empresaGson.setListaEmpresa(listaEmpresaCerca);
 			
-			
-		
-		
-		}
-		
-		catch(Exception e) 
-		
-		{
-			return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 		
 		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
 

@@ -156,16 +156,15 @@ public class HaversineDistanceDelivery {
 		List<Empresa> listaCerca=new ArrayList<>();
 		
 		//VAMOS A CALCULAR LA DISTANCIA QUE EXISTE
-		for(int i=0;i<=lista.size();i++) {
-			
+		for(int i=0;i<lista.size();i++) {
 				
-		List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(ubicacionCliente);
-		
+		List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(ubicacionCliente);	
+	
 		String coordenada=lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y();
-		
-		
+				
 		List<Double> point2=HaversineDistanceDelivery.convertStringToPoint(coordenada);
 		
+
 		double distancia=HaversineDistanceDelivery.calculateDistance(point1, point2);
 		
 
