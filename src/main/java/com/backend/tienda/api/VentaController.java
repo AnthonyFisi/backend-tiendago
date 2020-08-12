@@ -96,6 +96,7 @@ public class VentaController {
 			ventaAndroidAnswer.setRepsuesta_registro_venta(true);
 			Timestamp time=new Timestamp(System.currentTimeMillis());
 
+			
 			Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
 			Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
 			pk.setIdventa(respuesta.getIdventa());
@@ -109,11 +110,11 @@ public class VentaController {
 			
 			//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 			
-			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			/*Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
 			pusher.setCluster("us2");
 			
-			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
+			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);*/
 			
 
 			
