@@ -1,5 +1,7 @@
 package com.backend.tienda.api;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.MainPedido;
 import com.backend.tienda.entity.Orden;
+import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
 import com.backend.tienda.gson.OrdenGson;
 import com.backend.tienda.service.OrdenService;
@@ -35,10 +38,11 @@ public class OrdenController {
 		
 		List<Orden> lista=null;
 		OrdenGson ordenGson=null;
+
 		
 		try {
 			
-			lista=ordenService.ordenDisponible(6, 7	,3, idUsuario);
+			lista=ordenService.ordenDisponible(idUsuario);
 			ordenGson=new OrdenGson();
 			ordenGson.setListaOrden(lista);
 			

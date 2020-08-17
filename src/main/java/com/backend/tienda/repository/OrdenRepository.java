@@ -1,5 +1,6 @@
 package com.backend.tienda.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,7 +13,7 @@ import com.backend.tienda.entity.Orden;
 public interface OrdenRepository extends JpaRepository<Orden,Integer>{
 	
 	
-	@Query(value="SELECT    	" + 
+	/*@Query(value="SELECT    	" + 
 			"			idempresa," + 
 			"			nombre_empresa," + 
 			"			celular_empresa," + 
@@ -28,6 +29,11 @@ public interface OrdenRepository extends JpaRepository<Orden,Integer>{
 			"					idestado_pago,nombre_estado"
 			+ "     FROM orden "
 			+ "    WHERE idestado_venta<> ?1  AND  idestado_venta<> ?2 AND  idestado_venta<> ?3 AND idusuario= ?4 ",nativeQuery=true)
-	List<Orden> findByidestadoventaNotAndidestadoventaNotAndidestadoventaNotAndidusario(int idestado1,int idestado2,int idestado3,int idusuario);
+	List<Orden> findByidestadoventaNotAndidestadoventaNotAndidestadoventaNotAndidusario(int idestado1,int idestado2,int idestado3,int idusuario);*/
+	
+	List<Orden> findByIdusuarioAndOrdendisponibleAndVentafechaLessThanEqual(int idusuario,boolean disponible,Timestamp fecha);
+	
+	
+
 
 }

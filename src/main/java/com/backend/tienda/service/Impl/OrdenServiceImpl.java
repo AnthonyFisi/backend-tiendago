@@ -1,5 +1,10 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.*;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +21,25 @@ public class OrdenServiceImpl implements OrdenService{
 	OrdenRepository ordenRepository;
 	
 	@Override
-	public List<Orden> ordenDisponible(int idestado1, int idestado2, int idestado3, int idusuario) {
-		return ordenRepository.findByidestadoventaNotAndidestadoventaNotAndidestadoventaNotAndidusario(idestado1, idestado2, idestado3, idusuario);
+	public List<Orden> ordenDisponible(int idusuario) {
+
+          
+  		Timestamp time=new Timestamp(System.currentTimeMillis());
+  		Timestamp timeStampDate = null;
+         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+          // you can change format of date
+         Date date;
+		try {
+			date = formatter.parse(time.toString());
+	         timeStampDate = new Timestamp(date.getTime());
+	         System.out.println(timeStampDate.toString()+"La fecha de ohy");
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         
+		return ordenRepository.findByIdusuarioAndOrdendisponibleAndVentafechaLessThanEqual(idusuario,true,timeStampDate);
 	}
 
 }

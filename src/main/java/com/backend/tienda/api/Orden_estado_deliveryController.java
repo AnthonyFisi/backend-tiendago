@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Orden_estado_delivery;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
+import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.entity.Venta;
+import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.VentaService;
@@ -39,6 +41,9 @@ public class Orden_estado_deliveryController {
 	
 	@Autowired
 	VentaService ventaService;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	
 	
@@ -71,6 +76,10 @@ public class Orden_estado_deliveryController {
 						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
 						
 					}
+					
+					
+					//AÑADIR UN METODO PARA AGREGAR EL ESTADO DE LLEGAR A PUNTO DESTINO ,TODO ESTO EN LA TABLA "orden_estado_venta"
+					//COMPLETAR
 						
 					
 					ordenResult=orden_estado_deliveryService.saveState(orden);
@@ -78,9 +87,21 @@ public class Orden_estado_deliveryController {
 					listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
 					
 					
-				pusher.setCluster("us2");
+					if(orden.getId().getIdestado_delivery()==1) {
+						
+						Usuario usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
+						
+						usuario.setContrasena("");
+						
+						usuario.setRoles(null);
+						
+						pusher.setCluster("us2");
+						
+						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);
+						
+					}
 					
-				pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", listaOrden);
+				
 					
 				
 				}

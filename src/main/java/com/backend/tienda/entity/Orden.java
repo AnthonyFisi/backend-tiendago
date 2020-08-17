@@ -1,13 +1,20 @@
 package com.backend.tienda.entity;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name="orden")
@@ -57,7 +64,7 @@ public class Orden {
 	private String maps_coordenada_y;
 	
 	
-	private Timestamp venta_fecha;
+	private Timestamp ventafecha;
 	
 	private Timestamp venta_fechaentrega;
 	
@@ -78,6 +85,39 @@ public class Orden {
 	private int idestado_pago;
 	
 	private String nombre_estado;
+	
+	//NUEVA DATA 
+	private boolean ordendisponible;
+	
+	private String tiempo_espera;
+	
+	private boolean cancelar;
+
+	private int idtipo_envio;
+	
+	private String nombre_tipo_envio;
+	
+    private int idrepartidor;
+	
+	private String placa_vehiculo;
+	
+	private String imagen_vehiculo;
+	
+	private Long idusuariorepartidor;
+
+	private String nombre;
+	
+	@Email
+	private String correo;	
+	
+	private String apellido;
+	
+	
+	private String celular;
+	
+	
+	private String foto;
+	
 
 	public int getIdempresa() {
 		return idempresa;
@@ -239,13 +279,7 @@ public class Orden {
 		this.idventa = idventa;
 	}
 
-	public Timestamp getVenta_fecha() {
-		return venta_fecha;
-	}
 
-	public void setVenta_fecha(Timestamp venta_fecha) {
-		this.venta_fecha = venta_fecha;
-	}
 
 	public Timestamp getVenta_fechaentrega() {
 		return venta_fechaentrega;
@@ -325,6 +359,129 @@ public class Orden {
 
 	public void setNombre_estado(String nombre_estado) {
 		this.nombre_estado = nombre_estado;
+	}
+
+	
+
+	public String getTiempo_espera() {
+		return tiempo_espera;
+	}
+
+	public void setTiempo_espera(String tiempo_espera) {
+		this.tiempo_espera = tiempo_espera;
+	}
+
+	public boolean isCancelar() {
+		return cancelar;
+	}
+
+	public void setCancelar(boolean cancelar) {
+		this.cancelar = cancelar;
+	}
+
+	public int getIdtipo_envio() {
+		return idtipo_envio;
+	}
+
+	public void setIdtipo_envio(int idtipo_envio) {
+		this.idtipo_envio = idtipo_envio;
+	}
+
+	public String getNombre_tipo_envio() {
+		return nombre_tipo_envio;
+	}
+
+	public void setNombre_tipo_envio(String nombre_tipo_envio) {
+		this.nombre_tipo_envio = nombre_tipo_envio;
+	}
+
+	public int getIdrepartidor() {
+		return idrepartidor;
+	}
+
+	public void setIdrepartidor(int idrepartidor) {
+		this.idrepartidor = idrepartidor;
+	}
+
+	public String getPlaca_vehiculo() {
+		return placa_vehiculo;
+	}
+
+	public void setPlaca_vehiculo(String placa_vehiculo) {
+		this.placa_vehiculo = placa_vehiculo;
+	}
+
+	public String getImagen_vehiculo() {
+		return imagen_vehiculo;
+	}
+
+	public void setImagen_vehiculo(String imagen_vehiculo) {
+		this.imagen_vehiculo = imagen_vehiculo;
+	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Timestamp getVentafecha() {
+		return ventafecha;
+	}
+
+	public void setVentafecha(Timestamp ventafecha) {
+		this.ventafecha = ventafecha;
+	}
+
+	public boolean isOrdendisponible() {
+		return ordendisponible;
+	}
+
+	public void setOrdendisponible(boolean ordendisponible) {
+		this.ordendisponible = ordendisponible;
+	}
+
+	public Long getIdusuariorepartidor() {
+		return idusuariorepartidor;
+	}
+
+	public void setIdusuariorepartidor(Long idusuariorepartidor) {
+		this.idusuariorepartidor = idusuariorepartidor;
 	}
 	
 	

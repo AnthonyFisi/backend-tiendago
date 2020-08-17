@@ -26,7 +26,7 @@ public class Repartidor {
 	
 	private String detalles;
 	
-	private int idcuentarepartidor;
+	private int idusuario;
 	
 	private boolean disponible ;
 	
@@ -71,12 +71,14 @@ public class Repartidor {
 		this.detalles = detalles;
 	}
 
-	public int getIdcuentarepartidor() {
-		return idcuentarepartidor;
+	
+
+	public int getIdusuario() {
+		return idusuario;
 	}
 
-	public void setIdcuentarepartidor(int idcuentarepartidor) {
-		this.idcuentarepartidor = idcuentarepartidor;
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
 	}
 
 	public boolean isDisponible() {
