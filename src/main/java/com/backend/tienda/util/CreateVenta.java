@@ -41,7 +41,7 @@ public class CreateVenta {
 		venta.setVenta_costodelivery(precioGanancia);
 		venta.setVenta_costototal(ventaAndroid.getVenta_costototal());
 		venta.setComentario(ventaAndroid.getComentario());
-		venta.setIdestado_venta(ventaAndroid.getIdestado_venta());
+		venta.setIdestado_venta(1);
 		venta.setIdestado_pago(ventaAndroid.getIdestado_pago());
 		venta.setIdtipo_envio(ventaAndroid.getIdtipo_envio());
 		venta.setComentario_entrega("");

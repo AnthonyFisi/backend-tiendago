@@ -19,9 +19,9 @@ public class VentaAndroid {
 	
 	private int idubicacion;
 	
-	private int idpedido;
+	//private int idpedido;
 	
-	private String venta_fecha;
+	//private String venta_fecha;
 	
 	private String venta_fechaentrega;
 	
@@ -31,7 +31,7 @@ public class VentaAndroid {
 	
 	private String comentario;
 	
-	private int idestado_venta;
+	//private int idestado_venta;
 	
 	private int idestado_pago;
 	
@@ -75,23 +75,6 @@ public class VentaAndroid {
 		this.idubicacion = idubicacion;
 	}
 
-	public int getIdpedido() {
-		return idpedido;
-	}
-
-	public void setIdpedido(int idpedido) {
-		this.idpedido = idpedido;
-	}
-
-	
-
-	public String getVenta_fecha() {
-		return venta_fecha;
-	}
-
-	public void setVenta_fecha(String venta_fecha) {
-		this.venta_fecha = venta_fecha;
-	}
 
 	public String getVenta_fechaentrega() {
 		return venta_fechaentrega;
@@ -125,13 +108,7 @@ public class VentaAndroid {
 		this.comentario = comentario;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
-	}
-
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
-	}
+	
 
 	public int getIdestado_pago() {
 		return idestado_pago;
