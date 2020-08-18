@@ -97,27 +97,8 @@ public class Orden {
 	
 	private String nombre_tipo_envio;
 	
-    private int idrepartidor;
-	
-	private String placa_vehiculo;
-	
-	private String imagen_vehiculo;
-	
-	private Long idusuariorepartidor;
-
-	private String nombre;
-	
-	@Email
-	private String correo;	
-	
-	private String apellido;
-	
-	
-	private String celular;
-	
-	
-	private String foto;
-	
+	private int idrepartidor;
+   
 
 	public int getIdempresa() {
 		return idempresa;
@@ -395,70 +376,6 @@ public class Orden {
 		this.nombre_tipo_envio = nombre_tipo_envio;
 	}
 
-	public int getIdrepartidor() {
-		return idrepartidor;
-	}
-
-	public void setIdrepartidor(int idrepartidor) {
-		this.idrepartidor = idrepartidor;
-	}
-
-	public String getPlaca_vehiculo() {
-		return placa_vehiculo;
-	}
-
-	public void setPlaca_vehiculo(String placa_vehiculo) {
-		this.placa_vehiculo = placa_vehiculo;
-	}
-
-	public String getImagen_vehiculo() {
-		return imagen_vehiculo;
-	}
-
-	public void setImagen_vehiculo(String imagen_vehiculo) {
-		this.imagen_vehiculo = imagen_vehiculo;
-	}
-
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
 
 	public Timestamp getVentafecha() {
 		return ventafecha;
@@ -476,14 +393,15 @@ public class Orden {
 		this.ordendisponible = ordendisponible;
 	}
 
-	public Long getIdusuariorepartidor() {
-		return idusuariorepartidor;
+	public int getIdrepartidor() {
+		return idrepartidor;
 	}
 
-	public void setIdusuariorepartidor(Long idusuariorepartidor) {
-		this.idusuariorepartidor = idusuariorepartidor;
+	public void setIdrepartidor(int idrepartidor) {
+		this.idrepartidor = idrepartidor;
 	}
-	
+
+
 	
 	
 	
