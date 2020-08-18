@@ -39,7 +39,7 @@ public class OrdenServiceImpl implements OrdenService{
 			e.printStackTrace();
 		}
          
-		return ordenRepository.findByIdusuarioAndOrdendisponibleAndVentafechaLessThanEqual(idusuario,true,timeStampDate);
+		return ordenRepository.findByIdusuarioAndOrdendisponibleAndVentafechaGreaterThanEqual(idusuario,true,timeStampDate);
 	}
 
 }
