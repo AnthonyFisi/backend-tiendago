@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Orden_estado_delivery;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
+import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
+import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.VentaService;
 import com.pusher.rest.Pusher;
 
@@ -45,7 +47,8 @@ public class Orden_estado_deliveryController {
 	@Autowired
 	UserRepository userRepository;
 	
-	
+	@Autowired
+	RepartidorService repartidorService;
 	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
@@ -89,7 +92,11 @@ public class Orden_estado_deliveryController {
 					
 					if(orden.getId().getIdestado_delivery()==1) {
 						
-						Usuario usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
+						
+						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor();
+
+						
+						Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
 						
 						usuario.setContrasena("");
 						
