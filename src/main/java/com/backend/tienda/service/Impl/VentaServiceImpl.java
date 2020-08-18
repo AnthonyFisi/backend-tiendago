@@ -140,12 +140,13 @@ Venta venta=null;
 	}
 
 	@Override
-	public Venta updateDeliveryEstado(int idVenta, int idEstado_delivery) {
-Venta venta=null;
+	public Venta updateDeliveryEstado(int idVenta, int idEstado_delivery,int idRepartidor) {
+			Venta venta=null;
 		
 		try {
 			venta=ventaRepository.findById(idVenta).get();
 			venta.setIdestado_delivery(idEstado_delivery);
+			venta.setIdrepartidor(idRepartidor);
 			venta=ventaRepository.save(venta);
 		}catch(Exception e) {
 			return venta;

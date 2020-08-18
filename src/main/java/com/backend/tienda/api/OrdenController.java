@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.MainPedido;
 import com.backend.tienda.entity.Orden;
+import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
 import com.backend.tienda.entity.Usuario;
@@ -24,6 +25,7 @@ import com.backend.tienda.gson.OrdenGeneralGson;
 import com.backend.tienda.gson.OrdenGson;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.OrdenService;
+import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 
 @RestController
@@ -43,6 +45,9 @@ public class OrdenController {
 	
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
+	
+	@Autowired
+	Orden_estado_restauranteService orden_estado_service;
 	
 	@RequestMapping(value=LISTA_DISPONIBLE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<OrdenGeneralGson> listaOrdenesDisponibles(@PathVariable ("idUsuario") int idUsuario){
@@ -80,6 +85,9 @@ public class OrdenController {
 					
 				}
 				
+				List<Orden_estado_restaurante> listaOrden =orden_estado_service.listaEstadosOrden(orden.getIdventa());
+
+				data.setLista_orden_estado(listaOrden);
 				
 				productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(orden.getIdpedido());
 

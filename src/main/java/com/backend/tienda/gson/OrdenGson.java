@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.backend.tienda.api.ProductoJOINregistroPedidoJOINpedidoController;
 import com.backend.tienda.entity.Orden;
+import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Usuario;
 
@@ -15,6 +16,8 @@ public class OrdenGson implements Serializable{
 	private Usuario usuario;
 	
 	private List<ProductoJOINregistroPedidoJOINpedido> lista_productos;
+	
+	private List<Orden_estado_restaurante> lista_orden_estado;
 
 	public Orden getDetalle_orden() {
 		return detalle_orden;
@@ -39,6 +42,16 @@ public class OrdenGson implements Serializable{
 	public void setLista_productos(List<ProductoJOINregistroPedidoJOINpedido> lista_productos) {
 		this.lista_productos = lista_productos;
 	}
+
+	public List<Orden_estado_restaurante> getLista_orden_estado() {
+		return lista_orden_estado;
+	}
+
+	public void setLista_orden_estado(List<Orden_estado_restaurante> lista_orden_estado) {
+		this.lista_orden_estado = lista_orden_estado;
+	}
+	
+	
 
 	
 	

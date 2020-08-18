@@ -70,7 +70,9 @@ public class Orden_estado_deliveryController {
 		{
 				
 		
-				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),orden.getId().getIdestado_delivery());
+			//FALTA QUE SEA UNA ACTUALIZACION CON EL ID DEL REPARTIDOR
+			
+				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),orden.getId().getIdestado_delivery(),orden.getIdrepartidor());
  
 				if(venta!=null) {
 					
