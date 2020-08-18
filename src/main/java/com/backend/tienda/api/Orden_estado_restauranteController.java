@@ -140,7 +140,8 @@ public class Orden_estado_restauranteController {
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
 		//boolean update=false;
-		
+		Orden_estado_restauranteGson gson=null;
+
 		
 		
 		/*Venta ventaTotal=ventaService.getVenta(orden.getId().getIdventa());
@@ -171,12 +172,15 @@ public class Orden_estado_restauranteController {
 
 					listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
 					System.out.println("PASO3");
-
+					
+					gson=new Orden_estado_restauranteGson();
+					gson.setListaOrden_estado_restaurante(listaOrden);
 					
 					pusher.setCluster("us2");
 					
-					pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
-					
+				//	pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
+					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+	
 					
 					
 					
@@ -207,6 +211,8 @@ public class Orden_estado_restauranteController {
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
+		Orden_estado_restauranteGson gson=null;
+
 	
 		//try 
 		//{
@@ -222,11 +228,15 @@ public class Orden_estado_restauranteController {
 				
 				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
 				
+				gson=new Orden_estado_restauranteGson();
+				gson.setListaOrden_estado_restaurante(listaOrden);
+				
 				pusher.setCluster("us2");
 				
-				pusher.trigger("canal-orden-ready-"+idUsuario, "my-event", listaOrden);
+				//pusher.trigger("canal-orden-ready-"+idUsuario, "my-event", listaOrden);
 				
-				
+				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+
 				
 				
 			}
