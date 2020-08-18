@@ -93,7 +93,7 @@ public class Orden_estado_deliveryController {
 					if(orden.getId().getIdestado_delivery()==1) {
 						
 						
-						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor();
+						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor());
 
 						
 						Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
