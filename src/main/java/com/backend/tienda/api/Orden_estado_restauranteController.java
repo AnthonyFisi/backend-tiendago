@@ -87,6 +87,8 @@ public class Orden_estado_restauranteController {
 		
 		List<Orden_estado_restaurante> listaOrden =null;
 		
+		Orden_estado_restauranteGson gson=null;
+		
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
@@ -101,10 +103,13 @@ public class Orden_estado_restauranteController {
 				ordenResult=ordenService.registrarEstado(orden);
 				
 				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+				
+				gson=new Orden_estado_restauranteGson();
+				gson.setListaOrden_estado_restaurante(listaOrden);
 						
 				pusher.setCluster("us2");
 				
-				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", listaOrden);
+				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 				
 			}
 			

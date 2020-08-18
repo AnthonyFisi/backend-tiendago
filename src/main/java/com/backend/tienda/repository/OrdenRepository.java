@@ -31,7 +31,7 @@ public interface OrdenRepository extends JpaRepository<Orden,Integer>{
 			+ "    WHERE idestado_venta<> ?1  AND  idestado_venta<> ?2 AND  idestado_venta<> ?3 AND idusuario= ?4 ",nativeQuery=true)
 	List<Orden> findByidestadoventaNotAndidestadoventaNotAndidestadoventaNotAndidusario(int idestado1,int idestado2,int idestado3,int idusuario);*/
 	
-	List<Orden> findByIdusuarioAndOrdendisponibleAndVentafechaLessThanEqual(int idusuario,boolean disponible,Timestamp fecha);
+	List<Orden> findByIdusuarioAndOrdendisponibleAndVentafechaGreaterThanEqual(int idusuario,boolean disponible,Timestamp fecha);
 	
 	
 
