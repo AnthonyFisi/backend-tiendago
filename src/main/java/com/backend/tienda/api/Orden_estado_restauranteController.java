@@ -110,6 +110,9 @@ public class Orden_estado_restauranteController {
 				
 				ordenResult=ordenService.registrarEstado(orden);
 				
+				ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),1);
+
+				
 				//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 				
 				orden_general=convert_object(orden,tiempo_espera,1,time);
@@ -174,6 +177,7 @@ public class Orden_estado_restauranteController {
 			
 				
 				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
+				
 				System.out.println("PASO1");
 
 				if(venta!=null) {
@@ -181,6 +185,9 @@ public class Orden_estado_restauranteController {
 					ordenResult=ordenService.registrarEstado(orden);
 					
 					//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+					
+					ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),2);
+
 					
 					orden_general=convert_object(orden,"",2,time);
 					
@@ -199,12 +206,7 @@ public class Orden_estado_restauranteController {
 					
 					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 	
-					
-					
-					
-				
-			
-			
+							
 		
 			}
 			

@@ -172,4 +172,20 @@ Venta venta=null;
 		return venta;
 	}
 
+	@Override
+	public Venta updateVentaEstadoGeneral(int idventa,int idestado_general) {
+Venta venta=null;
+		
+		try {
+			venta=ventaRepository.findById(idventa).get();
+			venta.setIdestado_general(idestado_general);
+			venta=ventaRepository.save(venta);
+		}catch(Exception e) {
+			return venta;
+
+		}
+		
+		return venta;
+	}
+
 }

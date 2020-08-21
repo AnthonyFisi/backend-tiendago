@@ -110,7 +110,6 @@ public class Orden_estado_deliveryController {
 						
 						
 						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor());
-
 						
 						Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
 						
@@ -125,6 +124,9 @@ public class Orden_estado_deliveryController {
 					}
 					
 					if(orden.getId().getIdestado_delivery() == 3) {
+						
+						ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(), 3);
+
 						
 						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
 						
@@ -156,7 +158,7 @@ public class Orden_estado_deliveryController {
 						
 						//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 						
-						orden_general=convert_object(orden,"",5,time);
+						orden_general=convert_object(orden,"",4,time);
 						
 						//GUARDAR EL ESTADO EN LA TABLA GENERAL
 						orden_estado_generalService.guardar_estado(orden_general);

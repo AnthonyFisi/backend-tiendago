@@ -25,6 +25,8 @@ public interface VentaService {
 	Venta updateDeliveryEstado(int idVenta,int idEstado_delivery,int idRepartidor);
 	
 	Venta updateDisponibilidad(int idVenta);
+	
+	Venta updateVentaEstadoGeneral(int idventa,int idestado_general);
 
 
 }

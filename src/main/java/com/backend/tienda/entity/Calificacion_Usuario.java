@@ -16,7 +16,6 @@ public class Calificacion_Usuario {
 	@Column(name = "idcalificacion_usuario", updatable = false, nullable = false)
 	private int idcalificacion_usuario;
 	
-	private int idcliente;
 	
 	private int idventa;
 	
@@ -35,13 +34,7 @@ public class Calificacion_Usuario {
 		this.idcalificacion_usuario = idcalificacion_usuario;
 	}
 
-	public int getIdcliente() {
-		return idcliente;
-	}
 
-	public void setIdcliente(int idcliente) {
-		this.idcliente = idcliente;
-	}
 
 	public int getIdventa() {
 		return idventa;
