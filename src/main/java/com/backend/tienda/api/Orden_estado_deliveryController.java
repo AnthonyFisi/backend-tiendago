@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_delivery;
+import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.entity.Venta;
+import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
+import com.backend.tienda.service.Orden_estado_generalService;
+import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.VentaService;
@@ -50,6 +54,14 @@ public class Orden_estado_deliveryController {
 	@Autowired
 	RepartidorService repartidorService;
 	
+	
+	@Autowired
+	Orden_estado_restauranteService ordenService;
+	
+	
+	@Autowired
+	Orden_estado_generalService orden_estado_generalService;
+	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
 	
@@ -63,6 +75,13 @@ public class Orden_estado_deliveryController {
 		List<Orden_estado_delivery> listaOrden =null;
 		
 		Orden_estado_delivery ordenResult=null;
+		
+		List<Orden_estado_general> lista_estado_general =null;
+		
+		Orden_estado_restauranteGson gson=null;
+		
+		Orden_estado_general orden_general= new Orden_estado_general();
+	
 
 		orden.setFecha(time);
 	
@@ -76,11 +95,6 @@ public class Orden_estado_deliveryController {
  
 				if(venta!=null) {
 					
-					if(orden.getId().getIdestado_delivery() == 5) {
-						
-						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
-						
-					}
 					
 					
 					//AÑADIR UN METODO PARA AGREGAR EL ESTADO DE LLEGAR A PUNTO DESTINO ,TODO ESTO EN LA TABLA "orden_estado_venta"
@@ -110,6 +124,57 @@ public class Orden_estado_deliveryController {
 						
 					}
 					
+					if(orden.getId().getIdestado_delivery() == 3) {
+						
+						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
+						
+						//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+						
+						orden_general=convert_object(orden,"",3,time);
+						
+						//GUARDAR EL ESTADO EN LA TABLA GENERAL
+						orden_estado_generalService.guardar_estado(orden_general);
+						
+						lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+						
+						
+						gson=new Orden_estado_restauranteGson();
+						
+						gson.setListaOrden_estado_general(lista_estado_general);
+								
+						pusher.setCluster("us2");
+						
+						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+						
+					}
+					
+					
+					
+					if(orden.getId().getIdestado_delivery() == 5) {
+						
+						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
+						
+						//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+						
+						orden_general=convert_object(orden,"",5,time);
+						
+						//GUARDAR EL ESTADO EN LA TABLA GENERAL
+						orden_estado_generalService.guardar_estado(orden_general);
+						
+						lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+						
+						
+						gson=new Orden_estado_restauranteGson();
+						
+						gson.setListaOrden_estado_general(lista_estado_general);
+								
+						pusher.setCluster("us2");
+						
+						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+						
+					}
+					
+					
 				
 					
 				
@@ -125,6 +190,20 @@ public class Orden_estado_deliveryController {
 		return new ResponseEntity<Orden_estado_delivery>(ordenResult,HttpStatus.OK);
 		
 	}
+	
+	
+	private Orden_estado_general convert_object(Orden_estado_delivery delivery,String tiempo,int idestado,Timestamp time) {
+		
+		Orden_estado_general estado= new Orden_estado_general();
+		
+		estado.setIdventa(delivery.getId().getIdventa());
+		estado.setIdestadogeneral(idestado);
+		estado.setTiempo_aproximado(tiempo);
+		estado.setFecha(time);
+		
+		return estado;
+	}
+	
 	
 	
 

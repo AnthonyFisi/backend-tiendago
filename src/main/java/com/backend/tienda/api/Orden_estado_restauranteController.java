@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.Orden_estado_restaurantePK;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
+import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.VentaService;
 import com.pusher.rest.Pusher;
@@ -46,6 +48,10 @@ public class Orden_estado_restauranteController {
 	@Autowired
 	Orden_estado_restauranteService ordenService;
 	
+	
+	@Autowired
+	Orden_estado_generalService orden_estado_generalService;
+	
 	@Autowired
 	VentaService ventaService;
 	
@@ -64,7 +70,7 @@ public class Orden_estado_restauranteController {
 			
 			ordenGson= new Orden_estado_restauranteGson();
 			
-			ordenGson.setListaOrden_estado_restaurante(listaOrden);
+			//ordenGson.setListaOrden_estado_restaurante(listaOrden);
 			
 		}catch(Exception e) {
 			return new ResponseEntity<Orden_estado_restauranteGson>(ordenGson,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -85,13 +91,15 @@ public class Orden_estado_restauranteController {
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 		
 		
-		List<Orden_estado_restaurante> listaOrden =null;
+		List<Orden_estado_general> lista_estado_general =null;
 		
 		Orden_estado_restauranteGson gson=null;
 		
 		Venta venta=null;
 		Orden_estado_restaurante ordenResult=null;
 		orden.setFecha(time);
+		
+		Orden_estado_general orden_general= new Orden_estado_general();
 	
 		try 
 		{
@@ -102,10 +110,19 @@ public class Orden_estado_restauranteController {
 				
 				ordenResult=ordenService.registrarEstado(orden);
 				
-				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
+				//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+				
+				orden_general=convert_object(orden,tiempo_espera,1,time);
+				
+				//GUARDAR EL ESTADO EN LA TABLA GENERAL
+				orden_estado_generalService.guardar_estado(orden_general);
+				
+				lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+				
 				
 				gson=new Orden_estado_restauranteGson();
-				gson.setListaOrden_estado_restaurante(listaOrden);
+				
+				gson.setListaOrden_estado_general(lista_estado_general);
 						
 				pusher.setCluster("us2");
 				
@@ -135,31 +152,26 @@ public class Orden_estado_restauranteController {
 			@PathVariable ("idUsuario") int idUsuario){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
-		List<Orden_estado_restaurante> listaOrden =null;
+		
 		Venta venta=null;
+		
 		Orden_estado_restaurante ordenResult=null;
+		
 		orden.setFecha(time);
-		//boolean update=false;
+		
 		Orden_estado_restauranteGson gson=null;
+		
+		List<Orden_estado_general> lista_estado_general =null;
+		
+		Orden_estado_general orden_general= new Orden_estado_general();
+	
+		
 
-		
-		
-		/*Venta ventaTotal=ventaService.getVenta(orden.getId().getIdventa());
-		
-		
-		int tiempo=tiempoRestante(ventaTotal.getTiempo_espera());
-		
-		
-		if(tiempo>= Integer.valueOf(ventaTotal.getTiempo_espera())) {
-			
-			update=true;
-		}*/
 		
 	
 		try 
 		{
 			
-			//if(update) {
 				
 				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_venta());
 				System.out.println("PASO1");
@@ -168,17 +180,23 @@ public class Orden_estado_restauranteController {
 					
 					ordenResult=ordenService.registrarEstado(orden);
 					
-					System.out.println("PASO2");
-
-					listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
-					System.out.println("PASO3");
+					//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+					
+					orden_general=convert_object(orden,"",2,time);
+					
+					//GUARDAR EL ESTADO EN LA TABLA GENERAL
+					orden_estado_generalService.guardar_estado(orden_general);
+					
+					lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+					
+					
+				
 					
 					gson=new Orden_estado_restauranteGson();
-					gson.setListaOrden_estado_restaurante(listaOrden);
+					gson.setListaOrden_estado_general(lista_estado_general);
 					
 					pusher.setCluster("us2");
 					
-				//	pusher.trigger("canal-orden-proces-"+idUsuario, "my-event", listaOrden);
 					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 	
 					
@@ -229,13 +247,14 @@ public class Orden_estado_restauranteController {
 				listaOrden=ordenService.listaEstadosOrden(orden.getId().getIdventa());
 				
 				gson=new Orden_estado_restauranteGson();
-				gson.setListaOrden_estado_restaurante(listaOrden);
+			
+				//	gson.setListaOrden_estado_restaurante(listaOrden);
 				
-				pusher.setCluster("us2");
+				//pusher.setCluster("us2");
 				
 				//pusher.trigger("canal-orden-ready-"+idUsuario, "my-event", listaOrden);
 				
-				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			//	pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 				
 				
@@ -294,7 +313,17 @@ public class Orden_estado_restauranteController {
 
     }
 
-	
+	private Orden_estado_general convert_object(Orden_estado_restaurante empresa,String tiempo,int idestado,Timestamp time) {
+		
+		Orden_estado_general estado= new Orden_estado_general();
+		
+		estado.setIdventa(empresa.getId().getIdventa());
+		estado.setIdestadogeneral(idestado);
+		estado.setTiempo_aproximado(tiempo);
+		estado.setFecha(time);
+		
+		return estado;
+	}
 	
 	
 	

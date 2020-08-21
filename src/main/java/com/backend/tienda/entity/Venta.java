@@ -59,6 +59,8 @@ public class Venta {
 	private String comentario_cancelar;
 	
 	private int idestado_delivery;
+	
+	private int idestado_general;
 
 	
 	/*public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
@@ -264,6 +266,15 @@ public class Venta {
 	public void setIdestado_delivery(int idestado_delivery) {
 		this.idestado_delivery = idestado_delivery;
 	}
+
+	public int getIdestado_general() {
+		return idestado_general;
+	}
+
+	public void setIdestado_general(int idestado_general) {
+		this.idestado_general = idestado_general;
+	}
+
 	
 	
 	

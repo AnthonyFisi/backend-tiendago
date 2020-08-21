@@ -14,6 +14,8 @@ public class Orden_estado_restaurante {
 	@EmbeddedId
 	Orden_estado_restaurantePK id;
 	
+	private int idempresa;
+	
 	private String detalle;
 	
 	private Timestamp fecha;
@@ -40,6 +42,14 @@ public class Orden_estado_restaurante {
 
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
+	}
+
+	public int getIdempresa() {
+		return idempresa;
+	}
+
+	public void setIdempresa(int idempresa) {
+		this.idempresa = idempresa;
 	}
 	
 	

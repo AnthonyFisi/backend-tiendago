@@ -3,19 +3,21 @@ package com.backend.tienda.gson;
 import java.io.Serializable;
 import java.util.List;
 
+import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 
 public class Orden_estado_restauranteGson implements Serializable{
 	
-	private List<Orden_estado_restaurante> listaOrden_estado_restaurante;
+	private List<Orden_estado_general> listaOrden_estado_general;
 
-	public List<Orden_estado_restaurante> getListaOrden_estado_restaurante() {
-		return listaOrden_estado_restaurante;
+	public List<Orden_estado_general> getListaOrden_estado_general() {
+		return listaOrden_estado_general;
 	}
 
-	public void setListaOrden_estado_restaurante(List<Orden_estado_restaurante> listaOrden_estado_restaurante) {
-		this.listaOrden_estado_restaurante = listaOrden_estado_restaurante;
+	public void setListaOrden_estado_general(List<Orden_estado_general> listaOrden_estado_general) {
+		this.listaOrden_estado_general = listaOrden_estado_general;
 	}
+
 	
 	
 

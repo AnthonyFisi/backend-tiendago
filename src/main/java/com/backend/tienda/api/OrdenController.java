@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.MainPedido;
 import com.backend.tienda.entity.Orden;
+import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_restaurante;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
@@ -25,6 +26,7 @@ import com.backend.tienda.gson.OrdenGeneralGson;
 import com.backend.tienda.gson.OrdenGson;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.OrdenService;
+import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 
@@ -47,7 +49,7 @@ public class OrdenController {
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 	
 	@Autowired
-	Orden_estado_restauranteService orden_estado_service;
+	Orden_estado_generalService orden_estado_generalService;
 	
 	@RequestMapping(value=LISTA_DISPONIBLE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<OrdenGeneralGson> listaOrdenesDisponibles(@PathVariable ("idUsuario") int idUsuario){
@@ -66,9 +68,16 @@ public class OrdenController {
 			
 			lista=ordenService.ordenDisponible(idUsuario);
 			
-			OrdenGson data=new OrdenGson();
+			for(Orden orden:lista) {
+				System.out.println(orden.getIdventa());
+
+			}
+			
 			
 			for(Orden orden:lista) {
+				
+				OrdenGson data=new OrdenGson();
+
 				
 				data.setDetalle_orden(orden);
 				
@@ -85,9 +94,9 @@ public class OrdenController {
 					
 				}
 				
-				List<Orden_estado_restaurante> listaOrden =orden_estado_service.listaEstadosOrden(orden.getIdventa());
+				List<Orden_estado_general> listaOrden =orden_estado_generalService.listaOrdenByidVenta(orden.getIdventa());
 
-				data.setLista_orden_estado(listaOrden);
+				data.setLista_orden_general(listaOrden);
 				
 				productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(orden.getIdpedido());
 

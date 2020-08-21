@@ -52,7 +52,9 @@ public class CreateVenta {
 		venta.setIdrepartidor(0);
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");
+		venta.setTiempo_espera("");
 		venta.setIdestado_delivery(6);
+		venta.setIdestado_general(0);
 
 		
 		
