@@ -78,7 +78,7 @@ public class Orden {
 	
 	private int idusuario;
 	
-	private int idestado_venta;
+	private int idestado_empresa;
 	
 	private String tipo_estado;
 	
@@ -98,6 +98,8 @@ public class Orden {
 	private String nombre_tipo_envio;
 	
 	private int idrepartidor;
+	
+	private int idestado_general;
    
 
 	public int getIdempresa() {
@@ -310,12 +312,22 @@ public class Orden {
 		this.idusuario = idusuario;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
+	
+
+	public int getIdestado_empresa() {
+		return idestado_empresa;
 	}
 
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
+	public void setIdestado_empresa(int idestado_empresa) {
+		this.idestado_empresa = idestado_empresa;
+	}
+
+	public int getIdestado_general() {
+		return idestado_general;
+	}
+
+	public void setIdestado_general(int idestado_general) {
+		this.idestado_general = idestado_general;
 	}
 
 	public String getTipo_estado() {
