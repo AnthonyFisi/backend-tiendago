@@ -103,6 +103,7 @@ public class VentaController {
 			pk.setIdestado_venta(1);
 			
 			ordenEstado.setId(pk);
+			ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
 			ordenEstado.setDetalle("");
 			ordenEstado.setFecha(time);
 			
