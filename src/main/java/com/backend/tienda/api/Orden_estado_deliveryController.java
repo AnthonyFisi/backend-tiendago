@@ -132,7 +132,7 @@ public class Orden_estado_deliveryController {
 						
 						//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 						
-						orden_general=convert_object(orden,"",3,time);
+						orden_general=convert_object(orden,venta.getTiempo_aprox_delivery(),3,time);
 						
 						//GUARDAR EL ESTADO EN LA TABLA GENERAL
 						orden_estado_generalService.guardar_estado(orden_general);

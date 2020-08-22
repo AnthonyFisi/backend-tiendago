@@ -52,6 +52,8 @@ public class Venta {
 	
 	private String tiempo_espera;
 	
+	private String tiempo_aprox_delivery;
+	
 	private int  idrepartidor;
 	
 	private boolean cancelar;
@@ -273,6 +275,14 @@ public class Venta {
 
 	public void setIdestado_general(int idestado_general) {
 		this.idestado_general = idestado_general;
+	}
+
+	public String getTiempo_aprox_delivery() {
+		return tiempo_aprox_delivery;
+	}
+
+	public void setTiempo_aprox_delivery(String tiempo_aprox_delivery) {
+		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
 	}
 
 	
