@@ -36,7 +36,7 @@ public class Venta {
 	
 	private String comentario;
 	
-	private int idestado_venta;
+	private int idestado_empresa;
 	
 	private int idestado_pago;
 	
@@ -219,12 +219,14 @@ public class Venta {
 		this.comentario = comentario;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
+	
+
+	public int getIdestado_empresa() {
+		return idestado_empresa;
 	}
 
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
+	public void setIdestado_empresa(int idestado_empresa) {
+		this.idestado_empresa = idestado_empresa;
 	}
 
 	public int getIdestado_pago() {

@@ -6,14 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Orden_estado_restaurantePK implements Serializable{
+public class Orden_estado_empresaPK implements Serializable{
 
 	
 	@Column(name="idventa")
 	private int idventa;
 	
-	@Column(name="idestado_venta")
-	private int idestado_venta;
+	@Column(name="idestado_empresa")
+	private int idestado_empresa;
 
 	public int getIdventa() {
 		return idventa;
@@ -23,19 +23,19 @@ public class Orden_estado_restaurantePK implements Serializable{
 		this.idventa = idventa;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
+	public int getIdestado_empresa() {
+		return idestado_empresa;
 	}
 
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
+	public void setIdestado_empresa(int idestado_empresa) {
+		this.idestado_empresa = idestado_empresa;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idestado_venta;
+		result = prime * result + idestado_empresa;
 		result = prime * result + idventa;
 		return result;
 	}
@@ -48,8 +48,8 @@ public class Orden_estado_restaurantePK implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Orden_estado_restaurantePK other = (Orden_estado_restaurantePK) obj;
-		if (idestado_venta != other.idestado_venta)
+		Orden_estado_empresaPK other = (Orden_estado_empresaPK) obj;
+		if (idestado_empresa != other.idestado_empresa)
 			return false;
 		if (idventa != other.idventa)
 			return false;
@@ -58,8 +58,10 @@ public class Orden_estado_restaurantePK implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Orden_estado_restaurantePK [idventa=" + idventa + ", idestado_venta=" + idestado_venta + "]";
+		return "Orden_estado_restaurantePK [idventa=" + idventa + ", idestado_empresa=" + idestado_empresa + "]";
 	}
+
+
 	
 	
 	

@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orden_estado_restaurante")
-public class Orden_estado_restaurante {
+@Table(name="orden_estado_empresa")
+public class Orden_estado_empresa {
 	
 	
 	@EmbeddedId
-	Orden_estado_restaurantePK id;
+	Orden_estado_empresaPK id;
 	
 	private int idempresa;
 	
@@ -20,11 +20,11 @@ public class Orden_estado_restaurante {
 	
 	private Timestamp fecha;
 
-	public Orden_estado_restaurantePK getId() {
+	public Orden_estado_empresaPK getId() {
 		return id;
 	}
 
-	public void setId(Orden_estado_restaurantePK id) {
+	public void setId(Orden_estado_empresaPK id) {
 		this.id = id;
 	}
 

@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.backend.tienda.entity.Orden_estado_restaurante;
-import com.backend.tienda.entity.Orden_estado_restaurantePK;
+import com.backend.tienda.entity.Orden_estado_empresa;
+import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.repository.Orden_estado_restauranteRepository;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 
@@ -18,7 +18,7 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 	Orden_estado_restauranteRepository ordenRepository;
 	
 	@Override
-	public Orden_estado_restaurante registrarEstado(Orden_estado_restaurante ordenEstado) {
+	public Orden_estado_empresa registrarEstado(Orden_estado_empresa ordenEstado) {
 		
 		
 		
@@ -26,10 +26,10 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 	}
 
 	@Override
-	public List<Orden_estado_restaurante> listaEstadosOrden(int idVenta) {
+	public List<Orden_estado_empresa> listaEstadosOrden(int idVenta) {
 		
 		
-	List<Orden_estado_restaurante> lista=null;
+	List<Orden_estado_empresa> lista=null;
 		
 		try {
 			
@@ -44,15 +44,15 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 	
 
 	@Override
-	public Orden_estado_restaurante OrdenDate(int idVenta, int idEstado_Venta) {
+	public Orden_estado_empresa OrdenDate(int idVenta, int idEstado_Venta) {
 		
-		Orden_estado_restaurante orden= null;
+		Orden_estado_empresa orden= null;
 		
 		try {
 
-			Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
+			Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
 			pk.setIdventa(idVenta);
-			pk.setIdestado_venta(idEstado_Venta);
+			pk.setIdestado_empresa(idEstado_Venta);
 			orden=ordenRepository.findById(pk).get();
 		}catch(Exception e) {
 			return orden;
@@ -64,9 +64,9 @@ public class Orden_estado_restauranteServiceImpl implements Orden_estado_restaur
 	}
 
 	@Override
-	public List<Orden_estado_restaurante> listaEstados(List<Orden_estado_restaurantePK> pk) {
+	public List<Orden_estado_empresa> listaEstados(List<Orden_estado_empresaPK> pk) {
 
-		List<Orden_estado_restaurante> lista=null;
+		List<Orden_estado_empresa> lista=null;
 		
 		try {
 			

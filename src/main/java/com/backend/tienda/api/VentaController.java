@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tienda.entity.Orden_estado_restaurante;
-import com.backend.tienda.entity.Orden_estado_restaurantePK;
+import com.backend.tienda.entity.Orden_estado_empresa;
+import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.Pedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
@@ -97,10 +97,10 @@ public class VentaController {
 			Timestamp time=new Timestamp(System.currentTimeMillis());
 
 			
-			Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
-			Orden_estado_restaurantePK pk = new Orden_estado_restaurantePK();
+			Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
+			Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
 			pk.setIdventa(respuesta.getIdventa());
-			pk.setIdestado_venta(1);
+			pk.setIdestado_empresa(1);
 			
 			ordenEstado.setId(pk);
 			ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
@@ -204,7 +204,7 @@ public class VentaController {
 		
 		try {
 		
-			venta2=ventaService.updateVentaCancelarPedido(venta.getIdestado_venta(),venta.getComentario());
+			venta2=ventaService.updateVentaCancelarPedido(venta.getIdestado_empresa(),venta.getComentario());
 			
 			
 			respuesta= new VentaAndroid();

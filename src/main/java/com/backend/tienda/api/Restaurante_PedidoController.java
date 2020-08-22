@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tienda.entity.Orden_estado_restaurante;
-import com.backend.tienda.entity.Orden_estado_restaurantePK;
+import com.backend.tienda.entity.Orden_estado_empresa;
+import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
@@ -270,7 +270,7 @@ public class Restaurante_PedidoController {
 
 		List<Restaurante_PedidoModified> listaTotal=null;
 				
-		List<Orden_estado_restaurante> listaEstados=null;
+		List<Orden_estado_empresa> listaEstados=null;
 
 		try {
 
@@ -283,13 +283,13 @@ public class Restaurante_PedidoController {
 
 		
 			
-			List<Orden_estado_restaurantePK> pklist=new ArrayList<>();
+			List<Orden_estado_empresaPK> pklist=new ArrayList<>();
 			
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
-				Orden_estado_restaurantePK pk=new Orden_estado_restaurantePK();
+				Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
 				pk.setIdventa(pedido.getIdventa());
-				pk.setIdestado_venta(pedido.getIdestado_venta());
+				pk.setIdestado_empresa(pedido.getIdestado_venta());
 				pklist.add(pk);
 				
 			}

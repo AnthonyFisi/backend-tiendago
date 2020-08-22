@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_delivery;
 import com.backend.tienda.entity.Orden_estado_general;
-import com.backend.tienda.entity.Orden_estado_restaurante;
+import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario;
@@ -128,7 +128,7 @@ public class Orden_estado_deliveryController {
 						ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(), 3);
 
 						
-						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
+						//venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
 						
 						//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 						
@@ -152,7 +152,10 @@ public class Orden_estado_deliveryController {
 					
 					
 					
-					if(orden.getId().getIdestado_delivery() == 5) {
+					if(orden.getId().getIdestado_delivery() == 4) {
+						
+						ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(), 4);
+
 						
 						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
 						
@@ -174,6 +177,12 @@ public class Orden_estado_deliveryController {
 						
 						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 						
+					}
+					
+
+					if(orden.getId().getIdestado_delivery() == 5) {
+						
+						venta=ventaService.updateDisponibilidad(orden.getId().getIdventa());
 					}
 					
 					

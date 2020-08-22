@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.backend.tienda.entity.Orden_estado_general;
-import com.backend.tienda.entity.Orden_estado_restaurante;
+import com.backend.tienda.entity.Orden_estado_empresa;
 
 public class Orden_estado_restauranteGson implements Serializable{
 	

@@ -41,7 +41,7 @@ public class CreateVenta {
 		venta.setVenta_costodelivery(precioGanancia);
 		venta.setVenta_costototal(ventaAndroid.getVenta_costototal());
 		venta.setComentario(ventaAndroid.getComentario());
-		venta.setIdestado_venta(1);
+		venta.setIdestado_empresa(1);
 		venta.setIdestado_pago(ventaAndroid.getIdestado_pago());
 		venta.setIdtipo_envio(ventaAndroid.getIdtipo_envio());
 		venta.setComentario_entrega("");
@@ -49,6 +49,7 @@ public class CreateVenta {
 		venta.setCosto_delivery(precioDelivery);
 		venta.setOrden_disponible(true);
 		venta.setTiempo_espera(String.valueOf(0));
+		venta.setTiempo_aprox_delivery("");
 		venta.setIdrepartidor(0);
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");

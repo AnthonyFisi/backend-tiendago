@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.MainPedido;
 import com.backend.tienda.entity.Orden;
 import com.backend.tienda.entity.Orden_estado_general;
-import com.backend.tienda.entity.Orden_estado_restaurante;
+import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
 import com.backend.tienda.entity.Usuario;
