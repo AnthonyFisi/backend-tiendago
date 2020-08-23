@@ -18,8 +18,9 @@ public class EmpresaServiceImpl  implements EmpresaService{
 
 	@Override
 	public List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria) {
-	//	return empresaRepository.listaEmpresaFindByIdSubCategoria(idSubCategoria);
-		return null;
+		
+		return empresaRepository.findByIdsubcategoriaempresa(idSubCategoria);
+
 	}
 
 	@Override
@@ -36,12 +37,6 @@ public class EmpresaServiceImpl  implements EmpresaService{
 
 	}
 
-	@Override
-	public List<Empresa> listaEmpresaFindByIdSubCategoriaAndUbicacion(int idSubCategoria, String Ubicacion) {
-
-		//return empresaRepository.listaEmpresaFindByIdSubCategoriaAnddireccion(idSubCategoria, Ubicacion);
-		return null;
-	}
 
 	@Override
 	public Empresa InsertEmpresa(Empresa empresa) {
