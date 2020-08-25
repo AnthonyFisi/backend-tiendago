@@ -199,7 +199,7 @@ public class ProductoController {
 		productoGson= new ProductoGson();
 		productoGson.setListaProducto(rpta);
 
-		return ResponseEntity.ok(rpta);
+		return ResponseEntity.ok(productoGson);
 
 
 	}
