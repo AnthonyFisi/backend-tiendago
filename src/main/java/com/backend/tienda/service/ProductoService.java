@@ -18,5 +18,6 @@ public interface ProductoService {
 	
 	Producto updateDisponibilidadProducto(int idproducto,int idempresa,boolean disponibilidad);
 	
+	List<Producto> listafindByPalabra(int idempresa,String palabra);
 
 }
