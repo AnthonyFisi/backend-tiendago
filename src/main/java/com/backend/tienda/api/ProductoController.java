@@ -39,7 +39,7 @@ public class ProductoController {
 
 	public final static String LIST_PRODUCTOS_EMPRESA="/listaProductosEmpresa/{idEmpresa}";
 
-	public final static String BUSCAR_BY_WORD="/searchWord";
+	public final static String BUSCAR_BY_WORD="/searchWord/{idempresa}/{word}";
 
 
 
@@ -190,12 +190,12 @@ public class ProductoController {
 	}
 
 	@GetMapping(BUSCAR_BY_WORD)
-	public ResponseEntity<?> regitrarCuentaEmpresa(@RequestBody Word word){
+	public ResponseEntity<?> regitrarCuentaEmpresa(@PathVariable("idempresa")int idempresa,@PathVariable("word")String word){
 
 		List<Producto> rpta=null;
 		ProductoGson productoGson=null;
 
-		rpta=productoService.listafindByPalabra(word.getIdempresa(),word.getWord());
+		rpta=productoService.listafindByPalabra(idempresa,word);
 		productoGson= new ProductoGson();
 		productoGson.setListaProducto(rpta);
 

@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="empresa_bi")
-
 public class Empresa{
 
 	@Id
