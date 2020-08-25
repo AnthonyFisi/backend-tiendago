@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Categoria_producto_empresa;
 import com.backend.tienda.gson.CategoriaEmpresaGson;
+import com.backend.tienda.gson.Categoria_producto_empresaGson;
 import com.backend.tienda.service.Categoria_producto_empresaService;
 
 @RestController
@@ -30,9 +31,12 @@ public class Categoria_producto_empresaController {
 	@GetMapping(LISTA_CATEGORIA)
 	public ResponseEntity<?> listaCategoriaProductoEmpresa(@PathVariable("idempresa") int idempresa){
 		
-		List<Categoria_producto_empresa> lista=categoria_producto_empresaService.listaCategoria(idempresa);
+		Categoria_producto_empresaGson gson=new Categoria_producto_empresaGson(); 
 		
-		return new  ResponseEntity<>(lista,HttpStatus.OK);
+		List<Categoria_producto_empresa> lista=categoria_producto_empresaService.listaCategoria(idempresa);
+		gson.setListaCategoriaEmpresa(lista);
+		
+		return new  ResponseEntity<>(gson,HttpStatus.OK);
 		
 	}
 
