@@ -62,6 +62,7 @@ public class ProductoServiceImpl  implements ProductoService{
 
 	@Override
 	public List<Producto> listafindByPalabra(int idempresa,String palabra) {
+		
 		return productoRepository.listafindByPalabra(idempresa,palabra);
 	}
 
