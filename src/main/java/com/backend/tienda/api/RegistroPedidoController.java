@@ -32,7 +32,7 @@ public class RegistroPedidoController {
 	public static final String DISMINUIR_PEDIDO_CONTROLLER="/disminuirProducto";
 	
 	
-	public static final String ELIMINAR_CARRITO="/eliminarCarrito/{idUsuario}";
+	public static final String ELIMINAR_CARRITO="/eliminarCarrito/{idempresa}/{idusuario}";
 
 	@Autowired
 	RegistroPedidoService registroPedidoService;
