@@ -196,9 +196,11 @@ public class ProductoController {
 		ProductoGson productoGson=null;
 
 		rpta=productoService.listafindByPalabra(idempresa,word);
-		if(rpta==null) {
 		
-			return ResponseEntity.badRequest().build();
+		
+		if(rpta.isEmpty()) {
+		
+			return ResponseEntity.notFound().build();
 		}
 
 		productoGson= new ProductoGson();
