@@ -138,14 +138,14 @@ public class RegistroPedidoController {
 	
 	
 	@RequestMapping(value=ELIMINAR_CARRITO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RegistroPedido> eliminarCarrito(@RequestBody MainPedido mainPedido){
+	public ResponseEntity<RegistroPedido> eliminarCarrito(@PathVariable("idempresa") int idempresa,@PathVariable("idusuario") int idusuario){
 	
 		Pedido respuesta = null;
 		RegistroPedido respuestaFinal=null;
 	
 		try {
 			
-			respuesta=pedidoService.findByIdUsuario(mainPedido.getIdusuario(),mainPedido.getIdempresa());
+			respuesta=pedidoService.findByIdUsuario(idusuario,idempresa);
 			
 			respuestaFinal=registroPedidoService.eliminarCarrito(respuesta.getIdpedido());
 			
