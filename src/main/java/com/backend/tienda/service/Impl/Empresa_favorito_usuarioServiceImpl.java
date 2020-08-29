@@ -19,4 +19,25 @@ public class Empresa_favorito_usuarioServiceImpl implements  Empresa_favorito_us
 		return empresa_favorito_usuarioRepository.save(favorito);
 	}
 
+	@Override
+	public Empresa_favorito_usuario eliminarFavorito(int idempresa, int idusuario) {
+		 
+		Empresa_favorito_usuario empresa=null;
+		empresa=empresa_favorito_usuarioRepository.findByIdempresaAndIdusuario(idempresa, idusuario);
+		empresa_favorito_usuarioRepository.deleteById(empresa.getIdefu());
+				
+		
+		try {
+			
+			empresa=empresa_favorito_usuarioRepository.findByIdempresaAndIdusuario(idempresa, idusuario);
+
+			return empresa;
+			
+		}catch(Exception e) {
+						
+			return new Empresa_favorito_usuario();
+		}
+		
+	}
+
 }

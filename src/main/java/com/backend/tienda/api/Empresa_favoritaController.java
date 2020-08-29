@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Empresa_favorita;
 import com.backend.tienda.gson.DistritoGson;
+import com.backend.tienda.gson.Empresa_favoritaGson;
 import com.backend.tienda.service.Empresa_favoritaService;
 
 @RestController
@@ -31,11 +32,14 @@ public final static String EMPRESA_FAVORITA_CONTROLLER="/EmpresaFavoritaControll
 	public ResponseEntity<?> listaDistrito(@PathVariable("idusuario") int idusuario){
 		
 		List<Empresa_favorita> listaEmpresa=null;
+		Empresa_favoritaGson empresa_favoritaGson=null;
 		
 		listaEmpresa=empresa_favoritaService.listaEmpresas(idusuario);
 		
 		if(listaEmpresa.size()>0) {
-			return ResponseEntity.ok(listaEmpresa);
+			empresa_favoritaGson=new Empresa_favoritaGson();
+			empresa_favoritaGson.setListaEmpresaFavorita(listaEmpresa);
+			return ResponseEntity.ok(empresa_favoritaGson);
 		}
 		
 		return ResponseEntity.badRequest().build();
