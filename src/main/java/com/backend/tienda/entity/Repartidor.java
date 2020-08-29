@@ -25,9 +25,7 @@ public class Repartidor {
 	private String tipo_brevete;
 	
 	private String detalles;
-	
-	private int idusuario;
-	
+		
 	private boolean disponible ;
 	
 
@@ -72,14 +70,6 @@ public class Repartidor {
 	}
 
 	
-
-	public int getIdusuario() {
-		return idusuario;
-	}
-
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
-	}
 
 	public boolean isDisponible() {
 		return disponible;

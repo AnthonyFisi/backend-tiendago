@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tienda.entity.Cliente;
 import com.backend.tienda.entity.Cuenta_Usuario;
 import com.backend.tienda.entity.Roles;
 import com.backend.tienda.entity.Usuario;
@@ -41,7 +40,6 @@ import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.security.jwt.JwtUtils;
 import com.backend.tienda.security.services.AuthenticationUserService;
 import com.backend.tienda.security.services.UserDetailsImpl;
-import com.backend.tienda.service.ClienteService;
 import com.backend.tienda.service.Cuenta_UsuarioService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
@@ -68,8 +66,7 @@ public class AuthController {
 	@Autowired
 	AuthenticationUserService authenticationUserService;
 	
-	@Autowired
-	ClienteService clienteService;
+
 	
 	@Autowired
 	Cuenta_UsuarioService cuenta_UsuarioService;
@@ -192,13 +189,7 @@ public class AuthController {
 		//CREANDO EN LA TABLA DE USUARIO
 		usuario=userRepository.save(user);
 		
-		//CREANDO EN LA TABLA DE CLIENTE
-		
-		Cliente createCliente=new Cliente();
-		createCliente.setIdcliente(0);
-		createCliente.setIdusuario(usuario.getIdusuario().intValue());
-		
-		clienteService.saveCliente(createCliente);
+	
 		
 		
 		//CREANDO EN LA TABLA DE CUENTA_USUARIO

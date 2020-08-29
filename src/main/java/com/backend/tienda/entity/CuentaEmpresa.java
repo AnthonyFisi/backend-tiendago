@@ -30,7 +30,7 @@ public class CuentaEmpresa {
 	
 	private String detallecuenta;
 	
-	private int idusuario;
+	private int idempresa;
 
 	public int getIdcuentaempresa() {
 		return idcuentaempresa;
@@ -88,73 +88,15 @@ public class CuentaEmpresa {
 		this.detallecuenta = detallecuenta;
 	}
 
-	public int getIdusuario() {
-		return idusuario;
+	public int getIdempresa() {
+		return idempresa;
 	}
 
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
+	public void setIdempresa(int idempresa) {
+		this.idempresa = idempresa;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (cuentaactiva ? 1231 : 1237);
-		result = prime * result + ((detallecuenta == null) ? 0 : detallecuenta.hashCode());
-		result = prime * result + ((fecha_registrocuenta == null) ? 0 : fecha_registrocuenta.hashCode());
-		result = prime * result + ((fecha_vencimiento == null) ? 0 : fecha_vencimiento.hashCode());
-		result = prime * result + idcuentaempresa;
-		result = prime * result + idtipocuenta;
-		result = prime * result + idusuario;
-		result = prime * result + Float.floatToIntBits(montoabonado);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CuentaEmpresa other = (CuentaEmpresa) obj;
-		if (cuentaactiva != other.cuentaactiva)
-			return false;
-		if (detallecuenta == null) {
-			if (other.detallecuenta != null)
-				return false;
-		} else if (!detallecuenta.equals(other.detallecuenta))
-			return false;
-		if (fecha_registrocuenta == null) {
-			if (other.fecha_registrocuenta != null)
-				return false;
-		} else if (!fecha_registrocuenta.equals(other.fecha_registrocuenta))
-			return false;
-		if (fecha_vencimiento == null) {
-			if (other.fecha_vencimiento != null)
-				return false;
-		} else if (!fecha_vencimiento.equals(other.fecha_vencimiento))
-			return false;
-		if (idcuentaempresa != other.idcuentaempresa)
-			return false;
-		if (idtipocuenta != other.idtipocuenta)
-			return false;
-		if (idusuario != other.idusuario)
-			return false;
-		if (Float.floatToIntBits(montoabonado) != Float.floatToIntBits(other.montoabonado))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "CuentaEmpresa [idcuentaempresa=" + idcuentaempresa + ", idtipocuenta=" + idtipocuenta
-				+ ", cuentaactiva=" + cuentaactiva + ", fecha_registrocuenta=" + fecha_registrocuenta
-				+ ", fecha_vencimiento=" + fecha_vencimiento + ", montoabonado=" + montoabonado + ", detallecuenta="
-				+ detallecuenta + ", idusuario=" + idusuario + "]";
-	}
+	
 	
 	
 

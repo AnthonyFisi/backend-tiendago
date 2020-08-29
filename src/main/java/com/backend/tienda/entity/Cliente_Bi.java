@@ -23,9 +23,7 @@ public class Cliente_Bi {
 	private String celular;
 	
 	private String foto;
-	
-	private int idcliente;
-	
+		
 	private int idcuentausuario;
 	
 	private boolean activa;
@@ -86,13 +84,7 @@ public class Cliente_Bi {
 		this.foto = foto;
 	}
 
-	public int getIdcliente() {
-		return idcliente;
-	}
-
-	public void setIdcliente(int idcliente) {
-		this.idcliente = idcliente;
-	}
+	
 
 	public int getIdcuentausuario() {
 		return idcuentausuario;

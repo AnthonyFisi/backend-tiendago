@@ -111,7 +111,11 @@ public class Orden_estado_deliveryController {
 						
 						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor());
 						
-						Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
+						//VA TENER QUE IR A LA TABLA DE REPARTIDOR
+						//falta COREGIR ACA
+						
+						/*Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
+						
 						
 						usuario.setContrasena("");
 						
@@ -119,7 +123,7 @@ public class Orden_estado_deliveryController {
 						
 						pusher.setCluster("us2");
 						
-						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);
+						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);*/
 						
 					}
 					
