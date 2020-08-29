@@ -100,7 +100,7 @@ public class Empresa_favorito_usuarioController {
 			empresaGson=new EmpresaGson();
 			empresaGson.setListaEmpresa(listaEmpresaFavorita);
 		
-			return ResponseEntity.ok(listaEmpresaFavorita);
+			return ResponseEntity.ok(empresaGson);
 		}
 		
 	
