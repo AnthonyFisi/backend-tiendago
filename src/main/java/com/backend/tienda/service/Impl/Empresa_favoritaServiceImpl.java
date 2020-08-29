@@ -1,5 +1,6 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class Empresa_favoritaServiceImpl implements Empresa_favoritaService{
 
 	@Override
 	public List<Empresa_favorita> listaEmpresas(int idusuario) {
+	/*	
+		List<Integer> lista=new ArrayList<>();
+		lista.add(1);
+		List<Empresa_favorita> lis=null;
+		
+		lis=empresa_favoriaRepository.findAllById(lista);
+		*/
 		
 		return empresa_favoriaRepository.findByIdusuario(idusuario);
 		}

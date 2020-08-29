@@ -31,6 +31,9 @@ public final static String EMPRESA_FAVORITA_CONTROLLER="/EmpresaFavoritaControll
 	@GetMapping(LISTA_FAVORITOS)
 	public ResponseEntity<?> listaDistrito(@PathVariable("idusuario") int idusuario){
 		
+		
+		
+		
 		List<Empresa_favorita> listaEmpresa=null;
 		Empresa_favoritaGson empresa_favoritaGson=null;
 		

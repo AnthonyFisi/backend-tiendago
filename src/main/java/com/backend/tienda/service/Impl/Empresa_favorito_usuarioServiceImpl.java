@@ -1,5 +1,7 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,11 @@ public class Empresa_favorito_usuarioServiceImpl implements  Empresa_favorito_us
 			return new Empresa_favorito_usuario();
 		}
 		
+	}
+
+	@Override
+	public List<Empresa_favorito_usuario> listaEmpresas(int idusuario) {
+		return empresa_favorito_usuarioRepository.findByIdusuario(idusuario);
 	}
 
 }

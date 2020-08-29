@@ -28,6 +28,9 @@ public interface EmpresaService {
 	
 	Empresa updateDescripcion(Empresa empresa);
 	
+	List<Empresa> listaEmpresaFavorito( List<Integer> listaIds);
+
+	
 	
 	
 }
