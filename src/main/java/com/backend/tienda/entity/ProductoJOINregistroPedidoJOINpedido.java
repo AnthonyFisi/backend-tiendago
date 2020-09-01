@@ -63,6 +63,11 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	    private String comentario;
 
 
+	   
+	    private int entrada;
+
+	   
+	    private int segundo;
 	
 	public String getComentario() {
 			return comentario;
@@ -232,6 +237,22 @@ public class ProductoJOINregistroPedidoJOINpedido {
 
 	public void setProducto_detalle(String producto_detalle) {
 		this.producto_detalle = producto_detalle;
+	}
+
+	public int getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(int entrada) {
+		this.entrada = entrada;
+	}
+
+	public int getSegundo() {
+		return segundo;
+	}
+
+	public void setSegundo(int segundo) {
+		this.segundo = segundo;
 	}
 	
 	
