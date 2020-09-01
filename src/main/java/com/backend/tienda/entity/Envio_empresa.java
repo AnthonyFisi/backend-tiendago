@@ -24,6 +24,8 @@ public class Envio_empresa {
 
 	private String url_foto;
 	
+	private float precio;
+	
 	
 	public int getIdtee() {
 		return idtee;
@@ -65,6 +67,14 @@ public class Envio_empresa {
 
 	public void setUrl_foto(String url_foto) {
 		this.url_foto = url_foto;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 	
 	
