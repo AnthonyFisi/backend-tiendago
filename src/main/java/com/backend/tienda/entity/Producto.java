@@ -42,7 +42,9 @@ public class Producto {
 	
 	private boolean disponible;
 
-	
+	 private int entrada;
+	 
+	 private int segundo;
 	
 	
 	
@@ -148,6 +150,22 @@ public class Producto {
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public int getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(int entrada) {
+		this.entrada = entrada;
+	}
+
+	public int getSegundo() {
+		return segundo;
+	}
+
+	public void setSegundo(int segundo) {
+		this.segundo = segundo;
 	}
 
 	

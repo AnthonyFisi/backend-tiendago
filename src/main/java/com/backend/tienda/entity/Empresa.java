@@ -83,7 +83,9 @@ public class Empresa{
 	
 	private boolean socio;
 	
+	private float precio_menu;
 	
+	private float monto_descuento_menu;
 	
 
 	public boolean isDisponible() {
@@ -351,6 +353,22 @@ public class Empresa{
 
 	public void setSocio(boolean socio) {
 		this.socio = socio;
+	}
+
+	public float getPrecio_menu() {
+		return precio_menu;
+	}
+
+	public void setPrecio_menu(float precio_menu) {
+		this.precio_menu = precio_menu;
+	}
+
+	public float getMonto_descuento_menu() {
+		return monto_descuento_menu;
+	}
+
+	public void setMonto_descuento_menu(float monto_descuento_menu) {
+		this.monto_descuento_menu = monto_descuento_menu;
 	}
 
 	

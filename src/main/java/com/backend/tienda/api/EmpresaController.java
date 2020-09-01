@@ -122,6 +122,7 @@ public class EmpresaController {
 			empresaGson.setListaEmpresa(lista);
 		}catch(Exception e) 
 		{
+			
 			return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

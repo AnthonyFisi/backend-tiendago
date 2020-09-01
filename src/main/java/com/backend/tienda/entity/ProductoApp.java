@@ -29,7 +29,9 @@ private int idproducto;
 	
 	private boolean disponible;
 
+	private int entrada;
 	
+	private int segundo;
 	
 	
 	
@@ -129,6 +131,22 @@ private int idproducto;
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public int getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(int entrada) {
+		this.entrada = entrada;
+	}
+
+	public int getSegundo() {
+		return segundo;
+	}
+
+	public void setSegundo(int segundo) {
+		this.segundo = segundo;
 	}
 
 	

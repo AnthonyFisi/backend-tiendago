@@ -30,7 +30,7 @@ public class ProductoServiceImpl  implements ProductoService{
 	@Override
 	public List<Producto> listaIdcategoriaproductoAndIdempresa(int idcategoriaproducto, int idempresa) {
 		
-		return productoRepository.listafindByidcategoriaproductoAndidempresa(idcategoriaproducto, idempresa);
+		return productoRepository.findByIdcategoriaproductoAndIdempresa(idcategoriaproducto, idempresa);
 	
 	}
 

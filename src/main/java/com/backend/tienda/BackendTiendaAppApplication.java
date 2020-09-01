@@ -14,8 +14,7 @@ public class BackendTiendaAppApplication {
 
 
 	public static void main(String[] args) {
-		
-
+	
 		SpringApplication.run(BackendTiendaAppApplication.class, args);
 	
 			
