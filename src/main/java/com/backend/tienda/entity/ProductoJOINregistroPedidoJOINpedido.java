@@ -61,10 +61,9 @@ public class ProductoJOINregistroPedidoJOINpedido {
 	    private String icono_empresa;
 	    
 	    private String comentario;
-
-
 	   
 	    private int tipomenu;
+	    
 	
 	public String getComentario() {
 			return comentario;
