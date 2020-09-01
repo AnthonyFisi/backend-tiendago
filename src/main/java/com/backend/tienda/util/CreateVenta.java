@@ -56,8 +56,7 @@ public class CreateVenta {
 		venta.setTiempo_espera("");
 		venta.setIdestado_delivery(6);
 		venta.setIdestado_general(0);
-
-		
+		venta.setNumeromesa(ventaAndroid.getNumeromesa());
 		
 		return venta;
 	}

@@ -63,6 +63,8 @@ public class Venta {
 	private int idestado_delivery;
 	
 	private int idestado_general;
+	
+	private int numeromesa;
 
 	
 	/*public Venta(int idventa, int idtipopago, int idhorario, int idubicacion, int idpedido, Timestamp venta_fecha,
@@ -287,12 +289,17 @@ public class Venta {
 		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
 	}
 
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
+	}
+
 	
 	
-	
-	
-	
-	
+
 	
 
 }

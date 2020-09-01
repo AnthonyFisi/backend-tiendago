@@ -41,6 +41,7 @@ public class VentaAndroid {
 
 	private boolean repsuesta_registro_venta;	
 	
+	private int numeromesa;
 
 
 	public int getIdEmpresa() {
@@ -141,6 +142,14 @@ public class VentaAndroid {
 
 	public void setRepsuesta_registro_venta(boolean repsuesta_registro_venta) {
 		this.repsuesta_registro_venta = repsuesta_registro_venta;
+	}
+
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
 	}
 
 	
