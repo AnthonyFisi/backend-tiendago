@@ -64,58 +64,57 @@ public class OrdenController {
 
 
 		
-		try {
+		lista=ordenService.ordenDisponible(idUsuario);
+		
+		if(lista.size()<=0) {
 			
-			lista=ordenService.ordenDisponible(idUsuario);
-			
-			for(Orden orden:lista) {
-				System.out.println(orden.getIdventa());
+			return new ResponseEntity<OrdenGeneralGson>(ordenGeneral,HttpStatus.NOT_FOUND);
 
-			}
-			
-			
-			for(Orden orden:lista) {
-				
-				OrdenGson data=new OrdenGson();
-
-				
-				data.setDetalle_orden(orden);
-				
-				if(orden.getIdrepartidor()!=0) {
-
-					Usuario usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
-					
-					usuario.setContrasena("");
-					
-					usuario.setRoles(null);
-					
-					data.setUsuario(usuario);
-
-					
-				}
-				
-				List<Orden_estado_general> listaOrden =orden_estado_generalService.listaOrdenByidVenta(orden.getIdventa());
-
-				data.setLista_orden_general(listaOrden);
-				
-				productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(orden.getIdpedido());
-
-				data.setLista_productos(productos);
-				
-				ordenGson.add(data);
-				
-				
-			}
-			
-			ordenGeneral=new OrdenGeneralGson();
-			ordenGeneral.setLista(ordenGson);
-			
-	
-			
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-			return new ResponseEntity<OrdenGeneralGson>(ordenGeneral,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		for(Orden orden:lista) {
+			System.out.println(orden.getIdventa());
+
+		}
+		
+		
+		for(Orden orden:lista) {
+			
+			OrdenGson data=new OrdenGson();
+
+			
+			data.setDetalle_orden(orden);
+			
+			if(orden.getIdrepartidor()!=0) {
+
+				Usuario usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
+				
+				usuario.setContrasena("");
+				
+				usuario.setRoles(null);
+				
+				data.setUsuario(usuario);
+
+				
+			}
+			
+			List<Orden_estado_general> listaOrden =orden_estado_generalService.listaOrdenByidVenta(orden.getIdventa());
+
+			data.setLista_orden_general(listaOrden);
+			
+			productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(orden.getIdpedido());
+
+			data.setLista_productos(productos);
+			
+			ordenGson.add(data);
+			
+			
+		}
+		
+		ordenGeneral=new OrdenGeneralGson();
+		ordenGeneral.setLista(ordenGson);
+		
+	
 		return new ResponseEntity<OrdenGeneralGson>(ordenGeneral,HttpStatus.OK);
 
 	}
