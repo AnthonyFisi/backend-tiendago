@@ -13,9 +13,11 @@ public class Repartidor_Bi {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idusuario", updatable = false, nullable = false)
-	private int idusuario;
-	
+	@Column(name = "idusuariogeneral", updatable = false, nullable = false)
+	private int idusuariogeneral;
+
+	private int idrepartidor;
+		
 	private String nombre_usuario;
 	
 	private String correo;
@@ -37,21 +39,25 @@ public class Repartidor_Bi {
 	private int idtipocuenta;
 	
 	private String nombre_cuenta;
-	
-	private int idrepartidor;
-	
+		
 	private String placa_vehiculo;
 	
 	private String imagen_vehiculo;
 
 	private boolean disponible;
 	
-	public int getIdusuario() {
-		return idusuario;
+	
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
 	}
 
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
 	}
 
 	public String getNombre_usuario() {

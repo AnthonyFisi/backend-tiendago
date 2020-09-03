@@ -70,7 +70,6 @@ public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
    // List<Todo> findByTitleOrderByTitleAscDescriptionDesc(String title);
     List<Empresa> findByIdcategoriaempresaOrderByPopularidadAsc(int idCategoria);
 
-	
 
 
 }

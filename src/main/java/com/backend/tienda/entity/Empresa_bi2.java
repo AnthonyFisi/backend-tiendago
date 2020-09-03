@@ -1,5 +1,6 @@
 package com.backend.tienda.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="empresa_favorita")
-public class Empresa_favorita {
-	
+@Table(name="empresa_bi")
+public class Empresa_bi2{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idempresa", updatable = false, nullable = false)
+	@Column(name = "idusuariogeneral", updatable = false, nullable = false)
+	private int idusuariogeneral;
+
 	private int idempresa;
 	
 	private int idsubcategoriaempresa;
@@ -64,7 +66,8 @@ public class Empresa_favorita {
 	
 	private float estrella_empresa;
 	
-
+	
+	
 	
 	private String maps_coordenada_x;
 	
@@ -82,8 +85,19 @@ public class Empresa_favorita {
 	
 	private boolean socio;
 	
-	private int idusuario;
+	private float precio_menu;
 	
+	private float monto_descuento_menu;
+	
+	private String apellido;
+	
+	private String nombre;
+	
+	private String correo;
+	
+	private String celular;
+	
+	private String foto;
 	
 
 	public boolean isDisponible() {
@@ -237,6 +251,10 @@ public class Empresa_favorita {
 		this.idcuentaempresa = idcuentaempresa;
 	}
 
+	
+
+
+
 	public double getPopularidad() {
 		return popularidad;
 	}
@@ -244,7 +262,6 @@ public class Empresa_favorita {
 	public void setPopularidad(double popularidad) {
 		this.popularidad = popularidad;
 	}
-	
 
 	public int getHorario_inicio() {
 		return horario_inicio;
@@ -353,15 +370,72 @@ public class Empresa_favorita {
 		this.socio = socio;
 	}
 
-	public int getIdusuario() {
-		return idusuario;
+	public float getPrecio_menu() {
+		return precio_menu;
 	}
 
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
+	public void setPrecio_menu(float precio_menu) {
+		this.precio_menu = precio_menu;
+	}
+
+	public float getMonto_descuento_menu() {
+		return monto_descuento_menu;
+	}
+
+	public void setMonto_descuento_menu(float monto_descuento_menu) {
+		this.monto_descuento_menu = monto_descuento_menu;
+	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	
+
 
 	
 	

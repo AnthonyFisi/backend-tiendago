@@ -8,13 +8,13 @@ import com.backend.tienda.entity.Orden;
 import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
-import com.backend.tienda.entity.Usuario;
+import com.backend.tienda.entity.Usuario_general;
 
 public class OrdenGson implements Serializable{
 
 	private Orden detalle_orden;
 	
-	private Usuario usuario;
+	private Usuario_general usuario;
 	
 	private List<ProductoJOINregistroPedidoJOINpedido> lista_productos;
 	
@@ -28,11 +28,11 @@ public class OrdenGson implements Serializable{
 		this.detalle_orden = detalle_orden;
 	}
 
-	public Usuario getUsuario() {
+	public Usuario_general getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Usuario_general usuario) {
 		this.usuario = usuario;
 	}
 

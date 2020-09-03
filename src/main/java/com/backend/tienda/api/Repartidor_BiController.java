@@ -24,7 +24,7 @@ public class Repartidor_BiController {
 	
 	
 	@GetMapping(INFORMACION_INICIO)
-	@PreAuthorize("hasRole('ROLE_MOTORIZADO') or hasRole('ROLE_EMPRESA_ASOCIADA')")
+	@PreAuthorize("hasRole('ROLE_MOTORIZADO')")
 	public ResponseEntity<?> informacionBasica(@PathVariable("idusuario")int idusuario){
 	
 		Repartidor_Bi repartidorData=null;

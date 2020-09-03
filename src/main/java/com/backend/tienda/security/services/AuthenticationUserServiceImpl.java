@@ -67,11 +67,11 @@ public class AuthenticationUserServiceImpl implements AuthenticationUserService 
 				 roles,
 				 idubicacion
 				);
-		
-		
-
-		
+				
 	}
+
+	
+	
 	
 
 }

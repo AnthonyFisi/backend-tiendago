@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cuentaempresa")
+@Table(name="cuenta_empresa")
 public class CuentaEmpresa {
 	
 	@Id
@@ -31,6 +31,12 @@ public class CuentaEmpresa {
 	private String detallecuenta;
 	
 	private int idempresa;
+	
+	private int idtarifa;
+	
+	private boolean marketplace;
+	
+	private boolean socio;
 
 	public int getIdcuentaempresa() {
 		return idcuentaempresa;
@@ -94,6 +100,30 @@ public class CuentaEmpresa {
 
 	public void setIdempresa(int idempresa) {
 		this.idempresa = idempresa;
+	}
+
+	public int getIdtarifa() {
+		return idtarifa;
+	}
+
+	public void setIdtarifa(int idtarifa) {
+		this.idtarifa = idtarifa;
+	}
+
+	public boolean isMarketplace() {
+		return marketplace;
+	}
+
+	public void setMarketplace(boolean marketplace) {
+		this.marketplace = marketplace;
+	}
+
+	public boolean isSocio() {
+		return socio;
+	}
+
+	public void setSocio(boolean socio) {
+		this.socio = socio;
 	}
 
 	

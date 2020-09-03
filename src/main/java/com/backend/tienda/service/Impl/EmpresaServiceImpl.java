@@ -143,6 +143,7 @@ public class EmpresaServiceImpl  implements EmpresaService{
 	public List<Empresa> listaEmpresaFavorito(List<Integer> listaIds) {
 		Iterable<Empresa> lista=null;
 		lista=empresaRepository.findAllById(listaIds);
+		
 		for(Empresa empresa:lista) {
 			System.out.println(empresa.getIdempresa());
 		}

@@ -1,28 +1,33 @@
 package com.backend.tienda.entity;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="empresa_bi")
-public class Empresa{
+@Table(name="empresa")
+public class EmpresaOficial{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idempresa", updatable = false, nullable = false)
 	private int idempresa;
-	
-	private int idusuariogeneral;
+
 	
 	private int idsubcategoriaempresa;
-	 
-	private String nombre_subcategoria; 
-	
+	 	
 	private String nombre_empresa;
 	
 	private String direccion_empresa;
@@ -38,10 +43,8 @@ public class Empresa{
 	private String urlfoto_empresa;
 	
 	private String nombredueno_empresa;
-	
-	private int idcuentaempresa;
-	
-	private double popularidad;
+		
+	private double porcentaje_popularidad;
 
 	private boolean cuenta_delivery;
 	
@@ -67,8 +70,6 @@ public class Empresa{
 	private float estrella_empresa;
 	
 	
-	
-	
 	private String maps_coordenada_x;
 	
 	private String maps_coordenada_y;
@@ -77,27 +78,12 @@ public class Empresa{
 
 	private boolean disponible;
 		
-	private int idcategoriaempresa;
-	
-	private String nombre_categoria;
-	
-	private boolean marketplace;
-	
-	private boolean socio;
-	
+		
 	private float precio_menu;
 	
 	private float monto_descuento_menu;
 	
-	private String apellido;
-	
-	private String nombre;
-	
-	private String correo;
-	
-	private String celular;
-	
-	private String foto;
+	private int idusuariogeneral;
 	
 
 	public boolean isDisponible() {
@@ -242,25 +228,16 @@ public class Empresa{
 		this.nombredueno_empresa = nombredueno_empresa;
 	}
 
-	
-	public int getIdcuentaempresa() {
-		return idcuentaempresa;
-	}
-
-	public void setIdcuentaempresa(int idcuentaempresa) {
-		this.idcuentaempresa = idcuentaempresa;
-	}
 
 	
+	
 
-
-
-	public double getPopularidad() {
-		return popularidad;
+	public double getPorcentaje_popularidad() {
+		return porcentaje_popularidad;
 	}
 
-	public void setPopularidad(double popularidad) {
-		this.popularidad = popularidad;
+	public void setPorcentaje_popularidad(double porcentaje_popularidad) {
+		this.porcentaje_popularidad = porcentaje_popularidad;
 	}
 
 	public int getHorario_inicio() {
@@ -328,47 +305,7 @@ public class Empresa{
 		this.detalle_ubicacion = detalle_ubicacion;
 	}
 
-	public String getNombre_subcategoria() {
-		return nombre_subcategoria;
-	}
 
-	public void setNombre_subcategoria(String nombre_subcategoria) {
-		this.nombre_subcategoria = nombre_subcategoria;
-	}
-
-
-
-	public int getIdcategoriaempresa() {
-		return idcategoriaempresa;
-	}
-
-	public void setIdcategoriaempresa(int idcategoriaempresa) {
-		this.idcategoriaempresa = idcategoriaempresa;
-	}
-
-	public String getNombre_categoria() {
-		return nombre_categoria;
-	}
-
-	public void setNombre_categoria(String nombre_categoria) {
-		this.nombre_categoria = nombre_categoria;
-	}
-
-	public boolean isMarketplace() {
-		return marketplace;
-	}
-
-	public void setMarketplace(boolean marketplace) {
-		this.marketplace = marketplace;
-	}
-
-	public boolean isSocio() {
-		return socio;
-	}
-
-	public void setSocio(boolean socio) {
-		this.socio = socio;
-	}
 
 	public float getPrecio_menu() {
 		return precio_menu;
@@ -393,52 +330,9 @@ public class Empresa{
 	public void setIdusuariogeneral(int idusuariogeneral) {
 		this.idusuariogeneral = idusuariogeneral;
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	
-
-
 	
 	
-	
+
+
 
 }

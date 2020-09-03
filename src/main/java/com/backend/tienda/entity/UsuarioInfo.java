@@ -9,6 +9,8 @@ public class UsuarioInfo {
     
     private String correo;
     
+    private String contrasena;
+    
     private String celular;
         
     private String foto;
@@ -54,6 +56,15 @@ public class UsuarioInfo {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+	
     
     
     

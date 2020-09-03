@@ -8,27 +8,14 @@ import com.backend.tienda.repository.UsuarioRepository;
 import com.backend.tienda.service.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl  implements UsuarioService{
-	
+public class UsuarioServiceImpl implements UsuarioService{
+
 	@Autowired
 	UsuarioRepository usuarioRepository;
-
-	@Override
-	public Usuario updateCelular(int idusuario, String celular) {
 	
-		Usuario usuario=null;
-		
-		usuario=usuarioRepository.findById((long) idusuario).get();
-		usuario.setCelular(celular);
-		return usuarioRepository.save(usuario);
-		
-	}
-
 	@Override
-	public Usuario updateCorreo(int idusuario, String correo) {
-		Usuario usuario=null;
-		usuario=usuarioRepository.findById((long) idusuario).get();
-		usuario.setCelular(correo);
+	public Usuario guardarUsuario(Usuario usuario) {
+	
 		return usuarioRepository.save(usuario);
 	}
 

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.tienda.entity.Usuario;
-import com.backend.tienda.service.UsuarioService;
+import com.backend.tienda.entity.Usuario_general;
+import com.backend.tienda.service.Usuario_generalService;
 
 @RestController
-@RequestMapping(UsuarioController.USUARIO_CONTROLLER)
+@RequestMapping(Usuario_generalController.USUARIO_CONTROLLER)
 
-public class UsuarioController {
+public class Usuario_generalController {
 	
 	public final static String USUARIO_CONTROLLER="/UsuarioController";
 	
@@ -22,13 +22,13 @@ public class UsuarioController {
 	public final static String UPDATE_CELULAR="/updateCelular/{idusuario}/{celular}";
 	
 	@Autowired
-	UsuarioService usuarioService;
+	Usuario_generalService usuarioService;
 	
 	
 	@PostMapping(UPDATE_CORREO)
-	public ResponseEntity<Usuario>  updateCorreo(@PathVariable("idusuario")int idusuario,@PathVariable("correo")String correo){
+	public ResponseEntity<Usuario_general>  updateCorreo(@PathVariable("idusuario")int idusuario,@PathVariable("correo")String correo){
 		
-		Usuario usuario=usuarioService.updateCorreo(idusuario, correo);
+		Usuario_general usuario=usuarioService.updateCorreo(idusuario, correo);
 		
 		
 		if(usuario==null) {
@@ -41,9 +41,9 @@ public class UsuarioController {
 	
 
 	@PostMapping(UPDATE_CELULAR)
-	public ResponseEntity<Usuario>  updateCelular(@PathVariable("idusuario")int idusuario,@PathVariable("celular")String celular){
+	public ResponseEntity<Usuario_general>  updateCelular(@PathVariable("idusuario")int idusuario,@PathVariable("celular")String celular){
 		
-		Usuario usuario=usuarioService.updateCelular(idusuario, celular);
+		Usuario_general usuario=usuarioService.updateCelular(idusuario, celular);
 		
 		if(usuario==null) {
 			return ResponseEntity.badRequest().build();

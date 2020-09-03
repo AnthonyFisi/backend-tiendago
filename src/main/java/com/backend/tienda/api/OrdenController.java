@@ -21,7 +21,7 @@ import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
-import com.backend.tienda.entity.Usuario;
+import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.gson.OrdenGeneralGson;
 import com.backend.tienda.gson.OrdenGson;
 import com.backend.tienda.repositorys.UserRepository;
@@ -87,7 +87,7 @@ public class OrdenController {
 			
 			if(orden.getIdrepartidor()!=0) {
 
-				Usuario usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
+				Usuario_general usuario=userRepository.findById((long)orden.getIdrepartidor()).get();
 				
 				usuario.setContrasena("");
 				

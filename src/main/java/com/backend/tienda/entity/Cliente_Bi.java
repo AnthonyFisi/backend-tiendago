@@ -13,8 +13,11 @@ public class Cliente_Bi {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idusuario", updatable = false, nullable = false)
+	@Column(name = "idusuariogeneral", updatable = false, nullable = false)
+	private int idusuariogeneral;
+
 	private int idusuario;
+	
 	
 	private String nombre;
 	
@@ -164,6 +167,14 @@ public class Cliente_Bi {
 
 	public void setMaps_coordenada_y(String maps_coordenada_y) {
 		this.maps_coordenada_y = maps_coordenada_y;
+	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
 	}
 	
 	

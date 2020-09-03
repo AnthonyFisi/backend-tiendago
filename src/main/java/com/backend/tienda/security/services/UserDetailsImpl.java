@@ -10,8 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.backend.tienda.entity.Usuario;
-import com.backend.tienda.models.User;
+import com.backend.tienda.entity.Usuario_general;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
@@ -38,13 +37,13 @@ public class UserDetailsImpl implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(Usuario user) {
+	public static UserDetailsImpl build(Usuario_general user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getNombre().name()))
 				.collect(Collectors.toList());
 
 		return new UserDetailsImpl(
-				user.getIdusuario(), 
+				(long)user.getIdusuariogeneral(), 
 				user.getNombre(), 
 				user.getCorreo(),
 				user.getContrasena(), authorities);

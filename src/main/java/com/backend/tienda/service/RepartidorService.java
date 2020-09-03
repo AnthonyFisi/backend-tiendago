@@ -7,5 +7,7 @@ public interface RepartidorService {
 	Repartidor findRepartidorById(int idRepartidor);
 	
 	Repartidor updateDisponibilidad(int idRepartidor,boolean state);
+	
+	Repartidor guardarRepartidor(Repartidor repartidor);
 
 }

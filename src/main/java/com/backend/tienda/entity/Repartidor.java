@@ -28,6 +28,8 @@ public class Repartidor {
 		
 	private boolean disponible ;
 	
+	private int idusuariogeneral;
+	
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -77,6 +79,14 @@ public class Repartidor {
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
 	}
 
 	

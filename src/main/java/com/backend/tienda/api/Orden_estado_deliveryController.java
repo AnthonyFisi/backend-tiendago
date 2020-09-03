@@ -18,7 +18,7 @@ import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.Repartidor;
-import com.backend.tienda.entity.Usuario;
+import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.repositorys.UserRepository;

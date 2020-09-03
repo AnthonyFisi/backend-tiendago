@@ -46,6 +46,11 @@ public class RepartidorServiceImpl implements RepartidorService {
 		}
 		
 	}
+
+	@Override
+	public Repartidor guardarRepartidor(Repartidor repartidor) {
+		return repartidorRepository.save(repartidor);
+	}
 	
 	
 	

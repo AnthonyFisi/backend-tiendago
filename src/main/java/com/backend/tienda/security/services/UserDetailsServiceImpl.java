@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.backend.tienda.entity.Usuario;
+import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.models.User;
 import com.backend.tienda.repositorys.UserRepository;
 
@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		System.out.println("ENTRAMIS CON EL CORREO "+ correo);
 		
 		//Usuario user = userRepository.findByNombre(username)
-		Usuario user = userRepository.findByCorreo(correo)
+		Usuario_general user = userRepository.findByCorreo(correo)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + correo));
 
 		return UserDetailsImpl.build(user);
