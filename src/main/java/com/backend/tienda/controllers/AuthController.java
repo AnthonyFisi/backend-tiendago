@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.CuentaEmpresa;
 import com.backend.tienda.entity.Cuenta_Usuario;
 import com.backend.tienda.entity.Cuenta_repartidor;
+import com.backend.tienda.entity.Empresa;
 import com.backend.tienda.entity.EmpresaOficial;
 import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Roles;
@@ -49,6 +50,7 @@ import com.backend.tienda.service.CuentaEmpresaService;
 import com.backend.tienda.service.Cuenta_UsuarioService;
 import com.backend.tienda.service.Cuenta_repartidorService;
 import com.backend.tienda.service.EmpresaOficialService;
+import com.backend.tienda.service.EmpresaService;
 import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.UsuarioService;
 import com.google.firebase.auth.FirebaseAuth;
@@ -96,9 +98,41 @@ public class AuthController {
 	
 	@Autowired
 	RepartidorService repartidorService;
+	
+	@Autowired
+	EmpresaService empresaService;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+		
+		JwtResponse jwt=authenticationUserService.jwtToken(loginRequest.getUsername(),loginRequest.getPassword());
+		
+		return ResponseEntity.ok(jwt);
+	}
+	
+	@PostMapping("/signinEmpresa")
+	public ResponseEntity<?> authenticateEmpresa(@Valid @RequestBody LoginRequest loginRequest) {
+
+		Usuario_general usuario_general=null;
+		
+		JwtResponse jwt=authenticationUserService.jwtToken(loginRequest.getUsername(),loginRequest.getPassword());
+		
+		usuario_general=userRepository.findByCorreo(loginRequest.getUsername().trim()).get();
+		
+		Empresa empresa=null;
+		
+		if(usuario_general!=null) {
+			
+			//empresa=empresaService.findByIdEmpresaTotal(usuario_gene)
+			
+		}
+		
+		return ResponseEntity.ok(jwt);
+	}
+	
+	@PostMapping("/signinRepartidor")
+	public ResponseEntity<?> authenticateRepartidor(@Valid @RequestBody LoginRequest loginRequest) {
 
 		
 		JwtResponse jwt=authenticationUserService.jwtToken(loginRequest.getUsername(),loginRequest.getPassword());

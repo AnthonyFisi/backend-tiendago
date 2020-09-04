@@ -15,74 +15,73 @@ public class Restaurante_Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idpedido", updatable = false, nullable = false)
+	@Column(name = "idventa", updatable = false, nullable = false)
+	private int idventa;
+
+	private int idtipopago;
+	
+	private String tipopago_nombre;
+	
+	private int idhorario;
+	
+	private String horario_nombre;
+	
+	private int idubicacion;
+	
 	private int idpedido;
 	
 	private int idempresa;
 	
-	private int idventa;
+	private int pedido_cantidadtotal;
+
+	private int idusuario;
 	
-	private int idubicacion;
+	private int idusuariogeneral;
 	
-	private Timestamp venta_fecha;
+	private String nombre;
 	
-	private Timestamp venta_fechaentrega;
+	private String apellido;
+	
+	private String celular;
+	
+	
+	private Timestamp ventafecha;
+	
+	private Timestamp ventafechaentrega;
 	
 	private float venta_costodelivery;
 	
 	private float venta_costototal;
 	
-	private String comentario_global;
+	private String comentario;
 	
+	private int idestadoempresa;
+
 	private int idestado_pago;
 	
-	private String nombre_estado;
-
-	
-	private int idusuario;
-	
-	private String usuario_nombre;
-	
-	private String usuario_celular;
-	
-	private boolean orden_disponible;
-	
-	private int idrepartidor;
-	
-	private int idtipopago;
-	
-	private String tipopago_nombre;
-	
-	private int idestado_venta;
-	
-	private String tipo_estado;
+	private String nombre_estadopago;
 	
 	private int idtipo_envio;
-	
+
 	private String nombre_tipo_envio;
 
+	private boolean ordendisponible;
+
+	
 	private String tiempo_espera;
 	
-	private int pedido_cantidadtotal;
-	
-	private String comentario_pedido;
-	
+	private int idrepartidor;
 
-	
-	private String nombre_repartidor;
-	
-	private String imagen_repartidor;
-	
-	private String codigo_repartidor;
-	
 	private boolean cancelar;
-	
-	private String telefono;
-	
-	
-	
-	
 
+	private String comentario_cancelar;
+	
+	private int idestadodelivery;
+	
+	private int idestadogeneral;
+	
+	private int numeromesa;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -91,37 +90,6 @@ public class Restaurante_Pedido {
 		this.cancelar = cancelar;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public String getNombre_repartidor() {
-		return nombre_repartidor;
-	}
-
-	public void setNombre_repartidor(String nombre_repartidor) {
-		this.nombre_repartidor = nombre_repartidor;
-	}
-
-	public String getImagen_repartidor() {
-		return imagen_repartidor;
-	}
-
-	public void setImagen_repartidor(String imagen_repartidor) {
-		this.imagen_repartidor = imagen_repartidor;
-	}
-
-	public String getCodigo_repartidor() {
-		return codigo_repartidor;
-	}
-
-	public void setCodigo_repartidor(String codigo_repartidor) {
-		this.codigo_repartidor = codigo_repartidor;
-	}
 	
 	public int getPedido_cantidadtotal() {
 		return pedido_cantidadtotal;
@@ -171,21 +139,7 @@ public class Restaurante_Pedido {
 		this.idubicacion = idubicacion;
 	}
 
-	public Timestamp getVenta_fecha() {
-		return venta_fecha;
-	}
 
-	public void setVenta_fecha(Timestamp venta_fecha) {
-		this.venta_fecha = venta_fecha;
-	}
-
-	public Timestamp getVenta_fechaentrega() {
-		return venta_fechaentrega;
-	}
-
-	public void setVenta_fechaentrega(Timestamp venta_fechaentrega) {
-		this.venta_fechaentrega = venta_fechaentrega;
-	}
 
 	public float getVenta_costodelivery() {
 		return venta_costodelivery;
@@ -203,13 +157,7 @@ public class Restaurante_Pedido {
 		this.venta_costototal = venta_costototal;
 	}
 
-	public String getComentario_global() {
-		return comentario_global;
-	}
 
-	public void setComentario_global(String comentario_global) {
-		this.comentario_global = comentario_global;
-	}
 
 	public int getIdestado_pago() {
 		return idestado_pago;
@@ -219,23 +167,7 @@ public class Restaurante_Pedido {
 		this.idestado_pago = idestado_pago;
 	}
 
-	public String getNombre_estado() {
-		return nombre_estado;
-	}
 
-	public void setNombre_estado(String nombre_estado) {
-		this.nombre_estado = nombre_estado;
-	}
-
-
-
-	public String getComentario_pedido() {
-		return comentario_pedido;
-	}
-
-	public void setComentario_pedido(String comentario_pedido) {
-		this.comentario_pedido = comentario_pedido;
-	}
 
 	public int getIdusuario() {
 		return idusuario;
@@ -245,29 +177,7 @@ public class Restaurante_Pedido {
 		this.idusuario = idusuario;
 	}
 
-	public String getUsuario_nombre() {
-		return usuario_nombre;
-	}
 
-	public void setUsuario_nombre(String usuario_nombre) {
-		this.usuario_nombre = usuario_nombre;
-	}
-
-	public String getUsuario_celular() {
-		return usuario_celular;
-	}
-
-	public void setUsuario_celular(String usuario_celular) {
-		this.usuario_celular = usuario_celular;
-	}
-
-	public boolean isOrden_disponible() {
-		return orden_disponible;
-	}
-
-	public void setOrden_disponible(boolean orden_disponible) {
-		this.orden_disponible = orden_disponible;
-	}
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -293,21 +203,6 @@ public class Restaurante_Pedido {
 		this.tipopago_nombre = tipopago_nombre;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
-	}
-
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
-	}
-
-	public String getTipo_estado() {
-		return tipo_estado;
-	}
-
-	public void setTipo_estado(String tipo_estado) {
-		this.tipo_estado = tipo_estado;
-	}
 
 	public int getIdtipo_envio() {
 		return idtipo_envio;
@@ -323,6 +218,135 @@ public class Restaurante_Pedido {
 
 	public void setNombre_tipo_envio(String nombre_tipo_envio) {
 		this.nombre_tipo_envio = nombre_tipo_envio;
+	}
+
+	public Timestamp getVentafecha() {
+		return ventafecha;
+	}
+
+	public void setVentafecha(Timestamp ventafecha) {
+		this.ventafecha = ventafecha;
+	}
+
+	public Timestamp getVentafechaentrega() {
+		return ventafechaentrega;
+	}
+
+	public void setVentafechaentrega(Timestamp ventafechaentrega) {
+		this.ventafechaentrega = ventafechaentrega;
+	}
+
+
+	public int getIdestadoempresa() {
+		return idestadoempresa;
+	}
+
+	public void setIdestadoempresa(int idestadoempresa) {
+		this.idestadoempresa = idestadoempresa;
+	}
+
+	public int getIdestadodelivery() {
+		return idestadodelivery;
+	}
+
+	public void setIdestadodelivery(int idestadodelivery) {
+		this.idestadodelivery = idestadodelivery;
+	}
+
+	public int getIdestadogeneral() {
+		return idestadogeneral;
+	}
+
+	public void setIdestadogeneral(int idestadogeneral) {
+		this.idestadogeneral = idestadogeneral;
+	}
+
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
+	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public boolean isOrdendisponible() {
+		return ordendisponible;
+	}
+
+	public void setOrdendisponible(boolean ordendisponible) {
+		this.ordendisponible = ordendisponible;
+	}
+
+	public int getIdhorario() {
+		return idhorario;
+	}
+
+	public void setIdhorario(int idhorario) {
+		this.idhorario = idhorario;
+	}
+
+	public String getHorario_nombre() {
+		return horario_nombre;
+	}
+
+	public void setHorario_nombre(String horario_nombre) {
+		this.horario_nombre = horario_nombre;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public String getNombre_estadopago() {
+		return nombre_estadopago;
+	}
+
+	public void setNombre_estadopago(String nombre_estadopago) {
+		this.nombre_estadopago = nombre_estadopago;
+	}
+
+	public String getComentario_cancelar() {
+		return comentario_cancelar;
+	}
+
+	public void setComentario_cancelar(String comentario_cancelar) {
+		this.comentario_cancelar = comentario_cancelar;
 	}
 	
 	

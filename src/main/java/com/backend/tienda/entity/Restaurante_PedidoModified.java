@@ -5,75 +5,75 @@ import java.util.List;
 
 public class Restaurante_PedidoModified {
 	
+	private int idventa;
+
+	private int idtipopago;
+	
+	private String tipopago_nombre;
+	
+	private int idhorario;
+	
+	private String horario_nombre;
+	
+	private int idubicacion;
+	
 	private int idpedido;
 	
 	private int idempresa;
 	
-	private int idventa;
+	private int pedido_cantidadtotal;
+
+	private int idusuario;
 	
-	private int idubicacion;
+	private int idusuariogeneral;
 	
-	private Timestamp venta_fecha;
+	private String nombre;
 	
-	private Timestamp venta_fechaentrega;
+	private String apellido;
+	
+	private String celular;
+	
+	
+	private Timestamp ventafecha;
+	
+	private Timestamp ventafechaentrega;
 	
 	private float venta_costodelivery;
 	
 	private float venta_costototal;
 	
-	private String comentario_global;
+	private String comentario;
 	
+	private int idestadoempresa;
+
 	private int idestado_pago;
 	
-	private String nombre_estado;
-
-	
-	private String comentario_pedido;
-	
-	private int idusuario;
-	
-	private String usuario_nombre;
-	
-	private String usuario_celular;
-	
-	private boolean orden_disponible;
-	
-	private int idrepartidor;
-	
-	private int idtipopago;
-	
-	private String tipopago_nombre;
-	
-	private int idestado_venta;
-	
-	private String tipo_estado;
+	private String nombre_estadopago;
 	
 	private int idtipo_envio;
-	
+
 	private String nombre_tipo_envio;
 
-	private String tiempo_espera;
-	
-	private int pedido_cantidadtotal;
+	private boolean ordendisponible;
 
 	
-	private String nombre_repartidor;
+	private String tiempo_espera;
 	
-	private String imagen_repartidor;
+	private int idrepartidor;
+
+	private boolean cancelar;
+
+	private String comentario_cancelar;
 	
-	private String codigo_repartidor;
+	private int idestadodelivery;
 	
-private boolean cancelar;
+	private int idestadogeneral;
 	
-	private String telefono;
+	private int numeromesa;
 	
-	
-	
+	private String fechaAceptado;
+		
 	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
-	
-	
-	
-	
 	
 	
 	public boolean isCancelar() {
@@ -84,47 +84,12 @@ private boolean cancelar;
 		this.cancelar = cancelar;
 	}
 
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
 	public int getPedido_cantidadtotal() {
 		return pedido_cantidadtotal;
 	}
 
 	public void setPedido_cantidadtotal(int pedido_cantidadtotal) {
 		this.pedido_cantidadtotal = pedido_cantidadtotal;
-	}
-
-	
-
-	
-	public String getNombre_repartidor() {
-		return nombre_repartidor;
-	}
-
-	public void setNombre_repartidor(String nombre_repartidor) {
-		this.nombre_repartidor = nombre_repartidor;
-	}
-
-	public String getImagen_repartidor() {
-		return imagen_repartidor;
-	}
-
-	public void setImagen_repartidor(String imagen_repartidor) {
-		this.imagen_repartidor = imagen_repartidor;
-	}
-
-	public String getCodigo_repartidor() {
-		return codigo_repartidor;
-	}
-
-	public void setCodigo_repartidor(String codigo_repartidor) {
-		this.codigo_repartidor = codigo_repartidor;
 	}
 
 
@@ -160,21 +125,7 @@ private boolean cancelar;
 		this.idubicacion = idubicacion;
 	}
 
-	public Timestamp getVenta_fecha() {
-		return venta_fecha;
-	}
 
-	public void setVenta_fecha(Timestamp venta_fecha) {
-		this.venta_fecha = venta_fecha;
-	}
-
-	public Timestamp getVenta_fechaentrega() {
-		return venta_fechaentrega;
-	}
-
-	public void setVenta_fechaentrega(Timestamp venta_fechaentrega) {
-		this.venta_fechaentrega = venta_fechaentrega;
-	}
 
 	public float getVenta_costodelivery() {
 		return venta_costodelivery;
@@ -192,13 +143,6 @@ private boolean cancelar;
 		this.venta_costototal = venta_costototal;
 	}
 
-	public String getComentario_global() {
-		return comentario_global;
-	}
-
-	public void setComentario_global(String comentario_global) {
-		this.comentario_global = comentario_global;
-	}
 
 	public int getIdestado_pago() {
 		return idestado_pago;
@@ -206,23 +150,6 @@ private boolean cancelar;
 
 	public void setIdestado_pago(int idestado_pago) {
 		this.idestado_pago = idestado_pago;
-	}
-
-	public String getNombre_estado() {
-		return nombre_estado;
-	}
-
-	public void setNombre_estado(String nombre_estado) {
-		this.nombre_estado = nombre_estado;
-	}
-
-	
-	public String getComentario_pedido() {
-		return comentario_pedido;
-	}
-
-	public void setComentario_pedido(String comentario_pedido) {
-		this.comentario_pedido = comentario_pedido;
 	}
 
 	public int getIdusuario() {
@@ -233,29 +160,7 @@ private boolean cancelar;
 		this.idusuario = idusuario;
 	}
 
-	public String getUsuario_nombre() {
-		return usuario_nombre;
-	}
 
-	public void setUsuario_nombre(String usuario_nombre) {
-		this.usuario_nombre = usuario_nombre;
-	}
-
-	public String getUsuario_celular() {
-		return usuario_celular;
-	}
-
-	public void setUsuario_celular(String usuario_celular) {
-		this.usuario_celular = usuario_celular;
-	}
-
-	public boolean isOrden_disponible() {
-		return orden_disponible;
-	}
-
-	public void setOrden_disponible(boolean orden_disponible) {
-		this.orden_disponible = orden_disponible;
-	}
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -281,21 +186,7 @@ private boolean cancelar;
 		this.tipopago_nombre = tipopago_nombre;
 	}
 
-	public int getIdestado_venta() {
-		return idestado_venta;
-	}
-
-	public void setIdestado_venta(int idestado_venta) {
-		this.idestado_venta = idestado_venta;
-	}
-
-	public String getTipo_estado() {
-		return tipo_estado;
-	}
-
-	public void setTipo_estado(String tipo_estado) {
-		this.tipo_estado = tipo_estado;
-	}
+	
 
 	public int getIdtipo_envio() {
 		return idtipo_envio;
@@ -328,9 +219,202 @@ private boolean cancelar;
 	public void setListaProductos(List<ProductoJOINregistroPedidoJOINpedido> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
+	
+	
 
 	
 
+	public Timestamp getVentafecha() {
+		return ventafecha;
+	}
+
+	public void setVentafecha(Timestamp ventafecha) {
+		this.ventafecha = ventafecha;
+	}
+
+	public Timestamp getVentafechaentrega() {
+		return ventafechaentrega;
+	}
+
+	public void setVentafechaentrega(Timestamp ventafechaentrega) {
+		this.ventafechaentrega = ventafechaentrega;
+	}
+
+
+	public int getIdestadoempresa() {
+		return idestadoempresa;
+	}
+
+	public void setIdestadoempresa(int idestadoempresa) {
+		this.idestadoempresa = idestadoempresa;
+	}
+
+	public int getIdestadodelivery() {
+		return idestadodelivery;
+	}
+
+	public void setIdestadodelivery(int idestadodelivery) {
+		this.idestadodelivery = idestadodelivery;
+	}
+
+	public int getIdestadogeneral() {
+		return idestadogeneral;
+	}
+
+	public void setIdestadogeneral(int idestadogeneral) {
+		this.idestadogeneral = idestadogeneral;
+	}
+
+	public int getNumeromesa() {
+		return numeromesa;
+	}
+
+	public void setNumeromesa(int numeromesa) {
+		this.numeromesa = numeromesa;
+	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public boolean isOrdendisponible() {
+		return ordendisponible;
+	}
+
+	public void setOrdendisponible(boolean ordendisponible) {
+		this.ordendisponible = ordendisponible;
+	}
+	
+	
+/*                ****************************************/
+	public int getIdhorario() {
+		return idhorario;
+	}
+
+	public void setIdhorario(int idhorario) {
+		this.idhorario = idhorario;
+	}
+
+	public String getHorario_nombre() {
+		return horario_nombre;
+	}
+
+	public void setHorario_nombre(String horario_nombre) {
+		this.horario_nombre = horario_nombre;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	public String getNombre_estadopago() {
+		return nombre_estadopago;
+	}
+
+	public void setNombre_estadopago(String nombre_estadopago) {
+		this.nombre_estadopago = nombre_estadopago;
+	}
+
+	public String getComentario_cancelar() {
+		return comentario_cancelar;
+	}
+
+	public void setComentario_cancelar(String comentario_cancelar) {
+		this.comentario_cancelar = comentario_cancelar;
+	}
+	
+	
+
+	public String getFechaAceptado() {
+		return fechaAceptado;
+	}
+
+	public void setFechaAceptado(String fechaAceptado) {
+		this.fechaAceptado = fechaAceptado;
+	}
+
+	public static Restaurante_PedidoModified convert(Restaurante_Pedido pedido) {
+		
+		Restaurante_PedidoModified res =new Restaurante_PedidoModified();
+
+			 res = new Restaurante_PedidoModified();
+			res.setIdpedido(pedido.getIdpedido());
+			res.setIdempresa(pedido.getIdempresa());
+			res.setIdventa(pedido.getIdventa());
+			res.setIdubicacion(pedido.getIdubicacion());
+			res.setVentafecha(pedido.getVentafecha());
+			res.setVentafechaentrega(pedido.getVentafechaentrega());
+			res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+			
+			
+			
+			res.setVenta_costototal(pedido.getVenta_costototal());
+			res.setComentario(pedido.getComentario());
+			res.setIdestado_pago(pedido.getIdestado_pago());
+			res.setNombre_estadopago(pedido.getNombre_estadopago());
+			
+			
+			res.setIdusuario(pedido.getIdusuario());
+			res.setNombre(pedido.getNombre());
+			res.setCelular(pedido.getCelular());
+			res.setOrdendisponible(pedido.isOrdendisponible());
+			res.setIdrepartidor(pedido.getIdrepartidor());
+			res.setIdtipopago(pedido.getIdtipopago());
+			
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+			res.setIdtipopago(pedido.getIdtipopago());
+			res.setTipopago_nombre(pedido.getTipopago_nombre());
+			res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+			res.setTiempo_espera(pedido.getTiempo_espera());
+			
+			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
+			res.setCancelar(pedido.isCancelar());
+			
+			res.setIdestadodelivery(pedido.getIdestadodelivery());
+			res.setIdestadoempresa(pedido.getIdestadoempresa());
+			res.setIdestadogeneral(pedido.getIdestadogeneral());
+			
+			res.setIdhorario(pedido.getIdhorario());
+			res.setHorario_nombre(pedido.getHorario_nombre());
+			res.setNombre_estadopago(pedido.getNombre_estadopago());
+			res.setComentario_cancelar(pedido.getComentario_cancelar());
+		
+		return res;
+		
+	}
+	
 
 
 

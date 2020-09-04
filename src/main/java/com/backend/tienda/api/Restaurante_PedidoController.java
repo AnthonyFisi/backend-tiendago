@@ -101,7 +101,7 @@ public class Restaurante_PedidoController {
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevosDistinct(idEmpresa);
 			
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+			//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
 			
 			
@@ -110,44 +110,10 @@ public class Restaurante_PedidoController {
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
 		
-				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
-				
-				res.setIdpedido(pedido.getIdpedido());
-				res.setIdempresa(pedido.getIdempresa());
-				res.setIdventa(pedido.getIdventa());
-				res.setIdubicacion(pedido.getIdubicacion());
-				res.setVenta_fecha(pedido.getVenta_fecha());
-				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
-				res.setVenta_costototal(pedido.getVenta_costototal());
-				res.setComentario_global(pedido.getComentario_global());
-				res.setIdestado_pago(pedido.getIdestado_pago());
-				res.setNombre_estado(pedido.getNombre_estado());				
-				res.setComentario_pedido(pedido.getComentario_pedido());				
-				res.setIdusuario(pedido.getIdusuario());
-				res.setUsuario_nombre(pedido.getUsuario_nombre());
-				res.setUsuario_celular(pedido.getUsuario_celular());
-				res.setOrden_disponible(pedido.isOrden_disponible());
-				res.setIdrepartidor(pedido.getIdrepartidor());
-				res.setIdtipopago(pedido.getIdtipopago());				
-				res.setTipopago_nombre(pedido.getTipopago_nombre());			
-				res.setIdestado_venta(pedido.getIdestado_venta());
-				res.setTipo_estado(pedido.getTipo_estado());
-				res.setIdtipopago(pedido.getIdtipopago());
-				res.setTipopago_nombre(pedido.getTipopago_nombre());			
-				res.setTiempo_espera(pedido.getTiempo_espera());
-				res.setListaProductos(listaProductos);				
-				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
-				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-				res.setNombre_repartidor(pedido.getNombre_repartidor());
-				res.setImagen_repartidor(pedido.getImagen_repartidor());
-				
-				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
-				
-				res.setCancelar(pedido.isCancelar());
-				res.setTelefono(pedido.getTelefono());
+				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
-				
+				res.setListaProductos(listaProductos);	
 				
 				listaTotal.add(res);
 			}
@@ -184,7 +150,6 @@ public class Restaurante_PedidoController {
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
 			
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
 
 			listaTotal= new ArrayList<>();
@@ -192,53 +157,12 @@ public class Restaurante_PedidoController {
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
 		
-				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
-				res.setIdpedido(pedido.getIdpedido());
-				res.setIdempresa(pedido.getIdempresa());
-				res.setIdventa(pedido.getIdventa());
-				res.setIdubicacion(pedido.getIdubicacion());
-				res.setVenta_fecha(pedido.getVenta_fecha());
-				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 				
-				
-				
-				res.setVenta_costototal(pedido.getVenta_costototal());
-				res.setComentario_global(pedido.getComentario_global());
-				res.setIdestado_pago(pedido.getIdestado_pago());
-				res.setNombre_estado(pedido.getNombre_estado());
-				
-				res.setComentario_pedido(pedido.getComentario_pedido());
-				
-				res.setIdusuario(pedido.getIdusuario());
-				res.setUsuario_nombre(pedido.getUsuario_nombre());
-				res.setUsuario_celular(pedido.getUsuario_celular());
-				res.setOrden_disponible(pedido.isOrden_disponible());
-				res.setIdrepartidor(pedido.getIdrepartidor());
-				res.setIdtipopago(pedido.getIdtipopago());
-				
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 				
-				res.setIdestado_venta(pedido.getIdestado_venta());
-				res.setTipo_estado(pedido.getTipo_estado());
-				res.setIdtipopago(pedido.getIdtipopago());
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-				
-				
-				res.setTiempo_espera(pedido.getTiempo_espera());
-
-				res.setListaProductos(listaProductos);
-				
-				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-				res.setNombre_repartidor(pedido.getNombre_repartidor());
-				res.setImagen_repartidor(pedido.getImagen_repartidor());
-				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
-
-				res.setCancelar(pedido.isCancelar());
-				res.setTelefono(pedido.getTelefono());
-
+				res.setListaProductos(listaProductos);	
 				listaTotal.add(res);
 			}
 
@@ -275,12 +199,8 @@ public class Restaurante_PedidoController {
 		try {
 
 
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);
-			System.out.println("PASO 1 ");
-			
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
-			System.out.println("PASO 1 ");
-
+			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);		
+	
 		
 			
 			List<Orden_estado_empresaPK> pklist=new ArrayList<>();
@@ -289,84 +209,24 @@ public class Restaurante_PedidoController {
 				
 				Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
 				pk.setIdventa(pedido.getIdventa());
-				pk.setIdestado_empresa(pedido.getIdestado_venta());
+				pk.setIdestado_empresa(pedido.getIdestadoempresa());
 				pklist.add(pk);
 				
 			}
-			
-			
+						
 			listaEstados=ordenService.listaEstados(pklist);
-			System.out.println("PASO 2 ");
-
-			listaEstados.stream().forEach(p->{
-				System.out.println(p.getFecha().toString());
-
-			});
 
 
 			listaTotal= new ArrayList<>();
 			
 			int position=0;
-			
-			
-			
-			
-			
-			
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
-				
-				
-		
-				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
-				res.setIdpedido(pedido.getIdpedido());
-				res.setIdempresa(pedido.getIdempresa());
-				res.setIdventa(pedido.getIdventa());
-				res.setIdubicacion(pedido.getIdubicacion());
-				res.setVenta_fecha(pedido.getVenta_fecha());
-				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
-				
-				
-				
-				res.setVenta_costototal(pedido.getVenta_costototal());
-				res.setComentario_global(pedido.getComentario_global());
-				res.setIdestado_pago(pedido.getIdestado_pago());
-				res.setNombre_estado(pedido.getNombre_estado());
-				
-				res.setComentario_pedido(pedido.getComentario_pedido());
-				
-				res.setIdusuario(pedido.getIdusuario());
-				res.setUsuario_nombre(pedido.getUsuario_nombre());
-				res.setUsuario_celular(pedido.getUsuario_celular());
-				res.setOrden_disponible(pedido.isOrden_disponible());
-				res.setIdrepartidor(pedido.getIdrepartidor());
-				res.setIdtipopago(pedido.getIdtipopago());
-				
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-		
-				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
 
-				res.setIdestado_venta(pedido.getIdestado_venta());
-				res.setTipo_estado(pedido.getTipo_estado());
-				res.setIdtipopago(pedido.getIdtipopago());
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-				
-				
-				res.setTiempo_espera(pedido.getTiempo_espera());
-
-				res.setListaProductos(listaProductos);
-				
-				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-				res.setNombre_repartidor(pedido.getNombre_repartidor());
-				res.setImagen_repartidor(pedido.getImagen_repartidor());
-				
-				res.setCodigo_repartidor(listaEstados.get(position).getFecha().toString());
-				
-
-				res.setCancelar(pedido.isCancelar());
-				res.setTelefono(pedido.getTelefono());
-
+				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
+				res.setListaProductos(listaProductos);	
 				listaTotal.add(res);
 				
 				position++;
@@ -410,7 +270,7 @@ public class Restaurante_PedidoController {
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosHistorial(idEmpresa);
 			
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+			//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
 
 			listaTotal= new ArrayList<>();
@@ -418,53 +278,11 @@ public class Restaurante_PedidoController {
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 				
 		
-				Restaurante_PedidoModified res = new Restaurante_PedidoModified();
-				res.setIdpedido(pedido.getIdpedido());
-				res.setIdempresa(pedido.getIdempresa());
-				res.setIdventa(pedido.getIdventa());
-				res.setIdubicacion(pedido.getIdubicacion());
-				res.setVenta_fecha(pedido.getVenta_fecha());
-				res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-				res.setVenta_costodelivery(pedido.getVenta_costodelivery());
-				
-				
-				
-				res.setVenta_costototal(pedido.getVenta_costototal());
-				res.setComentario_global(pedido.getComentario_global());
-				res.setIdestado_pago(pedido.getIdestado_pago());
-				res.setNombre_estado(pedido.getNombre_estado());
-				
-				res.setComentario_pedido(pedido.getComentario_pedido());
-				
-				res.setIdusuario(pedido.getIdusuario());
-				res.setUsuario_nombre(pedido.getUsuario_nombre());
-				res.setUsuario_celular(pedido.getUsuario_celular());
-				res.setOrden_disponible(pedido.isOrden_disponible());
-				res.setIdrepartidor(pedido.getIdrepartidor());
-				res.setIdtipopago(pedido.getIdtipopago());
-				
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-		
-				res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
+				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 
-				res.setIdestado_venta(pedido.getIdestado_venta());
-				res.setTipo_estado(pedido.getTipo_estado());
-				res.setIdtipopago(pedido.getIdtipopago());
-				res.setTipopago_nombre(pedido.getTipopago_nombre());
-				
-				
-				res.setTiempo_espera(pedido.getTiempo_espera());
+				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
-				res.setListaProductos(listaProductos);
-				
-				res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-				res.setNombre_repartidor(pedido.getNombre_repartidor());
-				res.setImagen_repartidor(pedido.getImagen_repartidor());
-				res.setCodigo_repartidor(pedido.getCodigo_repartidor());
-				
-
-				res.setCancelar(pedido.isCancelar());
-				res.setTelefono(pedido.getTelefono());
+				res.setListaProductos(listaProductos);	
 
 				listaTotal.add(res);
 			}
@@ -509,58 +327,9 @@ public class Restaurante_PedidoController {
 			System.out.println("paso porlista productos" + pedido.getIdempresa());
 
 
-		
-
-			 res = new Restaurante_PedidoModified();
-			res.setIdpedido(pedido.getIdpedido());
-			res.setIdempresa(pedido.getIdempresa());
-			res.setIdventa(pedido.getIdventa());
-			res.setIdubicacion(pedido.getIdubicacion());
-			res.setVenta_fecha(pedido.getVenta_fecha());
-			res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-			res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+			res =  Restaurante_PedidoModified.convert(pedido);
 			
-			
-			
-			res.setVenta_costototal(pedido.getVenta_costototal());
-			res.setComentario_global(pedido.getComentario_global());
-			res.setIdestado_pago(pedido.getIdestado_pago());
-			res.setNombre_estado(pedido.getNombre_estado());
-			
-			res.setComentario_pedido(pedido.getComentario_pedido());
-			
-			res.setIdusuario(pedido.getIdusuario());
-			res.setUsuario_nombre(pedido.getUsuario_nombre());
-			res.setUsuario_celular(pedido.getUsuario_celular());
-			res.setOrden_disponible(pedido.isOrden_disponible());
-			res.setIdrepartidor(pedido.getIdrepartidor());
-			res.setIdtipopago(pedido.getIdtipopago());
-			
-			res.setTipopago_nombre(pedido.getTipopago_nombre());
-	
-			
-			res.setIdestado_venta(pedido.getIdestado_venta());
-			res.setTipo_estado(pedido.getTipo_estado());
-			res.setIdtipopago(pedido.getIdtipopago());
-			res.setTipopago_nombre(pedido.getTipopago_nombre());
-			
-			res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
-
-			res.setTiempo_espera(pedido.getTiempo_espera());
-
-			res.setListaProductos(listaProductos);
-
-
-			res.setNombre_repartidor(pedido.getNombre_repartidor());
-			res.setImagen_repartidor(pedido.getImagen_repartidor());
-			res.setCodigo_repartidor(pedido.getCodigo_repartidor());
-			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-
-			res.setCancelar(pedido.isCancelar());
-			res.setTelefono(pedido.getTelefono());
-			
-			
-
+			res.setListaProductos(listaProductos);	
 
 		}catch(Exception e) {
 
@@ -594,57 +363,9 @@ public class Restaurante_PedidoController {
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 
-		
-
-			 res = new Restaurante_PedidoModified();
-			res.setIdpedido(pedido.getIdpedido());
-			res.setIdempresa(pedido.getIdempresa());
-			res.setIdventa(pedido.getIdventa());
-			res.setIdubicacion(pedido.getIdubicacion());
-			res.setVenta_fecha(pedido.getVenta_fecha());
-			res.setVenta_fechaentrega(pedido.getVenta_fechaentrega());
-			res.setVenta_costodelivery(pedido.getVenta_costodelivery());
+			res =  Restaurante_PedidoModified.convert(pedido);
 			
-			
-			
-			res.setVenta_costototal(pedido.getVenta_costototal());
-			res.setComentario_global(pedido.getComentario_global());
-			res.setIdestado_pago(pedido.getIdestado_pago());
-			res.setNombre_estado(pedido.getNombre_estado());
-			
-			res.setComentario_pedido(pedido.getComentario_pedido());
-			
-			res.setIdusuario(pedido.getIdusuario());
-			res.setUsuario_nombre(pedido.getUsuario_nombre());
-			res.setUsuario_celular(pedido.getUsuario_celular());
-			res.setOrden_disponible(pedido.isOrden_disponible());
-			res.setIdrepartidor(pedido.getIdrepartidor());
-			res.setIdtipopago(pedido.getIdtipopago());
-			
-			res.setTipopago_nombre(pedido.getTipopago_nombre());
-	
-			
-			res.setIdestado_venta(pedido.getIdestado_venta());
-			res.setTipo_estado(pedido.getTipo_estado());
-			res.setIdtipopago(pedido.getIdtipopago());
-			res.setTipopago_nombre(pedido.getTipopago_nombre());
-			
-			res.setPedido_cantidadtotal(pedido.getPedido_cantidadtotal());
-
-			res.setTiempo_espera(pedido.getTiempo_espera());
-
-			res.setListaProductos(listaProductos);
-
-			res.setNombre_repartidor(pedido.getNombre_repartidor());
-			res.setImagen_repartidor(pedido.getImagen_repartidor());
-			res.setCodigo_repartidor(pedido.getCodigo_repartidor());
-			
-			res.setNombre_tipo_envio(pedido.getNombre_tipo_envio());
-
-
-			res.setCancelar(pedido.isCancelar());
-			res.setTelefono(pedido.getTelefono());
-			
+			res.setListaProductos(listaProductos);	
 
 
 		}catch(Exception e) {
