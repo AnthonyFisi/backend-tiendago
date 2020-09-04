@@ -13,8 +13,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.backend.tienda.entity.Ubicacion;
+import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.payload.response.JwtResponse;
 import com.backend.tienda.repository.UbicacionRepository;
+import com.backend.tienda.repository.UsuarioRepository;
 import com.backend.tienda.security.jwt.JwtUtils;
 @Service
 public class AuthenticationUserServiceImpl implements AuthenticationUserService {
@@ -28,11 +30,17 @@ public class AuthenticationUserServiceImpl implements AuthenticationUserService 
 	@Autowired
 	UbicacionRepository ubicacionRepository;
 	
+	
+	@Autowired
+	UsuarioRepository usuarioRepository;
+	
 	@Override
 	public JwtResponse jwtToken(String username,String password) {
 		
 		List<Ubicacion> lista=null;
 		int idubicacion=0;
+		
+		Usuario usuario=null;
 		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(username,password));
@@ -47,9 +55,12 @@ public class AuthenticationUserServiceImpl implements AuthenticationUserService 
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 		
+		usuario=usuarioRepository.findByIdusuariogeneral(userDetails.getId().intValue());
+		
+		
 		try {
 			
-			lista=ubicacionRepository.findByIdusuario(userDetails.getId().intValue());
+			lista=ubicacionRepository.findByIdusuario(usuario.getIdusuario());
 
 		}catch(Exception e) {
 			
