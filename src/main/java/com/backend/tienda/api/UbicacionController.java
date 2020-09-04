@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Ubicacion;
+import com.backend.tienda.entity.Usuario;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
 import com.backend.tienda.gson.UbicacionGson;
+import com.backend.tienda.repository.UsuarioRepository;
 import com.backend.tienda.service.UbicacionService;
 
 @RestController
@@ -42,6 +44,8 @@ public class UbicacionController {
 	@Autowired
 	UbicacionService ubicacionService;
 	
+	@Autowired
+	UsuarioRepository usuarioRepository;
 	
 	@RequestMapping(value=LISTA_BY_IDUSUARIO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UbicacionGson>  listaUbicacionByIdUsuario(@PathVariable("idusuario")int idusuario){
@@ -68,8 +72,13 @@ public class UbicacionController {
 	public ResponseEntity<Ubicacion>  registrarFirstTimeUbicacion(@RequestBody Ubicacion ubicacion){
 		
 		Ubicacion ubicacio=null;
+		Usuario usuario=null;
 		
 		try {
+			
+			
+			usuario=usuarioRepository.findByIdusuariogeneral(ubicacion.getIdusuario());
+			ubicacion.setIdusuario(usuario.getIdusuario());
 			ubicacio=ubicacionService.saveUbicacionFirstTime(ubicacion);
 			
 		}catch(Exception e) {

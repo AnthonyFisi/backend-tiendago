@@ -36,7 +36,6 @@ public class EmpresaController {
 
 	public final static String FIND_LISTA="/lista";
 
-	public final static String FIND_LISTA_ENTERPRISE="/listaEnterprise/{idCategoria}";
 
 	public final static String REGISTRAR_EMPRESA="/registrar";
 
