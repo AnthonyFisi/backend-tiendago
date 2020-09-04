@@ -63,6 +63,9 @@ public class HaversineDistanceDelivery {
 
 	public static List<Double> convertStringToPoint(String position) {
 		
+		System.out.println(position+"BOMBRE DE LA UBICACION");
+
+		
 		List<Double> lista=new ArrayList<>();
 		
 		String data[] =position.split(",");

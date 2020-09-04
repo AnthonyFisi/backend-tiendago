@@ -97,26 +97,62 @@ public class VentaController {
 			Timestamp time=new Timestamp(System.currentTimeMillis());
 
 			
-			Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
-			Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
-			pk.setIdventa(respuesta.getIdventa());
-			pk.setIdestado_empresa(1);
-			
-			ordenEstado.setId(pk);
-			ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
-			ordenEstado.setDetalle("");
-			ordenEstado.setFecha(time);
-			
-			ordenService.registrarEstado(ordenEstado);
-			
-			//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
-			
-			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+			if(ventaAndroid.getNumeromesa()!=0) {
+				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
+				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
+				pk.setIdventa(respuesta.getIdventa());
+				pk.setIdestado_empresa(1);
+				
+				ordenEstado.setId(pk);
+				ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
+				ordenEstado.setDetalle("");
+				ordenEstado.setFecha(time);
+				
+				ordenService.registrarEstado(ordenEstado);
+				
+				//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+				
+				Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
-			pusher.setCluster("us2");
+				pusher.setCluster("us2");
+				
+				pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
+				
+			}else {
+				
+				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
+				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
+				pk.setIdventa(respuesta.getIdventa());
+				pk.setIdestado_empresa(1);
+				
+				ordenEstado.setId(pk);
+				ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
+				ordenEstado.setDetalle("");
+				ordenEstado.setFecha(time);
+				
+				ordenService.registrarEstado(ordenEstado);
+				
+				Timestamp time2=new Timestamp(System.currentTimeMillis());
+
+				pk.setIdventa(2);
+				ordenEstado.setId(pk);
+				ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
+				ordenEstado.setDetalle("");
+				ordenEstado.setFecha(time2);
+				ordenService.registrarEstado(ordenEstado);
+
+				
+				//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+				
+				Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+
+				pusher.setCluster("us2");
+				
+				pusher.trigger("canal-orden-proces-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
+			}
 			
-			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 			
+		
 
 			
 		}catch(Exception e) {

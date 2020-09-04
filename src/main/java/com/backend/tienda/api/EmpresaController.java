@@ -34,8 +34,6 @@ public class EmpresaController {
 
 	public final static String FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION="/ListafindByLocationSubCategoria/{idSubCategoria}/{Ubicacion}";
 
-	public final static String FIND_LISTA="/lista";
-
 
 	public final static String REGISTRAR_EMPRESA="/registrar";
 
@@ -87,6 +85,8 @@ public class EmpresaController {
 	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacion(@PathVariable("idCategoria") int idCategoria
 			,@PathVariable("Ubicacion")String Ubicacion){
 
+		System.out.println(Ubicacion+"BOMBRE DE LA UBICACION");
+		
 		List<Empresa> listaEmpresaCerca=new ArrayList<>();
 
 		EmpresaGson empresaGson =null;
@@ -94,6 +94,9 @@ public class EmpresaController {
 		List<Empresa> lista=null;
 
 		lista=empresaService.listaEmpresaIdCategoria(idCategoria);
+		
+		System.out.println(lista.size()+"tamano");
+
 
 		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion);
 
