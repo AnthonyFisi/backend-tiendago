@@ -367,7 +367,7 @@ public class Restaurante_PedidoModified {
 
 	public static Restaurante_PedidoModified convert(Restaurante_Pedido pedido) {
 		
-		Restaurante_PedidoModified res =new Restaurante_PedidoModified();
+		Restaurante_PedidoModified res =null;
 
 			 res = new Restaurante_PedidoModified();
 			res.setIdpedido(pedido.getIdpedido());
@@ -410,6 +410,11 @@ public class Restaurante_PedidoModified {
 			res.setHorario_nombre(pedido.getHorario_nombre());
 			res.setNombre_estadopago(pedido.getNombre_estadopago());
 			res.setComentario_cancelar(pedido.getComentario_cancelar());
+			
+			res.setNumeromesa(pedido.getNumeromesa());
+			res.setIdusuariogeneral(pedido.getIdusuariogeneral());
+			res.setApellido(pedido.getApellido());
+			res.setIdtipo_envio(pedido.getIdtipo_envio());
 		
 		return res;
 		

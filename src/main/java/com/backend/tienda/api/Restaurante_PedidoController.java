@@ -111,6 +111,7 @@ public class Restaurante_PedidoController {
 				
 		
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+				
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 				res.setListaProductos(listaProductos);	
@@ -223,6 +224,8 @@ public class Restaurante_PedidoController {
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 
+				System.out.println(pedido.getNumeromesa()+"numeromesa");
+				
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 				
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
