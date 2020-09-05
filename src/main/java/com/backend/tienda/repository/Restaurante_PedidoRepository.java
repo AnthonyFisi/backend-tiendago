@@ -110,7 +110,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idestadogeneral,\r\n" + 
 			"					numeromesa "+
 			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadorestaurante = 2  AND ordendisponible=true" + 
+			"                 WHERE   idestadoempresa = 2  AND ordendisponible=true" + 
 			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
 	List<Restaurante_Pedido> findProcesOrden(int idEmpresa);
 	
@@ -138,7 +138,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					idestadogeneral,\r\n" + 
 			"					numeromesa "+
 			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoventa = 3  AND ordendisponible=true" + 
+			"                 WHERE   idestadoempresa = 3  AND ordendisponible=true" + 
 			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
 	List<Restaurante_Pedido> findReadyOrden(int idEmpresa);
 	
