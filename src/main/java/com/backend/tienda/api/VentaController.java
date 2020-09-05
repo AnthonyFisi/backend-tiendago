@@ -142,7 +142,10 @@ public class VentaController {
 				ordenEstado.setDetalle("");
 				ordenEstado.setFecha(time);
 				
+				
 				ordenService.registrarEstado(ordenEstado);
+				
+				
 				
 				/*INSERTAMOS DOS ESTADO*/
 				
@@ -150,15 +153,18 @@ public class VentaController {
 
 				Orden_estado_empresa ordenEstado2=new Orden_estado_empresa();
 				Orden_estado_empresaPK pk2 = new Orden_estado_empresaPK();
-				pk.setIdventa(respuesta.getIdventa());
-				pk.setIdestado_empresa(2);
+				pk2.setIdventa(respuesta.getIdventa());
+				pk2.setIdestado_empresa(2);
 				
 				ordenEstado2.setId(pk2);
 				ordenEstado2.setIdempresa(ventaAndroid.getIdEmpresa());
 				ordenEstado2.setDetalle("");
 				ordenEstado2.setFecha(time2);
 				
+		
+				
 				ordenService.registrarEstado(ordenEstado2);
+
 
 				
 				//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
