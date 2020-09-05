@@ -85,15 +85,17 @@ public class VentaController {
 		
 		try {
 			
-			respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
 			
-			
-			answerPedido=true;
 		
 			
 
 			
-			if(ventaAndroid.getNumeromesa()!=0) {
+			if(ventaAndroid.getNumeromesa()==0) {
+				
+				respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
+				
+				
+				answerPedido=true;
 				
 				pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
 				
@@ -123,6 +125,11 @@ public class VentaController {
 				pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 				
 			}else {
+				
+				respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
+				
+				
+				answerPedido=true;
 				
 				respuesta.setTiempo_espera("50");
 				
