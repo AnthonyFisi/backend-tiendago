@@ -83,8 +83,20 @@ public class VentaController {
 		
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 		
-		try {
+	//	try {
 			
+		respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
+		
+		
+		answerPedido=true;
+		
+		
+		pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
+		
+		ventaAndroidAnswer = new VentaAndroid();
+		ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
 			
 		
 			
@@ -92,17 +104,7 @@ public class VentaController {
 			
 			if(ventaAndroid.getNumeromesa()==0) {
 				
-				respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
-				
-				
-				answerPedido=true;
-				
-				pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
-				
-				ventaAndroidAnswer = new VentaAndroid();
-				ventaAndroidAnswer.setRepsuesta_registro_venta(true);
-				
-				Timestamp time=new Timestamp(System.currentTimeMillis());
+			
 				
 				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
 				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
@@ -126,19 +128,8 @@ public class VentaController {
 				
 			}else {
 				
-				respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
 				
 				
-				answerPedido=true;
-				
-				respuesta.setTiempo_espera("50");
-				
-				pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
-				
-				ventaAndroidAnswer = new VentaAndroid();
-				ventaAndroidAnswer.setRepsuesta_registro_venta(true);
-				
-				Timestamp time=new Timestamp(System.currentTimeMillis());
 
 				
 				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
@@ -181,13 +172,13 @@ public class VentaController {
 			
 			
 		
-
+/*
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 
 			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		}*/
 		
 		return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
 	}

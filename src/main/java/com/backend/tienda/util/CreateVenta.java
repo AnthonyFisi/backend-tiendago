@@ -53,7 +53,7 @@ public class CreateVenta {
 		venta.setIdrepartidor(0);
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");
-		venta.setTiempo_espera("");
+		venta.setTiempo_espera("50");
 		venta.setIdestado_delivery(6);
 		venta.setIdestado_general(0);
 		venta.setNumeromesa(ventaAndroid.getNumeromesa());
