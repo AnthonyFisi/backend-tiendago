@@ -224,7 +224,10 @@ public class Restaurante_PedidoController {
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+				
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+				
+				
 				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
 				res.setListaProductos(listaProductos);	
 				listaTotal.add(res);

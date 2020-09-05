@@ -90,14 +90,18 @@ public class VentaController {
 			
 			answerPedido=true;
 		
-			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
 			
-			ventaAndroidAnswer = new VentaAndroid();
-			ventaAndroidAnswer.setRepsuesta_registro_venta(true);
-			Timestamp time=new Timestamp(System.currentTimeMillis());
 
 			
 			if(ventaAndroid.getNumeromesa()!=0) {
+				
+				pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
+				
+				ventaAndroidAnswer = new VentaAndroid();
+				ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+				
+				Timestamp time=new Timestamp(System.currentTimeMillis());
+				
 				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
 				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
 				pk.setIdventa(respuesta.getIdventa());
@@ -119,6 +123,16 @@ public class VentaController {
 				pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 				
 			}else {
+				
+				respuesta.setTiempo_espera("50");
+				
+				pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
+				
+				ventaAndroidAnswer = new VentaAndroid();
+				ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+				
+				Timestamp time=new Timestamp(System.currentTimeMillis());
+
 				
 				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
 				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
