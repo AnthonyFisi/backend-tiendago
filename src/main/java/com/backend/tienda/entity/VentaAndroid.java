@@ -43,7 +43,7 @@ public class VentaAndroid {
 	
 	private int numeromesa;
 
-	private float descuenta_mesa;
+	private float descuento_mesa;
 	
 	private boolean mesa;
 	
@@ -157,12 +157,13 @@ public class VentaAndroid {
 		this.numeromesa = numeromesa;
 	}
 
-	public float getDescuenta_mesa() {
-		return descuenta_mesa;
+	
+	public float getDescuento_mesa() {
+		return descuento_mesa;
 	}
 
-	public void setDescuenta_mesa(float descuenta_mesa) {
-		this.descuenta_mesa = descuenta_mesa;
+	public void setDescuento_mesa(float descuento_mesa) {
+		this.descuento_mesa = descuento_mesa;
 	}
 
 	public boolean isMesa() {

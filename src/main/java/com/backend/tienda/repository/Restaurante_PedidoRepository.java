@@ -52,7 +52,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					comentario_cancelar,\r\n" + 
 			"					idestadodelivery,\r\n" + 
 			"					idestadogeneral,\r\n" + 
-			"					numeromesa "+
+			"					numeromesa ,descuento_mesa,mesa"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestadoempresa = 1  AND ordendisponible=true" + 
 			"					AND idempresa= ?1  AND  ventafechaentrega BETWEEN ?2 AND ?3  ",nativeQuery=true)
@@ -78,7 +78,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					comentario_cancelar,\r\n" + 
 			"					idestadodelivery,\r\n" + 
 			"					idestadogeneral,\r\n" + 
-			"					numeromesa "+
+			"					numeromesa ,descuento_mesa,mesa"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestadoempresa = 1  AND ordendisponible=true" + 
 			"					AND idempresa= ?1 AND idpedido = ?2 AND idventa = ?3  ",nativeQuery=true)
@@ -108,7 +108,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					comentario_cancelar,\r\n" + 
 			"					idestadodelivery,\r\n" + 
 			"					idestadogeneral,\r\n" + 
-			"					numeromesa "+
+			"					numeromesa ,descuento_mesa,mesa"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestadoempresa = 2  AND ordendisponible=true" + 
 			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
@@ -136,7 +136,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					comentario_cancelar,\r\n" + 
 			"					idestadodelivery,\r\n" + 
 			"					idestadogeneral,\r\n" + 
-			"					numeromesa "+
+			"					numeromesa ,descuento_mesa,mesa"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestadoempresa = 3  AND ordendisponible=true" + 
 			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
@@ -164,7 +164,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					comentario_cancelar,\r\n" + 
 			"					idestadodelivery,\r\n" + 
 			"					idestadogeneral,\r\n" + 
-			"					numeromesa "+
+			"					numeromesa ,descuento_mesa,mesa"+
 			"                 FROM restaurante_pedido"+
 			"                 WHERE   idestadoempresa = 4  AND ordendisponible=false" + 
 			"					AND idempresa= ?1  ",nativeQuery=true)
