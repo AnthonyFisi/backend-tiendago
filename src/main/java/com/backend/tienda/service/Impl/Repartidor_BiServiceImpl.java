@@ -14,12 +14,12 @@ public class Repartidor_BiServiceImpl implements Repartidor_BiService {
 	Repartidor_BiRepository repartidor_BiRepository;
 
 	@Override
-	public Repartidor_Bi findByIdRepartidor(int idusuario) {
+	public Repartidor_Bi findByIdRepartidor(int idrepartidor) {
 		Repartidor_Bi respuesta= null;
 		
 		try {
 			
-			respuesta= repartidor_BiRepository.findById(idusuario).get();
+			respuesta= repartidor_BiRepository.findByIdrepartidor(idrepartidor);
 			
 		}catch(Exception e ) {
 			
@@ -28,6 +28,23 @@ public class Repartidor_BiServiceImpl implements Repartidor_BiService {
 		
 		return respuesta;
 		
+	}
+
+	@Override
+	public Repartidor_Bi findByIdUsuarioGeneral(int idusuariogeneral) {
+		
+		Repartidor_Bi respuesta= null;
+		
+		try {
+			
+			respuesta= repartidor_BiRepository.findById(idusuariogeneral).get();
+			
+		}catch(Exception e ) {
+			
+			return respuesta;
+		}
+		
+		return respuesta;
 	}
 
 }

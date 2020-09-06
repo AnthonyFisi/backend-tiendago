@@ -63,6 +63,9 @@ public class VentaController {
 	@Autowired
 	Restaurante_PedidoController pedidoController;
 	
+	@Autowired
+	Orden_estado_restauranteController orden_estado_restauranteController;
+	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
 	
@@ -83,7 +86,6 @@ public class VentaController {
 		
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 		
-	//	try {
 			
 		respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
 		
@@ -102,7 +104,62 @@ public class VentaController {
 			
 
 			
-			if(ventaAndroid.getNumeromesa()==0) {
+			if(ventaAndroid.isMesa()){
+					
+					
+					
+
+					
+					Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
+					Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
+					pk.setIdventa(respuesta.getIdventa());
+					pk.setIdestado_empresa(1);
+					
+					ordenEstado.setId(pk);
+					ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
+					ordenEstado.setDetalle("");
+					ordenEstado.setFecha(time);
+					
+					
+					ordenService.registrarEstado(ordenEstado);
+					
+					
+					
+					/*INSERTAMOS DOS ESTADO*/
+					
+					Timestamp time2=new Timestamp(System.currentTimeMillis());
+
+					Orden_estado_empresa ordenEstado2=new Orden_estado_empresa();
+					Orden_estado_empresaPK pk2 = new Orden_estado_empresaPK();
+					pk2.setIdventa(respuesta.getIdventa());
+					pk2.setIdestado_empresa(2);
+					
+					ordenEstado2.setId(pk2);
+					ordenEstado2.setIdempresa(ventaAndroid.getIdEmpresa());
+					ordenEstado2.setDetalle("");
+					ordenEstado2.setFecha(time2);
+					
+			
+					/*
+					ordenService.registrarEstado(ordenEstado2);
+					
+					*/
+					//ESTAMOS ACTUALIZANDO AUTOMATICAMENTE LA SIGUIENTE ORDEN
+					orden_estado_restauranteController.updateOrdenProcesMethod(ordenEstado2,ventaAndroid.getIdUsuario());
+					
+
+
+					/*ENVIAMOS UN PUSHER A LA APLICAION DE EMPRESA 
+					EN ESA SITUACION MANDAREMOS EL ORDENRECIENTE A LA SECCION DE ORDENES PREPARANDOSE
+						*/			
+					Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+
+					pusher.setCluster("us2");
+					
+					pusher.trigger("canal-orden-proces-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
+				}
+			
+			else{
 				
 			
 				
@@ -126,65 +183,9 @@ public class VentaController {
 				
 				pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 				
-			}else {
-				
-				
-				
-
-				
-				Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
-				Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
-				pk.setIdventa(respuesta.getIdventa());
-				pk.setIdestado_empresa(1);
-				
-				ordenEstado.setId(pk);
-				ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
-				ordenEstado.setDetalle("");
-				ordenEstado.setFecha(time);
-				
-				
-				ordenService.registrarEstado(ordenEstado);
-				
-				
-				
-				/*INSERTAMOS DOS ESTADO*/
-				
-				Timestamp time2=new Timestamp(System.currentTimeMillis());
-
-				Orden_estado_empresa ordenEstado2=new Orden_estado_empresa();
-				Orden_estado_empresaPK pk2 = new Orden_estado_empresaPK();
-				pk2.setIdventa(respuesta.getIdventa());
-				pk2.setIdestado_empresa(2);
-				
-				ordenEstado2.setId(pk2);
-				ordenEstado2.setIdempresa(ventaAndroid.getIdEmpresa());
-				ordenEstado2.setDetalle("");
-				ordenEstado2.setFecha(time2);
-				
-		
-				
-				ordenService.registrarEstado(ordenEstado2);
-
-
-				
-				//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
-				
-				Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
-
-				pusher.setCluster("us2");
-				
-				pusher.trigger("canal-orden-proces-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
 			}
 			
-			
 		
-/*
-			
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-
-			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
-		}*/
 		
 		return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
 	}

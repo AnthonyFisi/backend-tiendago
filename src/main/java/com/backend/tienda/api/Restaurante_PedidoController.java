@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
+import com.backend.tienda.entity.Repartidor_Bi;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.gson.Restaurante_PedidoGson;
 import com.backend.tienda.gson.Tipo_EnvioGson;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
+import com.backend.tienda.service.Repartidor_BiService;
 import com.backend.tienda.service.Restaurante_PedidoService;
 
 @RestController
@@ -58,6 +60,9 @@ public class Restaurante_PedidoController {
 	@Autowired
 	Orden_estado_restauranteService ordenService;
 
+	@Autowired
+	Repartidor_BiService repartidor_biService;
+	
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
 
@@ -146,6 +151,7 @@ public class Restaurante_PedidoController {
 
 		List<Restaurante_PedidoModified> listaTotal=null;
 
+		Repartidor_Bi repartidor_bi=null;
 		try {
 
 
@@ -162,6 +168,9 @@ public class Restaurante_PedidoController {
 				
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
+				repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
+				
+				res.setRepartidor_bi(repartidor_bi);
 				
 				res.setListaProductos(listaProductos);	
 				listaTotal.add(res);
@@ -244,10 +253,7 @@ public class Restaurante_PedidoController {
 			restauranteGson.setListaRestaurante_Pedido(listaTotal);
 
 		}catch(Exception e) {
-			
-			System.out.println(e.getMessage());
-			System.out.println("HERE");
-
+		
 			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}

@@ -57,6 +57,8 @@ public class CreateVenta {
 		venta.setIdestado_delivery(6);
 		venta.setIdestado_general(0);
 		venta.setNumeromesa(ventaAndroid.getNumeromesa());
+		venta.setMesa(ventaAndroid.isMesa());
+		venta.setDescuenta_mesa(ventaAndroid.getDescuenta_mesa());
 		
 		return venta;
 	}

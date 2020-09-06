@@ -71,8 +71,14 @@ public class Restaurante_PedidoModified {
 	
 	private int numeromesa;
 	
+	private float descuento_mesa;
+	
+	private boolean mesa;
+	
 	private String fechaAceptado;
 		
+	private Repartidor_Bi repartidor_bi;
+	
 	List<ProductoJOINregistroPedidoJOINpedido> listaProductos;
 	
 	
@@ -364,6 +370,33 @@ public class Restaurante_PedidoModified {
 	public void setFechaAceptado(String fechaAceptado) {
 		this.fechaAceptado = fechaAceptado;
 	}
+	
+
+	public Repartidor_Bi getRepartidor_bi() {
+		return repartidor_bi;
+	}
+
+	public void setRepartidor_bi(Repartidor_Bi repartidor_bi) {
+		this.repartidor_bi = repartidor_bi;
+	}
+
+	
+	
+	public float getDescuento_mesa() {
+		return descuento_mesa;
+	}
+
+	public void setDescuento_mesa(float descuento_mesa) {
+		this.descuento_mesa = descuento_mesa;
+	}
+
+	public boolean isMesa() {
+		return mesa;
+	}
+
+	public void setMesa(boolean mesa) {
+		this.mesa = mesa;
+	}
 
 	public static Restaurante_PedidoModified convert(Restaurante_Pedido pedido) {
 		
@@ -415,6 +448,10 @@ public class Restaurante_PedidoModified {
 			res.setIdusuariogeneral(pedido.getIdusuariogeneral());
 			res.setApellido(pedido.getApellido());
 			res.setIdtipo_envio(pedido.getIdtipo_envio());
+			
+			
+			res.setDescuento_mesa(pedido.getDescuento_mesa());
+			res.setMesa(pedido.isMesa());
 		
 		return res;
 		

@@ -90,40 +90,53 @@ public class Orden_estado_restauranteController {
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 		
-		
 		List<Orden_estado_general> lista_estado_general =null;
 		
 		Orden_estado_restauranteGson gson=null;
 		
 		Venta venta=null;
+		
 		Orden_estado_empresa ordenResult=null;
+		
 		orden.setFecha(time);
 		
 		Orden_estado_general orden_general= new Orden_estado_general();
 		
+		//ESTE ES EL ESTADO QUE VA ACTUALIZAR EN LA TABLA DE ESTADO_GENERAL
 		int idestado_general=1;
 	
 		try 
 		{
 			
-			
+			// ESTOY ACTUALIZANDO EN LA TABLA DE VENTA EL ESTADO DE EMPRESA CON EL TIEMPO DE ESPERA
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa(),tiempo_espera);
 			
 			if(venta!=null) {
 				
+				//PRIMERO GUARDO EL ESTADO QUE MANDO DESDE LA APLICACION DE EMPRESA
 				ordenResult=ordenService.registrarEstado(orden);
 				
+				//ACTUALIZO LA TABLA DE ORDEN_ESTADO_EMPRESA CON EL NUEVO ESTADO QUE ACABO DE GUARDAR ANTERIORMENTE
 				ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
 
 				
 				//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 				
+				
+				
+				
+				//(ESTOY TRANSFORMANDO LOS DATOS SUELTO EN UN OBJETO TIPO ORDEN_ESTADO_GENERAL)
 				orden_general=convert_object(orden,tiempo_espera,idestado_general,time);
 				
-				//GUARDAR EL ESTADO EN LA TABLA GENERAL
+				// ESTOY GUARDANDO EL ESTADO ANTERIOR CREADO EN LA TABLA GENERAL
 				orden_estado_generalService.guardar_estado(orden_general);
 				
+				
+				//DESPUES DE TODO ESTO VOY A SACAR LOS ESTADO QUE  TENGO EN LA TABL DE ORDEN_ESTADO_GENERAL PARA ENVIARSELO A LA APLICACION DE CLIENTE
 				lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+				
+				
+				
 				
 				
 				gson=new Orden_estado_restauranteGson();
@@ -141,11 +154,7 @@ public class Orden_estado_restauranteController {
 
 		}
 		
-		
-		
-		
-		
-		
+			
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
 		
 	}
@@ -197,6 +206,8 @@ public class Orden_estado_restauranteController {
 					
 					//GUARDAR EL ESTADO EN LA TABLA GENERAL
 					orden_estado_generalService.guardar_estado(orden_general);
+					
+					
 					
 					lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
 					
@@ -314,6 +325,67 @@ public class Orden_estado_restauranteController {
 		estado.setFecha(time);
 		
 		return estado;
+	}
+	
+	
+	public void updateOrdenProcesMethod( Orden_estado_empresa orden,int idUsuario){
+		
+	Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		Venta venta=null;
+		
+		orden.setFecha(time);
+		
+		Orden_estado_restauranteGson gson=null;
+		
+		List<Orden_estado_general> lista_estado_general =null;
+		
+		Orden_estado_general orden_general= new Orden_estado_general();
+	
+		
+			
+				int idestado_general=2;
+				
+				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
+				
+				System.out.println("PASO1");
+
+				if(venta!=null) {
+					
+					ordenService.registrarEstado(orden);
+					
+					//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+					
+					ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
+
+					
+					orden_general=convert_object(orden,"",idestado_general,time);
+					
+					//GUARDAR EL ESTADO EN LA TABLA GENERAL
+					orden_estado_generalService.guardar_estado(orden_general);
+					
+					
+					
+					lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+					
+					
+				
+					
+					gson=new Orden_estado_restauranteGson();
+					gson.setListaOrden_estado_general(lista_estado_general);
+					
+					pusher.setCluster("us2");
+					
+					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+	
+							
+		
+			}
+			
+	
+		
+
+		
 	}
 	
 	

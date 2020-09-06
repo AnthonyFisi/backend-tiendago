@@ -43,6 +43,11 @@ public class VentaAndroid {
 	
 	private int numeromesa;
 
+	private float descuenta_mesa;
+	
+	private boolean mesa;
+	
+	
 
 	public int getIdEmpresa() {
 		return idEmpresa;
@@ -150,6 +155,22 @@ public class VentaAndroid {
 
 	public void setNumeromesa(int numeromesa) {
 		this.numeromesa = numeromesa;
+	}
+
+	public float getDescuenta_mesa() {
+		return descuenta_mesa;
+	}
+
+	public void setDescuenta_mesa(float descuenta_mesa) {
+		this.descuenta_mesa = descuenta_mesa;
+	}
+
+	public boolean isMesa() {
+		return mesa;
+	}
+
+	public void setMesa(boolean mesa) {
+		this.mesa = mesa;
 	}
 
 	

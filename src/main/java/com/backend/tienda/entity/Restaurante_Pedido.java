@@ -82,6 +82,10 @@ public class Restaurante_Pedido {
 	
 	private int numeromesa;
 	
+	private float descuento_mesa;
+	
+	private boolean mesa;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -347,6 +351,22 @@ public class Restaurante_Pedido {
 
 	public void setComentario_cancelar(String comentario_cancelar) {
 		this.comentario_cancelar = comentario_cancelar;
+	}
+
+	public float getDescuento_mesa() {
+		return descuento_mesa;
+	}
+
+	public void setDescuento_mesa(float descuento_mesa) {
+		this.descuento_mesa = descuento_mesa;
+	}
+
+	public boolean isMesa() {
+		return mesa;
+	}
+
+	public void setMesa(boolean mesa) {
+		this.mesa = mesa;
 	}
 	
 	
