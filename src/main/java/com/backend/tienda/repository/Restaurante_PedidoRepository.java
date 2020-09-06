@@ -84,6 +84,9 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					AND idempresa= ?1 AND idpedido = ?2 AND idventa = ?3  ",nativeQuery=true)
 	Restaurante_Pedido findRecentOrden(int idEmpresa,int idPedido,int idVenta);
 	
+	Restaurante_Pedido findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(int idestadoempresa,boolean disponbile,int idempresa,int idpedido,int idventa);
+
+	//Restaurante_Pedido findByIdestadoempresaAndOrdendisponible(int iempresa,boolean m);
 	
 	/* PROCES ORDEN */
 	

@@ -126,7 +126,7 @@ public class Orden_estado_restauranteController {
 				
 				
 				//(ESTOY TRANSFORMANDO LOS DATOS SUELTO EN UN OBJETO TIPO ORDEN_ESTADO_GENERAL)
-				orden_general=convert_object(orden,tiempo_espera,idestado_general,time);
+				orden_general=convert_object(orden,tiempo_espera,idestado_general,time,orden.getIdempresa());
 				
 				// ESTOY GUARDANDO EL ESTADO ANTERIOR CREADO EN LA TABLA GENERAL
 				orden_estado_generalService.guardar_estado(orden_general);
@@ -202,7 +202,7 @@ public class Orden_estado_restauranteController {
 					ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
 
 					
-					orden_general=convert_object(orden,"",idestado_general,time);
+					orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
 					
 					//GUARDAR EL ESTADO EN LA TABLA GENERAL
 					orden_estado_generalService.guardar_estado(orden_general);
@@ -315,7 +315,7 @@ public class Orden_estado_restauranteController {
 
     }
 
-	private Orden_estado_general convert_object(Orden_estado_empresa empresa,String tiempo,int idestado,Timestamp time) {
+	private Orden_estado_general convert_object(Orden_estado_empresa empresa,String tiempo,int idestado,Timestamp time,int idusuario) {
 		
 		Orden_estado_general estado= new Orden_estado_general();
 		
@@ -323,6 +323,7 @@ public class Orden_estado_restauranteController {
 		estado.setIdestadogeneral(idestado);
 		estado.setTiempo_aproximado(tiempo);
 		estado.setFecha(time);
+		estado.setIdusuario(idusuario);
 		
 		return estado;
 	}
@@ -359,7 +360,7 @@ public class Orden_estado_restauranteController {
 					ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
 
 					
-					orden_general=convert_object(orden,"",idestado_general,time);
+					orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
 					
 					//GUARDAR EL ESTADO EN LA TABLA GENERAL
 					orden_estado_generalService.guardar_estado(orden_general);

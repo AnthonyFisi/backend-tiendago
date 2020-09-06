@@ -151,8 +151,13 @@ public class VentaController {
 
 					/*ENVIAMOS UN PUSHER A LA APLICAION DE EMPRESA 
 					EN ESA SITUACION MANDAREMOS EL ORDENRECIENTE A LA SECCION DE ORDENES PREPARANDOSE
+					
+					
 						*/			
-					Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+					
+					System.out.println(respuestaPedido.getIdempresa()+"/"+respuestaPedido.getIdpedido()+"/"+ respuesta.getIdventa());
+					
+					Restaurante_PedidoModified ordenReciente=pedidoController.recientes2(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
 					pusher.setCluster("us2");
 					

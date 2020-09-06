@@ -25,6 +25,7 @@ import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.gson.Restaurante_PedidoGson;
 import com.backend.tienda.gson.Tipo_EnvioGson;
+import com.backend.tienda.repository.Restaurante_PedidoRepository;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.Repartidor_BiService;
@@ -62,6 +63,9 @@ public class Restaurante_PedidoController {
 
 	@Autowired
 	Repartidor_BiService repartidor_biService;
+	
+	@Autowired
+	Restaurante_PedidoRepository restaurante_pedidoRepository;
 	
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
@@ -371,6 +375,7 @@ public class Restaurante_PedidoController {
 
 
 			pedido=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
+			
 
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
@@ -390,6 +395,38 @@ public class Restaurante_PedidoController {
 
 	
 	
+	public Restaurante_PedidoModified  recientes2(int idEmpresa,int idPedido, int idVenta){
+
+
+
+		Restaurante_Pedido pedido= null;
+
+		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+
+		Restaurante_PedidoModified res =null;
+
+
+		try {
+
+			pedido=restaurante_pedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(2,true, idEmpresa, idPedido, idVenta);
+			
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+
+			res =  Restaurante_PedidoModified.convert(pedido);
+			
+			res.setListaProductos(listaProductos);	
+
+
+		}catch(Exception e) {
+
+		return res;
+		}
+
+		return res;
+	}
+
 
 
 }

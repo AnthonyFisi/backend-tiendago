@@ -24,6 +24,8 @@ public class Orden_estado_general {
 	private String tiempo_aproximado;
 	
 	private Timestamp fecha;
+	
+	private int idusuario;
 
 	public int getIdoeg() {
 		return idoeg;
@@ -65,6 +67,16 @@ public class Orden_estado_general {
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
+
+	public int getIdusuario() {
+		return idusuario;
+	}
+
+	public void setIdusuario(int idusuario) {
+		this.idusuario = idusuario;
+	}
+
+	
 	
 	
 }
