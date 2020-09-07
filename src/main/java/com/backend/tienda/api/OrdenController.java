@@ -86,8 +86,10 @@ public class OrdenController {
 			data.setDetalle_orden(orden);
 			
 			if(orden.getIdrepartidor()!=0) {
+				
+				
 
-				Usuario_general usuario=userRepository.findById(orden.getIdrepartidor()).get();
+				Usuario_general usuario=userRepository.findById(orden.getIdusuariogeneral()).get();
 				
 				usuario.setContrasena("");
 				
