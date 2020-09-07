@@ -24,9 +24,9 @@ public class DeliveryService {
 	FBInitialize db;
 	
 	
-	public void updateData() {
+	public void updateDataDisponible(int idusuariogeneral) {
 		CollectionReference documentReference =db.getFirebase().collection(COL_NAME);
-		documentReference.document("1").update("location", "-12.174714,-76.935345");
+		documentReference.document(String.valueOf(idusuariogeneral)).update("disponible", false);
 		
 	}
 

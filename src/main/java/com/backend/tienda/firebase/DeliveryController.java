@@ -40,9 +40,7 @@ public class DeliveryController {
 
 
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
-
-
-
+	
 
 	@PostMapping(LISTA_FIREBASE)
 	public ResponseEntity<?> listaDelivery(@RequestBody Delivery_PedidoGson pedidoPropuesta ){
@@ -133,7 +131,11 @@ public class DeliveryController {
 			pedido.getDelivery_information().setDistancia_delivery(String.valueOf(suma_distancia));
 
 			pedido.getDelivery_information().setIdrepartidor((lista.get(positionElegida).getIdRepartidor()));
+			
+			
 
+			deliveryService.updateDataDisponible(lista.get(positionElegida).getIdUsuario());
+			
 
 			//ENVIAR ATRAVES DE UN PUSH EL PEDIDO AL REPARTIDOR
 			pusher.setCluster("us2");
