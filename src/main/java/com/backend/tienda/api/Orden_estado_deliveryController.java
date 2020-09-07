@@ -21,6 +21,7 @@ import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
+import com.backend.tienda.repository.Usuario_generalRepository;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
 import com.backend.tienda.service.Orden_estado_generalService;
@@ -49,7 +50,7 @@ public class Orden_estado_deliveryController {
 	VentaService ventaService;
 	
 	@Autowired
-	UserRepository userRepository;
+	Usuario_generalRepository usuario_generalRepository;
 	
 	@Autowired
 	RepartidorService repartidorService;
@@ -114,7 +115,7 @@ public class Orden_estado_deliveryController {
 						//VA TENER QUE IR A LA TABLA DE REPARTIDOR
 						//falta COREGIR ACA
 						
-						/*Usuario usuario=userRepository.findById((long)repartidor.getIdusuario()).get();
+						Usuario_general usuario=usuario_generalRepository.findById((long)repartidor.getIdusuariogeneral()).get();
 						
 						
 						usuario.setContrasena("");
@@ -123,7 +124,7 @@ public class Orden_estado_deliveryController {
 						
 						pusher.setCluster("us2");
 						
-						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);*/
+						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);
 						
 					}
 					
