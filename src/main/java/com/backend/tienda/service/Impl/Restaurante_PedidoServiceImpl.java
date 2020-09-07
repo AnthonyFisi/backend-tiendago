@@ -25,7 +25,8 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 
 	@Override
 	public Restaurante_Pedido recientePedido(int idEmpresa, int idPedido, int idVenta) {
-		return restaurante_PedidoRepository.findRecentOrden(idEmpresa, idPedido, idVenta);
+		//return restaurante_PedidoRepository.findRecentOrden(idEmpresa, idPedido, idVenta);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(1,true,idEmpresa,idPedido,idVenta);
 	}
 
 	@Override
@@ -47,26 +48,30 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 		
 		Timestamp date2=Timestamp.valueOf(fecha2+" 00:00:00.000");
 
+		//.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetween(1,true,idEmpresa,date1,date2);
 		
-		
-		return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(idEmpresa,date1,date2);
+		//return restaurante_PedidoRepository.listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(idEmpresa,date1,date2);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetween(1,true,idEmpresa,date1,date2);
 	}
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosProceso(int idEmpresa) {
 		
 		
-		return restaurante_PedidoRepository.findProcesOrden(idEmpresa);
+	//	return restaurante_PedidoRepository.findProcesOrden(idEmpresa);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndCancelar(2,true,idEmpresa,false);
 	}
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosReady(int idEmpresa) {
-		return restaurante_PedidoRepository.findReadyOrden(idEmpresa);
+		//return restaurante_PedidoRepository.findReadyOrden(idEmpresa);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndCancelar(3,true,idEmpresa,false);
+
 	}
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosHistorial(int idEmpresa) {
-		return restaurante_PedidoRepository.findHistorialOrden(idEmpresa);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresa(4,false,idEmpresa);
 	}
 
 }

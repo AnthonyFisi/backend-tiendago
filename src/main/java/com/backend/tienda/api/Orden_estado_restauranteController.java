@@ -22,6 +22,7 @@ import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Venta;
+import com.backend.tienda.firebase.DeliveryController;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
@@ -54,6 +55,9 @@ public class Orden_estado_restauranteController {
 	
 	@Autowired
 	VentaService ventaService;
+	
+	@Autowired
+	DeliveryController deliveryController;
 	
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 	
@@ -220,6 +224,15 @@ public class Orden_estado_restauranteController {
 					pusher.setCluster("us2");
 					
 					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+					
+					
+					
+					
+					
+					//deliveryController.searchRepartidor(pedidoPropuesta);
+					
+					
+					
 	
 							
 		

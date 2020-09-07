@@ -22,6 +22,13 @@ public class DeliveryService {
 	
 	@Autowired
 	FBInitialize db;
+	
+	
+	public void updateData() {
+		CollectionReference documentReference =db.getFirebase().collection(COL_NAME);
+		documentReference.document("1").update("location", "-12.174714,-76.935345");
+		
+	}
 
 	
 	
@@ -37,7 +44,7 @@ public class DeliveryService {
 	        												   .whereEqualTo("cuentaActivada", true)
 	        												   .whereEqualTo("online", true)
 	        												   .get();
-	       
+	        //documentReference.document(childPath)
 	        
 	        for(DocumentSnapshot doc:future.get().getDocuments()) {
 	        	Delivery delivery=doc.toObject(Delivery.class);
@@ -49,15 +56,15 @@ public class DeliveryService {
 	}
 	
 	
+	
 	public void loadData(int data) throws InterruptedException, ExecutionException {
 		CollectionReference cities = db.getFirebase().collection(COL_NAME);
 		List<ApiFuture<WriteResult>> futures = new ArrayList<>();
 	
 		if(data==1) {
 		
-		futures.add(cities.document(String.valueOf(3)).set(new Delivery(true,3,3,3,"-12.176120,-76.938113","nombre3",true,true,8,1.5461372056457814,4.517828796148134,1.4873980574333114)));
-		futures.add(cities.document(String.valueOf(4)).set(new Delivery(true,4,4,4,"-12.177294,-76.937029","nombre4",true,true,3,9.369628185951012,5.439807348694531,3.25243441962278)));
-		futures.add(cities.document(String.valueOf(5)).set(new Delivery(true,5,5,5, "-12.175260,-76.938038"  ,"nombre" ,true,true,1,3.168915058265533,1.5951419233282857,5.036104420500885)));
+		futures.add(cities.document(String.valueOf(9)).set(new Delivery(true,4,4,9,"-12.177294,-76.937029","nombre4",true,true,3,9.369628185951012,5.439807348694531,3.25243441962278)));
+		/*futures.add(cities.document(String.valueOf(5)).set(new Delivery(true,5,5,5, "-12.175260,-76.938038"  ,"nombre" ,true,true,1,3.168915058265533,1.5951419233282857,5.036104420500885)));
 		futures.add(cities.document(String.valueOf(6)).set(new Delivery(true,6,6,6, "-12.175385,-76.936965"  ,"nombre" ,true,true,10,4.893497735633812,4.50533757658042,5.266144400342978)));
 		futures.add(cities.document(String.valueOf(7)).set(new Delivery(true,7,7,7, "-12.176036,-76.936289"  ,"nombre" ,true,true,5,10.232380922921292,2.9733362017640133,3.566531878071951)));
 		futures.add(cities.document(String.valueOf(8)).set(new Delivery(true,8,8,8, "-12.174463,-76.937147"  ,"nombre" ,true,true,4,5.217868200079761,5.352615181650157,5.834534381479234)));
@@ -67,6 +74,7 @@ public class DeliveryService {
 		futures.add(cities.document(String.valueOf(12)).set(new Delivery(true,12,12,12, "-12.175008,-76.935752"  ,"nombre" ,true,true,8,13.930780066433412,2.134435162560476,5.061614314118661)));
 		futures.add(cities.document(String.valueOf(13)).set(new Delivery(true,13,13,13, "-12.175302,-76.935602"  ,"nombre" ,true,true,6,11.472402400064954,4.884418503367678,1.6710696802232607)));
 		futures.add(cities.document(String.valueOf(14)).set(new Delivery(true,14,14,14, "-12.173729,-76.936010"  ,"nombre" ,true,true,4,1.361111778337393,4.894444107701306,4.81444291435233)));
+		*/
 		}
 		
 		if(data==2) {

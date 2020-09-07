@@ -86,6 +86,14 @@ public class Restaurante_Pedido {
 	
 	private boolean mesa;
 	
+	private String ubicacion_nombre;
+	
+	private String maps_coordenada_x;
+	
+	private String maps_coordenada_y;
+	
+	private String ubicacion_comentarios;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -367,6 +375,38 @@ public class Restaurante_Pedido {
 
 	public void setMesa(boolean mesa) {
 		this.mesa = mesa;
+	}
+
+	public String getUbicacion_nombre() {
+		return ubicacion_nombre;
+	}
+
+	public void setUbicacion_nombre(String ubicacion_nombre) {
+		this.ubicacion_nombre = ubicacion_nombre;
+	}
+
+	public String getMaps_coordenada_x() {
+		return maps_coordenada_x;
+	}
+
+	public void setMaps_coordenada_x(String maps_coordenada_x) {
+		this.maps_coordenada_x = maps_coordenada_x;
+	}
+
+	public String getMaps_coordenada_y() {
+		return maps_coordenada_y;
+	}
+
+	public void setMaps_coordenada_y(String maps_coordenada_y) {
+		this.maps_coordenada_y = maps_coordenada_y;
+	}
+
+	public String getUbicacion_comentarios() {
+		return ubicacion_comentarios;
+	}
+
+	public void setUbicacion_comentarios(String ubicacion_comentarios) {
+		this.ubicacion_comentarios = ubicacion_comentarios;
 	}
 	
 	
