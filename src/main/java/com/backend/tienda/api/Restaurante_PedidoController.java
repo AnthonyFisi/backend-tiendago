@@ -245,7 +245,9 @@ public class Restaurante_PedidoController {
 				
 				
 				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
+				
 				res.setListaProductos(listaProductos);	
+				
 				listaTotal.add(res);
 				
 				position++;
@@ -404,9 +406,10 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		Restaurante_PedidoModified res =null;
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
 
 
-		try {
 
 			pedido=restaurante_pedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(2,true, idEmpresa, idPedido, idVenta);
 			
@@ -416,13 +419,16 @@ public class Restaurante_PedidoController {
 
 			res =  Restaurante_PedidoModified.convert(pedido);
 			
+			
+			res.setFechaAceptado(time.toString());
+			
+			res.setRepartidor_bi(new Repartidor_Bi());
+			
 			res.setListaProductos(listaProductos);	
+			
+			
+			System.out.println(res.getFechaAceptado()+" / "+res.getRepartidor_bi().toString());
 
-
-		}catch(Exception e) {
-
-		return res;
-		}
 
 		return res;
 	}
