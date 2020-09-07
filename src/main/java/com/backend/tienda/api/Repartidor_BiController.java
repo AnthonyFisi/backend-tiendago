@@ -25,11 +25,11 @@ public class Repartidor_BiController {
 	
 	@GetMapping(INFORMACION_INICIO)
 	@PreAuthorize("hasRole('ROLE_MOTORIZADO')")
-	public ResponseEntity<?> informacionBasica(@PathVariable("idusuario")int idusuario){
+	public ResponseEntity<?> informacionBasica(@PathVariable("idusuario")int idusuariogeneral){
 	
 		Repartidor_Bi repartidorData=null;
 		
-		repartidorData=repartidor_BiService.findByIdRepartidor(idusuario);
+		repartidorData=repartidor_BiService.findByIdUsuarioGeneral(idusuariogeneral);
 		
 		if(repartidorData==null) {
 			
