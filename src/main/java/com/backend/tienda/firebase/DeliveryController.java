@@ -138,7 +138,7 @@ public class DeliveryController {
 			//ENVIAR ATRAVES DE UN PUSH EL PEDIDO AL REPARTIDOR
 			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+lista.get(positionElegida).getIdRepartidor(), "my-event", pedido);
+			pusher.trigger("canal-orden-delivery-"+lista.get(positionElegida).getIdRepartidor(), "my-event", pedido);
 
 
 
