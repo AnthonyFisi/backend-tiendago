@@ -45,7 +45,7 @@ public class CreateVenta {
 		venta.setIdestado_pago(ventaAndroid.getIdestado_pago());
 		venta.setIdtipo_envio(ventaAndroid.getIdtipo_envio());
 		venta.setComentario_entrega("");
-		venta.setDistancia_delivery(0);
+		venta.setDistancia_delivery("0 km");
 		venta.setCosto_delivery(precioDelivery);
 		venta.setOrden_disponible(true);
 		venta.setTiempo_espera(String.valueOf(0));
