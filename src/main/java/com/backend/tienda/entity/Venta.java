@@ -44,7 +44,7 @@ public class Venta {
 	
 	private String comentario_entrega;
 	
-	private float distancia_delivery;
+	private String distancia_delivery;
 	
 	private float costo_delivery;
 	
@@ -81,12 +81,16 @@ public class Venta {
 	}
 
 
-	public float getDistancia_delivery() {
+	
+	
+	public String getDistancia_delivery() {
 		return distancia_delivery;
 	}
-	public void setDistancia_delivery(float distancia_delivery) {
+
+	public void setDistancia_delivery(String distancia_delivery) {
 		this.distancia_delivery = distancia_delivery;
 	}
+
 	public float getCosto_delivery() {
 		return costo_delivery;
 	}
