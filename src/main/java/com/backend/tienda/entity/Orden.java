@@ -100,9 +100,7 @@ public class Orden {
 	private int idrepartidor;
 	
 	private int idestado_general;
-	
-	private int idusuariogeneral;
-   
+	   
 
 	public int getIdempresa() {
 		return idempresa;
@@ -413,14 +411,6 @@ public class Orden {
 
 	public void setIdrepartidor(int idrepartidor) {
 		this.idrepartidor = idrepartidor;
-	}
-
-	public int getIdusuariogeneral() {
-		return idusuariogeneral;
-	}
-
-	public void setIdusuariogeneral(int idusuariogeneral) {
-		this.idusuariogeneral = idusuariogeneral;
 	}
 
 
