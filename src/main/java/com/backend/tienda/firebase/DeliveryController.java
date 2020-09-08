@@ -134,7 +134,7 @@ public class DeliveryController {
 			
 			
 
-			deliveryService.updateDataDisponible(lista.get(positionElegida).getIdUsuario());
+			//deliveryService.updateDataDisponible(lista.get(positionElegida).getIdUsuario());
 			
 
 			//ENVIAR ATRAVES DE UN PUSH EL PEDIDO AL REPARTIDOR
@@ -150,12 +150,24 @@ public class DeliveryController {
 
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
+			pusher.setCluster("us2");
 
-			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
+			
+			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
+			
+			pusher.trigger("canal-orden-delivery", "my-event", error);
+
+			System.out.println();
 			e.printStackTrace();
 			return ResponseEntity.badRequest().build();
 
 		} catch (ExecutionException e) {
+		pusher.setCluster("us2");
+
+			
+			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
+			
+			pusher.trigger("canal-orden-delivery", "my-event", error);
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
 
@@ -165,6 +177,15 @@ public class DeliveryController {
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
+			
+		pusher.setCluster("us2");
+
+			
+			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
+			
+			pusher.trigger("canal-orden-delivery", "my-event", error);
+
 			return ResponseEntity.badRequest().build();
 
 		}
