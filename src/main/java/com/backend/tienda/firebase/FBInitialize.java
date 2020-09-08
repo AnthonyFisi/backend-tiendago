@@ -23,12 +23,12 @@ public class FBInitialize {
 			/*InputStream serviceAccount=this.getClass().getClassLoader()
 					.getResourceAsStream("src/main/resources/proof-bd3aa-firebase-adminsdk-ebd9z-18cf0817e9.json");*/
 			FileInputStream serviceAccount =
-					  new FileInputStream("src/main/resources/proof-bd3aa-firebase-adminsdk-ebd9z-18cf0817e9.json");
+					  new FileInputStream("src/main/resources/yego-22b59-firebase-adminsdk-zdchs-7e80ec81fe.json");
 
 			
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-					.setDatabaseUrl("https://proof-bd3aa.firebaseio.com")
+					.setDatabaseUrl("https://yego-22b59.firebaseio.com")
 					.build();
 
 			if(FirebaseApp.getApps().isEmpty()) {
