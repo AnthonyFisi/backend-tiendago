@@ -21,7 +21,7 @@ public class FBInitialize {
 		try {
 
 			InputStream serviceAccount=this.getClass().getClassLoader()
-					.getResourceAsStream("./yego-22b59-firebase-adminsdk-zdchs-b05085924f.json");
+					.getResourceAsStream("./yego-22b59-firebase-adminsdk-zdchs-523c599d14.json");
 			
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
