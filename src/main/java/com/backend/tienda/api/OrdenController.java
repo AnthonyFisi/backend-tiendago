@@ -21,9 +21,11 @@ import com.backend.tienda.entity.Orden_estado_general;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.entity.RegistroPedido;
+import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.gson.OrdenGeneralGson;
 import com.backend.tienda.gson.OrdenGson;
+import com.backend.tienda.repository.RepartidorRepository;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.OrdenService;
 import com.backend.tienda.service.Orden_estado_generalService;
@@ -50,6 +52,9 @@ public class OrdenController {
 	
 	@Autowired
 	Orden_estado_generalService orden_estado_generalService;
+	
+	@Autowired
+	RepartidorRepository repartidorRepository;
 	
 	@RequestMapping(value=LISTA_DISPONIBLE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<OrdenGeneralGson> listaOrdenesDisponibles(@PathVariable ("idUsuario") int idUsuario){
@@ -88,8 +93,9 @@ public class OrdenController {
 			if(orden.getIdrepartidor()!=0) {
 				
 				
+				Repartidor repartidor=repartidorRepository.findById(orden.getIdrepartidor()).get();
 
-				Usuario_general usuario=userRepository.findById(orden.getIdusuariogeneral()).get();
+				Usuario_general usuario=userRepository.findById(repartidor.getIdusuariogeneral()).get();
 				
 				usuario.setContrasena("");
 				
