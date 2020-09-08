@@ -94,6 +94,10 @@ public class Restaurante_Pedido {
 	
 	private String ubicacion_comentarios;
 	
+	private String distancia_delivery;
+	
+	private String tiempo_aprox_delivery;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -408,6 +412,23 @@ public class Restaurante_Pedido {
 	public void setUbicacion_comentarios(String ubicacion_comentarios) {
 		this.ubicacion_comentarios = ubicacion_comentarios;
 	}
+
+	public String getDistancia_delivery() {
+		return distancia_delivery;
+	}
+
+	public void setDistancia_delivery(String distancia_delivery) {
+		this.distancia_delivery = distancia_delivery;
+	}
+
+	public String getTiempo_aprox_delivery() {
+		return tiempo_aprox_delivery;
+	}
+
+	public void setTiempo_aprox_delivery(String tiempo_aprox_delivery) {
+		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
+	}
+	
 	
 	
 	

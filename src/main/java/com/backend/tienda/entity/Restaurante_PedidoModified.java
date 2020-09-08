@@ -83,6 +83,10 @@ public class Restaurante_PedidoModified {
 	
 	private String ubicacion_comentarios;
 	
+	private String distancia_delivery;
+	
+	private String tiempo_aprox_delivery;
+	
 	private String fechaAceptado;
 		
 	private Repartidor_Bi repartidor_bi;
@@ -439,6 +443,24 @@ public class Restaurante_PedidoModified {
 	public void setUbicacion_comentarios(String ubicacion_comentarios) {
 		this.ubicacion_comentarios = ubicacion_comentarios;
 	}
+	
+	
+
+	public String getDistancia_delivery() {
+		return distancia_delivery;
+	}
+
+	public void setDistancia_delivery(String distancia_delivery) {
+		this.distancia_delivery = distancia_delivery;
+	}
+
+	public String getTiempo_aprox_delivery() {
+		return tiempo_aprox_delivery;
+	}
+
+	public void setTiempo_aprox_delivery(String tiempo_aprox_delivery) {
+		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
+	}
 
 	public static Restaurante_PedidoModified convert(Restaurante_Pedido pedido) {
 		
@@ -499,6 +521,10 @@ public class Restaurante_PedidoModified {
 			res.setMaps_coordenada_x(pedido.getMaps_coordenada_x());
 			res.setMaps_coordenada_y(pedido.getMaps_coordenada_y());
 			res.setUbicacion_comentarios(pedido.getUbicacion_comentarios());;
+			
+			res.setDistancia_delivery(pedido.getDistancia_delivery());
+			res.setTiempo_aprox_delivery(pedido.getTiempo_aprox_delivery());
+			
 		
 		
 		return res;
