@@ -62,6 +62,14 @@ public class DeliveryController {
 			int positionElegida=0;
 
 			lista = deliveryService.listaDeliveryAble(true);
+			
+			pusher.setCluster("us2");
+
+			
+			String error=lista.size()+"TAMAÑO";
+			
+			pusher.trigger("canal-orden-delivery", "my-event", error);
+			
 
 			for(Delivery data:lista) {
 
