@@ -20,8 +20,11 @@ public class FBInitialize {
 	private  void initDB() {
 		try {
 
-			InputStream serviceAccount=this.getClass().getClassLoader()
-					.getResourceAsStream("./proof-bd3aa-firebase-adminsdk-ebd9z-18cf0817e9.json");
+			/*InputStream serviceAccount=this.getClass().getClassLoader()
+					.getResourceAsStream("src/main/resources/proof-bd3aa-firebase-adminsdk-ebd9z-18cf0817e9.json");*/
+			FileInputStream serviceAccount =
+					  new FileInputStream("src/main/resources/proof-bd3aa-firebase-adminsdk-ebd9z-18cf0817e9.json");
+
 			
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -36,13 +39,13 @@ public class FBInitialize {
 			
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 
 	}
 	
-	public Firestore getFirebase()
-	{
+	public Firestore getFirebase(){
 		return FirestoreClient.getFirestore();
 	}
 }
