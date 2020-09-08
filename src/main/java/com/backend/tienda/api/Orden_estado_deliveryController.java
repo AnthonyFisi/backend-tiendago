@@ -73,7 +73,7 @@ public class Orden_estado_deliveryController {
 
 		Venta venta=null;
 
-		List<Orden_estado_delivery> listaOrden =null;
+		//List<Orden_estado_delivery> listaOrden =null;
 		
 		Orden_estado_delivery ordenResult=null;
 		
@@ -86,8 +86,8 @@ public class Orden_estado_deliveryController {
 
 		orden.setFecha(time);
 	
-		try 
-		{
+	//	try 
+//		{
 				
 		
 			//FALTA QUE SEA UNA ACTUALIZACION CON EL ID DEL REPARTIDOR
@@ -104,7 +104,7 @@ public class Orden_estado_deliveryController {
 					
 					ordenResult=orden_estado_deliveryService.saveState(orden);
 					
-					listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
+					//listaOrden=orden_estado_deliveryService.listaEstadosByIdVenta(orden.getId().getIdventa());
 					
 					
 					if(orden.getId().getIdestado_delivery()==1) {
@@ -115,7 +115,7 @@ public class Orden_estado_deliveryController {
 						//VA TENER QUE IR A LA TABLA DE REPARTIDOR
 						//falta COREGIR ACA
 						
-						Usuario_general usuario=usuario_generalRepository.findById((long)repartidor.getIdusuariogeneral()).get();
+						Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
 						
 						
 						usuario.setContrasena("");
@@ -196,12 +196,12 @@ public class Orden_estado_deliveryController {
 				
 				}
 				
-				
+	/*			
 			
 		}catch(Exception e) {
 			return new ResponseEntity<Orden_estado_delivery>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}
+		}*/
 		
 		return new ResponseEntity<Orden_estado_delivery>(ordenResult,HttpStatus.OK);
 		

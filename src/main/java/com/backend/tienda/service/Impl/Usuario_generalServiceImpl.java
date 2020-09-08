@@ -18,7 +18,7 @@ public class Usuario_generalServiceImpl  implements Usuario_generalService{
 	
 		Usuario_general usuario=null;
 		
-		usuario=usuarioRepository.findById((long) idusuario).get();
+		usuario=usuarioRepository.findById(idusuario).get();
 		usuario.setCelular(celular);
 		return usuarioRepository.save(usuario);
 		
@@ -27,7 +27,7 @@ public class Usuario_generalServiceImpl  implements Usuario_generalService{
 	@Override
 	public Usuario_general updateCorreo(int idusuario, String correo) {
 		Usuario_general usuario=null;
-		usuario=usuarioRepository.findById((long) idusuario).get();
+		usuario=usuarioRepository.findById(idusuario).get();
 		usuario.setCelular(correo);
 		return usuarioRepository.save(usuario);
 	}
