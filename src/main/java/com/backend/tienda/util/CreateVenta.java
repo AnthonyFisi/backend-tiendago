@@ -54,11 +54,12 @@ public class CreateVenta {
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");
 		venta.setTiempo_espera("50");
-		venta.setIdestado_delivery(6);
+		venta.setIdestado_delivery(0);
 		venta.setIdestado_general(0);
 		venta.setNumeromesa(ventaAndroid.getNumeromesa());
 		venta.setMesa(ventaAndroid.isMesa());
 		venta.setDescuento_mesa(ventaAndroid.getDescuento_mesa());
+		venta.setVenta_costopedido(venta.getVenta_costopedido());
 		
 		return venta;
 	}

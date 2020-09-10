@@ -21,6 +21,7 @@ import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
+import com.backend.tienda.gson.RepartidorInformationGson;
 import com.backend.tienda.repository.Usuario_generalRepository;
 import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
@@ -109,6 +110,7 @@ public class Orden_estado_deliveryController {
 					
 					if(orden.getId().getIdestado_delivery()==1) {
 						
+						RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
 						
 						Repartidor repartidor=repartidorService.findRepartidorById(orden.getIdrepartidor());
 						
@@ -122,9 +124,14 @@ public class Orden_estado_deliveryController {
 						
 						usuario.setRoles(null);
 						
+						
+						repartidorInformation.setUsuario_general(usuario);
+						
+						repartidorInformation.setIdventa(orden.getId().getIdventa());
+						
 						pusher.setCluster("us2");
 						
-						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", usuario);
+						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", repartidorInformation);
 						
 					}
 					
@@ -152,6 +159,8 @@ public class Orden_estado_deliveryController {
 						pusher.setCluster("us2");
 						
 						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+						
+						
 						
 					}
 					

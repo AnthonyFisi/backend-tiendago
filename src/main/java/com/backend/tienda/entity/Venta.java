@@ -70,6 +70,14 @@ public class Venta {
 	
 	private float descuento_mesa;
 	
+	private float venta_costopedido;
+	
+	private String venta_distancia_delivery_total;
+	
+	private float venta_ganancia_delivery;
+	
+	private float ganancia_yegoo;
+	
 
 	
 	public String getComentario_cancelar() {
@@ -287,6 +295,38 @@ public class Venta {
 
 	public void setDescuento_mesa(float descuento_mesa) {
 		this.descuento_mesa = descuento_mesa;
+	}
+
+	public float getVenta_costopedido() {
+		return venta_costopedido;
+	}
+
+	public void setVenta_costopedido(float venta_costopedido) {
+		this.venta_costopedido = venta_costopedido;
+	}
+
+	public String getVenta_distancia_delivery_total() {
+		return venta_distancia_delivery_total;
+	}
+
+	public void setVenta_distancia_delivery_total(String venta_distancia_delivery_total) {
+		this.venta_distancia_delivery_total = venta_distancia_delivery_total;
+	}
+
+	public float getVenta_ganancia_delivery() {
+		return venta_ganancia_delivery;
+	}
+
+	public void setVenta_ganancia_delivery(float venta_ganancia_delivery) {
+		this.venta_ganancia_delivery = venta_ganancia_delivery;
+	}
+
+	public float getGanancia_yegoo() {
+		return ganancia_yegoo;
+	}
+
+	public void setGanancia_yegoo(float ganancia_yegoo) {
+		this.ganancia_yegoo = ganancia_yegoo;
 	}
 
 	

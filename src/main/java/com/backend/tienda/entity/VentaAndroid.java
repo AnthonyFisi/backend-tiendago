@@ -1,12 +1,6 @@
 package com.backend.tienda.entity;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import com.backend.tienda.util.CalculatePriceDelivery;
-import com.backend.tienda.util.CalculatePriceRestaurante;
-
-import java.sql.Timestamp;
+import java.util.List;
 
 public class VentaAndroid {
 
@@ -47,6 +41,11 @@ public class VentaAndroid {
 	
 	private boolean mesa;
 	
+	private float venta_costopedido;
+
+	private List<Double> empresa_posistion;
+	
+	private List<Double> usuario_position;
 	
 
 	public int getIdEmpresa() {
@@ -172,6 +171,30 @@ public class VentaAndroid {
 
 	public void setMesa(boolean mesa) {
 		this.mesa = mesa;
+	}
+
+	public float getVenta_costopedido() {
+		return venta_costopedido;
+	}
+
+	public void setVenta_costopedido(float venta_costopedido) {
+		this.venta_costopedido = venta_costopedido;
+	}
+
+	public List<Double> getEmpresa_posistion() {
+		return empresa_posistion;
+	}
+
+	public void setEmpresa_posistion(List<Double> empresa_posistion) {
+		this.empresa_posistion = empresa_posistion;
+	}
+
+	public List<Double> getUsuario_position() {
+		return usuario_position;
+	}
+
+	public void setUsuario_position(List<Double> usuario_position) {
+		this.usuario_position = usuario_position;
 	}
 
 	
