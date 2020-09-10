@@ -19,14 +19,7 @@ public class CreateVenta {
 		
 		Timestamp ventaFecha_entrega=Timestamp.valueOf(newDate);
 
-		float precioDelivery=0;
-				//CalculatePriceDelivery.calculatePriceDelivery(ventaAndroid.getDistancia(),ventaAndroid.getTiempo(),ventaAndroid.getDificultad());
-		
-		float precioPorcentaje=0;
-				//CalculatePriceRestaurante.calculatePrice(ventaAndroid.getVenta_costototal(), listaPorcentajes);
 	
-	 
-		float precioGanancia=precioPorcentaje-precioDelivery;
 	
 		Venta venta= new Venta();
 		
@@ -38,7 +31,7 @@ public class CreateVenta {
 		venta.setVenta_fecha(ventaFecha);
 		venta.setVenta_fechaentrega(ventaFecha_entrega);
 		//REEMPLAZAMOS EL PRECIO DEL DELIVERY DEL COMERCIO POR LA GANANCIA QUE DA A LA EMPRESA YEGoO
-		venta.setVenta_costodelivery(precioGanancia);
+		venta.setVenta_costodelivery(ventaAndroid.getVenta_costodelivery());
 		venta.setVenta_costototal(ventaAndroid.getVenta_costototal());
 		venta.setComentario(ventaAndroid.getComentario());
 		venta.setIdestado_empresa(1);
@@ -46,7 +39,7 @@ public class CreateVenta {
 		venta.setIdtipo_envio(ventaAndroid.getIdtipo_envio());
 		venta.setComentario_entrega("");
 		venta.setDistancia_delivery("0 km");
-		venta.setCosto_delivery(precioDelivery);
+		venta.setCosto_delivery(0);
 		venta.setOrden_disponible(true);
 		venta.setTiempo_espera(String.valueOf(0));
 		venta.setTiempo_aprox_delivery("");

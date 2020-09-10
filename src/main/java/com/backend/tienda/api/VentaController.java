@@ -184,6 +184,8 @@ public class VentaController {
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 
 
+		respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
+
 
 		//REGISTRAMOS EN LA TABLA DE VENTA
 		respuesta=ventaService.registrarVenta(respuesta);
