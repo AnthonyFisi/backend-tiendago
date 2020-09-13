@@ -57,16 +57,16 @@ public class Restaurante_PedidoController {
 
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
-	
+
 	@Autowired
 	Orden_estado_restauranteService ordenService;
 
 	@Autowired
 	Repartidor_BiService repartidor_biService;
-	
+
 	@Autowired
 	Restaurante_PedidoRepository restaurante_pedidoRepository;
-	
+
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
 
@@ -102,46 +102,43 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
-		
-		
-
-		try {
 
 
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevosDistinct(idEmpresa);
-			
-			//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+		listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosNuevosDistinct(idEmpresa);
 
-			
-			
-			listaTotal= new ArrayList<>();
+		//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
-			for(Restaurante_Pedido pedido:listaRestaurante) {
-				
-		
-				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-				
-				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+		if(listaRestaurante.size()<=0) {
 
-				res.setListaProductos(listaProductos);	
-				
-				listaTotal.add(res);
-			}
-
-
-
-			restauranteGson= new Restaurante_PedidoGson();
-			restauranteGson.setListaRestaurante_Pedido(listaTotal);
-
-		}catch(Exception e) {
-			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
 
 		}
+
+
+		listaTotal= new ArrayList<>();
+
+		for(Restaurante_Pedido pedido:listaRestaurante) {
+
+
+			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+			res.setListaProductos(listaProductos);	
+
+			listaTotal.add(res);
+		}
+
+
+
+		restauranteGson= new Restaurante_PedidoGson();
+		restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
 
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
-	
+
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_READY,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosReady(@PathVariable("idEmpresa") int idEmpresa){
 
@@ -156,26 +153,31 @@ public class Restaurante_PedidoController {
 		List<Restaurante_PedidoModified> listaTotal=null;
 
 		Repartidor_Bi repartidor_bi=null;
-		try {
+
 
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
-			
 
+
+			if(listaRestaurante.size()<=0) {
+
+				return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
+
+			}
 
 			listaTotal= new ArrayList<>();
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
-				
-		
+
+
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-				
+
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 				repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
-				
+
 				res.setRepartidor_bi(repartidor_bi);
-				
+
 				res.setListaProductos(listaProductos);	
 				listaTotal.add(res);
 			}
@@ -185,16 +187,13 @@ public class Restaurante_PedidoController {
 			restauranteGson= new Restaurante_PedidoGson();
 			restauranteGson.setListaRestaurante_Pedido(listaTotal);
 
-		}catch(Exception e) {
-			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}
+	
 
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
-	
-	
+
+
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_PROCES,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosProces(@PathVariable("idEmpresa") int idEmpresa){
 
@@ -207,49 +206,54 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		List<Restaurante_PedidoModified> listaTotal=null;
-				
+
 		List<Orden_estado_empresa> listaEstados=null;
 
-		try {
 
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);		
-	
-		
+
+
+			if(listaRestaurante.size()<=0) {
+
+				return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
+
+			}
 			
+
 			List<Orden_estado_empresaPK> pklist=new ArrayList<>();
-			
+
 			for(Restaurante_Pedido pedido:listaRestaurante) {
-				
+
 				Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
 				pk.setIdventa(pedido.getIdventa());
 				pk.setIdestado_empresa(pedido.getIdestadoempresa());
 				pklist.add(pk);
-				
+
 			}
-						
+
 			listaEstados=ordenService.listaEstados(pklist);
 
 
 			listaTotal= new ArrayList<>();
-			
+
 			int position=0;
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
 
 				System.out.println(pedido.getNumeromesa()+"numeromesa");
-				
+
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-				
+
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
-				
-				
+
+
 				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
-				
+
 				res.setListaProductos(listaProductos);	
-				
+
 				listaTotal.add(res);
-				
+
 				position++;
 			}
 
@@ -258,18 +262,13 @@ public class Restaurante_PedidoController {
 			restauranteGson= new Restaurante_PedidoGson();
 			restauranteGson.setListaRestaurante_Pedido(listaTotal);
 
-		}catch(Exception e) {
-		
-			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}
-
+	
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
-	
-	
-	
+
+
+
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_HISTORIAL,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosHistorial(@PathVariable("idEmpresa") int idEmpresa){
 
@@ -283,19 +282,19 @@ public class Restaurante_PedidoController {
 
 		List<Restaurante_PedidoModified> listaTotal=null;
 
-	try {
+		try {
 
 
 			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosHistorial(idEmpresa);
-			
+
 			//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
 
 
 			listaTotal= new ArrayList<>();
 
 			for(Restaurante_Pedido pedido:listaRestaurante) {
-				
-		
+
+
 				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 
 				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
@@ -318,10 +317,10 @@ public class Restaurante_PedidoController {
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
-	
-	
-	
-	
+
+
+
+
 	@RequestMapping(value=PEDIDO_RECIENTE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoModified>  pedidosRecientes(
 			@PathVariable("idEmpresa") int idEmpresa,@PathVariable("idPedido") int idPedido,@PathVariable("idVenta") int idVenta){
@@ -338,7 +337,7 @@ public class Restaurante_PedidoController {
 
 
 			pedido=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
-			
+
 			System.out.println("paso por pedido" + pedido.getIdempresa());
 
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
@@ -346,7 +345,7 @@ public class Restaurante_PedidoController {
 
 
 			res =  Restaurante_PedidoModified.convert(pedido);
-			
+
 			res.setListaProductos(listaProductos);	
 
 		}catch(Exception e) {
@@ -361,7 +360,7 @@ public class Restaurante_PedidoController {
 	}
 
 
-	
+
 	public Restaurante_PedidoModified  recientes(int idEmpresa,int idPedido, int idVenta){
 
 
@@ -377,26 +376,26 @@ public class Restaurante_PedidoController {
 
 
 			pedido=restaurante_PedidoService.recientePedido(idEmpresa, idPedido, idVenta);
-			
+
 
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 
 			res =  Restaurante_PedidoModified.convert(pedido);
-			
+
 			res.setListaProductos(listaProductos);	
 
 
 		}catch(Exception e) {
 
-		return res;
+			return res;
 		}
 
 		return res;
 	}
 
-	
-	
+
+
 	public Restaurante_PedidoModified  recientes2(int idEmpresa,int idPedido, int idVenta){
 
 
@@ -406,28 +405,28 @@ public class Restaurante_PedidoController {
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 
 		Restaurante_PedidoModified res =null;
-		
+
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 
 
 
-			pedido=restaurante_pedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(2,true, idEmpresa, idPedido, idVenta);
-			
-
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+		pedido=restaurante_pedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(2,true, idEmpresa, idPedido, idVenta);
 
 
-			res =  Restaurante_PedidoModified.convert(pedido);
-			
-			
-			res.setFechaAceptado(time.toString());
-			
-			res.setRepartidor_bi(new Repartidor_Bi());
-			
-			res.setListaProductos(listaProductos);	
-			
-			
-			System.out.println(res.getFechaAceptado()+" / "+res.getRepartidor_bi().toString());
+		listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+
+		res =  Restaurante_PedidoModified.convert(pedido);
+
+
+		res.setFechaAceptado(time.toString());
+
+		res.setRepartidor_bi(new Repartidor_Bi());
+
+		res.setListaProductos(listaProductos);	
+
+
+		System.out.println(res.getFechaAceptado()+" / "+res.getRepartidor_bi().toString());
 
 
 		return res;

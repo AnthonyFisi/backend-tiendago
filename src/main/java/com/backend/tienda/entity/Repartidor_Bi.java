@@ -24,6 +24,8 @@ public class Repartidor_Bi {
 	
 	private String apellido;
 	
+	private String celular;
+	
 	private String foto;
 	
 	private  int idcuentarepartidor;
@@ -178,6 +180,14 @@ public class Repartidor_Bi {
 
 	public void setDiponible(boolean disponible) {
 		this.disponible = disponible;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	
