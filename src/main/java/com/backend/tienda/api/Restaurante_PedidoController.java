@@ -156,38 +156,38 @@ public class Restaurante_PedidoController {
 
 
 
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
+		listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
 
 
-			if(listaRestaurante.size()<=0) {
+		if(listaRestaurante.size()<=0) {
 
-				return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
 
-			}
+		}
 
-			listaTotal= new ArrayList<>();
+		listaTotal= new ArrayList<>();
 
-			for(Restaurante_Pedido pedido:listaRestaurante) {
-
-
-				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-
-				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
-
-				repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
-
-				res.setRepartidor_bi(repartidor_bi);
-
-				res.setListaProductos(listaProductos);	
-				listaTotal.add(res);
-			}
+		for(Restaurante_Pedido pedido:listaRestaurante) {
 
 
+			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 
-			restauranteGson= new Restaurante_PedidoGson();
-			restauranteGson.setListaRestaurante_Pedido(listaTotal);
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
-	
+			repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
+
+			res.setRepartidor_bi(repartidor_bi);
+
+			res.setListaProductos(listaProductos);	
+			listaTotal.add(res);
+		}
+
+
+
+		restauranteGson= new Restaurante_PedidoGson();
+		restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+
 
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
@@ -211,58 +211,58 @@ public class Restaurante_PedidoController {
 
 
 
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);		
+		listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosProceso(idEmpresa);		
 
 
-			if(listaRestaurante.size()<=0) {
+		if(listaRestaurante.size()<=0) {
 
-				return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
 
-			}
-			
-
-			List<Orden_estado_empresaPK> pklist=new ArrayList<>();
-
-			for(Restaurante_Pedido pedido:listaRestaurante) {
-
-				Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
-				pk.setIdventa(pedido.getIdventa());
-				pk.setIdestado_empresa(pedido.getIdestadoempresa());
-				pklist.add(pk);
-
-			}
-
-			listaEstados=ordenService.listaEstados(pklist);
+		}
 
 
-			listaTotal= new ArrayList<>();
+		List<Orden_estado_empresaPK> pklist=new ArrayList<>();
 
-			int position=0;
+		for(Restaurante_Pedido pedido:listaRestaurante) {
 
-			for(Restaurante_Pedido pedido:listaRestaurante) {
+			Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
+			pk.setIdventa(pedido.getIdventa());
+			pk.setIdestado_empresa(pedido.getIdestadoempresa());
+			pklist.add(pk);
 
-				System.out.println(pedido.getNumeromesa()+"numeromesa");
+		}
 
-				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-
-				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
-
-
-				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
-
-				res.setListaProductos(listaProductos);	
-
-				listaTotal.add(res);
-
-				position++;
-			}
+		listaEstados=ordenService.listaEstados(pklist);
 
 
+		listaTotal= new ArrayList<>();
 
-			restauranteGson= new Restaurante_PedidoGson();
-			restauranteGson.setListaRestaurante_Pedido(listaTotal);
+		int position=0;
 
-	
+		for(Restaurante_Pedido pedido:listaRestaurante) {
+
+			System.out.println(pedido.getNumeromesa()+"numeromesa");
+
+			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+
+			res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
+
+			res.setListaProductos(listaProductos);	
+
+			listaTotal.add(res);
+
+			position++;
+		}
+
+
+
+		restauranteGson= new Restaurante_PedidoGson();
+		restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}
 
@@ -282,37 +282,46 @@ public class Restaurante_PedidoController {
 
 		List<Restaurante_PedidoModified> listaTotal=null;
 
-		try {
-
-
-			listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosHistorial(idEmpresa);
-
-			//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
-
-
-			listaTotal= new ArrayList<>();
-
-			for(Restaurante_Pedido pedido:listaRestaurante) {
-
-
-				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-
-				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
-
-				res.setListaProductos(listaProductos);	
-
-				listaTotal.add(res);
-			}
+		Repartidor_Bi repartidor_bi=null;
 
 
 
-			restauranteGson= new Restaurante_PedidoGson();
-			restauranteGson.setListaRestaurante_Pedido(listaTotal);
 
-		}catch(Exception e) {
-			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosHistorial(idEmpresa);
+
+		//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(listaRestaurante.get(0).getIdpedido());
+
+
+		if(listaRestaurante.size()<=0) {
+
+			return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.NOT_FOUND);
 
 		}
+		listaTotal= new ArrayList<>();
+
+		for(Restaurante_Pedido pedido:listaRestaurante) {
+
+
+			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+			res.setListaProductos(listaProductos);	
+			
+			repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
+
+			res.setRepartidor_bi(repartidor_bi);
+
+
+			listaTotal.add(res);
+		}
+
+
+
+		restauranteGson= new Restaurante_PedidoGson();
+		restauranteGson.setListaRestaurante_Pedido(listaTotal);
+
+
 
 		return new ResponseEntity<Restaurante_PedidoGson>( restauranteGson,HttpStatus.OK);
 	}

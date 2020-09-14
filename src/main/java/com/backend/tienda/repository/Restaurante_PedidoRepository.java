@@ -176,7 +176,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					AND idempresa= ?1  ",nativeQuery=true)
 	List<Restaurante_Pedido> findHistorialOrden(int idEmpresa);*/
 	
-	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresa(int idestadoempresa,boolean disponbile,int idempresa);
+	List<Restaurante_Pedido> findByIdestadoempresaAndIdempresa(int idestadoempresa,int idempresa);
 
 	
 

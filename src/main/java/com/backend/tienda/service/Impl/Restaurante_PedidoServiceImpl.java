@@ -71,7 +71,7 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 
 	@Override
 	public List<Restaurante_Pedido> listaRestaurantePedidosHistorial(int idEmpresa) {
-		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresa(4,false,idEmpresa);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndIdempresa(4,idEmpresa);
 	}
 
 }
