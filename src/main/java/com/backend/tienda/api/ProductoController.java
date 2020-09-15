@@ -147,6 +147,8 @@ public class ProductoController {
 
 		try {
 			producto=productoService.updateDisponibilidadProducto(idproducto,idempresa, disponibilidad);
+			
+			producto.setProducto_fechacreacion(null);
 
 		}catch(Exception e) 
 		{
