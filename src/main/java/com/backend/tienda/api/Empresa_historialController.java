@@ -68,7 +68,7 @@ public class Empresa_historialController {
 			@PathVariable("idPedido") int idPedido,
 			@PathVariable("idRepartidor") int idRepartidor){
 
-
+		
 		Empresa_historialDetail empresahistorialDetail= null;
 
 		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
@@ -86,10 +86,7 @@ public class Empresa_historialController {
 		empresahistorialDetail.setListaProductos(listaProductos);	
 		
 		repartidor_bi=repartidor_biService.findByIdRepartidor(idRepartidor);
-		
-		if(repartidor_bi==null) {
-			return  ResponseEntity.badRequest().build();
-		}
+	
 
 		empresahistorialDetail.setRepartidor_bi(repartidor_bi);
 
