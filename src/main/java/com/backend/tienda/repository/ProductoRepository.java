@@ -21,7 +21,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer>{
 	List<Producto>  findByIdcategoriaproductoAndIdempresa(int idcategoriaproducto,int idempresa);
 	
 	
-	List<Producto>  findByidempresa(int idempresa);
+	List<Producto>  findByidempresaOrderByIdcategoriaproductoAsc(int idempresa);
 	
 	
 	Producto findByIdproductoAndIdempresa(int idproducto,int idempresa);

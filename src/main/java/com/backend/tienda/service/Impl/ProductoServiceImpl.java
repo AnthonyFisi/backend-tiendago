@@ -36,7 +36,7 @@ public class ProductoServiceImpl  implements ProductoService{
 
 	@Override
 	public List<Producto> findByidempresa(int idempresa) {
-		return productoRepository.findByidempresa(idempresa);
+		return productoRepository.findByidempresaOrderByIdcategoriaproductoAsc(idempresa);
 	}
 
 	@Override
@@ -64,6 +64,24 @@ public class ProductoServiceImpl  implements ProductoService{
 	public List<Producto> listafindByPalabra(int idempresa,String palabra) {
 		
 		return productoRepository.listafindByPalabra(idempresa,palabra);
+		
+	}
+
+	@Override
+	public Boolean eliminarProductoById(int idProducto) {
+
+		Producto producto=null;
+		
+		productoRepository.deleteById(idProducto);
+		
+		producto=productoRepository.findById(idProducto).get();
+		
+		if(producto!=null) {
+			
+			return true;
+		}
+		
+		return false;
 		
 	}
 

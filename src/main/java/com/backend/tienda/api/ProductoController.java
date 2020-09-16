@@ -41,6 +41,7 @@ public class ProductoController {
 
 	public final static String BUSCAR_BY_WORD="/searchWord/{idempresa}/{word}";
 
+	public final static String ELIMINAR_CATEGORIA_PRODUCTO="/eliminarCategoria/{idcategoriaproducto}/{idempresa}";
 
 
 	@Autowired
@@ -210,6 +211,29 @@ public class ProductoController {
 		return ResponseEntity.ok(productoGson);
 
 
+	}
+	
+	
+	@GetMapping(ELIMINAR_CATEGORIA_PRODUCTO)
+	public ResponseEntity<?> eliminarCategoriaProducto(@PathVariable("idcategoriaproducto") int idcategoriaproducto,
+			@PathVariable("idempresa") int idempresa){
+
+		List<Producto> rpta=null;
+		
+		rpta=productoService.listaIdcategoriaproductoAndIdempresa(idcategoriaproducto, idempresa);
+
+		if(rpta.isEmpty()) {
+			
+			return ResponseEntity.notFound().build();
+			
+		}
+		for(Producto producto:rpta) {
+			productoService.eliminarProductoById(producto.getIdproducto());	
+		}	
+		
+		return ResponseEntity.ok("Eliminado");
+		
+		
 	}
 
 }

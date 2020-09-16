@@ -13,11 +13,13 @@ public interface ProductoService {
 	
 	List<Producto> listaIdcategoriaproductoAndIdempresa(int idcategoriaproducto,int idempresa);
 	
-	
 	List<Producto>  findByidempresa(int idempresa);
 	
 	Producto updateDisponibilidadProducto(int idproducto,int idempresa,boolean disponibilidad);
 	
 	List<Producto> listafindByPalabra(int idempresa,String palabra);
+	
+	Boolean eliminarProductoById(int idProducto);
 
+	
 }

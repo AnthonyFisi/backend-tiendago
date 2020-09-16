@@ -18,4 +18,25 @@ public class EmpresaOficialServiceImpl implements EmpresaOficialService{
 		return empresaOficialRepository.save(empresa);
 	}
 
+	@Override
+	public EmpresaOficial updateValorDescuento(int idempresa, float valordescuento) {
+		
+		EmpresaOficial empresaOficial=null;
+		
+		EmpresaOficial empresaOficialResponse=null;
+		
+		empresaOficial=empresaOficialRepository.findById(idempresa).get();
+		
+		empresaOficial.setMonto_descuento_menu(valordescuento);
+		
+		empresaOficialResponse=empresaOficialRepository.save(empresaOficial);
+		
+		if(empresaOficialResponse==null) {
+			return null;
+		}
+		
+		return empresaOficialResponse;
+		
+	}
+
 }
