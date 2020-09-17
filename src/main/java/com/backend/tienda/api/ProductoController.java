@@ -104,6 +104,11 @@ public class ProductoController {
 
 		try {
 			rpta=productoService.listaIdcategoriaproductoAndIdempresa(idcategoriaproducto, idempresa);
+
+			for(Producto producto:rpta) {
+				producto.setProducto_fechacreacion(null);
+
+			}
 			productoGson= new ProductoGson();
 			productoGson.setListaProducto(rpta);
 
