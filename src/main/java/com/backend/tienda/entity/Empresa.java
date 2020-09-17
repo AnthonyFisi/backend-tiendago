@@ -99,6 +99,8 @@ public class Empresa{
 	
 	private String foto;
 	
+	private boolean cuentaactiva;
+	
 
 	public boolean isDisponible() {
 		return disponible;
@@ -432,6 +434,14 @@ public class Empresa{
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public boolean isCuentaactiva() {
+		return cuentaactiva;
+	}
+
+	public void setCuentaactiva(boolean cuentaactiva) {
+		this.cuentaactiva = cuentaactiva;
 	}
 
 	
