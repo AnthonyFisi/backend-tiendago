@@ -40,7 +40,7 @@ public class Orden_estado_restauranteController {
 	public static final String ORDEN_CANCELAR="/cancelarOrden/{idUsuario}";
 
 	
-	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}/{idUsuario}";
+	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}/{idUsuario}/{horario}/{fechaentrega}";
 	
 	public static final String ORDEN_UPDATE_PROCES="/updateOrdenProces/{idUsuario}";
 	
