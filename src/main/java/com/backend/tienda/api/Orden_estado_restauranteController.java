@@ -565,6 +565,19 @@ public class Orden_estado_restauranteController {
 	}
 	
 	
+	@RequestMapping(value="/calcular/{tiempoespera}/{horario}/{fechaentrega}",method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateOrdenProces(
+			@PathVariable ("tiempoespera") String tiempoespera,
+			@PathVariable ("horario") String horario,
+			@PathVariable ("fechaentrega") String fechaentrega){
+		
+		String tiempo=calculateTimeInRange(horario,tiempoespera,fechaentrega);
+		
+		return ResponseEntity.ok(tiempo);
+
+	}
+	
+	
 	private String calculateTimeInRange(String horario,String tiempo_espera,String fecha_entrega) {
 		
 		String tiempototal="";
@@ -574,10 +587,20 @@ public class Orden_estado_restauranteController {
 		String fecha1=
 		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
 		    	.now(                           // Capture the current date.
-		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	    ZoneId.of( "America/Lima" )  // Returns a `ZoneId` object.
 		    	).toString();
 		    	
-		Timestamp today=Timestamp.valueOf(fecha1+" 00:00:00.000");
+		Timestamp fecha_entre=Timestamp.valueOf(fecha_entrega);
+
+		
+		String fecha0=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )  // Returns a `ZoneId` object.
+		    	).minusDays(1).toString();
+		
+		Timestamp yesterday=Timestamp.valueOf(fecha0+" 00:00:00.000");
+
 
 		String fecha2=
 		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
@@ -588,30 +611,41 @@ public class Orden_estado_restauranteController {
 		Timestamp tomorrow=Timestamp.valueOf(fecha2+" 00:00:00.000");
 		
 		
+		System.out.println("Ayer "+yesterday+" | tomorrow "+tomorrow +" | hoy :"+time);
+
+		
 		String[] tiempo=horario.split("- ");
-		
-		System.out.println(tiempo[0]+" | "+tiempo[1]);
-		
+			
 		
 		Timestamp horarioInicio=Timestamp.valueOf(convertTimestamp(tiempo[0],fecha1));
+		
 		Timestamp horarioFin=Timestamp.valueOf(convertTimestamp(tiempo[1],fecha1));
+		
 		int tiempoToLong=Integer.valueOf(tiempo_espera)*60000;
 		Long l= new Long(tiempoToLong);
+		
+		System.out.println(time.after(yesterday) +" "+time.before(tomorrow));
 
-		if(time.after(today) && time.before(tomorrow)) {
+
+		if(fecha_entre.after(yesterday) && fecha_entre.before(tomorrow)) {
 			
-			
+			System.out.println("Estamos en que el dia es hoy");
+
 
 			
 			if(time.after(horarioInicio) && time.before(horarioFin)) {
+				System.out.println("Horario en el intervalo");
+
 				
 				tiempototal=String.valueOf(tiempoToLong);
 				
 			}else {
-				
+				System.out.println("Horario despues del intervalo");
+
 				long diference=horarioInicio.getTime()-time.getTime();
-				
-						
+			
+				System.out.println(horarioInicio+" "+time);
+
 
 				long total=l+diference;
 				
@@ -621,12 +655,18 @@ public class Orden_estado_restauranteController {
 			
 		}else {
 			
+			System.out.println("Dia de mañana ");
+
+			
 			String[] fecha3=fecha_entrega.split(" ");
 			
 	        Timestamp ts = Timestamp.valueOf(convertTimestamp(tiempo[0],fecha3[0]));
 
 			
 			long diference=ts.getTime()-time.getTime();
+			
+			System.out.println(ts+" "+time);
+
 			
 			//Long l= new Long(tiempoToLong);
 
@@ -649,8 +689,8 @@ public class Orden_estado_restauranteController {
 		
 		String input = fecha+" "+data[0]+":00 "+data[1].toLowerCase();
 	      //Format of the date defined in the input String
-		
-		System.out.println(input +"fehca");
+				
+		System.out.println("input"+input);
 		
 	      DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
 	      //Desired format: 24 hour format: Change the pattern as per the need
@@ -663,11 +703,12 @@ public class Orden_estado_restauranteController {
 	         //Changing the format of date and storing it in String
 	    	 output = outputformat.format(date);
 	         //Displaying the date
-	    	 System.out.println(output);
 	      }catch(ParseException pe){
 	         pe.printStackTrace();
 	       }
-	      
+	     
+			System.out.println("output"+output);
+
 	      
 	      return output;
 		
