@@ -118,11 +118,12 @@ public class Orden_estado_restauranteController {
 		//ESTE ES EL ESTADO QUE VA ACTUALIZAR EN LA TABLA DE ESTADO_GENERAL
 		int idestado_general=1;
 	
-		try 
-		{
+		//try {
 			//CALCULAR EL TIEMPO TOTAL DE ENTREGA
 			String tiempoTotal=calculateTimeInRange(horario,tiempo_espera,fechaentrega);
 
+			System.out.println(tiempoTotal+"tiempo total");
+			
 			
 			// ESTOY ACTUALIZANDO EN LA TABLA DE VENTA EL ESTADO DE EMPRESA CON EL TIEMPO DE ESPERA
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa(),tiempo_espera,tiempoTotal);
@@ -172,10 +173,10 @@ public class Orden_estado_restauranteController {
 				
 			}
 			
-		}catch(Exception e) {
-			return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
+		/*}catch(Exception e) {
+			//return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}
+		}*/
 		
 			
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
@@ -586,8 +587,10 @@ public class Orden_estado_restauranteController {
 		
 		Timestamp tomorrow=Timestamp.valueOf(fecha2+" 00:00:00.000");
 		
-		String[] tiempo=horario.split("-");
 		
+		String[] tiempo=horario.split("- ");
+		
+		System.out.println(tiempo[0]+" | "+tiempo[1]);
 		
 		
 		Timestamp horarioInicio=Timestamp.valueOf(convertTimestamp(tiempo[0],fecha1));
@@ -640,14 +643,18 @@ public class Orden_estado_restauranteController {
 	
 	private String convertTimestamp(String tiempo,String fecha) {
 		
+		
 		String[] data=tiempo.split(" ");
 		
 		
-		String input = fecha+" "+data[0]+":00 "+data[1];
+		String input = fecha+" "+data[0]+":00 "+data[1].toLowerCase();
 	      //Format of the date defined in the input String
-	      DateFormat df = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss aa");
+		
+		System.out.println(input +"fehca");
+		
+	      DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
 	      //Desired format: 24 hour format: Change the pattern as per the need
-	      DateFormat outputformat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+	      DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	      Date date = null;
 	      String output = null;
 	      try{
