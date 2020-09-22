@@ -33,7 +33,7 @@ public class VentaServiceImpl implements VentaService{
 	}
 
 	@Override
-	public Venta updateVentaEstado(int idVenta,int idEstado_empresa,String tiempo_espera) {
+	public Venta updateVentaEstado(int idVenta,int idEstado_empresa,String tiempo_espera,String tiempototal_espera) {
 		
 	Venta venta=null;
 	
@@ -42,6 +42,7 @@ public class VentaServiceImpl implements VentaService{
 			venta=ventaRepository.findById(idVenta).get();
 			venta.setIdestado_empresa(idEstado_empresa);
 			venta.setTiempo_espera(tiempo_espera);
+			venta.setTiempototal_espera(tiempototal_espera);
 			venta=ventaRepository.save(venta);
 		
 		}catch(Exception e)

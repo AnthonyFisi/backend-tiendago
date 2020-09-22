@@ -66,6 +66,9 @@ public class Restaurante_PedidoController {
 
 	@Autowired
 	Restaurante_PedidoRepository restaurante_pedidoRepository;
+	
+	@Autowired
+	Orden_estado_restauranteController orden_estado_restaurante_controller;
 
 	@RequestMapping(value=LISTA_BY_IDEMPRESA_FECHAVENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Restaurante_PedidoGson>  listaPedidosRecientes(@PathVariable("idEmpresa") int idEmpresa){
@@ -241,18 +244,54 @@ public class Restaurante_PedidoController {
 
 		for(Restaurante_Pedido pedido:listaRestaurante) {
 
-			System.out.println(pedido.getNumeromesa()+"numeromesa");
+			
+			if(updateStateReady(pedido,listaEstados.get(position).getFecha().toString())) {
+				
+				Timestamp time=new Timestamp(System.currentTimeMillis());
 
-			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+				
+				if(!pedido.isMesa()){
+	                Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
+	                pk.setIdventa(pedido.getIdventa());
+	                pk.setIdestado_empresa(3);
 
-			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+	                Orden_estado_empresa estado= new Orden_estado_empresa();
+	                estado.setId(pk);
+	                estado.setDetalle("");
+	                estado.setFecha(time);
+	                estado.setIdempresa(pedido.getIdempresa());
 
+	                //adapter.cancelAllTimers();
 
-			res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
+	                orden_estado_restaurante_controller.updatestateAutomatically(estado, pedido.getIdusuario());
+	            }else {
 
-			res.setListaProductos(listaProductos);	
+	                Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
+	                pk.setIdventa(pedido.getIdventa());
+	                pk.setIdestado_empresa(4);
+	                Orden_estado_empresa ordenEstado= new Orden_estado_empresa();
+	                ordenEstado.setId(pk);
+	                ordenEstado.setIdempresa(pedido.getIdempresa());
+	                ordenEstado.setFecha(time);
+	                ordenEstado.setDetalle("");
 
-			listaTotal.add(res);
+	                orden_estado_restaurante_controller.updatestateAutomatically(ordenEstado, pedido.getIdusuario());
+	            }
+			}else {
+				System.out.println(pedido.getNumeromesa()+"numeromesa");
+
+				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
+
+				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
+
+				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
+
+				res.setListaProductos(listaProductos);	
+				
+				res.setHoraservidor(new Timestamp(System.currentTimeMillis()));
+
+				listaTotal.add(res);
+			}
 
 			position++;
 		}
@@ -441,6 +480,24 @@ public class Restaurante_PedidoController {
 		return res;
 	}
 
+	
+	 private boolean updateStateReady (Restaurante_Pedido pedido,String fecha){
+
+	        Timestamp timeStart = Timestamp.valueOf(fecha);
+	        
+			Timestamp timeNow=new Timestamp(System.currentTimeMillis());
+
+	        long difference = timeNow.getTime() - timeStart.getTime();
+
+	        Long tiempoTotal= new Long(Integer.valueOf(pedido.getTiempototal_espera()));
+
+	        System.out.println("Diferencia "+difference+ " |  tiempo Total "+ tiempoTotal);
+
+	        return (difference) >= tiempoTotal;
+
+	    }
+	 
+	 
 
 
 }

@@ -78,7 +78,7 @@ public class Venta {
 	
 	private float ganancia_yegoo;
 	
-
+	private String tiempototal_espera;
 	
 	public String getComentario_cancelar() {
 		return comentario_cancelar;
@@ -327,6 +327,14 @@ public class Venta {
 
 	public void setGanancia_yegoo(float ganancia_yegoo) {
 		this.ganancia_yegoo = ganancia_yegoo;
+	}
+
+	public String getTiempototal_espera() {
+		return tiempototal_espera;
+	}
+
+	public void setTiempototal_espera(String tiempototal_espera) {
+		this.tiempototal_espera = tiempototal_espera;
 	}
 
 	

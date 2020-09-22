@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -92,7 +94,12 @@ public class Orden_estado_restauranteController {
 	
 
 	@RequestMapping(value=ORDEN_REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Orden_estado_empresa> updateOrdenProces(@RequestBody Orden_estado_empresa orden,@PathVariable ("tiempo_espera") String tiempo_espera,@PathVariable ("idUsuario") int idUsuario){
+	public ResponseEntity<Orden_estado_empresa> updateOrdenProces(
+			@RequestBody Orden_estado_empresa orden,
+			@PathVariable ("tiempo_espera") String tiempo_espera,
+			@PathVariable ("idUsuario") int idUsuario,
+			@PathVariable ("horario") String horario,
+			@PathVariable ("fechaentrega") String fechaentrega){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 		
@@ -113,9 +120,12 @@ public class Orden_estado_restauranteController {
 	
 		try 
 		{
+			//CALCULAR EL TIEMPO TOTAL DE ENTREGA
+			String tiempoTotal=calculateTimeInRange(horario,tiempo_espera,fechaentrega);
+
 			
 			// ESTOY ACTUALIZANDO EN LA TABLA DE VENTA EL ESTADO DE EMPRESA CON EL TIEMPO DE ESPERA
-			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa(),tiempo_espera);
+			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa(),tiempo_espera,tiempoTotal);
 			
 			if(venta!=null) {
 				
@@ -144,7 +154,6 @@ public class Orden_estado_restauranteController {
 				
 				
 				
-				
 				gson=new Orden_estado_restauranteGson();
 				
 				gson.setListaOrden_estado_general(lista_estado_general);
@@ -152,6 +161,14 @@ public class Orden_estado_restauranteController {
 				pusher.setCluster("us2");
 				
 				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+				/*-------------------------
+				if(socio){
+					
+					MANDAR A BUSCAR UN REPARTIDOR ,SOLO EN ESTE CASO
+				
+				}
+				
+				-------------------------------*/
 				
 			}
 			
@@ -490,6 +507,164 @@ public class Orden_estado_restauranteController {
 		
 	}
 	
+	
+	public void updatestateAutomatically(Orden_estado_empresa orden,int idUsuario){
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		Venta venta=null;
+		
+		Orden_estado_empresa ordenResult=null;
+		
+		orden.setFecha(time);
+		
+		Orden_estado_restauranteGson gson=null;
+		
+		List<Orden_estado_general> lista_estado_general =null;
+		
+		Orden_estado_general orden_general= new Orden_estado_general();
+	
+		
+				int idestado_general=2;
+				
+				venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
+				
+				System.out.println("PASO1");
+
+				if(venta!=null) {
+					
+					ordenResult=ordenService.registrarEstado(orden);
+					
+					//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+					
+					ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
+
+					
+					orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
+					
+					//GUARDAR EL ESTADO EN LA TABLA GENERAL
+					orden_estado_generalService.guardar_estado(orden_general);
+					
+					
+					
+					lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+					
+					
+				
+					
+					gson=new Orden_estado_restauranteGson();
+					gson.setListaOrden_estado_general(lista_estado_general);
+					
+					pusher.setCluster("us2");
+					
+					pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+
+			}
+	
+	}
+	
+	
+	private String calculateTimeInRange(String horario,String tiempo_espera,String fecha_entrega) {
+		
+		String tiempototal="";
+		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		String fecha1=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	).toString();
+		    	
+		Timestamp today=Timestamp.valueOf(fecha1+" 00:00:00.000");
+
+		String fecha2=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	).plusDays(1).toString();
+		
+		Timestamp tomorrow=Timestamp.valueOf(fecha2+" 00:00:00.000");
+		
+		String[] tiempo=horario.split("-");
+		
+		
+		
+		Timestamp horarioInicio=Timestamp.valueOf(convertTimestamp(tiempo[0],fecha1));
+		Timestamp horarioFin=Timestamp.valueOf(convertTimestamp(tiempo[1],fecha1));
+		int tiempoToLong=Integer.valueOf(tiempo_espera)*60000;
+		Long l= new Long(tiempoToLong);
+
+		if(time.after(today) && time.before(tomorrow)) {
+			
+			
+
+			
+			if(time.after(horarioInicio) && time.before(horarioFin)) {
+				
+				tiempototal=String.valueOf(tiempoToLong);
+				
+			}else {
+				
+				long diference=horarioInicio.getTime()-time.getTime();
+				
+						
+
+				long total=l+diference;
+				
+				tiempototal=String.valueOf(total);
+			}
+
+			
+		}else {
+			
+			String[] fecha3=fecha_entrega.split(" ");
+			
+	        Timestamp ts = Timestamp.valueOf(convertTimestamp(tiempo[0],fecha3[0]));
+
+			
+			long diference=ts.getTime()-time.getTime();
+			
+			//Long l= new Long(tiempoToLong);
+
+			long total=l+diference;
+			
+			tiempototal=String.valueOf(total);
+
+		}
+ 		
+		return tiempototal;
+	}
+	
+	
+	
+	private String convertTimestamp(String tiempo,String fecha) {
+		
+		String[] data=tiempo.split(" ");
+		
+		
+		String input = fecha+" "+data[0]+":00 "+data[1];
+	      //Format of the date defined in the input String
+	      DateFormat df = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss aa");
+	      //Desired format: 24 hour format: Change the pattern as per the need
+	      DateFormat outputformat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+	      Date date = null;
+	      String output = null;
+	      try{
+	         //Converting the input String to Date
+	    	 date= df.parse(input);
+	         //Changing the format of date and storing it in String
+	    	 output = outputformat.format(date);
+	         //Displaying the date
+	    	 System.out.println(output);
+	      }catch(ParseException pe){
+	         pe.printStackTrace();
+	       }
+	      
+	      
+	      return output;
+		
+	}
 	
 	
 }

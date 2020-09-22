@@ -87,6 +87,10 @@ public class Restaurante_PedidoModified {
 	
 	private String tiempo_aprox_delivery;
 	
+	private String tiempototal_espera;
+	
+	private Timestamp horaservidor;
+	
 	private String fechaAceptado;
 		
 	private Repartidor_Bi repartidor_bi;
@@ -461,6 +465,24 @@ public class Restaurante_PedidoModified {
 	public void setTiempo_aprox_delivery(String tiempo_aprox_delivery) {
 		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
 	}
+	
+	
+
+	public String getTiempototal_espera() {
+		return tiempototal_espera;
+	}
+
+	public void setTiempototal_espera(String tiempototal_espera) {
+		this.tiempototal_espera = tiempototal_espera;
+	}
+
+	public Timestamp getHoraservidor() {
+		return horaservidor;
+	}
+
+	public void setHoraservidor(Timestamp horaservidor) {
+		this.horaservidor = horaservidor;
+	}
 
 	public static Restaurante_PedidoModified convert(Restaurante_Pedido pedido) {
 		
@@ -525,7 +547,7 @@ public class Restaurante_PedidoModified {
 			res.setDistancia_delivery(pedido.getDistancia_delivery());
 			res.setTiempo_aprox_delivery(pedido.getTiempo_aprox_delivery());
 			
-		
+			res.setTiempototal_espera(pedido.getTiempototal_espera());
 		
 		return res;
 		

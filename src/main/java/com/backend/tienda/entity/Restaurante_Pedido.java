@@ -98,6 +98,8 @@ public class Restaurante_Pedido {
 	
 	private String tiempo_aprox_delivery;
 	
+	private String tiempototal_espera;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -427,6 +429,14 @@ public class Restaurante_Pedido {
 
 	public void setTiempo_aprox_delivery(String tiempo_aprox_delivery) {
 		this.tiempo_aprox_delivery = tiempo_aprox_delivery;
+	}
+
+	public String getTiempototal_espera() {
+		return tiempototal_espera;
+	}
+
+	public void setTiempototal_espera(String tiempototal_espera) {
+		this.tiempototal_espera = tiempototal_espera;
 	}
 	
 	

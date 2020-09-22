@@ -53,7 +53,7 @@ public class CreateVenta {
 		venta.setMesa(ventaAndroid.isMesa());
 		venta.setDescuento_mesa(ventaAndroid.getDescuento_mesa());
 		venta.setVenta_costopedido(venta.getVenta_costopedido());
-		
+		venta.setTiempototal_espera("");
 		return venta;
 	}
 
