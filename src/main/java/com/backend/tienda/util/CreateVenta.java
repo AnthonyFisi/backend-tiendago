@@ -46,14 +46,19 @@ public class CreateVenta {
 		venta.setIdrepartidor(0);
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");
-		venta.setTiempo_espera("50");
+		if(ventaAndroid.isMesa()) {
+			venta.setTiempototal_espera("3000000");
+			venta.setTiempo_espera("50");
+
+		}
+		venta.setTiempo_espera("0");
 		venta.setIdestado_delivery(0);
 		venta.setIdestado_general(0);
 		venta.setNumeromesa(ventaAndroid.getNumeromesa());
 		venta.setMesa(ventaAndroid.isMesa());
 		venta.setDescuento_mesa(ventaAndroid.getDescuento_mesa());
 		venta.setVenta_costopedido(venta.getVenta_costopedido());
-		venta.setTiempototal_espera("");
+		venta.setTiempototal_espera("0");
 		return venta;
 	}
 
