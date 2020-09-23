@@ -240,8 +240,6 @@ public class Restaurante_PedidoController {
 
 		listaTotal= new ArrayList<>();
 
-		int position=0;
-
 		for(Restaurante_Pedido pedido:listaRestaurante) {
 
 			String fecha="";
@@ -252,55 +250,19 @@ public class Restaurante_PedidoController {
 				}
 			}
 			
-			if(updateStateReady(pedido,fecha)) {
-				
-				Timestamp time=new Timestamp(System.currentTimeMillis());
 
-				
-				if(!pedido.isMesa()){
-	                Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
-	                pk.setIdventa(pedido.getIdventa());
-	                pk.setIdestado_empresa(3);
+			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 
-	                Orden_estado_empresa estado= new Orden_estado_empresa();
-	                estado.setId(pk);
-	                estado.setDetalle("");
-	                estado.setFecha(time);
-	                estado.setIdempresa(pedido.getIdempresa());
+			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
-	                //adapter.cancelAllTimers();
+			res.setFechaAceptado(fecha);
 
-	                orden_estado_restaurante_controller.updatestateAutomatically(estado, pedido.getIdusuario());
-	            }else {
+			res.setListaProductos(listaProductos);	
+			
+			res.setHoraservidor(new Timestamp(System.currentTimeMillis()));
 
-	                Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
-	                pk.setIdventa(pedido.getIdventa());
-	                pk.setIdestado_empresa(4);
-	                Orden_estado_empresa ordenEstado= new Orden_estado_empresa();
-	                ordenEstado.setId(pk);
-	                ordenEstado.setIdempresa(pedido.getIdempresa());
-	                ordenEstado.setFecha(time);
-	                ordenEstado.setDetalle("");
+			listaTotal.add(res);
 
-	                orden_estado_restaurante_controller.updatestateAutomatically(ordenEstado, pedido.getIdusuario());
-	            }
-			}else {
-				System.out.println(pedido.getNumeromesa()+"numeromesa");
-
-				Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
-
-				listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
-
-				res.setFechaAceptado(listaEstados.get(position).getFecha().toString());
-
-				res.setListaProductos(listaProductos);	
-				
-				res.setHoraservidor(new Timestamp(System.currentTimeMillis()));
-
-				listaTotal.add(res);
-			}
-
-			position++;
 		}
 
 
