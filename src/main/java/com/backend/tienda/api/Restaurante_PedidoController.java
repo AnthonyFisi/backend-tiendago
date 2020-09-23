@@ -244,8 +244,15 @@ public class Restaurante_PedidoController {
 
 		for(Restaurante_Pedido pedido:listaRestaurante) {
 
+			String fecha="";
 			
-			if(updateStateReady(pedido,listaEstados.get(position).getFecha().toString())) {
+			for(Orden_estado_empresa orden:listaEstados) {
+				if(orden.getId().getIdventa()==pedido.getIdventa()) {
+					fecha=orden.getFecha().toString();
+				}
+			}
+			
+			if(updateStateReady(pedido,fecha)) {
 				
 				Timestamp time=new Timestamp(System.currentTimeMillis());
 
@@ -482,6 +489,9 @@ public class Restaurante_PedidoController {
 
 	
 	 private boolean updateStateReady (Restaurante_Pedido pedido,String fecha){
+		 
+	        System.out.println("IDVENTA "+pedido.getIdventa()+" IDPEDIDO "+pedido.getIdpedido()+" TIEMPO "+pedido.getTiempototal_espera());
+
 
 	        Timestamp timeStart = Timestamp.valueOf(fecha);
 	        
@@ -491,8 +501,13 @@ public class Restaurante_PedidoController {
 
 	        Long tiempoTotal= new Long(Integer.valueOf(pedido.getTiempototal_espera()));
 
-	        System.out.println("Diferencia "+difference+ " |  tiempo Total "+ tiempoTotal);
+	        System.out.println("Diferencia "+difference+ " =  timeNow "+ timeNow +" - "+timeStart);
 
+	        boolean resultado=(difference) >= tiempoTotal;
+	        System.out.println("Resultado "+ resultado);
+	        System.out.println("----------------------------------------------");
+
+	        
 	        return (difference) >= tiempoTotal;
 
 	  }
