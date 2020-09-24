@@ -632,14 +632,23 @@ public class Orden_estado_restauranteController {
 			}else {
 				System.out.println("Horario despues del intervalo");
 
-				long diference=horarioInicio.getTime()-time.getTime();
-			
-				System.out.println(horarioInicio+" "+time);
-
-
-				long total=l+diference;
+				long diference=horarioInicio.getTime()-time.getTime(); 
 				
-				tiempototal=String.valueOf(total);
+				
+				if(diference<0) {
+					
+					tiempototal=String.valueOf(tiempoToLong);
+
+				}else {
+					System.out.println(horarioInicio+" "+time);
+
+
+					long total=l+diference;
+					
+					tiempototal=String.valueOf(total);
+				}
+			
+				
 			}
 
 			
