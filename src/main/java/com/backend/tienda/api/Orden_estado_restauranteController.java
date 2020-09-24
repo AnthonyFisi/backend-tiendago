@@ -39,13 +39,11 @@ public class Orden_estado_restauranteController {
 	
 	public static final String ORDEN_CANCELAR="/cancelarOrden/{idUsuario}";
 
-	
 	public static final String ORDEN_REGISTRAR="/registrarOrden/{tiempo_espera}/{idUsuario}/{horario}/{fechaentrega}";
 	
 	public static final String ORDEN_UPDATE_PROCES="/updateOrdenProces/{idUsuario}";
 	
 	public static final String ORDEN_UPDATE_READY="/updateOrdenReady/{idUsuario}";
-
 	
 	public static final String LISTA_ESTADO_BY_VENTA="/listaOrden/{idVenta}";
 	
@@ -275,15 +273,10 @@ public class Orden_estado_restauranteController {
 			@PathVariable ("idUsuario") int idUsuario){
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
-		List<Orden_estado_empresa> listaOrden =null;
 		Venta venta=null;
 		Orden_estado_empresa ordenResult=null;
 		orden.setFecha(time);
-		Orden_estado_restauranteGson gson=null;
 
-	
-		//try 
-		//{
 			
 			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
 			
@@ -295,10 +288,7 @@ public class Orden_estado_restauranteController {
 				
 			}
 			
-		/*}catch(Exception e) {
-			return new ResponseEntity<Orden_estado_restaurante>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}*/
 		
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
 		

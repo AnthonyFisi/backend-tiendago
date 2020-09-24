@@ -275,6 +275,8 @@ public class VentaController {
 
 		VentaAndroid  respuesta=null;
 		Venta venta=null;
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+
 
 
 		try {
@@ -285,6 +287,11 @@ public class VentaController {
 			respuesta= new VentaAndroid();
 
 			respuesta.setRepsuesta_registro_venta(true);
+			respuesta.setFechaServidor(time);
+			
+			respuesta.setVenta_costototal(venta.getVenta_costototal());
+			
+			//MANDAR UN PUSHER AL USUARIO NOTIFICANDO EL CAMIBO
 
 		}catch(Exception e) {
 			return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -299,6 +306,7 @@ public class VentaController {
 
 		VentaAndroid  respuesta=null;
 		Venta venta=null;
+		Timestamp time=new Timestamp(System.currentTimeMillis());
 
 
 		try {
@@ -309,6 +317,9 @@ public class VentaController {
 			respuesta= new VentaAndroid();
 
 			respuesta.setRepsuesta_registro_venta(true);
+			respuesta.setFechaServidor(time);
+			respuesta.setVenta_costototal(venta.getVenta_costototal());
+			//MANDAR UN PUSHER AL USUARIO NOTIFICANDO EL CAMIBO
 
 		}catch(Exception e) {
 			return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.INTERNAL_SERVER_ERROR);

@@ -75,11 +75,16 @@ public class VentaServiceImpl implements VentaService{
 	public Venta updateVentaTiempoEspera(int idVenta, int tiempo) {
 		Venta venta=null;
 		int time=0;
+		long tiempototal=0;
 		
 		try {
 			venta=ventaRepository.findById(idVenta).get();
+			
 			time=Integer.valueOf(venta.getTiempo_espera())+ tiempo;
+			tiempototal=tiempo*60000;
+			tiempototal=tiempototal+new Long(venta.getTiempototal_espera());
 			venta.setTiempo_espera(String.valueOf(time));
+			venta.setTiempototal_espera(String.valueOf(tiempototal));
 			venta=ventaRepository.save(venta);
 		}catch(Exception e) {
 			return venta;

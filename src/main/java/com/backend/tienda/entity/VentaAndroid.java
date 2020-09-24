@@ -1,5 +1,6 @@
 package com.backend.tienda.entity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class VentaAndroid {
@@ -42,6 +43,8 @@ public class VentaAndroid {
 	private boolean mesa;
 	
 	private float venta_costopedido;
+	
+	private Timestamp fechaServidor;
 
 	private List<Double> empresa_posistion;
 	
@@ -197,9 +200,15 @@ public class VentaAndroid {
 		this.usuario_position = usuario_position;
 	}
 
-	
+	public Timestamp getFechaServidor() {
+		return fechaServidor;
+	}
 
-	
+	public void setFechaServidor(Timestamp fechaServidor) {
+		this.fechaServidor = fechaServidor;
+	}
+
+
 	
 	
 }
