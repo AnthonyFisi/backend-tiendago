@@ -32,7 +32,7 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 	List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntrega(int idEmpresa);
 	
 	
-	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetween(int idestadoempresa,boolean ordendisponible,int idEmpresa,Timestamp fecha1,Timestamp fecha2);
+	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetweenOrderByVentafechaAsc(int idestadoempresa,boolean ordendisponible,int idEmpresa,Timestamp fecha1,Timestamp fecha2);
 
 
 	Restaurante_Pedido findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(int idestadoempresa,boolean disponbile,int idempresa,int idpedido,int idventa);
