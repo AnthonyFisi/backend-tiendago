@@ -12,23 +12,24 @@ public class CreateVenta {
 
 
 	public static Venta venta(VentaAndroid ventaAndroid,int idPedido) {
-		
+
 		String newDate=ventaAndroid.getVenta_fechaentrega()+" 00:00:00.000";
-		
+
 		Timestamp ventaFecha=new Timestamp(System.currentTimeMillis());
-		
+
 		Timestamp ventaFecha_entrega=Timestamp.valueOf(newDate);
 
-	
-	
+
+
 		Venta venta= new Venta();
-		
+
 		venta.setIdventa(0);
 		venta.setIdtipopago(ventaAndroid.getIdtipopago());
 		venta.setIdhorario(ventaAndroid.getIdhorario());
 		venta.setIdubicacion(ventaAndroid.getIdubicacion());
 		venta.setIdpedido(idPedido);
 		venta.setVenta_fecha(ventaFecha);
+
 		venta.setVenta_fechaentrega(ventaFecha_entrega);
 		//REEMPLAZAMOS EL PRECIO DEL DELIVERY DEL COMERCIO POR LA GANANCIA QUE DA A LA EMPRESA YEGoO
 		venta.setVenta_costodelivery(ventaAndroid.getVenta_costodelivery());
@@ -46,16 +47,11 @@ public class CreateVenta {
 		venta.setIdrepartidor(0);
 		venta.setCancelar(false);
 		venta.setComentario_cancelar("");
-		if(ventaAndroid.isMesa()) {
-			
-			venta.setTiempototal_espera("3000000");
-			venta.setTiempo_espera("50");
 
-		}else {
-			
-			venta.setTiempototal_espera("0");
-			venta.setTiempo_espera("0");
-		}
+
+		venta.setTiempototal_espera("0");
+		venta.setTiempo_espera("0");
+
 		venta.setIdestado_delivery(0);
 		venta.setIdestado_general(0);
 		venta.setNumeromesa(ventaAndroid.getNumeromesa());
@@ -65,6 +61,6 @@ public class CreateVenta {
 		return venta;
 	}
 
-	
-	
+
+
 }

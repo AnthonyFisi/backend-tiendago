@@ -179,8 +179,16 @@ public class VentaController {
 		//BUSCAMOS EL PEDIDO POR IDUSUARIO Y IDEMPRESA EN LA TABLA DE PEDIDO
 		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
 
+		respuesta=CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido());
+		
+		Timestamp time0=new Timestamp(System.currentTimeMillis());
 
-		respuesta=ventaService.registrarVenta(CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido()));
+		respuesta.setVenta_fechaentrega(new Timestamp(time0.getTime()+3000000));
+		
+		respuesta.setTiempototal_espera("3000000");
+		respuesta.setTiempo_espera("50");
+
+		respuesta=ventaService.registrarVenta(respuesta);
 
 
 		//REGISTRAMOS EN LA TABLA DE VENTA
