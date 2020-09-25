@@ -140,13 +140,18 @@ public  static Timestamp convertTimestampToDate(String tiempo,String fecha,Strin
 		
 		String[] data=tiempo.split(" ");
 		String[] data2=data[0].split(":");
+		String[] data3=fecha.split(" ");
 
 		// 4:00
+		   System.out.println(data[0]+"fecha1");
+
+		   System.out.println(data2[0]+"fecha2");
+
 		
+		String input = data3[0]+" "+data2[0]+":"+tiempo_espera+":00 "+data[1].toLowerCase();		
+	   System.out.println(input+"fecha3");
+		//"2020-09-24 00:00:00.0 8:6:00 pm"
 		
-		
-		String input = fecha+" "+data2[0]+":"+tiempo_espera+":00 "+data[1].toLowerCase();		
-	  
 	  return Timestamp.valueOf(transformDate(input));
 		
 	}
