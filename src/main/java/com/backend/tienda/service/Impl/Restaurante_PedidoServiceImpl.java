@@ -47,7 +47,7 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 		
 		Timestamp date2=Timestamp.valueOf(fecha2+" 00:00:00.000");
 
-		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetween(1,true,idEmpresa,date1,date2);
+		return restaurante_PedidoRepository.findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetweenOrderByVentafechaAsc(1,true,idEmpresa,date1,date2);
 	}
 
 	@Override
