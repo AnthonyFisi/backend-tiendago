@@ -1,5 +1,6 @@
 package com.backend.tienda.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.backend.tienda.entity.Venta;
@@ -10,7 +11,7 @@ public interface VentaService {
 	
 	List<Venta> listaVentaTotal();
 	
-	Venta updateVentaEstado(int idVenta,int idEstado_Venta,String tiempo_espera,String tiempototal_espera);
+	Venta updateVentaEstado(int idVenta,int idEstado_Venta,String tiempo_espera,String tiempototal_espera,Timestamp fecha_entrega);
 	
 	Venta updateVentaEstado(int idVenta,int idEstado_Venta);
 	

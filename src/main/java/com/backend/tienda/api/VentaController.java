@@ -1,7 +1,6 @@
 package com.backend.tienda.api;
 
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.Pedido;
-import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
@@ -26,8 +24,6 @@ import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.PedidoService;
 import com.backend.tienda.service.Restaurante_PedidoService;
 import com.backend.tienda.service.VentaService;
-import com.backend.tienda.util.CalculatePriceDelivery;
-import com.backend.tienda.util.CalculatePriceRestaurante;
 import com.backend.tienda.util.CreateVenta;
 import com.backend.tienda.util.GoogleMapsApi;
 import com.backend.tienda.util.HaversineDistanceDelivery;
@@ -242,6 +238,11 @@ public class VentaController {
 
 		Restaurante_PedidoModified ordenReciente=pedidoController.recientes2(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 
+		Timestamp timeNow=new Timestamp(System.currentTimeMillis());
+
+		
+		ordenReciente.setHoraservidor(timeNow);
+		
 		pusher.setCluster("us2");
 
 		pusher.trigger("canal-orden-proces-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);

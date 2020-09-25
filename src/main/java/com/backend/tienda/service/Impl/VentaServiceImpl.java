@@ -1,5 +1,6 @@
 package com.backend.tienda.service.Impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class VentaServiceImpl implements VentaService{
 	}
 
 	@Override
-	public Venta updateVentaEstado(int idVenta,int idEstado_empresa,String tiempo_espera,String tiempototal_espera) {
+	public Venta updateVentaEstado(int idVenta,int idEstado_empresa,String tiempo_espera,String tiempototal_espera,Timestamp fecha_entrega) {
 		
 	Venta venta=null;
 	
@@ -43,6 +44,7 @@ public class VentaServiceImpl implements VentaService{
 			venta.setIdestado_empresa(idEstado_empresa);
 			venta.setTiempo_espera(tiempo_espera);
 			venta.setTiempototal_espera(tiempototal_espera);
+			venta.setVenta_fechaentrega(fecha_entrega);
 			venta=ventaRepository.save(venta);
 		
 		}catch(Exception e)

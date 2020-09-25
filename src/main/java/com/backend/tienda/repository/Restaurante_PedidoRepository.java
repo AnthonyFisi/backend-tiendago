@@ -31,150 +31,15 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 			"					AND idempresa= ?1 ",nativeQuery=true)
 	List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntrega(int idEmpresa);
 	
-
-	/*@Query(value="SELECT    	 		idventa,\r\n" + 
-			"					idtipopago,tipopago_nombre,\r\n" + 
-			"					idhorario,horario_nombre,\r\n" + 
-			"					idubicacion,\r\n" + 
-			"					idpedido,idempresa,pedido_cantidadtotal,idusuario,idusuariogeneral,nombre,apellido,celular,\r\n" + 
-			"					ventafecha,\r\n" + 
-			"					ventafechaentrega,\r\n" + 
-			"					venta_costodelivery ,\r\n" + 
-			"					venta_costototal,\r\n" + 
-			"					comentario,\r\n" + 
-			"					idestadoempresa,\r\n" + 
-			"					idestado_pago,nombre_estadopago,\r\n" + 
-			"					idtipo_envio,nombre_tipo_envio,\r\n" + 
-			"					ordendisponible,\r\n" + 
-			"					tiempo_espera,\r\n" + 
-			"					idrepartidor,\r\n" + 
-			"					cancelar,\r\n" + 
-			"					comentario_cancelar,\r\n" + 
-			"					idestadodelivery,\r\n" + 
-			"					idestadogeneral,\r\n" + 
-			"					numeromesa ,descuento_mesa,mesa"+
-			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoempresa = 1  AND ordendisponible=true" + 
-			"					AND idempresa= ?1  AND  ventafechaentrega BETWEEN ?2 AND ?3  ",nativeQuery=true)*/
-	//List<Restaurante_Pedido> listfindByIdEmpresaAndIdVenta_fechaEntregaDistinct(int idEmpresa,Timestamp fecha1,Timestamp fecha2);
+	
 	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresaAndVentafechaentregaBetween(int idestadoempresa,boolean ordendisponible,int idEmpresa,Timestamp fecha1,Timestamp fecha2);
 
-	
-/*	@Query(value="SELECT    	 		idventa,\r\n" + 
-			"					idtipopago,tipopago_nombre,\r\n" + 
-			"					idhorario,horario_nombre,\r\n" + 
-			"					idubicacion,\r\n" + 
-			"					idpedido,idempresa,pedido_cantidadtotal,idusuario,idusuariogeneral,nombre,apellido,celular,\r\n" + 
-			"					ventafecha,\r\n" + 
-			"					ventafechaentrega,\r\n" + 
-			"					venta_costodelivery ,\r\n" + 
-			"					venta_costototal,\r\n" + 
-			"					comentario,\r\n" + 
-			"					idestadoempresa,\r\n" + 
-			"					idestado_pago,nombre_estadopago,\r\n" + 
-			"					idtipo_envio,nombre_tipo_envio,\r\n" + 
-			"					ordendisponible,\r\n" + 
-			"					tiempo_espera,\r\n" + 
-			"					idrepartidor,\r\n" + 
-			"					cancelar,\r\n" + 
-			"					comentario_cancelar,\r\n" + 
-			"					idestadodelivery,\r\n" + 
-			"					idestadogeneral,\r\n" + 
-			"					numeromesa ,descuento_mesa,mesa"+
-			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoempresa = 1  AND ordendisponible=true" + 
-			"					AND idempresa= ?1 AND idpedido = ?2 AND idventa = ?3  ",nativeQuery=true)
-	Restaurante_Pedido findRecentOrden(int idEmpresa,int idPedido,int idVenta);*/
-	
+
 	Restaurante_Pedido findByIdestadoempresaAndOrdendisponibleAndIdempresaAndIdpedidoAndIdventa(int idestadoempresa,boolean disponbile,int idempresa,int idpedido,int idventa);
 
-	//Restaurante_Pedido findByIdestadoempresaAndOrdendisponible(int iempresa,boolean m);
 	
-	/* PROCES ORDEN */
-	
-	
-	/*@Query(value="SELECT    	 		idventa,\r\n" + 
-			"					idtipopago,tipopago_nombre,\r\n" + 
-			"					idhorario,horario_nombre,\r\n" + 
-			"					idubicacion,\r\n" + 
-			"					idpedido,idempresa,pedido_cantidadtotal,idusuario,idusuariogeneral,nombre,apellido,celular,\r\n" + 
-			"					ventafecha,\r\n" + 
-			"					ventafechaentrega,\r\n" + 
-			"					venta_costodelivery ,\r\n" + 
-			"					venta_costototal,\r\n" + 
-			"					comentario,\r\n" + 
-			"					idestadoempresa,\r\n" + 
-			"					idestado_pago,nombre_estadopago,\r\n" + 
-			"					idtipo_envio,nombre_tipo_envio,\r\n" + 
-			"					ordendisponible,\r\n" + 
-			"					tiempo_espera,\r\n" + 
-			"					idrepartidor,\r\n" + 
-			"					cancelar,\r\n" + 
-			"					comentario_cancelar,\r\n" + 
-			"					idestadodelivery,\r\n" + 
-			"					idestadogeneral,\r\n" + 
-			"					numeromesa ,descuento_mesa,mesa"+
-			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoempresa = 2  AND ordendisponible=true" + 
-			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
-	List<Restaurante_Pedido> findProcesOrden(int idEmpresa);*/
-	
-	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresaAndCancelar(int idestadoempresa,boolean disponbile,int idempresa,boolean cancelar);
+	List<Restaurante_Pedido> findByIdestadoempresaAndOrdendisponibleAndIdempresaAndCancelarOrderByVentafechaentregaDesc(int idestadoempresa,boolean disponbile,int idempresa,boolean cancelar);
 
-	
-	/*@Query(value="SELECT    	 		idventa,\r\n" + 
-			"					idtipopago,tipopago_nombre,\r\n" + 
-			"					idhorario,horario_nombre,\r\n" + 
-			"					idubicacion,\r\n" + 
-			"					idpedido,idempresa,pedido_cantidadtotal,idusuario,idusuariogeneral,nombre,apellido,celular,\r\n" + 
-			"					ventafecha,\r\n" + 
-			"					ventafechaentrega,\r\n" + 
-			"					venta_costodelivery ,\r\n" + 
-			"					venta_costototal,\r\n" + 
-			"					comentario,\r\n" + 
-			"					idestadoempresa,\r\n" + 
-			"					idestado_pago,nombre_estadopago,\r\n" + 
-			"					idtipo_envio,nombre_tipo_envio,\r\n" + 
-			"					ordendisponible,\r\n" + 
-			"					tiempo_espera,\r\n" + 
-			"					idrepartidor,\r\n" + 
-			"					cancelar,\r\n" + 
-			"					comentario_cancelar,\r\n" + 
-			"					idestadodelivery,\r\n" + 
-			"					idestadogeneral,\r\n" + 
-			"					numeromesa ,descuento_mesa,mesa"+
-			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoempresa = 3  AND ordendisponible=true" + 
-			"					AND idempresa= ?1 AND cancelar=false ",nativeQuery=true)
-	List<Restaurante_Pedido> findReadyOrden(int idEmpresa);*/
-	
-	
-	
-/*	@Query(value="SELECT    	 		idventa,\r\n" + 
-			"					idtipopago,tipopago_nombre,\r\n" + 
-			"					idhorario,horario_nombre,\r\n" + 
-			"					idubicacion,\r\n" + 
-			"					idpedido,idempresa,pedido_cantidadtotal,idusuario,idusuariogeneral,nombre,apellido,celular,\r\n" + 
-			"					ventafecha,\r\n" + 
-			"					ventafechaentrega,\r\n" + 
-			"					venta_costodelivery ,\r\n" + 
-			"					venta_costototal,\r\n" + 
-			"					comentario,\r\n" + 
-			"					idestadoempresa,\r\n" + 
-			"					idestado_pago,nombre_estadopago,\r\n" + 
-			"					idtipo_envio,nombre_tipo_envio,\r\n" + 
-			"					ordendisponible,\r\n" + 
-			"					tiempo_espera,\r\n" + 
-			"					idrepartidor,\r\n" + 
-			"					cancelar,\r\n" + 
-			"					comentario_cancelar,\r\n" + 
-			"					idestadodelivery,\r\n" + 
-			"					idestadogeneral,\r\n" + 
-			"					numeromesa ,descuento_mesa,mesa"+
-			"                 FROM restaurante_pedido"+
-			"                 WHERE   idestadoempresa = 4  AND ordendisponible=false" + 
-			"					AND idempresa= ?1  ",nativeQuery=true)
-	List<Restaurante_Pedido> findHistorialOrden(int idEmpresa);*/
 	
 	List<Restaurante_Pedido> findByIdestadoempresaAndIdempresa(int idestadoempresa,int idempresa);
 
