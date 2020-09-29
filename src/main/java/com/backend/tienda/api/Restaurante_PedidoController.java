@@ -66,7 +66,7 @@ public class Restaurante_PedidoController {
 
 	@Autowired
 	Restaurante_PedidoRepository restaurante_pedidoRepository;
-	
+
 	@Autowired
 	Orden_estado_restauranteController orden_estado_restaurante_controller;
 
@@ -157,6 +157,8 @@ public class Restaurante_PedidoController {
 
 		Repartidor_Bi repartidor_bi=null;
 
+		List<Orden_estado_empresa> listaEstados=null;
+
 
 
 		listaRestaurante=restaurante_PedidoService.listaRestaurantePedidosReady(idEmpresa);
@@ -170,7 +172,28 @@ public class Restaurante_PedidoController {
 
 		listaTotal= new ArrayList<>();
 
+		List<Orden_estado_empresaPK> pklist=new ArrayList<>();
+
 		for(Restaurante_Pedido pedido:listaRestaurante) {
+
+			Orden_estado_empresaPK pk=new Orden_estado_empresaPK();
+			pk.setIdventa(pedido.getIdventa());
+			pk.setIdestado_empresa(2);
+			pklist.add(pk);
+
+		}
+
+		listaEstados=ordenService.listaEstados(pklist);
+
+		for(Restaurante_Pedido pedido:listaRestaurante) {
+
+			String fecha="";
+
+			for(Orden_estado_empresa orden:listaEstados) {
+				if(orden.getId().getIdventa()==pedido.getIdventa()) {
+					fecha=orden.getFecha().toString();
+				}
+			}
 
 
 			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
@@ -178,6 +201,8 @@ public class Restaurante_PedidoController {
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 			repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
+
+			res.setFechaAceptado(fecha);
 
 			res.setRepartidor_bi(repartidor_bi);
 
@@ -243,13 +268,13 @@ public class Restaurante_PedidoController {
 		for(Restaurante_Pedido pedido:listaRestaurante) {
 
 			String fecha="";
-			
+
 			for(Orden_estado_empresa orden:listaEstados) {
 				if(orden.getId().getIdventa()==pedido.getIdventa()) {
 					fecha=orden.getFecha().toString();
 				}
 			}
-			
+
 
 			Restaurante_PedidoModified res =  Restaurante_PedidoModified.convert(pedido);
 
@@ -258,7 +283,7 @@ public class Restaurante_PedidoController {
 			res.setFechaAceptado(fecha);
 
 			res.setListaProductos(listaProductos);	
-			
+
 			res.setHoraservidor(new Timestamp(System.currentTimeMillis()));
 
 			listaTotal.add(res);
@@ -315,7 +340,7 @@ public class Restaurante_PedidoController {
 			listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(pedido.getIdpedido());
 
 			res.setListaProductos(listaProductos);	
-			
+
 			repartidor_bi=repartidor_biService.findByIdRepartidor(pedido.getIdrepartidor());
 
 			res.setRepartidor_bi(repartidor_bi);
@@ -449,32 +474,32 @@ public class Restaurante_PedidoController {
 		return res;
 	}
 
-	
-	 private boolean updateStateReady (Restaurante_Pedido pedido,String fecha){
-		 
-	        System.out.println("IDVENTA "+pedido.getIdventa()+" IDPEDIDO "+pedido.getIdpedido()+" TIEMPO "+pedido.getTiempototal_espera());
+
+	private boolean updateStateReady (Restaurante_Pedido pedido,String fecha){
+
+		System.out.println("IDVENTA "+pedido.getIdventa()+" IDPEDIDO "+pedido.getIdpedido()+" TIEMPO "+pedido.getTiempototal_espera());
 
 
-	        Timestamp timeStart = Timestamp.valueOf(fecha);
-	        
-			Timestamp timeNow=new Timestamp(System.currentTimeMillis());
+		Timestamp timeStart = Timestamp.valueOf(fecha);
 
-	        long difference = timeNow.getTime() - timeStart.getTime();
+		Timestamp timeNow=new Timestamp(System.currentTimeMillis());
 
-	        Long tiempoTotal= new Long(Integer.valueOf(pedido.getTiempototal_espera()));
+		long difference = timeNow.getTime() - timeStart.getTime();
 
-	        System.out.println("Diferencia "+difference+ " =  timeNow "+ timeNow +" - "+timeStart);
+		Long tiempoTotal= new Long(Integer.valueOf(pedido.getTiempototal_espera()));
 
-	        boolean resultado=(difference) >= tiempoTotal;
-	        System.out.println("Resultado "+ resultado);
-	        System.out.println("----------------------------------------------");
+		System.out.println("Diferencia "+difference+ " =  timeNow "+ timeNow +" - "+timeStart);
 
-	        
-	        return (difference) >= tiempoTotal;
+		boolean resultado=(difference) >= tiempoTotal;
+		System.out.println("Resultado "+ resultado);
+		System.out.println("----------------------------------------------");
 
-	  }
-	 
-	 
+
+		return (difference) >= tiempoTotal;
+
+	}
+
+
 
 
 }
