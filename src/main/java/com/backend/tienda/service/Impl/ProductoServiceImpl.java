@@ -75,14 +75,13 @@ public class ProductoServiceImpl  implements ProductoService{
 		
 		productoRepository.deleteById(idProducto);
 		
-		producto=productoRepository.findById(idProducto).get();
-		
-		if(producto!=null) {
-			
+		try {
+			producto=productoRepository.findById(idProducto).get();
 			return true;
+		}catch(Exception e) {
+			return false;
 		}
-		
-		return false;
+	
 		
 	}
 

@@ -79,6 +79,12 @@ public class ProductoController {
 			
 		}
 		
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+		
+		producto.setProductofechacreacion(time);
+		
+		
+		
 		rpta=productoService.insertarProducto(producto);
 		
 			
