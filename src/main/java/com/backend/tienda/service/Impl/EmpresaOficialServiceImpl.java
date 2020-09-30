@@ -27,7 +27,7 @@ public class EmpresaOficialServiceImpl implements EmpresaOficialService{
 		
 		empresaOficial=empresaOficialRepository.findById(idempresa).get();
 		
-		empresaOficial.setMonto_descuento_menu(valordescuento);
+		empresaOficial.setPrecio_menu(valordescuento);
 		
 		empresaOficialResponse=empresaOficialRepository.save(empresaOficial);
 		
