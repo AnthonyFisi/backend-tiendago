@@ -22,9 +22,9 @@ public class EmpresaOficialController {
 	EmpresaOficialService empresaOficialService;
 	
 	@PostMapping(UPDATE_DESCUENTO_MENU)
-	public ResponseEntity<?> updateDescuentoMenu(@PathVariable("idEmpresa") int idEmpresa,@PathVariable("descuento") float descuento){
+	public ResponseEntity<?> updateDescuentoMenu(@PathVariable("idempresa") int idempresa,@PathVariable("descuento") float descuento){
 		
-		EmpresaOficial empresa=empresaOficialService.updateValorDescuento(idEmpresa, descuento);
+		EmpresaOficial empresa=empresaOficialService.updateValorDescuento(idempresa, descuento);
 		
 		if(empresa==null) {
 			return ResponseEntity.notFound().build();
