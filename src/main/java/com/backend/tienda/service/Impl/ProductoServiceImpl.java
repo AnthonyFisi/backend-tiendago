@@ -1,5 +1,6 @@
 package com.backend.tienda.service.Impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,11 @@ public class ProductoServiceImpl  implements ProductoService{
 		
 		return false;
 		
+	}
+
+	@Override
+	public List<Producto> listaFisrtCategory(int idempresa, int idcategoriaproducto, Timestamp fechacreacion) {
+		return  productoRepository.findByIdempresaAndIdcategoriaproductoAndProductofechacreacionBefore(idempresa, idcategoriaproducto, fechacreacion);
 	}
 
 	

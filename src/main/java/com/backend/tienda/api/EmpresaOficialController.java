@@ -16,7 +16,7 @@ public class EmpresaOficialController {
 	
 	public final static String EMPRESA_OFICIAL_CONTROLLER="/EmpresaOficialController";
 
-	public final static String UPDATE_DESCUENTO_MENU="/updateDescuento/{idempresa}";
+	public final static String UPDATE_DESCUENTO_MENU="/updateDescuento/{idempresa}/{descuento}";
 	
 	@Autowired
 	EmpresaOficialService empresaOficialService;

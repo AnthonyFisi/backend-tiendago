@@ -1,6 +1,7 @@
 package com.backend.tienda.entity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Producto {
 	
 	private int producto_stock;
 	
-	private Date producto_fechacreacion;
+	private Timestamp productofechacreacion;
 	
 	private String producto_uriimagen;
 	
@@ -102,12 +103,14 @@ public class Producto {
 		this.producto_stock = producto_stock;
 	}
 
-	public Date getProducto_fechacreacion() {
-		return producto_fechacreacion;
+	
+
+	public Timestamp getProductofechacreacion() {
+		return productofechacreacion;
 	}
 
-	public void setProducto_fechacreacion(Date producto_fechacreacion) {
-		this.producto_fechacreacion = producto_fechacreacion;
+	public void setProductofechacreacion(Timestamp productofechacreacion) {
+		this.productofechacreacion = productofechacreacion;
 	}
 
 	public String getProducto_uriimagen() {

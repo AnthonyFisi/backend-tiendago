@@ -1,5 +1,8 @@
 package com.backend.tienda.api;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Producto;
 import com.backend.tienda.entity.ProductoApp;
-import com.backend.tienda.entity.Word;
-import com.backend.tienda.gson.ProductoAppGson;
 import com.backend.tienda.gson.ProductoGson;
 import com.backend.tienda.service.ProductoService;
 
@@ -29,7 +30,7 @@ public class ProductoController {
 
 	public final static String LISTA_PRODUCTOS="/lista";
 
-	public final static String INSERTAR_PRODUCTO="/insertar";
+	public final static String INSERTAR_PRODUCTO="/insertar/{idempresa}/{idcategoriaproducto}";
 
 	public final static String LISTA_PRODUCTOS_FIND_IDCATEGORIA_IDEMPRESA="/listaCategoria/{idcategoriaproducto}/{idempresa}";
 
@@ -43,25 +44,44 @@ public class ProductoController {
 
 	public final static String ELIMINAR_CATEGORIA_PRODUCTO="/eliminarCategoria/{idcategoriaproducto}/{idempresa}";
 
+	public final static String PROOF="/proof/{idempresa}/{idcategoriaproducto}";
+
 
 	@Autowired
 	ProductoService productoService;
 
 
 	@RequestMapping(value=INSERTAR_PRODUCTO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Producto> regitrarCuentaEmpresa(@RequestBody Producto producto){
+	public ResponseEntity<Producto> regitrarCuentaEmpresa(
+			@PathVariable("idempresa")int idempresa,
+			@PathVariable("idcategoriaproducto")int idcategoriaproducto,
+			@RequestBody Producto producto){
 
 		Producto rpta=null;
+		
+		List<Producto> listaProducto=null;
+				
+		String fecha1=
+		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
+		    	.now(                           // Capture the current date.
+		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
+		    	).minusDays(1).toString();
+		    	
+		Timestamp fechacreacion=Timestamp.valueOf(fecha1+" 23:59:59");
 
-
-		try {
-			rpta=productoService.insertarProducto(producto);
-
-		}catch(Exception e) 
-		{
-			return new ResponseEntity<Producto>(rpta,HttpStatus.INTERNAL_SERVER_ERROR);
+		listaProducto=productoService.listaFisrtCategory(idempresa, idcategoriaproducto, fechacreacion);
+		
+		if(listaProducto.size()>0) {
+			
+			for(Producto product:listaProducto){
+				productoService.eliminarProductoById(product.getIdproducto());
+			}
+			
 		}
-
+		
+		rpta=productoService.insertarProducto(producto);
+		
+			
 		return new ResponseEntity<Producto>(rpta,HttpStatus.OK);
 
 	}
@@ -105,10 +125,10 @@ public class ProductoController {
 		try {
 			rpta=productoService.listaIdcategoriaproductoAndIdempresa(idcategoriaproducto, idempresa);
 
-			for(Producto producto:rpta) {
+			/*for(Producto producto:rpta) {
 				producto.setProducto_fechacreacion(null);
 
-			}
+			}*/
 			productoGson= new ProductoGson();
 			productoGson.setListaProducto(rpta);
 
@@ -154,7 +174,7 @@ public class ProductoController {
 		try {
 			producto=productoService.updateDisponibilidadProducto(idproducto,idempresa, disponibilidad);
 			
-			producto.setProducto_fechacreacion(null);
+		//	producto.setProducto_fechacreacion(null);
 
 		}catch(Exception e) 
 		{
@@ -176,10 +196,10 @@ public class ProductoController {
 		try {
 			rpta=productoService.findByidempresa(idEmpresa);
 
-			for(Producto producto:rpta) {
+			/*for(Producto producto:rpta) {
 				producto.setProducto_fechacreacion(null);
 
-			}
+			}*/
 
 			productoGson= new ProductoGson();
 			productoGson.setListaProducto(rpta);
@@ -240,5 +260,7 @@ public class ProductoController {
 		
 		
 	}
+	
+
 
 }
