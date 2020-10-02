@@ -16,7 +16,6 @@ public class EmpresaOficial{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idempresa", updatable = false, nullable = false)
 	private int idempresa;
-
 	
 	private int idsubcategoriaempresa;
 	 	
@@ -61,7 +60,6 @@ public class EmpresaOficial{
 	
 	private float estrella_empresa;
 	
-	
 	private String maps_coordenada_x;
 	
 	private String maps_coordenada_y;
@@ -69,8 +67,7 @@ public class EmpresaOficial{
 	private String detalle_ubicacion;
 
 	private boolean disponible;
-		
-		
+				
 	private float precio_menu;
 	
 	private float monto_descuento_menu;

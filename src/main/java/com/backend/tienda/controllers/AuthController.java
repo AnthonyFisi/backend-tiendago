@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -53,6 +54,7 @@ import com.backend.tienda.service.EmpresaOficialService;
 import com.backend.tienda.service.EmpresaService;
 import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.UsuarioService;
+import com.backend.tienda.service.Usuario_generalService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 
@@ -101,6 +103,10 @@ public class AuthController {
 	
 	@Autowired
 	EmpresaService empresaService;
+	
+	
+	@Autowired
+	Usuario_generalService usuario_generalService;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -116,20 +122,57 @@ public class AuthController {
 
 		Usuario_general usuario_general=null;
 		
+		EmpresaOficial empresaOficial=null;
+
+		int numerosesion=0;
+		
 		JwtResponse jwt=authenticationUserService.jwtToken(loginRequest.getUsername(),loginRequest.getPassword());
 		
 		usuario_general=userRepository.findByCorreo(loginRequest.getUsername().trim()).get();
 		
-		Empresa empresa=null;
-		
-		if(usuario_general!=null) {
+		if(usuario_general.getNumero_sesion()<2) {
 			
-			//empresa=empresaService.findByIdEmpresaTotal(usuario_gene)
+			//usuario_generalService.updateNumeroSesion(usuario_general.getIdusuariogeneral());
 			
+
+			numerosesion=usuario_general.getNumero_sesion()+1;
+			
+			usuario_general=usuario_generalService.updateNumeroSesion(numerosesion,usuario_general.getIdusuariogeneral());
+			
+			empresaOficial=empresaOficialService.findByIdUsuarioGeneral(usuario_general.getIdusuariogeneral());
+						
+			if(empresaOficial!=null) {
+				
+				return ResponseEntity.ok(jwt);
+			}
+			return ResponseEntity.badRequest().build();
 		}
 		
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.badRequest().build();
 	}
+	
+	
+	
+	@PostMapping("/signoutEmpresa")
+	public ResponseEntity<?> singoutEmpresa(@Valid @RequestBody LoginRequest loginRequest) {
+
+		Usuario_general usuario_general=null;
+		
+		int numerosesion=0;
+		
+		usuario_general=userRepository.findByCorreo(loginRequest.getUsername().trim()).get();
+		
+		numerosesion=usuario_general.getNumero_sesion()-1;
+		
+		usuario_general=usuario_generalService.updateNumeroSesion(numerosesion,usuario_general.getIdusuariogeneral());
+			
+		if(usuario_general!=null) {
+			return ResponseEntity.ok(new JwtResponse());
+		}
+		
+		return ResponseEntity.badRequest().build();
+	}
+	
 	
 	@PostMapping("/signinRepartidor")
 	public ResponseEntity<?> authenticateRepartidor(@Valid @RequestBody LoginRequest loginRequest) {

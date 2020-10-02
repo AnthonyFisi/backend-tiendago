@@ -7,13 +7,10 @@ import com.backend.tienda.entity.NombreSubcategoria;
 
 public class NombreSubCategoriaGson implements Serializable {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private List<NombreSubcategoria> listaNombreSubCategoria;
+	
 
 	public List<NombreSubcategoria> getListaNombreSubCategoria() {
 		return listaNombreSubCategoria;

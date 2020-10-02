@@ -6,4 +6,5 @@ import com.backend.tienda.entity.EmpresaOficial;
 
 public interface EmpresaOficialRepository extends JpaRepository<EmpresaOficial,Integer>{
 
+	EmpresaOficial findByIdusuariogeneral(int idusuariogeneral);
 }

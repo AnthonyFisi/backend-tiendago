@@ -29,25 +29,21 @@ public class Usuario_general {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idusuariogeneral;
-
 	
 	private String nombre;
-
 	
 	@Email
 	private String correo;
 
-	
 	private String contrasena;
-	
 	
 	private String apellido;
 	
-	
 	private String celular;
 	
-	
 	private String foto;
+	
+	private int numero_sesion;
 	
 	
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -145,8 +141,6 @@ public class Usuario_general {
 		this.foto = foto;
 	}
 
-
-
 	public Set<Roles> getRoles() {
 		return roles;
 	}
@@ -154,15 +148,12 @@ public class Usuario_general {
 	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
 	}
-	
 
-	
+	public int getNumero_sesion() {
+		return numero_sesion;
+	}
 
-	
-	
-	
-	
-	
-
-
+	public void setNumero_sesion(int numero_sesion) {
+		this.numero_sesion = numero_sesion;
+	}
 }

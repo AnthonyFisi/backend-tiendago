@@ -60,10 +60,11 @@ public class NombreSubCategoriaController {
 	public ResponseEntity<NombreSubCategoriaGson> listaNombresSubCategoriaByIdEmpresa(@PathVariable("idempresa")int idempresa){
 		
 		NombreSubCategoriaGson nombreSubCategoriaGson=null;
+		
 		List<NombreSubcategoria> lista=null;
 		
-		
 		try {
+			
 			lista= nombreSubCategoriaService.listaNombreSubCategoriaByidEmpresa(idempresa);
 			
 			nombreSubCategoriaGson=new NombreSubCategoriaGson();

@@ -3,8 +3,6 @@
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.backend.tienda.entity.Empresa;
@@ -13,61 +11,11 @@ import com.backend.tienda.entity.Empresa;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa,Integer> {
 	
-	/*@Query(value="SELECT e.idempresa,e.idsubcategoriaempresa,e.nombre_empresa," + 
-			"				 e.direccion_empresa,e.ruc_empresa,e.telefono_empresa,e.celular_empresa,e.descripcion_empresa" + 
-			"				 ,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" +
-			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
-			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
-			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-			"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion,disponible"+
-			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
-			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
-			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
-			"				 WHERE ce.idcategoriaempresa= ?1   AND c.cuentaactiva = true AND  " + 
-			"					plainto_tsquery( ?2 ) @@ to_tsvector(coalesce(direccion_empresa,'')) " , nativeQuery=true)*/
+
 	List<Empresa> findByIdcategoriaempresa(int idCategoria);
 	
-	/*@Query(value = "SELECT e.idempresa,e.idsubcategoriaempresa,e.nombre_empresa," + 
-			"				 e.direccion_empresa,e.ruc_empresa,e.telefono_empresa,e.celular_empresa,e.descripcion_empresa" + 
-			"				 ,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" + 
-			"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
-			"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
-			"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-			"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion,disponible"+
-			"				  FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
-			"				                          JOIN subcategoriaempresa AS sce ON sce.idsubcategoriaempresa = e.idsubcategoriaempresa" + 
-			"				 							JOIN categoriaempresa AS ce ON ce.idcategoriaempresa = sce.idcategoriaempresa " + 
-			"				 WHERE ce.idcategoriaempresa = ?1   AND c.cuentaactiva =  true  ORDER BY e.porcentaje_popularidad DESC LIMIT 10 ;", nativeQuery = true)
-	public  List<Empresa> listaEmpresaSortByBusquedaRating(int idCategoria);*/
-	
-/*	@Query(value="SELECT e.idempresa,e.idsubcategoriaempresa,e.nombre_empresa," + 
-				"				e.direccion_empresa,e.ruc_empresa,e.telefono_empresa,e.celular_empresa,e.descripcion_empresa" + 
-				"				,e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad" + 
-				"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"+
-				"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "+
-				"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"+
-				"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion,disponible"+
-
-				"				FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa " + 
-				"				 WHERE e.idsubcategoriaempresa = ?1 AND c.cuentaactiva = true  AND" + 
-				"				 plainto_tsquery( ?2  ) @@ to_tsvector(coalesce(direccion_empresa,'')) ",nativeQuery=true)
-	List<Empresa> listaEmpresaFindByIdSubCategoriaAnddireccion(int idSubCategoria, String direccion);*/
-	
-	
-	/*@Query(value="SELECT e.idempresa,e.idsubcategoriaempresa,e.nombre_empresa,"
-				+ "e.direccion_empresa,e.ruc_empresa,e.telefono_empresa,e.celular_empresa,e.descripcion_empresa"
-				+ ",e.urlfoto_empresa,e.nombredueno_empresa,e.idcuentaempresa,e.porcentaje_popularidad"
-				+"                ,e.cuenta_delivery,e.costo_delivery,e.detalle_delivery,e.tiempo_aproximado_entrega"
-				+"                ,e.iddistrito,e.icono_empresa,e.horario_inicio,e.horario_fin,e.tarjeta,e.detalle_tarjeta,e.estrella_empresa "
-				+"				,e.productospopulares,e.categoria1,e.categoria2,e.categoria3,e.categoria4"
-				+"                ,e.maps_coordenada_x , e.maps_coordenada_y ,e.detalle_ubicacion,disponible"
-				+ " FROM empresa AS e INNER JOIN cuentaempresa AS c ON e.idcuentaempresa = c.idcuentaempresa "
-				+ " WHERE e.idsubcategoriaempresa = ?1  AND c.cuentaactiva = true  ",nativeQuery=true)
-	List<Empresa> listaEmpresaFindByIdSubCategoria(int idSubCategoria);*/
 	List<Empresa> findByIdsubcategoriaempresa(int idSubCategoria);
 	
-
-   // List<Todo> findByTitleOrderByTitleAscDescriptionDesc(String title);
     List<Empresa> findByIdcategoriaempresaOrderByPopularidadAsc(int idCategoria);
 
 

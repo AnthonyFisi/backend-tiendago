@@ -39,4 +39,100 @@ public class EmpresaOficialServiceImpl implements EmpresaOficialService{
 		
 	}
 
+	@Override
+	public EmpresaOficial updateDisponibilidad(int idEmpresaOficial, boolean disponible) {
+		 EmpresaOficial empresa=null;
+
+	        try {
+	            empresa=empresaOficialRepository.findById(idEmpresaOficial).get();
+	            empresa.setDisponible(disponible);
+	            empresa=empresaOficialRepository.save(empresa);
+
+	        }catch(Exception e) {
+	            return empresa;
+	        }
+	        return empresa;
+	}
+
+	@Override
+	public EmpresaOficial updateTelefono(int idEmpresaOficial, String numeroTelefono) {
+		 EmpresaOficial empresa=null;
+
+	        try {
+	            empresa=empresaOficialRepository.findById(idEmpresaOficial).get();
+	            empresa.setTelefono_empresa(numeroTelefono);
+	            empresa=empresaOficialRepository.save(empresa);
+
+	        }catch(Exception e) {
+	            return empresa;
+	        }
+	        return empresa;
+	}
+
+	@Override
+	public EmpresaOficial updateCelular(int idEmpresaOficial, String numeroCelular) {
+		 EmpresaOficial empresa=null;
+
+	        try {
+	            empresa=empresaOficialRepository.findById(idEmpresaOficial).get();
+	            empresa.setCelular_empresa(numeroCelular);
+	            empresa=empresaOficialRepository.save(empresa);
+
+	        }catch(Exception e) {
+	            return empresa;
+	        }
+	        return empresa;
+	}
+
+	@Override
+	public EmpresaOficial updateHorarioAtencion(int idEmpresaOficial, int inicio, int fin) {
+		EmpresaOficial empresa=null;
+
+        try {
+            empresa=empresaOficialRepository.findById(idEmpresaOficial).get();
+            empresa.setHorario_inicio(inicio);
+            empresa.setHorario_fin(fin);
+            empresa=empresaOficialRepository.save(empresa);
+
+        }catch(Exception e) {
+            return empresa;
+        }
+        return empresa;
+	}
+
+	@Override
+	public EmpresaOficial updateTiempoEntrega(int idEmpresaOficial, String tiempoAproximado) {
+		  EmpresaOficial empresa=null;
+
+	        try {
+	            empresa=empresaOficialRepository.findById(idEmpresaOficial).get();
+	            empresa.setTiempo_aproximado_entrega(tiempoAproximado);
+	            empresa=empresaOficialRepository.save(empresa);
+
+	        }catch(Exception e) {
+	            return empresa;
+	        }
+	        return empresa;
+	}
+
+	@Override
+	public EmpresaOficial updateDescripcion(EmpresaOficial empresaOficial) {
+		  EmpresaOficial empresaResult=null;
+
+	        try {
+	            empresaResult=empresaOficialRepository.findById(empresaOficial.getIdempresa()).get();
+	            empresaResult.setDescripcion_empresa(empresaOficial.getDescripcion_empresa());
+	            empresaResult=empresaOficialRepository.save(empresaOficial);
+
+	        }catch(Exception e) {
+	            return empresaResult;
+	        }
+	        return empresaResult;
+	}
+
+	@Override
+	public EmpresaOficial findByIdUsuarioGeneral(int idusuariogeneral) {
+		return empresaOficialRepository.findByIdusuariogeneral(idusuariogeneral);
+	}
+
 }

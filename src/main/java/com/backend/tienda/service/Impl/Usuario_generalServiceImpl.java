@@ -32,4 +32,12 @@ public class Usuario_generalServiceImpl  implements Usuario_generalService{
 		return usuarioRepository.save(usuario);
 	}
 
+	@Override
+	public Usuario_general updateNumeroSesion(int nuevaCantidad,int idusuario) {
+		Usuario_general usuario=null;
+		usuario=usuarioRepository.findById(idusuario).get();
+		usuario.setNumero_sesion(nuevaCantidad);
+		return usuarioRepository.save(usuario);
+	}
+
 }

@@ -7,5 +7,8 @@ public interface Usuario_generalService {
 	Usuario_general updateCelular(int idusuario,String celular);
 	
 	Usuario_general updateCorreo(int idusuario,String correo);
+	
+	Usuario_general updateNumeroSesion(int nuevaCantidad,int idusuario);
+
 
 }
