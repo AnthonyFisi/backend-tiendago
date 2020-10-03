@@ -92,8 +92,14 @@ public class UbicacionController {
 	public ResponseEntity<Ubicacion>  registrarUbicacion(@RequestBody Ubicacion ubicacion,@PathVariable("idOldUbicacion") int idOldUbicacion){
 		
 		Ubicacion ubicacio=null;
+		Usuario usuario=null;
+
+		
+		usuario=usuarioRepository.findByIdusuariogeneral(ubicacion.getIdusuario());
+
 		
 		try {
+			ubicacion.setIdusuario(usuario.getIdusuario());
 			ubicacio=ubicacionService.saveUbicacion(ubicacion,idOldUbicacion);
 			
 		}catch(Exception e) {
@@ -137,6 +143,8 @@ public class UbicacionController {
 		
 		respuestaOld=ubicacionService.updateEstadoUbicacion(idOldUbicacion,false);
 		
+
+		
 		if(respuestaOld) {
 			
 			respuestaNew=ubicacionService.updateEstadoUbicacion(idNewUbicacion,true);
@@ -145,7 +153,7 @@ public class UbicacionController {
 		
 		if(respuestaNew) {
 			
-			try {
+		try {
 				ubicacion=ubicacionService.findByidubicacion(idNewUbicacion);
 				List<Ubicacion> lista=new ArrayList<>();
 				lista.add(ubicacion);
@@ -158,6 +166,7 @@ public class UbicacionController {
 			}
 			
 		}
+	//return new  ResponseEntity<UbicacionGson>(ubicacionGson,HttpStatus.INTERNAL_SERVER_ERROR);
 
 
 		return new  ResponseEntity<UbicacionGson>(ubicacionGson,HttpStatus.OK);

@@ -29,14 +29,14 @@ public final static String CLIENTE_BI_CONTROLLER="/clientebi";
 		
 		Cliente_Bi cliente_bi=null;
 		
-		try {
+		//try {
 			
 			cliente_bi=cliente_BiService.findCliente(idusuario);
 			return ResponseEntity.ok(cliente_bi);
 			
-		}catch(Exception e) {
-			return ResponseEntity.badRequest().body(cliente_bi);
-		}
+		//}catch(Exception e) {
+		//	return ResponseEntity.badRequest().body(cliente_bi);
+		//}
 		
 	}
 	

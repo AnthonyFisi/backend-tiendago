@@ -43,7 +43,6 @@ public class EmpresaOficial{
 	
 	private String detalle_delivery;
 	
-	
 	private int iddistrito;
 	
 	private String tiempo_aproximado_entrega;

@@ -49,7 +49,6 @@ public class Empresa{
 	
 	private String detalle_delivery;
 	
-	
 	private int iddistrito;
 	
 	private String tiempo_aproximado_entrega;
@@ -65,9 +64,6 @@ public class Empresa{
 	private String detalle_tarjeta;
 	
 	private float estrella_empresa;
-	
-	
-	
 	
 	private String maps_coordenada_x;
 	
