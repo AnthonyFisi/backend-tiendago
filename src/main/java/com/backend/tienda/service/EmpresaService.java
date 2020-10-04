@@ -6,6 +6,8 @@ import com.backend.tienda.entity.Empresa;
 
 public interface EmpresaService {
 	
+	List<Empresa> listaAllEmpresa();
+	
 	List<Empresa> listaEmpresaIdCategoria( int idCategoria );
 	
 	List<Empresa> listaEmpresaSortByBusquedaRating( int idCategoria);

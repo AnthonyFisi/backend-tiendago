@@ -35,11 +35,14 @@ import com.google.type.LatLng;
 public class HaversineDistanceDelivery {
 
 	//DISTANCIA BASE PARA ENCONTRAR LUGARES CERCANOS
-	private static double distanciaCerca=3000;
+	private static double distanciaCerca0=2500;
+	
+	private static double distanciaCerca1=8000;
+
 	
 	public static double calculateDistance(List<Double> point1,List<Double> point2) {
 
-		final int R = 6371; // Radious of the earth
+		final int R = 6371000; // Radious of the earth
 		Double lat1 =point1.get(0);
 		Double lon1 = point1.get(1);
 		Double lat2 = point2.get(0);
@@ -62,10 +65,7 @@ public class HaversineDistanceDelivery {
 	}
 
 	public static List<Double> convertStringToPoint(String position) {
-		
-		System.out.println(position+"BOMBRE DE LA UBICACION");
-
-		
+				
 		List<Double> lista=new ArrayList<>();
 		
 		String data[] =position.split(",");
@@ -154,7 +154,7 @@ public class HaversineDistanceDelivery {
 	
 	
 	
-	public static List<Empresa> calculateDistance(List<Empresa> lista,String ubicacionCliente) {
+	public static List<Empresa> calculateDistance(List<Empresa> lista,String ubicacionCliente,double distanciaCerca) {
 		
 		List<Empresa> listaCerca=new ArrayList<>();
 		
@@ -172,10 +172,46 @@ public class HaversineDistanceDelivery {
 		
 
 		//EVALUAR SI EL LUGAR ESTA EN EL RADIO ADECUADO
+		//System.out.println(distancia+"| "+lista.get(i).getNombre_empresa()+" -> "+lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y());
+
 		
 		if(distanciaCerca>distancia) {
+			System.out.println(distancia+"| "+lista.get(i).getNombre_empresa()+" -> "+lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y());
 			listaCerca.add(lista.get(i));
 		}
+		
+	}
+		
+		return listaCerca;
+		
+	}
+	
+	
+		public static List<Empresa> calculateDistanceComplementario(List<Empresa> lista,String ubicacionCliente) {
+		
+		List<Empresa> listaCerca=new ArrayList<>();
+		
+		//VAMOS A CALCULAR LA DISTANCIA QUE EXISTE
+		for(int i=0;i<lista.size();i++) {
+				
+		List<Double> point1=HaversineDistanceDelivery.convertStringToPoint(ubicacionCliente);	
+	
+		String coordenada=lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y();
+				
+		List<Double> point2=HaversineDistanceDelivery.convertStringToPoint(coordenada);
+		
+
+		double distancia=HaversineDistanceDelivery.calculateDistance(point1, point2);
+		
+
+		//EVALUAR SI EL LUGAR ESTA EN EL RADIO ADECUADO
+		//System.out.println(distancia+"| "+lista.get(i).getNombre_empresa()+" -> "+lista.get(i).getMaps_coordenada_x()+","+lista.get(i).getMaps_coordenada_y());
+
+		
+		if(distanciaCerca0<=distancia && distancia<=distanciaCerca1) {
+			listaCerca.add(lista.get(i));
+		}
+		
 		
 	}
 		

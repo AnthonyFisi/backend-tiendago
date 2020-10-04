@@ -150,6 +150,11 @@ public class EmpresaServiceImpl  implements EmpresaService{
 		return (List<Empresa>) lista;
 	}
 
+	@Override
+	public List<Empresa> listaAllEmpresa() {
+		return empresaRepository.findAll();
+	}
+
 
 
 }

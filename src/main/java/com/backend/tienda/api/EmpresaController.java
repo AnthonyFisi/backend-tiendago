@@ -21,27 +21,35 @@ import com.backend.tienda.util.HaversineDistanceDelivery;
 @RestController
 @RequestMapping(EmpresaController.EMPRESA_CONTROLLER)
 public class EmpresaController {
-	/*nuevoo*/
 
 	public final static String EMPRESA_CONTROLLER="/EmpresaController";
 
 
-	public final static String FIND_EMPRESA_IDSUBCATEGORIA="/ListafindBySubcategoria/{idSubCategoria}";
+	public final static String FIND_EMPRESA_BY_UBICACION_CERCA="/ListaCerca/{Ubicacion}";
 
+	
 	public final static String FIND_EMPRESA_BY_IDCATEGORIA_UBICACION="/ListafindByLocation/{idCategoria}/{Ubicacion}";
-
+		
+	//REEMPLAZAMPS ->ELIMINADOS 
 	public final static String FIND_EMPRESA_BY_IDCATEGORIA_SORT="/ListaSortfindBy/{idCategoria}";
+	
+	public final static String FIND_EMPRESA_BY_IDCATEGORIA_UBICACION_COMPLEMENTARIA="/ListaCategoriaComplemento/{idCategoria}/{Ubicacion}";
+
+	
 
 	public final static String FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION="/ListafindByLocationSubCategoria/{idSubCategoria}/{Ubicacion}";
+	
+	//REEMPLAZAMPS ->ELIMINADOS 
+	public final static String FIND_EMPRESA_IDSUBCATEGORIA="/ListafindBySubcategoria/{idSubCategoria}";
+	
+	public final static String FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION_COMPLEMENTARIA="/ListaSubcategoriaComplemento/{idSubCategoria}/{Ubicacion}";
 
 
 	public final static String REGISTRAR_EMPRESA="/registrar";
 
-
 	public final static String FIND_BY_EMPRESA="/findByEmpresa/{idEmpresa}";
 
 	public final static String UPDATE_DISPONIBILIDAD_EMPRESA="/updateDisponibilidad/{idEmpresa}/{disponibilidad}";
-
 
 	public final static String UPDATE_NUMERO_TELEFONO="/updateTelefono/{idEmpresa}/{numTelefono}";
 
@@ -54,11 +62,130 @@ public class EmpresaController {
 	public final static String UPDATE_DESCRIPCION="/updateDescripcion";
 
 
-
-
 	@Autowired
 	EmpresaService empresaService;
 
+
+
+	//ESTA ES LA RELACION DE EMPRESA CERCANAS DE UNA CATEGORIA EN ESPECIFIO (EJEM:RESTAURANTE) EN UN RADIO DE 3000 METROS
+	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_UBICACION,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacion(@PathVariable("idCategoria") int idCategoria
+			,@PathVariable("Ubicacion")String Ubicacion){
+		
+		double distancia=3000;
+
+		
+		List<Empresa> listaEmpresaCerca=new ArrayList<>();
+
+		EmpresaGson empresaGson =null;
+
+		List<Empresa> lista=null;
+
+		lista=empresaService.listaEmpresaIdCategoria(idCategoria);
+		
+
+		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion,distancia);
+
+
+		empresaGson=new EmpresaGson();
+
+		empresaGson.setListaEmpresa(listaEmpresaCerca);
+
+
+		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
+
+	}
+	
+	//ESTA ES LA RELACION DE EMPRESA QUE ESTAN A 3000 METROS DEL PUNTO DEL USUARIO Y MENORES a 5000 METROS Y SE FILTRA POR UNA CATEGORIA EN ESPECIAL
+
+	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_UBICACION_COMPLEMENTARIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacionComplementaria(@PathVariable("idCategoria") int idCategoria
+			,@PathVariable("Ubicacion")String Ubicacion){
+
+		System.out.println(Ubicacion+"BOMBRE DE LA UBICACION");
+		
+		
+		List<Empresa> listaEmpresaCerca=new ArrayList<>();
+
+		EmpresaGson empresaGson =null;
+
+		List<Empresa> lista=null;
+
+		lista=empresaService.listaEmpresaIdCategoria(idCategoria);
+		
+		System.out.println(lista.size()+"tamano");
+
+
+		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistanceComplementario(lista,Ubicacion);
+
+
+		empresaGson=new EmpresaGson();
+
+		empresaGson.setListaEmpresa(listaEmpresaCerca);
+
+
+		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
+
+	}
+	
+
+
+	//ESTA ES LA RELACION DE EMPRESA QUE SON MAS PROXIMAS NO DISTINGUE CATEGORIAS 1000 METROS DE RADIO
+
+	@RequestMapping(value=FIND_EMPRESA_BY_UBICACION_CERCA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmpresaGson> listaEmpresaCerca(@PathVariable("Ubicacion")String Ubicacion){
+
+		System.out.println(Ubicacion+"BOMBRE DE LA UBICACION");
+		
+		double distancia=2000;
+		
+		List<Empresa> listaEmpresaCerca=new ArrayList<>();
+
+		EmpresaGson empresaGson =null;
+
+		List<Empresa> lista=null;
+
+		lista=empresaService.listaAllEmpresa();
+		
+		System.out.println(lista.size()+"tamano");
+
+
+		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion,distancia);
+
+
+		empresaGson=new EmpresaGson();
+
+		empresaGson.setListaEmpresa(listaEmpresaCerca);
+
+
+		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
+
+	}
+	
+	
+	
+	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_SORT,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmpresaGson> listaEmpresaSortByBusquedaRating(@PathVariable("idCategoria") int idCategoria){
+
+		EmpresaGson empresaGson =null;
+		List<Empresa> lista=null;
+
+
+		try {
+			lista=empresaService.listaEmpresaSortByBusquedaRating(idCategoria);
+			empresaGson=new EmpresaGson();
+			empresaGson.setListaEmpresa(lista);
+		}catch(Exception e) 
+		{
+			
+			return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
+
+	}
+	
+	
 
 
 	@RequestMapping(value=FIND_EMPRESA_IDSUBCATEGORIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -81,62 +208,13 @@ public class EmpresaController {
 
 	}
 
-	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_UBICACION,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdCategoriaAndUbicacion(@PathVariable("idCategoria") int idCategoria
-			,@PathVariable("Ubicacion")String Ubicacion){
-
-		System.out.println(Ubicacion+"BOMBRE DE LA UBICACION");
-		
-		List<Empresa> listaEmpresaCerca=new ArrayList<>();
-
-		EmpresaGson empresaGson =null;
-
-		List<Empresa> lista=null;
-
-		lista=empresaService.listaEmpresaIdCategoria(idCategoria);
-		
-		System.out.println(lista.size()+"tamano");
-
-
-		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion);
-
-
-		empresaGson=new EmpresaGson();
-
-		empresaGson.setListaEmpresa(listaEmpresaCerca);
-
-
-		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
-
-	}
-
-
-	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_SORT,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<EmpresaGson> listaEmpresaSortByBusquedaRating(@PathVariable("idCategoria") int idCategoria){
-
-		EmpresaGson empresaGson =null;
-		List<Empresa> lista=null;
-
-
-		try {
-			lista=empresaService.listaEmpresaSortByBusquedaRating(idCategoria);
-			empresaGson=new EmpresaGson();
-			empresaGson.setListaEmpresa(lista);
-		}catch(Exception e) 
-		{
-			
-			return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
-
-	}
-
 
 
 	@RequestMapping(value=FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdSubCategoriaAndUbicacion(@PathVariable("idSubCategoria") int idSubCategoria,@PathVariable("Ubicacion")String Ubicacion){
 
+		double distancia=3000;
+		
 		EmpresaGson empresaGson =null;
 		
 		List<Empresa> lista=null;
@@ -145,7 +223,32 @@ public class EmpresaController {
 
 		lista=empresaService.listaEmpresaFindByIdSubCategoria(idSubCategoria);
 
-		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion);
+		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistance(lista,Ubicacion,distancia);
+
+		empresaGson=new EmpresaGson();
+
+		empresaGson.setListaEmpresa(listaEmpresaCerca);
+
+
+
+		return new ResponseEntity<EmpresaGson>(empresaGson,HttpStatus.OK);
+
+	}
+	
+
+	@RequestMapping(value=FIND_EMPRESA_BY_IDSUBCATEGORIA_UBICACION_COMPLEMENTARIA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EmpresaGson> listaEmpresaFindByIdSubCategoriaAndUbicacionComplementario(@PathVariable("idSubCategoria") int idSubCategoria,@PathVariable("Ubicacion")String Ubicacion){
+
+		
+		EmpresaGson empresaGson =null;
+		
+		List<Empresa> lista=null;
+		
+		List<Empresa> listaEmpresaCerca=new ArrayList<>();
+
+		lista=empresaService.listaEmpresaFindByIdSubCategoria(idSubCategoria);
+
+		listaEmpresaCerca=HaversineDistanceDelivery.calculateDistanceComplementario(lista,Ubicacion);
 
 		empresaGson=new EmpresaGson();
 
