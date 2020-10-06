@@ -268,7 +268,7 @@ public class DeliveryController {
 		
 		long tiempoEspera=new Long(venta.getTiempototal_espera());
 		
-		long tiempo=(long) (tiempoEspera*0.8);
+		long tiempo=(long) (tiempoEspera*0.6);
 		
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -405,10 +405,10 @@ public class DeliveryController {
 			//ENVIAR ATRAVES DE UN PUSH EL PEDIDO AL REPARTIDOR
 			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+lista.get(positionElegida).getIdRepartidor(), "my-event", pedido);
+			//pusher.trigger("canal-orden-reciente-"+lista.get(positionElegida).getIdRepartidor(), "my-event", pedido);
 
 
-
+			pusher.trigger("canal-orden-delivery-"+lista.get(positionElegida).getIdRepartidor(), "my-event", pedido);
 
 
 
