@@ -263,8 +263,8 @@ public class DeliveryController {
 	public void entregaProgramda(@PathVariable("idventa")int idventa,@PathVariable("idempresa")int idempresa) {
 		
 		Venta venta=new Venta();
-				
-		venta=ventaService.getVenta(827);
+
+		venta=ventaService.getVenta(idventa);
 		
 		long tiempoEspera=new Long(venta.getTiempototal_espera());
 		
