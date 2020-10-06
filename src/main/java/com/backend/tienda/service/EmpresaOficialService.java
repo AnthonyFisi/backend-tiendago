@@ -10,6 +10,8 @@ public interface EmpresaOficialService {
 	
 	EmpresaOficial findByIdUsuarioGeneral(int idusuariogeneral);
 	
+	EmpresaOficial findByIdempresa(int idempresa);
+	
 	//UPDATE EMPRESAOFICIAL
 	
     EmpresaOficial updateDisponibilidad(int idEmpresaOficial,boolean disponible);

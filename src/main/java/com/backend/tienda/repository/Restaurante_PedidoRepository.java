@@ -42,6 +42,9 @@ public interface Restaurante_PedidoRepository  extends JpaRepository<Restaurante
 
 	
 	List<Restaurante_Pedido> findByIdestadoempresaAndIdempresa(int idestadoempresa,int idempresa);
+	
+	
+	Restaurante_Pedido findByIdventa(int idventa);
 
 	
 

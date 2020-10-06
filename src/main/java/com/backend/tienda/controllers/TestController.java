@@ -46,6 +46,12 @@ public class TestController {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
         System.out.println("Inicio "+idusuario+" :"+dateFormat.format(date));
+        
+        String cantidad="60000";
+        
+        long tiempoEspera=new Long(cantidad);
+		
+		long tiempo=(long) (tiempoEspera*0.8);
 
 		
 		  Timer timer;
@@ -86,7 +92,7 @@ public class TestController {
 		        }
 		        };
 
-		    timer.schedule(task,10000);
+		    timer.schedule(task,tiempo);
 		
 		
 		/*

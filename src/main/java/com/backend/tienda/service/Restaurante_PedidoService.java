@@ -19,4 +19,6 @@ public interface Restaurante_PedidoService {
 	
 	List<Restaurante_Pedido> listaRestaurantePedidosHistorial(int idEmpresa);
 	
+	Restaurante_Pedido findByIdVenta(int idVenta);
+	
 }

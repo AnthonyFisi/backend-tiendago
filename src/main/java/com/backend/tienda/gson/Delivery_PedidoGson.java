@@ -11,6 +11,8 @@ public class Delivery_PedidoGson {
 	private Delivery_Pedido delivery_information;
 	
 	private List<ProductoJOINregistroPedidoJOINpedido> productos;
+	
+	
 
 	public Delivery_Pedido getDelivery_information() {
 		return delivery_information;

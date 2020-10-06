@@ -65,4 +65,9 @@ public class Restaurante_PedidoServiceImpl implements Restaurante_PedidoService{
 		return restaurante_PedidoRepository.findByIdestadoempresaAndIdempresa(4,idEmpresa);
 	}
 
+	@Override
+	public Restaurante_Pedido findByIdVenta(int idVenta) {
+		return  restaurante_PedidoRepository.findByIdventa(idVenta);
+	}
+
 }

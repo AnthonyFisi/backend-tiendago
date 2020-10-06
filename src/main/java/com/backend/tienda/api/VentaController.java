@@ -361,7 +361,23 @@ public class VentaController {
 
 		return new  ResponseEntity<VentaAndroid> (respuesta,HttpStatus.OK);
 	}
+	@RequestMapping(value="/v",method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Venta> getPedido(){
 
+		VentaAndroid  respuesta=null;
+		Venta venta2=null;
+
+			venta2=ventaService.getVenta(827);
+
+
+			respuesta= new VentaAndroid();
+
+			respuesta.setRepsuesta_registro_venta(true);
+
+	
+
+		return new  ResponseEntity<Venta> (venta2,HttpStatus.OK);
+	}
 
 
 

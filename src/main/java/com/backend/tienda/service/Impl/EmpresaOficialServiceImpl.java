@@ -135,4 +135,11 @@ public class EmpresaOficialServiceImpl implements EmpresaOficialService{
 		return empresaOficialRepository.findByIdusuariogeneral(idusuariogeneral);
 	}
 
+	@Override
+	public EmpresaOficial findByIdempresa(int idempresa) {
+		return empresaOficialRepository.findById(idempresa).get();
+	}
+	
+	
+
 }
