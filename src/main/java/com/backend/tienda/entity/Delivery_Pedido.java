@@ -58,6 +58,8 @@ public class Delivery_Pedido {
 	
 	private int idusuario;
 	
+	private int idusuariogeneral;
+	
 	private String nombre;
 	
 	private String celular;
@@ -302,6 +304,15 @@ public class Delivery_Pedido {
 	public void setIdrepartidor(int idrepartidor) {
 		this.idrepartidor = idrepartidor;
 	}
+
+	public int getIdusuariogeneral() {
+		return idusuariogeneral;
+	}
+
+	public void setIdusuariogeneral(int idusuariogeneral) {
+		this.idusuariogeneral = idusuariogeneral;
+	}
+	
 	
 	
 	

@@ -16,9 +16,7 @@ public class Calificacion_Usuario {
 	@Column(name = "idcalificacion_usuario", updatable = false, nullable = false)
 	private int idcalificacion_usuario;
 	
-	
 	private int idventa;
-	
 	
 	private int idusuario;
 	
