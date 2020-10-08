@@ -63,6 +63,10 @@ public class Repartidor_historial {
 	
 	private int  idestadodelivery;
 	
+	private String venta_distancia_delivery_total;
+	
+	private float ganancia_delivery;
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}
@@ -250,5 +254,23 @@ public class Repartidor_historial {
 	public void setFechahistorial(Timestamp fechahistorial) {
 		this.fechahistorial = fechahistorial;
 	}
+
+	public String getVenta_distancia_delivery_total() {
+		return venta_distancia_delivery_total;
+	}
+
+	public void setVenta_distancia_delivery_total(String venta_distancia_delivery_total) {
+		this.venta_distancia_delivery_total = venta_distancia_delivery_total;
+	}
+
+	public float getGanancia_delivery() {
+		return ganancia_delivery;
+	}
+
+	public void setGanancia_delivery(float ganancia_delivery) {
+		this.ganancia_delivery = ganancia_delivery;
+	}
+	
+	
 
 }
