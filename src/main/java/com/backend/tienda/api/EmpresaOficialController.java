@@ -21,8 +21,7 @@ public class EmpresaOficialController {
 	
 	public final static String EMPRESA_OFICIAL_CONTROLLER="/EmpresaOficialController";
 
-	public final static String UPDATE_DESCUENTO_MENU="/updateDescuento/{idempresa}/{descuento}";
-	
+	public final static String UPDATE_DESCUENTO_MENU="/updateDescuento/{idempresa}/{descuento}";	
 
 	public final static String UPDATE_DISPONIBILIDAD_EMPRESA="/updateDisponibilidad/{idEmpresa}/{disponibilidad}";
 
