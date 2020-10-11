@@ -24,7 +24,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Integer>{
 	@Query(value= "SELECT idproducto,idcategoriaproducto,idempresa,producto_nombre,producto_precio,\r\n" + 
 			"			 producto_stock,producto_fechacreacion,producto_uriimagen,producto_calificacion,\r\n" + 
 			"			 producto_detalle,producto_descuento,producto_precio_descuento,disponible,tipomenu FROM producto AS p	\r\n" + 
-			"WHERE p.idempresa= ? AND plainto_tsquery( ? ) @@ to_tsvector(coalesce(p.producto_nombre,'')       \r\n" + 
+			"WHERE p.idempresa= ?1 AND plainto_tsquery( ?2 ) @@ to_tsvector(coalesce(p.producto_nombre,'')       \r\n" + 
 			"										|| ' '  ||coalesce(p.producto_detalle,''))",nativeQuery=true)
 	List<Producto>  listafindByPalabra(int idempresa,String palabra);
 	
