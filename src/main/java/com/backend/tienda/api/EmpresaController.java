@@ -78,7 +78,7 @@ public class EmpresaController {
 	EmpresaRepository empresaOficialRepository;
 	
 	@GetMapping(FILTRO_BY_IDCATEGORIA_DISTANCIA_PRECIODELIVERY)
-	public ResponseEntity<List<Empresa>> filtroEmpresa(
+	public ResponseEntity<EmpresaGson> filtroEmpresa(
 			@PathVariable("idcategoriaempresa")int idcategoriaempresa,
 			@PathVariable("distancia")int distancia,
 			@PathVariable("preciodelivery")float preciodelivery,
@@ -87,6 +87,9 @@ public class EmpresaController {
 		int distance=10000; 
 		
 		float price_delivery=100;
+		
+		EmpresaGson empresaGson=null;
+		
 				
 		if(distancia>0) {
 			distance=distancia;
@@ -99,7 +102,11 @@ public class EmpresaController {
 		
 		lista=HaversineDistanceDelivery.calculateDistance(lista,ubicacion,distance);
 		
-		return ResponseEntity.ok(lista);
+		empresaGson=new EmpresaGson();
+		
+		empresaGson.setListaEmpresa(lista);
+		
+		return ResponseEntity.ok(empresaGson);
 
 	}
 	
