@@ -1,9 +1,12 @@
 package com.backend.tienda.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import com.backend.tienda.entity.EmpresaOficial;
+import com.backend.tienda.repository.EmpresaOficialRepository;
 import com.backend.tienda.service.EmpresaOficialService;
 
 @RestController
@@ -35,8 +39,23 @@ public class EmpresaOficialController {
 
 	public final static String UPDATE_DESCRIPCION="/updateDescripcion";
 	
+	public final static String TODO="/lista";	
+
+	
 	@Autowired
 	EmpresaOficialService empresaOficialService;
+	
+	@Autowired
+	EmpresaOficialRepository empresaOficialRepository;
+	
+	@GetMapping(TODO)
+	public ResponseEntity<?> todo(){
+		List<EmpresaOficial> lista=empresaOficialRepository.findAll();
+		
+		
+		return ResponseEntity.ok(lista);
+		
+	}
 	
 	@PostMapping(UPDATE_DESCUENTO_MENU)
 	public ResponseEntity<?> updateDescuentoMenu(@PathVariable("idempresa") int idempresa,@PathVariable("descuento") float descuento){

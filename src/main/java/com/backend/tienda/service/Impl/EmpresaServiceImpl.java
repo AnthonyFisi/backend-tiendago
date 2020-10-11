@@ -155,6 +155,11 @@ public class EmpresaServiceImpl  implements EmpresaService{
 		return empresaRepository.findAll();
 	}
 
+	@Override
+	public List<Empresa> listaEmpresaFiltro(int idCategoria, float preciodelivery) {
+		return empresaRepository.listfindByIdcategoriaAndCosto_delivery(idCategoria, preciodelivery);
+	}
+
 
 
 }

@@ -97,7 +97,6 @@ public class Empresa{
 	
 	private boolean cuentaactiva;
 	
-
 	public boolean isDisponible() {
 		return disponible;
 	}

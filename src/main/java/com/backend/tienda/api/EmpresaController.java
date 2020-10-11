@@ -1,12 +1,15 @@
 package com.backend.tienda.api;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Empresa;
+import com.backend.tienda.entity.EmpresaOficial;
 import com.backend.tienda.gson.EmpresaGson;
+import com.backend.tienda.repository.EmpresaOficialRepository;
+import com.backend.tienda.repository.EmpresaRepository;
 import com.backend.tienda.service.EmpresaService;
 import com.backend.tienda.util.HaversineDistanceDelivery;
 
@@ -24,6 +30,7 @@ public class EmpresaController {
 
 	public final static String EMPRESA_CONTROLLER="/EmpresaController";
 
+	public final static String LISTA="/lista";
 
 	public final static String FIND_EMPRESA_BY_UBICACION_CERCA="/ListaCerca/{Ubicacion}";
 
@@ -61,11 +68,50 @@ public class EmpresaController {
 
 	public final static String UPDATE_DESCRIPCION="/updateDescripcion";
 
+	public final static String FILTRO_BY_IDCATEGORIA_DISTANCIA_PRECIODELIVERY="/filtro/{idcategoriaempresa}/{distancia}/{preciodelivery}/{ubicacion}";
+
 
 	@Autowired
 	EmpresaService empresaService;
 
+	@Autowired
+	EmpresaRepository empresaOficialRepository;
+	
+	@GetMapping(FILTRO_BY_IDCATEGORIA_DISTANCIA_PRECIODELIVERY)
+	public ResponseEntity<List<Empresa>> filtroEmpresa(
+			@PathVariable("idcategoriaempresa")int idcategoriaempresa,
+			@PathVariable("distancia")int distancia,
+			@PathVariable("preciodelivery")float preciodelivery,
+			@PathVariable("ubicacion")String ubicacion){
 
+		int distance=10000; 
+		
+		float price_delivery=100;
+				
+		if(distancia>0) {
+			distance=distancia;
+		}
+		if(preciodelivery>0) {
+			price_delivery=preciodelivery;
+		}
+
+		List<Empresa> lista=empresaService.listaEmpresaFiltro(idcategoriaempresa, price_delivery);
+		
+		lista=HaversineDistanceDelivery.calculateDistance(lista,ubicacion,distance);
+		
+		return ResponseEntity.ok(lista);
+
+	}
+	
+	
+	@GetMapping(LISTA)
+	public ResponseEntity<?> todo(){
+		List<Empresa> lista=empresaOficialRepository.findAll();
+	
+		
+		return ResponseEntity.ok(lista);
+		
+	}
 
 	//ESTA ES LA RELACION DE EMPRESA CERCANAS DE UNA CATEGORIA EN ESPECIFIO (EJEM:RESTAURANTE) EN UN RADIO DE 3000 METROS
 	@RequestMapping(value=FIND_EMPRESA_BY_IDCATEGORIA_UBICACION,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -407,6 +453,9 @@ public class EmpresaController {
 		return new ResponseEntity<Empresa>(rpta,HttpStatus.OK);
 
 	}
+	
+	
+
 
 
 }

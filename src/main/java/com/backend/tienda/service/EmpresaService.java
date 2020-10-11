@@ -33,6 +33,9 @@ public interface EmpresaService {
 	List<Empresa> listaEmpresaFavorito( List<Integer> listaIds);
 
 	
+	List<Empresa> listaEmpresaFiltro(int idCategoria,float preciodelivery);
+
+	
 	
 	
 }
