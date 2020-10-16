@@ -30,6 +30,7 @@ public class Repartidor {
 	
 	private int idusuariogeneral;
 	
+	private int idempresa;
 
 	public int getIdrepartidor() {
 		return idrepartidor;
@@ -87,6 +88,14 @@ public class Repartidor {
 
 	public void setIdusuariogeneral(int idusuariogeneral) {
 		this.idusuariogeneral = idusuariogeneral;
+	}
+
+	public int getIdempresa() {
+		return idempresa;
+	}
+
+	public void setIdempresa(int idempresa) {
+		this.idempresa = idempresa;
 	}
 
 	

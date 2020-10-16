@@ -34,6 +34,16 @@ public class Delivery_PedidoServiceImpl implements Delivery_PedidoService{
 	
 		return delivery;
 	}
+
+	@Override
+	public List<Delivery_Pedido> findByidRepartidor(int idrepartidor) {
+		return delivery_PedidoRepository.findByIdrepartidor(idrepartidor);
+	}
+
+	@Override
+	public Delivery_Pedido findByIdventa(int idventa) {
+		return delivery_PedidoRepository.findByidventa(idventa);
+	}
 	
 	
 

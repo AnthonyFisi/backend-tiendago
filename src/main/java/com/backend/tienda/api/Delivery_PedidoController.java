@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Delivery_Pedido;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
+import com.backend.tienda.gson.DeliveryPedidoGson;
 import com.backend.tienda.gson.Delivery_PedidoGson;
 import com.backend.tienda.service.Delivery_PedidoService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
@@ -26,6 +27,8 @@ public class Delivery_PedidoController {
 
 	public static final String REPARTIDOR_PEDIDO="/Repartidor/{idRepartidor}";
 	
+	public static final String REPARTIDOR_PEDIDO_ALTERNATIVE="/listaPedido/{idRepartidor}";
+
 	
 	@Autowired
 	Delivery_PedidoService delivery_PedidoService;
@@ -64,6 +67,39 @@ public class Delivery_PedidoController {
 		}
 		
 		return new ResponseEntity<Delivery_PedidoGson>(delivery_PedidoGson,HttpStatus.OK);
+		
+		
+	}
+	
+
+	@RequestMapping(value=REPARTIDOR_PEDIDO_ALTERNATIVE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<DeliveryPedidoGson>  listaPedidoRepartidor(@PathVariable("idRepartidor") int idRepartidor){
+		
+		List<Delivery_Pedido> listaDeliveryInformation=null;
+		
+		//List<ProductoJOINregistroPedidoJOINpedido> productos=null;
+		
+		DeliveryPedidoGson deliveryPedidoGson=null;
+
+		try {
+			
+			listaDeliveryInformation=delivery_PedidoService.findByidRepartidor(idRepartidor);
+			
+			//productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(delivery_information.getIdpedido());
+			
+			deliveryPedidoGson = new DeliveryPedidoGson();
+			
+			deliveryPedidoGson.setListaDeliveryPedido(listaDeliveryInformation);
+			
+			//deliveryPedidoGson.setProductos(productos);
+			
+		}catch(Exception e) {
+		
+			return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+		
+		return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.OK);
 		
 		
 	}

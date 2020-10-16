@@ -1,5 +1,7 @@
 package com.backend.tienda.service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,11 @@ public class RepartidorServiceImpl implements RepartidorService {
 	@Override
 	public Repartidor guardarRepartidor(Repartidor repartidor) {
 		return repartidorRepository.save(repartidor);
+	}
+
+	@Override
+	public List<Repartidor> findByIdEmpresa(int idempresa) {
+		return repartidorRepository.findByIdempresa(idempresa);
 	}
 	
 	

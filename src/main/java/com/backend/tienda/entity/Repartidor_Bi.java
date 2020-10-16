@@ -48,7 +48,7 @@ public class Repartidor_Bi {
 
 	private boolean disponible;
 	
-	
+	private int idempresa;
 
 	public int getIdusuariogeneral() {
 		return idusuariogeneral;
@@ -188,6 +188,14 @@ public class Repartidor_Bi {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public int getIdempresa() {
+		return idempresa;
+	}
+
+	public void setIdempresa(int idempresa) {
+		this.idempresa = idempresa;
 	}
 
 	

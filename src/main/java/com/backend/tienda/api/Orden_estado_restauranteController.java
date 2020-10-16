@@ -25,7 +25,9 @@ import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.Restaurante_Pedido;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.firebase.DeliveryController;
+import com.backend.tienda.gson.Delivery_PedidoGson;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
+import com.backend.tienda.service.Delivery_PedidoService;
 import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.VentaService;
@@ -48,6 +50,8 @@ public class Orden_estado_restauranteController {
 
 	public static final String LISTA_ESTADO_BY_VENTA="/listaOrden/{idVenta}";
 
+	public static final String ORDEN_UPDATE_PROCES_ALTERNATIVE="/updateOrdenProces/{idUsuario}/{idrepartidor}";
+
 
 	@Autowired
 	Orden_estado_restauranteService ordenService;
@@ -61,6 +65,9 @@ public class Orden_estado_restauranteController {
 
 	@Autowired
 	DeliveryController deliveryController;
+	
+	@Autowired
+	Delivery_PedidoService delivery_PedidoService;
 	
 	
 
@@ -266,7 +273,97 @@ public class Orden_estado_restauranteController {
 
 	}
 
+	
+	
+	@RequestMapping(value=ORDEN_UPDATE_PROCES_ALTERNATIVE,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Orden_estado_empresa> updateProcesAlternative(@RequestBody Orden_estado_empresa orden,
+			@PathVariable ("idUsuario") int idUsuario,@PathVariable ("idRepartidor") int idRepartidor){
 
+		Timestamp time=new Timestamp(System.currentTimeMillis());
+
+		Venta venta=null;
+
+		Orden_estado_empresa ordenResult=null;
+
+		orden.setFecha(time);
+
+		Orden_estado_restauranteGson gson=null;
+
+		List<Orden_estado_general> lista_estado_general =null;
+
+		Orden_estado_general orden_general= new Orden_estado_general();
+
+		Delivery_PedidoGson delivery_PedidoGson=null;
+
+		try 
+		{
+
+			int idestado_general=2;
+
+			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
+
+			System.out.println("PASO1");
+
+			if(venta!=null) {
+
+				ordenResult=ordenService.registrarEstado(orden);
+
+				//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
+
+				ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
+
+
+				orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
+
+				//GUARDAR EL ESTADO EN LA TABLA GENERAL
+				orden_estado_generalService.guardar_estado(orden_general);
+
+
+
+				lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+
+
+
+
+				gson=new Orden_estado_restauranteGson();
+				gson.setListaOrden_estado_general(lista_estado_general);
+
+				pusher.setCluster("us2");
+
+				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+
+				//TENGO QUE ACTUALIZAR LA VENTA Y BUSCAR EN DELIVERY PEDIDO
+				
+
+				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),1,idRepartidor);
+
+				delivery_PedidoGson = new Delivery_PedidoGson();
+				
+				delivery_PedidoGson.setDelivery_information(delivery_PedidoService.findByIdventa(venta.getIdventa()));
+				
+				pusher.trigger("canal-orden-delivery-"+idRepartidor, "my-event", delivery_PedidoGson);
+
+
+				//deliveryController.searchRepartidor(pedidoPropuesta);
+
+
+
+
+			}
+
+		}catch(Exception e) {
+			return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+
+
+		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
+
+	}
+
+	
+	
 	@RequestMapping(value=ORDEN_UPDATE_READY,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_empresa> updateOrdenReady(@RequestBody Orden_estado_empresa orden,
 			@PathVariable ("idUsuario") int idUsuario){

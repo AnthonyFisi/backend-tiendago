@@ -2,6 +2,8 @@ package com.backend.tienda.api;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.backend.tienda.entity.Repartidor;
+import com.backend.tienda.gson.Repartidor_BiGson;
 import com.backend.tienda.service.RepartidorService;
 
 
@@ -29,6 +32,7 @@ public class RepartidorController {
 	
 	public static final String UPDATE_DISPONIBILIDAD="/disponibilidad/{idRepartidor}/{state}"; 
 
+	public static final String LISTA_BY_IDEMPRESA="/listaEmpresa/{idempresa}"; 
 
 	
 	@Autowired
@@ -67,6 +71,30 @@ public class RepartidorController {
 	
 	}
 	
+	
+/*	@GetMapping(LISTA_BY_IDEMPRESA)
+	public ResponseEntity<Repartidor_BiGson> listaRepartidorEmpresa(@PathVariable("idempresa") int idempresa){
+		
+		List<Repartidor> listarepartidor=null;
+		
+		Repartidor_BiGson gson=null;
+		
+		
+		try {
+			
+			listarepartidor=repartidorService.findByIdEmpresa(idempresa);
+			gson=new Repartidor_BiGson();
+			gson.setListaRepartidor(listarepartidor);
+		
+		}catch(Exception e) {
+			
+			return  ResponseEntity.notFound().build();
+
+		}
+		
+		return ResponseEntity.ok(gson);
+	
+	}*/
 	
 	
 
