@@ -28,6 +28,7 @@ import com.backend.tienda.firebase.DeliveryController;
 import com.backend.tienda.gson.Delivery_PedidoGson;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.service.Delivery_PedidoService;
+import com.backend.tienda.service.EmpresaOficialService;
 import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.VentaService;
@@ -68,6 +69,7 @@ public class Orden_estado_restauranteController {
 	
 	@Autowired
 	Delivery_PedidoService delivery_PedidoService;
+	
 	
 	
 
@@ -277,7 +279,7 @@ public class Orden_estado_restauranteController {
 	
 	@RequestMapping(value=ORDEN_UPDATE_PROCES_ALTERNATIVE,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_empresa> updateProcesAlternative(@RequestBody Orden_estado_empresa orden,
-			@PathVariable ("idUsuario") int idUsuario,@PathVariable ("idRepartidor") int idRepartidor){
+			@PathVariable ("idUsuario") int idUsuario,@PathVariable ("idrepartidor") int idRepartidor){
 
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 
@@ -323,9 +325,8 @@ public class Orden_estado_restauranteController {
 				lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
 
 
-
-
 				gson=new Orden_estado_restauranteGson();
+				
 				gson.setListaOrden_estado_general(lista_estado_general);
 
 				pusher.setCluster("us2");
