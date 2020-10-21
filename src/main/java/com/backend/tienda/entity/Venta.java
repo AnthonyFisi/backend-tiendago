@@ -80,6 +80,10 @@ public class Venta {
 	
 	private String tiempototal_espera;
 	
+	private String comentario_ubicacion;
+	
+	private String celular_adicional;
+	
 	public String getComentario_cancelar() {
 		return comentario_cancelar;
 	}
@@ -335,6 +339,22 @@ public class Venta {
 
 	public void setTiempototal_espera(String tiempototal_espera) {
 		this.tiempototal_espera = tiempototal_espera;
+	}
+
+	public String getComentario_ubicacion() {
+		return comentario_ubicacion;
+	}
+
+	public void setComentario_ubicacion(String comentario_ubicacion) {
+		this.comentario_ubicacion = comentario_ubicacion;
+	}
+
+	public String getCelular_adicional() {
+		return celular_adicional;
+	}
+
+	public void setCelular_adicional(String celular_adicional) {
+		this.celular_adicional = celular_adicional;
 	}
 
 	

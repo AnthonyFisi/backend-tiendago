@@ -20,17 +20,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.tienda.entity.Orden_estado_general;
+import com.backend.tienda.entity.Repartidor;
 import com.backend.tienda.entity.Orden_estado_empresa;
 import com.backend.tienda.entity.Orden_estado_empresaPK;
 import com.backend.tienda.entity.Restaurante_Pedido;
+import com.backend.tienda.entity.Usuario_general;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.firebase.DeliveryController;
 import com.backend.tienda.gson.Delivery_PedidoGson;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
+import com.backend.tienda.gson.RepartidorInformationGson;
+import com.backend.tienda.repository.Usuario_generalRepository;
 import com.backend.tienda.service.Delivery_PedidoService;
 import com.backend.tienda.service.EmpresaOficialService;
 import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
+import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.VentaService;
 import com.backend.tienda.util.CalculateTime;
 import com.pusher.rest.Pusher;
@@ -69,6 +74,12 @@ public class Orden_estado_restauranteController {
 	
 	@Autowired
 	Delivery_PedidoService delivery_PedidoService;
+	
+	@Autowired
+	Usuario_generalRepository usuario_generalRepository;
+	
+	@Autowired
+	RepartidorService repartidorService;
 	
 	
 	
@@ -165,7 +176,7 @@ public class Orden_estado_restauranteController {
 			lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
 
 
-
+			
 
 			gson=new Orden_estado_restauranteGson();
 
@@ -175,14 +186,9 @@ public class Orden_estado_restauranteController {
 
 			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 			
-			deliveryController.entregaProgramda(orden.getId().getIdventa(),orden.getIdempresa());
+			//deliveryController.entregaProgramda(orden.getId().getIdventa(),orden.getIdempresa());*/
 
 		}
-
-		/*}catch(Exception e) {
-			//return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
-
-		}*/
 
 
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
@@ -338,11 +344,25 @@ public class Orden_estado_restauranteController {
 
 				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),1,idRepartidor);
 
-				delivery_PedidoGson = new Delivery_PedidoGson();
 				
-				delivery_PedidoGson.setDelivery_information(delivery_PedidoService.findByIdventa(venta.getIdventa()));
+				RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
 				
-				pusher.trigger("canal-orden-delivery-"+idRepartidor, "my-event", delivery_PedidoGson);
+				Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
+				
+	
+				Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
+				
+				
+				usuario.setContrasena("");
+				
+				usuario.setRoles(null);
+				
+				
+				repartidorInformation.setUsuario_general(usuario);
+				
+				repartidorInformation.setIdventa(orden.getId().getIdventa());
+				
+				pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", delivery_PedidoGson);
 
 
 				//deliveryController.searchRepartidor(pedidoPropuesta);

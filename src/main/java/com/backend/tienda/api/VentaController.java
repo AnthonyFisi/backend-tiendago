@@ -20,6 +20,7 @@ import com.backend.tienda.entity.Pedido;
 import com.backend.tienda.entity.Restaurante_PedidoModified;
 import com.backend.tienda.entity.Venta;
 import com.backend.tienda.entity.VentaAndroid;
+import com.backend.tienda.service.EmpresaOficialService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.PedidoService;
 import com.backend.tienda.service.Restaurante_PedidoService;
@@ -38,6 +39,8 @@ public class VentaController {
 	public final static String REGISTRAR_VENTA="/registrar";
 
 	public final static String REGISTRAR_VENTA_MESA="/registrarMesa";
+	
+	public final static String REGISTRAR_VENTA_ALTERNATIVE="/registrarAlternative";
 
 	public final static String LISTA_VENTA="/lista";
 
@@ -71,7 +74,6 @@ public class VentaController {
 	GoogleMapsApi api;
 
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
-
 
 
 
@@ -144,6 +146,81 @@ public class VentaController {
 			ordenService.registrarEstado(ordenEstado);
 
 			//Restaurante_Pedido ordenReciente=restaurante_PedidoService.recientePedido(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+
+			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
+
+			pusher.setCluster("us2");
+
+			pusher.trigger("canal-orden-reciente-"+respuestaPedido.getIdempresa(), "my-event", ordenReciente);
+
+			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.OK);
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new  ResponseEntity<VentaAndroid>(ventaAndroidAnswer,HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+
+
+	}
+
+
+	@RequestMapping(value=REGISTRAR_VENTA_ALTERNATIVE,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<VentaAndroid>  registrarVentaAlternative(@RequestBody VentaAndroid ventaAndroid){
+
+		Venta respuesta=null;
+
+		VentaAndroid ventaAndroidAnswer=null;
+
+		Pedido respuestaPedido =new Pedido();
+
+		boolean answerPedido= false;
+
+
+		//BUSCAMOS EL PEDIDO POR IDUSUARIO Y IDEMPRESA EN LA TABLA DE PEDIDO
+		respuestaPedido=pedidoService.findByIdUsuario(ventaAndroid.getIdUsuario(),ventaAndroid.getIdEmpresa());
+
+		//CALCULAMOS EL TIEMPO Y DISTANCIA QUE EXISTE ENTRE EMPRESA ---> USUARIO
+
+
+
+		try {
+
+			respuesta=new Venta();
+			respuesta=CreateVenta.venta(ventaAndroid, respuestaPedido.getIdpedido());
+
+
+			//REGISTRAMOS EN LA TABLA DE VENTA
+			respuesta=ventaService.registrarVenta(respuesta);
+
+			answerPedido=true;
+
+			//ACTUALIZAMOS EL ESTADO DE LA TABLA PEDIDO A TRUE
+			pedidoService.updatePedidoEstado(answerPedido,respuesta.getIdpedido());
+
+			//RETORNAMOS UNA RESPUESTA DE QUE LA VENTA SE REALIZO CON EXITO
+			ventaAndroidAnswer = new VentaAndroid();
+			ventaAndroidAnswer.setRepsuesta_registro_venta(true);
+			ventaAndroidAnswer.setIdEmpresa(respuesta.getIdventa());
+
+			Timestamp time=new Timestamp(System.currentTimeMillis());
+
+
+			Orden_estado_empresa ordenEstado=new Orden_estado_empresa();
+			Orden_estado_empresaPK pk = new Orden_estado_empresaPK();
+			pk.setIdventa(respuesta.getIdventa());
+			pk.setIdestado_empresa(1);
+
+			ordenEstado.setId(pk);
+			ordenEstado.setIdempresa(ventaAndroid.getIdEmpresa());
+			ordenEstado.setDetalle("");
+			ordenEstado.setFecha(time);
+
+			ordenService.registrarEstado(ordenEstado);
+
 
 			Restaurante_PedidoModified ordenReciente=pedidoController.recientes(respuestaPedido.getIdempresa(), respuestaPedido.getIdpedido(), respuesta.getIdventa());
 

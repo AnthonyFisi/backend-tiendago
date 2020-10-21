@@ -44,6 +44,10 @@ public class VentaAndroid {
 	
 	private float venta_costopedido;
 	
+	private String comentario_ubicacion;
+	
+	private String celular_adicional;
+	
 	private Timestamp fechaServidor;
 
 	private List<Double> empresa_posistion;
@@ -207,6 +211,24 @@ public class VentaAndroid {
 	public void setFechaServidor(Timestamp fechaServidor) {
 		this.fechaServidor = fechaServidor;
 	}
+
+	public String getComentario_ubicacion() {
+		return comentario_ubicacion;
+	}
+
+	public void setComentario_ubicacion(String comentario_ubicacion) {
+		this.comentario_ubicacion = comentario_ubicacion;
+	}
+
+	public String getCelular_adicional() {
+		return celular_adicional;
+	}
+
+	public void setCelular_adicional(String celular_adicional) {
+		this.celular_adicional = celular_adicional;
+	}
+
+	
 
 
 	
