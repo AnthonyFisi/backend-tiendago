@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.tienda.entity.Orden;
 import com.backend.tienda.entity.Producto;
 import com.backend.tienda.entity.ProductoJOINregistroPedidoJOINpedido;
 import com.backend.tienda.gson.ProductoJOINregistroPedidoJOINpedidoGson;
+import com.backend.tienda.service.OrdenService;
 import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 
 @RestController
@@ -36,6 +38,8 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 	
+	@Autowired
+	OrdenService ordenService;
 	
 	@RequestMapping(value=LISTA_BY_PEDIDO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson> lista(@PathVariable("idusuario")int idusuario,@PathVariable("idempresa")int idempresa){
@@ -65,12 +69,19 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 		
 		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
 		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
+		List<Orden> listaOrden=null;
+
 		
 		try {
 			
+			listaOrden=ordenService.ordenDisponible(idusuario);
+
 			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoTotal(idusuario);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
+			
+			gson.setCantidadOrden(listaOrden.size());
+			
 		}catch(Exception e) {
 			return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.INTERNAL_SERVER_ERROR);
 		

@@ -347,10 +347,10 @@ public class Orden_estado_restauranteController {
 				
 				RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
 				
-				Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
+				//Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
 				
 	
-				Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
+				Usuario_general usuario=usuario_generalRepository.findById(idRepartidor).get();
 				
 				
 				usuario.setContrasena("");
