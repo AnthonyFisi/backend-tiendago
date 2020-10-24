@@ -56,7 +56,7 @@ public class Orden_estado_restauranteController {
 
 	public static final String LISTA_ESTADO_BY_VENTA="/listaOrden/{idVenta}";
 
-	public static final String ORDEN_UPDATE_PROCES_ALTERNATIVE="/updateOrdenProces/{idUsuario}/{idrepartidor}";
+	public static final String ORDEN_UPDATE_PROCES_ALTERNATIVE="/updateOrdenProcesAlternative/{idUsuario}/{idrepartidor}";
 
 
 	@Autowired
@@ -303,8 +303,8 @@ public class Orden_estado_restauranteController {
 
 		Delivery_PedidoGson delivery_PedidoGson=null;
 
-		try 
-		{
+		//try 
+	//	{
 
 			int idestado_general=2;
 
@@ -347,10 +347,10 @@ public class Orden_estado_restauranteController {
 				
 				RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
 				
-				//Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
+				Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
 				
 	
-				Usuario_general usuario=usuario_generalRepository.findById(idRepartidor).get();
+				Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
 				
 				
 				usuario.setContrasena("");
@@ -362,7 +362,7 @@ public class Orden_estado_restauranteController {
 				
 				repartidorInformation.setIdventa(orden.getId().getIdventa());
 				
-				pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", delivery_PedidoGson);
+				pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", repartidorInformation);
 
 
 				//deliveryController.searchRepartidor(pedidoPropuesta);
@@ -372,11 +372,11 @@ public class Orden_estado_restauranteController {
 
 			}
 
-		}catch(Exception e) {
-			return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
+/*		}catch(Exception e) {
+			//return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}
-
+		//}
+*/
 
 
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);

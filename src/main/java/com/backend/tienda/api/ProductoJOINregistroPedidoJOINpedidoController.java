@@ -69,18 +69,15 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 		
 		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
 		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
-		List<Orden> listaOrden=null;
 
 		
 		try {
 			
-			listaOrden=ordenService.ordenDisponible(idusuario);
 
 			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoTotal(idusuario);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
 			
-			gson.setCantidadOrden(listaOrden.size());
 			
 		}catch(Exception e) {
 			return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -97,13 +94,19 @@ public class ProductoJOINregistroPedidoJOINpedidoController {
 		
 		ProductoJOINregistroPedidoJOINpedidoGson gson=null;
 		List<ProductoJOINregistroPedidoJOINpedido> lista=null;
-		
+		List<Orden> listaOrden=null;
+
 		try {
 			
+			listaOrden=ordenService.ordenDisponible(idusuario);
+
 			lista=productoJOINregistroPedidoJOINpedidoService.listaCarritoByIdUsuario(idusuario);
 			gson= new ProductoJOINregistroPedidoJOINpedidoGson();
 			gson.setListaProductoJOINregistroPedidoJOINpedido(lista);
+			gson.setCantidadOrden(listaOrden.size());
+
 		}catch(Exception e) {
+			
 			return new ResponseEntity<ProductoJOINregistroPedidoJOINpedidoGson>(gson,HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		}
