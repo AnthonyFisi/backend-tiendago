@@ -21,87 +21,80 @@ import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 @RestController
 @RequestMapping(Delivery_PedidoController.DELIVERY_PEDIDO_CONTROLLER)
 public class Delivery_PedidoController {
-	
-	
+
+
 	public static final String DELIVERY_PEDIDO_CONTROLLER="/DeliveryPedido";
 
 	public static final String REPARTIDOR_PEDIDO="/Repartidor/{idRepartidor}";
-	
+
 	public static final String REPARTIDOR_PEDIDO_ALTERNATIVE="/listaPedido/{idRepartidor}";
 
-	
+
 	@Autowired
 	Delivery_PedidoService delivery_PedidoService;
-	
+
 
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 
-	
-	
+
+
 	@RequestMapping(value=REPARTIDOR_PEDIDO,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Delivery_PedidoGson>  pedidoRepartidor(@PathVariable("idRepartidor") int idRepartidor){
-		
+
 		Delivery_Pedido delivery_information=null;
-		
+
 		List<ProductoJOINregistroPedidoJOINpedido> productos=null;
-		
+
 		Delivery_PedidoGson delivery_PedidoGson=null;
 
 		try {
-			
+
 			delivery_information=delivery_PedidoService.pedido(idRepartidor);
-			
+
 			productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(delivery_information.getIdpedido());
-			
+
 			delivery_PedidoGson = new Delivery_PedidoGson();
-			
+
 			delivery_PedidoGson.setDelivery_information(delivery_information);
-			
+
 			delivery_PedidoGson.setProductos(productos);
-			
+
 		}catch(Exception e) {
-		
+
 			return new ResponseEntity<Delivery_PedidoGson>(delivery_PedidoGson,HttpStatus.INTERNAL_SERVER_ERROR);
 
 		}
-		
+
 		return new ResponseEntity<Delivery_PedidoGson>(delivery_PedidoGson,HttpStatus.OK);
-		
-		
+
+
 	}
-	
+
 
 	@RequestMapping(value=REPARTIDOR_PEDIDO_ALTERNATIVE,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DeliveryPedidoGson>  listaPedidoRepartidor(@PathVariable("idRepartidor") int idRepartidor){
-		
+
 		List<Delivery_Pedido> listaDeliveryInformation=null;
-		
-		//List<ProductoJOINregistroPedidoJOINpedido> productos=null;
-		
+
 		DeliveryPedidoGson deliveryPedidoGson=null;
 
-		try {
-			
-			listaDeliveryInformation=delivery_PedidoService.findByidRepartidor(idRepartidor);
-			
-			//productos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(delivery_information.getIdpedido());
-			
-			deliveryPedidoGson = new DeliveryPedidoGson();
-			
-			deliveryPedidoGson.setListaDeliveryPedido(listaDeliveryInformation);
-			
-			//deliveryPedidoGson.setProductos(productos);
-			
-		}catch(Exception e) {
-		
-			return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.INTERNAL_SERVER_ERROR);
 
+		listaDeliveryInformation=delivery_PedidoService.findByidRepartidor(idRepartidor);
+
+		if(listaDeliveryInformation.size()<0) {
+
+			return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
+
+		deliveryPedidoGson = new DeliveryPedidoGson();
+
+		deliveryPedidoGson.setListaDeliveryPedido(listaDeliveryInformation);
+
 		return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.OK);
-		
-		
+
+
 	}
 
 }
