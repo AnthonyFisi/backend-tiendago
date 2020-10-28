@@ -71,18 +71,18 @@ public class Orden_estado_restauranteController {
 
 	@Autowired
 	DeliveryController deliveryController;
-	
+
 	@Autowired
 	Delivery_PedidoService delivery_PedidoService;
-	
+
 	@Autowired
 	Usuario_generalRepository usuario_generalRepository;
-	
+
 	@Autowired
 	RepartidorService repartidorService;
-	
-	
-	
+
+
+
 
 	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
@@ -176,7 +176,7 @@ public class Orden_estado_restauranteController {
 			lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
 
 
-			
+
 
 			gson=new Orden_estado_restauranteGson();
 
@@ -185,7 +185,7 @@ public class Orden_estado_restauranteController {
 			pusher.setCluster("us2");
 
 			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
-			
+
 			//deliveryController.entregaProgramda(orden.getId().getIdventa(),orden.getIdempresa());*/
 
 		}
@@ -281,8 +281,8 @@ public class Orden_estado_restauranteController {
 
 	}
 
-	
-	
+
+
 	@RequestMapping(value=ORDEN_UPDATE_PROCES_ALTERNATIVE,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_empresa> updateProcesAlternative(@RequestBody Orden_estado_empresa orden,
 			@PathVariable ("idUsuario") int idUsuario,@PathVariable ("idrepartidor") int idRepartidor){
@@ -301,90 +301,80 @@ public class Orden_estado_restauranteController {
 
 		Orden_estado_general orden_general= new Orden_estado_general();
 
-		Delivery_PedidoGson delivery_PedidoGson=null;
+		int idestado_general=2;
 
-		//try 
-	//	{
+		venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
 
-			int idestado_general=2;
+		System.out.println("PASO1");
 
-			venta=ventaService.updateVentaEstado(orden.getId().getIdventa(), orden.getId().getIdestado_empresa());
+		if(venta!=null) {
 
-			System.out.println("PASO1");
+			ordenResult=ordenService.registrarEstado(orden);
 
-			if(venta!=null) {
+			//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
 
-				ordenResult=ordenService.registrarEstado(orden);
-
-				//AÑADIR NUEVA TABLA DE ORDEN ESTADO GENERAL
-
-				ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
+			ventaService.updateVentaEstadoGeneral(orden.getId().getIdventa(),idestado_general);
 
 
-				orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
+			orden_general=convert_object(orden,"",idestado_general,time,orden.getIdempresa());
 
-				//GUARDAR EL ESTADO EN LA TABLA GENERAL
-				orden_estado_generalService.guardar_estado(orden_general);
+			//GUARDAR EL ESTADO EN LA TABLA GENERAL
+			orden_estado_generalService.guardar_estado(orden_general);
 
 
 
-				lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
+			lista_estado_general=orden_estado_generalService.listaOrdenByidVenta(orden.getId().getIdventa());
 
 
-				gson=new Orden_estado_restauranteGson();
-				
-				gson.setListaOrden_estado_general(lista_estado_general);
+			gson=new Orden_estado_restauranteGson();
 
-				pusher.setCluster("us2");
+			gson.setListaOrden_estado_general(lista_estado_general);
 
-				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pusher.setCluster("us2");
 
-				//TENGO QUE ACTUALIZAR LA VENTA Y BUSCAR EN DELIVERY PEDIDO
-				
+			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
-				venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),1,idRepartidor);
-
-				
-				RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
-				
-				Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
-				
-	
-				Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
-				
-				
-				usuario.setContrasena("");
-				
-				usuario.setRoles(null);
-				
-				
-				repartidorInformation.setUsuario_general(usuario);
-				
-				repartidorInformation.setIdventa(orden.getId().getIdventa());
-				
-				pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", repartidorInformation);
+			//TENGO QUE ACTUALIZAR LA VENTA Y BUSCAR EN DELIVERY PEDIDO
 
 
-				//deliveryController.searchRepartidor(pedidoPropuesta);
+			venta=ventaService.updateDeliveryEstado(orden.getId().getIdventa(),1,idRepartidor);
+
+
+			RepartidorInformationGson repartidorInformation=new RepartidorInformationGson();
+
+			Repartidor repartidor=repartidorService.findRepartidorById(idRepartidor);
+
+
+			Usuario_general usuario=usuario_generalRepository.findById(repartidor.getIdusuariogeneral()).get();
+
+
+			usuario.setContrasena("");
+
+			usuario.setRoles(null);
+
+
+			repartidorInformation.setUsuario_general(usuario);
+
+			repartidorInformation.setIdventa(orden.getId().getIdventa());
+
+			pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", repartidorInformation);
+
+
+			Delivery_PedidoGson pedido=deliveryController.createGsonPedido(orden.getId().getIdventa(),orden.getIdempresa());
+
+			pusher.trigger("canal-orden-delivery-"+idRepartidor, "my-event", pedido);
 
 
 
 
-			}
-
-/*		}catch(Exception e) {
-			//return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.INTERNAL_SERVER_ERROR);
-
-		//}
-*/
-
+		}
 
 		return new ResponseEntity<Orden_estado_empresa>(ordenResult,HttpStatus.OK);
 
 	}
 
-	
-	
+
+
 	@RequestMapping(value=ORDEN_UPDATE_READY,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_empresa> updateOrdenReady(@RequestBody Orden_estado_empresa orden,
 			@PathVariable ("idUsuario") int idUsuario){

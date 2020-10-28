@@ -74,6 +74,12 @@ public class Delivery_Pedido {
 	
 	private String empresa_coordenada_y;
 
+	private String extra_ubicacion_comentario;
+	
+	private String extra_celular;
+	
+	private Timestamp venta_fechaentrega;
+	
 	public int getIdventa() {
 		return idventa;
 	}
@@ -312,6 +318,31 @@ public class Delivery_Pedido {
 	public void setIdusuariogeneral(int idusuariogeneral) {
 		this.idusuariogeneral = idusuariogeneral;
 	}
+
+	public String getExtra_ubicacion_comentario() {
+		return extra_ubicacion_comentario;
+	}
+
+	public void setExtra_ubicacion_comentario(String extra_ubicacion_comentario) {
+		this.extra_ubicacion_comentario = extra_ubicacion_comentario;
+	}
+
+	public String getExtra_celular() {
+		return extra_celular;
+	}
+
+	public void setExtra_celular(String extra_celular) {
+		this.extra_celular = extra_celular;
+	}
+
+	public Timestamp getVenta_fechaentrega() {
+		return venta_fechaentrega;
+	}
+
+	public void setVenta_fechaentrega(Timestamp venta_fechaentrega) {
+		this.venta_fechaentrega = venta_fechaentrega;
+	}
+	
 	
 	
 	

@@ -435,11 +435,11 @@ public class DeliveryController {
 	}
 
 
-	private  Delivery_PedidoGson createGsonPedido(int idventa,int idempresa) {
+	public   Delivery_PedidoGson createGsonPedido(int idventa,int idempresa) {
 		
 		Delivery_PedidoGson delivery=null;
 		
-		List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
+		//List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
 		
 		Restaurante_Pedido restaurante_pedido=restaurante_PedidoService.findByIdVenta(idventa);
 				
@@ -449,11 +449,10 @@ public class DeliveryController {
 		
 		delivery=convert(restaurante_pedido,empresaOficial);
 		
-		System.out.println(delivery.getDelivery_information().getCelular()+"/"+delivery.getDelivery_information().getEmpresa_coordenada_x());
 		
-		listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(restaurante_pedido.getIdpedido());
+		//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(restaurante_pedido.getIdpedido());
 		
-		delivery.setProductos(listaProductos);
+		//delivery.setProductos(listaProductos);
 		
 				
 		return delivery;

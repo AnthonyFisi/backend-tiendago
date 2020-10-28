@@ -32,14 +32,13 @@ public class OrdenServiceImpl implements OrdenService{
 		try {
 			date = formatter.parse(time.toString());
 	         timeStampDate = new Timestamp(date.getTime());
-	         System.out.println(timeStampDate.toString()+"La fecha de ohy");
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          
-		return ordenRepository.findByIdusuarioAndOrdendisponibleAndVentafechaGreaterThanEqual(idusuario,true,timeStampDate);
+		return ordenRepository.findByIdusuarioAndVentafechaGreaterThanEqual(idusuario,timeStampDate);
 	}
 
 }
