@@ -81,10 +81,11 @@ public class Delivery_PedidoController {
 
 
 		listaDeliveryInformation=delivery_PedidoService.findByidRepartidor(idRepartidor);
+		
 
-		if(listaDeliveryInformation.size()<0) {
+		if(listaDeliveryInformation.size()<=0) {
 
-			return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<DeliveryPedidoGson>(deliveryPedidoGson,HttpStatus.NOT_FOUND);
 		}
 
 
