@@ -100,6 +100,8 @@ public class Restaurante_Pedido {
 	
 	private String tiempototal_espera;
 	
+	
+	
 	public boolean isCancelar() {
 		return cancelar;
 	}

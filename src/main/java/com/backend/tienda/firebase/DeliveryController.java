@@ -44,7 +44,7 @@ public class DeliveryController {
 	public static final String LISTA_FIREBASE="/lista/v/total";
 
 	public static final String LOAD_DATA="/load/{data}";
-	
+
 	public static final String LOAD_DATA2="/load/{idventa}/{idempresa}";
 
 
@@ -54,23 +54,23 @@ public class DeliveryController {
 
 	@Autowired
 	GoogleMapsApi api;
-	
+
 	@Autowired
 	Restaurante_PedidoService restaurante_PedidoService;
-	
+
 	@Autowired
 	EmpresaOficialService empresaOficialService;
-	
+
 	@Autowired
 	VentaService ventaService;
-	
+
 	@Autowired
 	ProductoJOINregistroPedidoJOINpedidoService productoJOINregistroPedidoJOINpedidoService;
 
 
 
 	static Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
-	
+
 
 	@PostMapping(LISTA_FIREBASE)
 	public ResponseEntity<?> listaDelivery(@RequestBody Delivery_PedidoGson pedidoPropuesta ){
@@ -92,14 +92,14 @@ public class DeliveryController {
 			int positionElegida=0;
 
 			lista = deliveryService.listaDeliveryAble(true);
-			
+
 			pusher.setCluster("us2");
 
-			
+
 			String error=lista.size()+"TAMAÑO";
-			
+
 			pusher.trigger("canal-orden-delivery", "my-event", error);
-			
+
 
 			for(Delivery data:lista) {
 
@@ -169,11 +169,11 @@ public class DeliveryController {
 			pedido.getDelivery_information().setDistancia_delivery(String.valueOf(suma_distancia));
 
 			pedido.getDelivery_information().setIdrepartidor((lista.get(positionElegida).getIdRepartidor()));
-			
-			
+
+
 
 			//deliveryService.updateDataDisponible(lista.get(positionElegida).getIdUsuario());
-			
+
 
 			//ENVIAR ATRAVES DE UN PUSH EL PEDIDO AL REPARTIDOR
 			pusher.setCluster("us2");
@@ -190,9 +190,9 @@ public class DeliveryController {
 			// TODO Auto-generated catch block
 			pusher.setCluster("us2");
 
-			
+
 			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
-			
+
 			pusher.trigger("canal-orden-delivery", "my-event", error);
 
 			System.out.println();
@@ -200,11 +200,11 @@ public class DeliveryController {
 			return ResponseEntity.badRequest().build();
 
 		} catch (ExecutionException e) {
-		pusher.setCluster("us2");
+			pusher.setCluster("us2");
 
-			
+
 			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
-			
+
 			pusher.trigger("canal-orden-delivery", "my-event", error);
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
@@ -216,12 +216,12 @@ public class DeliveryController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
-			
-		pusher.setCluster("us2");
 
-			
+			pusher.setCluster("us2");
+
+
 			String error=e.getMessage() + e.getCause()+e.getLocalizedMessage()+e.getStackTrace();
-			
+
 			pusher.trigger("canal-orden-delivery", "my-event", error);
 
 			return ResponseEntity.badRequest().build();
@@ -258,63 +258,63 @@ public class DeliveryController {
 
 
 	}
-	
+
 	@PostMapping(LOAD_DATA2)
 	public void entregaProgramda(@PathVariable("idventa")int idventa,@PathVariable("idempresa")int idempresa) {
-		
+
 		Venta venta=new Venta();
 
 		venta=ventaService.getVenta(idventa);
-		
+
 		long tiempoEspera=new Long(venta.getTiempototal_espera());
-		
+
 		long tiempo=(long) (tiempoEspera*0.6);
-		
-		
+
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-        System.out.println("Inicio "+dateFormat.format(date));
-		
-		 Timer timer;
-		    timer = new Timer();
-		    TimerTask task = new TimerTask() {
+		System.out.println("Inicio "+dateFormat.format(date));
 
-		        @Override
-		        public void run()
-		        {
-		        	
-		        	
-		        	DateFormat dateFormat2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		    		Date date2 = new Date();
-		    		
-		            System.out.println("Fin tiempo"+dateFormat2.format(date2));
+		Timer timer;
+		timer = new Timer();
+		TimerTask task = new TimerTask() {
 
-		        
-		        	searchRepartidor(idventa,idempresa);
-		        	
-		        	
-		        	DateFormat dateFormat3 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		    		Date date3 = new Date();
-		    		
-		            System.out.println("Fin :"+dateFormat3.format(date3));
+			@Override
+			public void run()
+			{
 
-		           
-		        }
-		        };
 
-		    timer.schedule(task,tiempo);
-		
+				DateFormat dateFormat2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				Date date2 = new Date();
+
+				System.out.println("Fin tiempo"+dateFormat2.format(date2));
+
+
+				searchRepartidor(idventa,idempresa);
+
+
+				DateFormat dateFormat3 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				Date date3 = new Date();
+
+				System.out.println("Fin :"+dateFormat3.format(date3));
+
+
+			}
+		};
+
+		timer.schedule(task,tiempo);
+
 	}
 
 
 	public  void searchRepartidor(int idventa,int idempresa) {
-		
+
 		//Delivery_PedidoGson pedidoPropuesta=;
-		
+
 		List<Delivery> lista=null;
 
 		Delivery_PedidoGson pedido=createGsonPedido(idventa,idempresa);
-		
+
 		System.out.println(pedido.getDelivery_information().getEmpresa_coordenada_x()+","+pedido.getDelivery_information().getEmpresa_coordenada_y()+"5555555");
 
 		try {
@@ -397,8 +397,8 @@ public class DeliveryController {
 
 			pedido.getDelivery_information().setIdrepartidor((lista.get(positionElegida).getIdRepartidor()));
 
-			
-			
+
+
 			System.out.println(lista.get(positionElegida).getIdRepartidor()+ "REPARTIDOR");
 
 
@@ -425,7 +425,7 @@ public class DeliveryController {
 			e.printStackTrace();
 
 		}catch (Exception e) {
-			
+
 			System.out.println(e.getMessage() + e.getCause()+e.getLocalizedMessage());
 
 			// TODO Auto-generated catch block
@@ -436,66 +436,67 @@ public class DeliveryController {
 
 
 	public   Delivery_PedidoGson createGsonPedido(int idventa,int idempresa) {
-		
+
 		Delivery_PedidoGson delivery=null;
-		
+
 		//List<ProductoJOINregistroPedidoJOINpedido> listaProductos=null;
-		
+
 		Restaurante_Pedido restaurante_pedido=restaurante_PedidoService.findByIdVenta(idventa);
-				
+
 		delivery = new Delivery_PedidoGson();
-		
+
 		EmpresaOficial empresaOficial=empresaOficialService.findByIdempresa(idempresa);
-		
+
 		delivery=convert(restaurante_pedido,empresaOficial);
-		
-		
+
+
 		//listaProductos=productoJOINregistroPedidoJOINpedidoService.listaProductoVenta(restaurante_pedido.getIdpedido());
-		
+
 		//delivery.setProductos(listaProductos);
-		
-				
+
+
 		return delivery;
 	}
 
 
 
 	private  Delivery_PedidoGson convert(Restaurante_Pedido mRestaurante_pedido,EmpresaOficial empresa ) {
-		  Delivery_PedidoGson gson=new Delivery_PedidoGson();
-          Delivery_Pedido pedido=new Delivery_Pedido();
+		Delivery_PedidoGson gson=new Delivery_PedidoGson();
+		Delivery_Pedido pedido=new Delivery_Pedido();
 
-          pedido.setIdventa(mRestaurante_pedido.getIdventa());
-          pedido.setIdtipopago(mRestaurante_pedido.getIdtipopago());
-          pedido.setTipopago_nombre(mRestaurante_pedido.getTipopago_nombre());
-          pedido.setUbicacion_nombre(mRestaurante_pedido.getUbicacion_nombre());
-          pedido.setIdusuario(mRestaurante_pedido.getIdusuario());
-          pedido.setUsuario_coordenada_x(mRestaurante_pedido.getMaps_coordenada_x());
-          pedido.setUsuario_coordenada_y(mRestaurante_pedido.getMaps_coordenada_y());
-          pedido.setIdpedido(mRestaurante_pedido.getIdpedido());
-          pedido.setVenta_costodelivery(mRestaurante_pedido.getVenta_costodelivery());
-          pedido.setVenta_costototal(mRestaurante_pedido.getVenta_costototal());
-          pedido.setCancelar(mRestaurante_pedido.isCancelar());
-          pedido.setComentario_global(mRestaurante_pedido.getComentario());
-          pedido.setCosto_delivery(mRestaurante_pedido.getVenta_costodelivery());
-          pedido.setDistancia_delivery(mRestaurante_pedido.getDistancia_delivery());
-          pedido.setTiempo(mRestaurante_pedido.getTiempo_aprox_delivery());
-          pedido.setOrden_disponible(true);
-          pedido.setIdestado_delivery(mRestaurante_pedido.getIdestadodelivery());
-          pedido.setIdrepartidor(mRestaurante_pedido.getIdrepartidor());
-          pedido.setIdestado_pago(mRestaurante_pedido.getIdtipopago());
-          pedido.setNombre_estadopago(mRestaurante_pedido.getNombre_estadopago());
-          pedido.setNombre(mRestaurante_pedido.getNombre());
-          pedido.setCelular(mRestaurante_pedido.getCelular());
-          pedido.setIdempresa(empresa.getIdempresa());
-          pedido.setDireccion_empresa(empresa.getDireccion_empresa());
-          pedido.setEmpresa_coordenada_x(empresa.getMaps_coordenada_x());
-          pedido.setEmpresa_coordenada_y(empresa.getMaps_coordenada_y());
-          pedido.setNombre_empresa(empresa.getNombre_empresa());
-          pedido.setUbicacion_comentarios(pedido.getUbicacion_comentarios());
+		pedido.setIdventa(mRestaurante_pedido.getIdventa());
+		pedido.setIdtipopago(mRestaurante_pedido.getIdtipopago());
+		pedido.setTipopago_nombre(mRestaurante_pedido.getTipopago_nombre());
+		pedido.setUbicacion_nombre(mRestaurante_pedido.getUbicacion_nombre());
+		pedido.setIdusuario(mRestaurante_pedido.getIdusuario());
+		pedido.setUsuario_coordenada_x(mRestaurante_pedido.getMaps_coordenada_x());
+		pedido.setUsuario_coordenada_y(mRestaurante_pedido.getMaps_coordenada_y());
+		pedido.setIdpedido(mRestaurante_pedido.getIdpedido());
+		pedido.setVenta_costodelivery(mRestaurante_pedido.getVenta_costodelivery());
+		pedido.setVenta_costototal(mRestaurante_pedido.getVenta_costototal());
+		pedido.setCancelar(mRestaurante_pedido.isCancelar());
+		pedido.setComentario_global(mRestaurante_pedido.getComentario());
+		pedido.setCosto_delivery(mRestaurante_pedido.getVenta_costodelivery());
+		pedido.setDistancia_delivery(mRestaurante_pedido.getDistancia_delivery());
+		pedido.setTiempo(mRestaurante_pedido.getTiempo_aprox_delivery());
+		pedido.setOrden_disponible(true);
+		pedido.setIdestado_delivery(mRestaurante_pedido.getIdestadodelivery());
+		pedido.setIdrepartidor(mRestaurante_pedido.getIdrepartidor());
+		pedido.setIdestado_pago(mRestaurante_pedido.getIdtipopago());
+		pedido.setNombre_estadopago(mRestaurante_pedido.getNombre_estadopago());
+		pedido.setNombre(mRestaurante_pedido.getNombre());
+		pedido.setCelular(mRestaurante_pedido.getCelular());
+		pedido.setIdempresa(empresa.getIdempresa());
+		pedido.setDireccion_empresa(empresa.getDireccion_empresa());
+		pedido.setEmpresa_coordenada_x(empresa.getMaps_coordenada_x());
+		pedido.setEmpresa_coordenada_y(empresa.getMaps_coordenada_y());
+		pedido.setNombre_empresa(empresa.getNombre_empresa());
+		pedido.setUbicacion_comentarios(pedido.getUbicacion_comentarios());
+		pedido.setVenta_fechaentrega(mRestaurante_pedido.getVentafechaentrega());
 
-          gson.setDelivery_information(pedido);
-          return  gson;
-       
+		gson.setDelivery_information(pedido);
+		return  gson;
+
 	}
 
 
