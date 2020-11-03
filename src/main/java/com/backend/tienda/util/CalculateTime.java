@@ -137,12 +137,15 @@ public class CalculateTime {
 
 	public  static Timestamp convertTimestampToDate(String tiempo,String fecha,String tiempo_espera) {
 
-		
+	
+		System.out.println("tiempo : "+ tiempo+" , fecha : "+fecha+" , tiempo_espera :"+tiempo_espera);
 		
 		Timestamp time;
 
 		String[] data=tiempo.split(" ");
 		String[] data2=data[0].split(":");
+				
+		
 		String[] data3=fecha.split(" ");
 
 		String input = data3[0]+" "+data2[0]+":"+tiempo_espera+":00 "+data[1].toLowerCase();		
@@ -156,18 +159,33 @@ public class CalculateTime {
 						ZoneId.of( "America/Lima" )  // Returns a `ZoneId` object.
 						).toString();
 
-		Timestamp yesterday=Timestamp.valueOf(fecha0+" "+data2[0]+":00:00.000");
+		Timestamp yesterday=Timestamp.valueOf(transformDate(fecha0+" "+data2[0]+":00:00 "+data[1].toLowerCase()));	
 
 
+		
 		String fecha2=
 				LocalDate                       // Represents an entire day, without time-of-day and without time zone.
 				.now(                           // Capture the current date.
 						ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
 						).toString();
 
-		Timestamp tomorrow=Timestamp.valueOf(fecha2+" "+(Integer.valueOf(data2[0])+1)+":00:00.000");
+		
+		
+		
+		Timestamp tomorrow=Timestamp.valueOf(transformDate(fecha2+" "+(Integer.valueOf(data2[0])+1)+":00:00 "+data[4].toLowerCase()));
 
+		System.out.println("yesterday"+yesterday+" tiempo : "+time+" tomorrow"+tomorrow);
+
+		
 		if(time.after(yesterday) && time.before(tomorrow)) {
+		
+/*		long yes=yesterday.getTime();
+		long tom=tomorrow.getTime();
+		long ti=time.getTime();
+
+		System.out.println("yesterday"+yes+" tiempo : "+ti+" tomorrow"+tom);
+
+		if(ti>yes && ti<tom) {*/
 
 
 			int wait_time=Integer.valueOf(tiempo_espera)*60000;
@@ -177,15 +195,20 @@ public class CalculateTime {
 			
 			time=new Timestamp(total);
 			
+			System.out.println("result 1: "+time);
 
 			
 		}else {
 
 			time=Timestamp.valueOf(CalculateTime.transformDate(input));
+			
+			System.out.println("result2 : "+time);
+
 		}
 		
 		
-		
+		System.out.println("result : "+time);
+
 
 
 		return time;
