@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,12 @@ import com.backend.tienda.entity.Venta;
 import com.backend.tienda.gson.Orden_estado_restauranteGson;
 import com.backend.tienda.gson.RepartidorInformationGson;
 import com.backend.tienda.repository.Usuario_generalRepository;
-import com.backend.tienda.repositorys.UserRepository;
 import com.backend.tienda.service.Orden_estado_deliveryService;
 import com.backend.tienda.service.Orden_estado_generalService;
 import com.backend.tienda.service.Orden_estado_restauranteService;
-import com.backend.tienda.service.ProductoJOINregistroPedidoJOINpedidoService;
 import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.VentaService;
+import com.backend.tienda.util.Pushers;
 import com.pusher.rest.Pusher;
 
 @RestController
@@ -64,8 +64,9 @@ public class Orden_estado_deliveryController {
 	@Autowired
 	Orden_estado_generalService orden_estado_generalService;
 	
-	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
 
+	@Autowired
+	Pushers pushernotifications;
 	
 	@RequestMapping(value=ORDEN_REGISTRAR,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_delivery> updateOrdenProces(@RequestBody Orden_estado_delivery orden,@PathVariable ("idUsuario") int idUsuario){
@@ -128,10 +129,8 @@ public class Orden_estado_deliveryController {
 						repartidorInformation.setUsuario_general(usuario);
 						
 						repartidorInformation.setIdventa(orden.getId().getIdventa());
-						
-						pusher.setCluster("us2");
-						
-						pusher.trigger("canal-estado-delivery-"+idUsuario, "my-event", repartidorInformation);
+						//Pusher ps=Pushers.instance();
+						pushernotifications.instance().trigger("canal-estado-delivery-"+idUsuario, "my-event", repartidorInformation);
 						
 					}
 					
@@ -156,9 +155,8 @@ public class Orden_estado_deliveryController {
 						
 						gson.setListaOrden_estado_general(lista_estado_general);
 								
-						pusher.setCluster("us2");
 						
-						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+						pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 						
 						
 						
@@ -187,9 +185,7 @@ public class Orden_estado_deliveryController {
 						
 						gson.setListaOrden_estado_general(lista_estado_general);
 								
-						pusher.setCluster("us2");
-						
-						pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+						pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 						
 					}
 					

@@ -30,7 +30,7 @@ public class ProductoController {
 
 	public final static String LISTA_PRODUCTOS="/lista";
 
-	public final static String INSERTAR_PRODUCTO="/insertar/{idempresa}/{idcategoriaproducto}";
+	public final static String INSERTAR_PRODUCTO="/insertar";
 
 	public final static String LISTA_PRODUCTOS_FIND_IDCATEGORIA_IDEMPRESA="/listaCategoria/{idcategoriaproducto}/{idempresa}";
 
@@ -53,31 +53,9 @@ public class ProductoController {
 
 	@RequestMapping(value=INSERTAR_PRODUCTO,method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Producto> regitrarCuentaEmpresa(
-			@PathVariable("idempresa")int idempresa,
-			@PathVariable("idcategoriaproducto")int idcategoriaproducto,
 			@RequestBody Producto producto){
 
 		Producto rpta=null;
-		
-		List<Producto> listaProducto=null;
-				
-		String fecha1=
-		    	LocalDate                       // Represents an entire day, without time-of-day and without time zone.
-		    	.now(                           // Capture the current date.
-		    	    ZoneId.of( "America/Lima" )   // Returns a `ZoneId` object.
-		    	).minusDays(1).toString();
-		    	
-		Timestamp fechacreacion=Timestamp.valueOf(fecha1+" 23:59:59");
-
-		listaProducto=productoService.listaFisrtCategory(idempresa, idcategoriaproducto, fechacreacion);
-		
-		if(listaProducto.size()>0) {
-			
-			for(Producto product:listaProducto){
-				productoService.eliminarProductoById(product.getIdproducto());
-			}
-			
-		}
 		
 		Timestamp time=new Timestamp(System.currentTimeMillis());
 		

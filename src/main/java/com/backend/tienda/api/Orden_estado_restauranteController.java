@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,7 @@ import com.backend.tienda.service.Orden_estado_restauranteService;
 import com.backend.tienda.service.RepartidorService;
 import com.backend.tienda.service.VentaService;
 import com.backend.tienda.util.CalculateTime;
+import com.backend.tienda.util.Pushers;
 import com.pusher.rest.Pusher;
 
 @RestController
@@ -81,10 +83,8 @@ public class Orden_estado_restauranteController {
 	@Autowired
 	RepartidorService repartidorService;
 
-
-
-
-	Pusher pusher = new Pusher("960667", "18c8170377c406cfcf3a", "55be7e2ee64af1927a79");
+	@Autowired
+	Pushers pushernotifications;
 
 	@RequestMapping(value=LISTA_ESTADO_BY_VENTA,method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Orden_estado_restauranteGson> listaOrdenByVenta(@PathVariable ("idVenta") int idVenta){
@@ -182,9 +182,7 @@ public class Orden_estado_restauranteController {
 
 			gson.setListaOrden_estado_general(lista_estado_general);
 
-			pusher.setCluster("us2");
-
-			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 			//deliveryController.entregaProgramda(orden.getId().getIdventa(),orden.getIdempresa());*/
 
@@ -253,9 +251,8 @@ public class Orden_estado_restauranteController {
 				gson=new Orden_estado_restauranteGson();
 				gson.setListaOrden_estado_general(lista_estado_general);
 
-				pusher.setCluster("us2");
 
-				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+				pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 
 
@@ -330,9 +327,8 @@ public class Orden_estado_restauranteController {
 
 			gson.setListaOrden_estado_general(lista_estado_general);
 
-			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 			//TENGO QUE ACTUALIZAR LA VENTA Y BUSCAR EN DELIVERY PEDIDO
 
@@ -357,12 +353,12 @@ public class Orden_estado_restauranteController {
 
 			repartidorInformation.setIdventa(orden.getId().getIdventa());
 
-			pusher.trigger("canal-estado-delivery-"+idRepartidor, "my-event", repartidorInformation);
+			pushernotifications.instance().trigger("canal-estado-delivery-"+idRepartidor, "my-event", repartidorInformation);
 
 
 			Delivery_PedidoGson pedido=deliveryController.createGsonPedido(orden.getId().getIdventa(),orden.getIdempresa());
 
-			pusher.trigger("canal-orden-delivery-"+idRepartidor, "my-event", pedido);
+			pushernotifications.instance().trigger("canal-orden-delivery-"+idRepartidor, "my-event", pedido);
 
 
 
@@ -421,9 +417,8 @@ public class Orden_estado_restauranteController {
 			gson=new Orden_estado_restauranteGson();
 			gson.setListaOrden_estado_general(lista_estado_general);
 
-			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 
 
@@ -494,9 +489,8 @@ public class Orden_estado_restauranteController {
 				gson=new Orden_estado_restauranteGson();
 				gson.setListaOrden_estado_general(lista_estado_general);
 
-				pusher.setCluster("us2");
 
-				pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+				pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 
 
@@ -625,9 +619,8 @@ public class Orden_estado_restauranteController {
 			gson=new Orden_estado_restauranteGson();
 			gson.setListaOrden_estado_general(lista_estado_general);
 
-			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 
 
@@ -687,9 +680,8 @@ public class Orden_estado_restauranteController {
 			gson=new Orden_estado_restauranteGson();
 			gson.setListaOrden_estado_general(lista_estado_general);
 
-			pusher.setCluster("us2");
 
-			pusher.trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
+			pushernotifications.instance().trigger("canal-orden-reciente-"+idUsuario, "my-event", gson);
 
 		}
 

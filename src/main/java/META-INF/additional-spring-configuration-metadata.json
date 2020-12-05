@@ -8,5 +8,75 @@
     "name": "spring.jpa.hibernate.naming-strategy",
     "type": "java.lang.String",
     "description": "A description for 'spring.jpa.hibernate.naming-strategy'"
+  },
+  {
+    "name": "backend.tienda.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.app.jwtSecret'"
+  },
+  {
+    "name": "backend.tienda.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.app.jwtExpirationMs'"
+  },
+  {
+    "name": "pusher.appId",
+    "type": "java.lang.String",
+    "description": "A description for 'pusher.appId'"
+  },
+  {
+    "name": "pusher.key",
+    "type": "java.lang.String",
+    "description": "A description for 'pusher.key'"
+  },
+  {
+    "name": "pusher.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'pusher.secret'"
+  },
+  {
+    "name": "backend.tienda.pusherappid",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.pusherappid'"
+  },
+  {
+    "name": "backend.tienda.pusherkey",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.pusherkey'"
+  },
+  {
+    "name": "backend.tienda.pushersecret",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.pushersecret'"
+  },
+  {
+    "name": "backend.tienda.app.pusherappid",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.app.pusherappid'"
+  },
+  {
+    "name": "backend.tienda.app.pusherkey",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.app.pusherkey'"
+  },
+  {
+    "name": "backend.tienda.app.pushersecret",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.app.pushersecret'"
+  },
+  {
+    "name": "backend.tienda.util.pusherappid",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.util.pusherappid'"
+  },
+  {
+    "name": "backend.tienda.util.pusherkey",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.util.pusherkey'"
+  },
+  {
+    "name": "backend.tienda.util.pushersecret",
+    "type": "java.lang.String",
+    "description": "A description for 'backend.tienda.util.pushersecret'"
   }
 ]}
