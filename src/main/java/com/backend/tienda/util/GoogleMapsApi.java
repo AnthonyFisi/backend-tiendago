@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.type.LatLng;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -13,9 +14,13 @@ import java.util.Map;
 
 @Component
 public class GoogleMapsApi extends HttpConnection {
-    private static final String BASE_URI_STRING = "https://maps.googleapis.com/maps/api/directions/json";
+    
+	private static final String BASE_URI_STRING = "https://maps.googleapis.com/maps/api/directions/json";
+    
     private static final String GET_REQUEST = "GET";
-    private final String API_KEY_GOOGLE_MAPS="AIzaSyAovb3NQYJdlU_a8SwdrWIe2cj-e2NWOmM";
+    
+    @Value("${backend.tienda.app.google-maps-key}")
+    private  String API_KEY_GOOGLE_MAPS;
 
     public String getLocation (List<Double> point1, List<Double> point2) throws Exception {
         // Get JSON builder
